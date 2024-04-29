@@ -1,0 +1,15 @@
+header {
+    background-color: blue;
+}
+
+#searchWrapper {
+    background-color: white;
+}
+
+#searchInput {
+    outline: none;
+}
+
+#searchInput:focus-visible {
+    outline: none;
+}
