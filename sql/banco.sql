@@ -1,3 +1,4 @@
+drop database senai_final;
 create database senai_final;
 use senai_final;
 
@@ -6,8 +7,9 @@ idUsuario int primary key auto_increment,
 nome varchar(100),
 email varchar(100),
 senha varchar(100),
-    cpf char(14) not null,
-    telefone varchar(15)
+    cpf char(14),
+    telefone varchar(15),
+    tipo int default 2
 );
 
 create table endereco (
@@ -37,7 +39,6 @@ create table produto (
     desconto float(10,2) default 0,
     valorFinal float(10,2) GENERATED ALWAYS AS (valor - COALESCE(desconto, 0)) STORED,
     categoria int not null,
-    tipo int default 2,
     foreign key (categoria) references categoria(idCategoria)
 );
 
@@ -99,3 +100,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
+select * from usuario;

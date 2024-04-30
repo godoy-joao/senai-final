@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author Senai
  */
 public class Conexao {
-    private static final String URL = "jdbc:mysql://localhost:3306/banco_ds?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/senai_final";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
