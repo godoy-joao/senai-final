@@ -1,7 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
         <html>
 
         <head>
@@ -20,7 +19,7 @@
                     <div class="w-100 row px-5 justify-content-between">
                         <div class="col-2 m-auto">
                             <div>
-                                <p>Aqui terá a logo</p>
+                                <a href="./home" class="text-black text-decoration-none"><p>Aqui terá a logo</p></a>
                             </div>
                         </div>
                         <div class="col-4 m-auto">
@@ -28,10 +27,9 @@
                                 <div id="searchInputDiv" class="col-10 pe-0">
                                     <input class="w-100 border-0" type="search" name="search" id="searchInput">
                                 </div>
-                                <div id="searchButtonDiv"
-                                    class="col-2 ps-0 d-flex align-items-center">
-                                    <a href="./search" class="text-black w-100 d-flex justify-content-center" style="font-size: 1.3rem;"><i
-                                            class="fa-solid fa-magnifying-glass"></i></a>
+                                <div id="searchButtonDiv" class="col-2 ps-0 d-flex align-items-center">
+                                    <a href="./search" class="text-black w-100 d-flex justify-content-center"
+                                        style="font-size: 1.3rem;"><i class="fa-solid fa-magnifying-glass"></i></a>
                                 </div>
                             </div>
                         </div>
