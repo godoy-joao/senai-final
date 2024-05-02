@@ -13,53 +13,43 @@
                 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="./css/login.css">
         </head>
-        <body class="vh-100">
-            <header>
-                <div class="row justify-content-start">
-                    <div class="col-4">
-                        <a href="./home">
-                            <img src="" alt="">
-                            <p>A logo aparecerá aqui</p>
+        <body class="vh-100 d-flex align-items-center justify-content-center">
+            <main class="">
+                 <a href="./home" class="text-dark text-decoration-none">
+                            <i class="fa-solid fa-arrow-left rounded-circle" id="backToIndex"></i>
                         </a>
-                    </div>
-                </div>
-            </header>
-            <main class="d-flex align-items-center justify-content-center vh-100">
-                <a href="./home" class="text-dark text-decoration-none">
-                    <i class="fa-solid fa-arrow-left rounded-circle" id="backToIndex"></i>
-                </a>
-                <div class="container">
+                <div class="align-self-center w-100" id="container">
                     <div id="contLogin" class="formWrapper d-flex flex-column px-3 py-4">
-                        <div class="formHeader">
+                        <div class="formHeader d-flex flex-row justify-content-between">
                             <h3>
                                 Login
                             </h3>
                             <button onclick="goToSignup()">
-                                <p>Ainda não possui cadastro?</p>
+                                <p>Cadastre-se</p>
                             </button>
                         </div>
                         <form id="loginForm" class="formContainer d-flex flex-column" action="logon" method="post">
-                            <div id="radioGroup" class="row">
-                                <input class="col-6" type="radio" name="option" id="radioEmail" checked>E-mail<br>
-                                <input class="col-6" type="radio" name="option" id="radioTelefone">Telefone
+                            <div id="radioGroup" class="d-flex gap-1 flex-row">
+                                <input class="" type="radio" name="option" id="radioEmail" checked><label class="me-1" for="radioEmail">E-mail</label>
+                                <input class="" type="radio" name="option" id="radioTelefone"><label for="radioTelefone">Telefone</label>
                             </div>
                             <label for="login">Email ou número de telefone</label>
-                            <input type="" id="login" name="login" required>
+                            <input type="email" id="login" name="login" required>
                             <label for="senhaLogin">Senha</label>
                             <input type="text" name="senhaLogin" id="senhaLogin" required>
                             <button type="submit" id="btnAcesso" form="loginForm" class="btnSubmit">Acessar</button>
                         </form>
                     </div>
-                    <div id="contCadastro" class="formWrapper d-none">
-                        <div class="formHeader">
+                    <div id="contCadastro" class="formWrapper d-none flex-column px-3 py-4">
+                        <div class="formHeader d-flex flex-row justify-content-between">
                             <h3>
                                 Cadastro
                             </h3>
                             <button onclick="goToLogin()">
-                                <p>Já possui cadastro?</p>
+                                <p>Faça login</p>
                             </button>
                         </div>
-                        <form id="signupForm" class="formContainer" action="signup" method="post">
+                        <form id="signupForm" class="formContainer d-flex flex-column" action="signup" method="post">
                             <label for="inputNome">Nome e Sobrenome</label>
                             <input id="inputNome" type="text" name="nome" required>
                             <label for="inputEmail">Digite seu E-mail</label>
@@ -68,6 +58,10 @@
                             <input type="tel" id="inputTelefone" name="telefone">
                             <label for="inputSenha">Digite sua senha</label>
                             <input type="password" id="inputSenha" name="senha" required>
+                            <label for="confirmaSenha">Confirme sua senha</label>
+                            <input type="password" id="confirmaSenha" name="senha" required>
+                            <label for="dataNasc">Data de nascimento</label>
+                            <input type="date" id="dataNasc" name="dataNasc" required>
                             <button type="submit" id="btnCadastro" form="signupForm" class="btnSubmit">Cadastrar</button>
                         </form>
                     </div>

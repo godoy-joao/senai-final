@@ -13,12 +13,12 @@ import java.sql.Blob;
  */
 public class Imagem {
     private int idImagem;
-    private Blob imagem;
+    private byte[] imagem;
 
     public Imagem() {
     }
 
-    public Imagem(int idImagem, Blob imagem) {
+    public Imagem(int idImagem, byte[] imagem) {
         this.idImagem = idImagem;
         this.imagem = imagem;
     }
@@ -31,12 +31,14 @@ public class Imagem {
         this.idImagem = idImagem;
     }
 
-    public Blob getImagem() {
+    public byte[] getImagem() {
         return imagem;
     }
 
-    public void setImagem(Blob imagem) {
+    public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
+
+    
     
 }

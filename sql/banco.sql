@@ -4,11 +4,12 @@ use senai_final;
 
 create table usuario (
 idUsuario int primary key auto_increment,
-nome varchar(100),
-email varchar(100),
-senha varchar(100),
+nome varchar(100) not null,
+email varchar(100) not null,
+senha varchar(100) not null,
     cpf char(14),
-    telefone varchar(15),
+    telefone varchar(15) not null,
+    dataNascimento date not null,
     tipo int default 2
 );
 
@@ -39,6 +40,7 @@ create table produto (
     desconto float(10,2) default 0,
     valorFinal float(10,2) GENERATED ALWAYS AS (valor - COALESCE(desconto, 0)) STORED,
     categoria int not null,
+    descricao varchar(2000),
     foreign key (categoria) references categoria(idCategoria)
 );
 
