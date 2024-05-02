@@ -5,21 +5,24 @@
  */
 package controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.bean.Usuario;
-import model.dao.UsuarioDAO;
+import javax.servlet.http.Part;
+import model.bean.Imagem;
+import model.bean.Produto;
 
 /**
  *
  * @author Senai
  */
-public class LoginController extends HttpServlet {
+public class AdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +35,7 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nextPage = "/WEB-INF/jsp/login.jsp";
+        String nextPage = "WEB-INF/jsp/admin.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }
@@ -64,42 +67,25 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = request.getServletPath();
-        if (url.equals("/logon")) {
-            UsuarioDAO uDAO = new UsuarioDAO();
-            String login = request.getParameter("login");
-            String senha = request.getParameter("senhaLogin");
-            try {
-                if (uDAO.login(login, senha)) {
-                    response.sendRedirect("./home");
-                } else {
-                    response.sendRedirect("./login");
-                    request.setAttribute("errorMessage", "Usuário ou senha inválidos");
-                }                
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.sendRedirect("./login");
-                request.setAttribute("errorMessage", "Usuário ou senha inválidos");
-            }
-        } else if (url.equals("/signup")) {
-            String nextPage = "/WEB-INF/jsp/login.jsp";
-            Usuario u = new Usuario();
-            UsuarioDAO uDAO = new UsuarioDAO();
-            u.setNome(request.getParameter("nome"));
-            u.setEmail(request.getParameter("email"));
-            u.setSenha(request.getParameter("senha"));
-            u.setTelefone(request.getParameter("telefone"));
-            u.setNome(u.getNome().replaceAll("Ã£", "ã"));
-            try {
-                uDAO.create(u);
-                response.sendRedirect("./login");
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.setAttribute("errorMessage", "Algo deu errado. Tente novamente.");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-                dispatcher.forward(request, response);
-            }
-        } else {
-            processRequest(request, response);
+        if (url.equals("/addProduto")) {
+            Produto p = new Produto();
+        p.setNome("parameternome");
+        p.setCategoria(1);
+        //p.setDescricao("");
+        p.setValor(Float.NaN);
+        p.setValorFinal(Float.NaN);
+        p.setDesconto(Float.NaN);
+        Part filePart = request.getPart("imagem");
+        InputStream iStream = filePart.getInputStream();
+        ByteArrayOutputStream byteA = new ByteArrayOutputStream();
+        byte[] img = new byte[4096];
+        int byteRead = -1;
+        while ((byteRead = iStream.read(img)) !=-1) {
+            byteA.write(img, 0, byteRead);
+        }
+        byte[] imgBytes = byteA.toByteArray();
+        Imagem imagem = new Imagem();
+        imagem.setImagem(img);
         }
     }
 

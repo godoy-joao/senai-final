@@ -5,29 +5,51 @@
  */
 package model.bean;
 
+import java.sql.Date;
+
 /**
  *
  * @author Joao Guilherme
  */
 public class Usuario {
-    
+
     private int idUsuario;
     private String nome;
     private String email;
     private String senha;
     private String cpf;
     private String telefone;
+    private Date dataNasc;
+    private int tipo;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone) {
+    public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone, Date dataNasc, int tipo) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.dataNasc = dataNasc;
+        this.tipo = tipo;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
     }
 
     public int getIdUsuario() {
@@ -77,5 +99,5 @@ public class Usuario {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
+
 }

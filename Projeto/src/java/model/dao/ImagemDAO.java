@@ -51,15 +51,15 @@ public class ImagemDAO {
                    
         }
      */
-    public void insertImagem(File imagem) throws FileNotFoundException {
+    public void insertImagem(byte[] imagem) throws FileNotFoundException {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            FileInputStream inputStream = new FileInputStream(imagem);
+            
 
             stmt = conexao.prepareStatement("INSERT INTO imagem (imagem) VALUES (?)");
-            stmt.setBlob(1, inputStream);
+            stmt.setBytes(1, imagem);
 
             stmt.close();
             conexao.close();
@@ -84,7 +84,7 @@ public class ImagemDAO {
 
             if (rs.next()) {
                 img.setIdImagem(id);
-                img.setImagem(rs.getBlob("imagem"));
+                //img.setImagem(rs.getBlob("imagem"));
             }
 
             rs.close();
@@ -110,7 +110,7 @@ public class ImagemDAO {
             while (rs.next()) {
                 Imagem i = new Imagem();
                 i.setIdImagem(rs.getInt("idImagem"));
-                i.setImagem(rs.getBlob("imagem"));
+                //i.setImagem(rs.getBlob("imagem"));
                 imagens.add(i);
             }
             

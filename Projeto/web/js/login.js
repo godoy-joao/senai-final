@@ -23,3 +23,23 @@ function goToSignup() {
     $("#contCadastro").removeClass('d-none').addClass('d-flex');
 }
 
+const formLogin = document.getElementById("loginForm");
+const formCadastro = document.getElementById("signupForm");
+
+formLogin.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const login = document.getElementById("login").value.trim();
+    const senha = document.getElementById("senhaLogin").value.trim();
+    
+    if (login === "" || senha === "") {
+        alert("Usuário ou senha não podem estar vazios!");
+    } else {
+        formLogin.submit();
+    }
+})
+
+formCadastro.addEventListener("submit", function(event) {
+
+})
+

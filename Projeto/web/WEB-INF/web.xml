@@ -36,6 +36,10 @@
         <servlet-name>ProdutoController</servlet-name>
         <servlet-class>controller.ProdutoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>controller.AdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>ProdutoController</servlet-name>
         <url-pattern>/produto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
