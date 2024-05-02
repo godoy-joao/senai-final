@@ -30,7 +30,7 @@ public class CarrinhoDAO {
     Esse método deve retornar todos os produtos de um usuário fornecido como
     parâmetro, portanto deve ser chamado na página que exibe o carrinho.  
     */
-    private List<Produto> lerProdutos(Usuario u) {
+    public List<Produto> lerProdutos(Usuario u) {
         
         List<Produto> produtos = new ArrayList();
         try {

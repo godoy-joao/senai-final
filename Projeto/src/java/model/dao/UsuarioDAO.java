@@ -65,6 +65,70 @@ public class UsuarioDAO {
         return valida;
     }
 
+    public Usuario getUsuarioById(int id) {
+        Usuario u = new Usuario();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM usuario WHERE idUsuario = ?");
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                u.setIdUsuario(rs.getInt("idUsuario"));
+                u.setNome(rs.getString("nome"));
+                u.setEmail(rs.getString("email"));
+                u.setTelefone(rs.getString("telefone"));
+                u.setCpf(rs.getString("cpf"));
+            } else {
+                System.out.println("Usuario não localizado.");
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return u;
+    }
+
+    public Usuario getUsuarioByTel(String telefone) {
+        Usuario u = new Usuario();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM usuario WHERE telefone = ?");
+            stmt.setString(1, telefone);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                u.setIdUsuario(rs.getInt("idUsuario"));
+                u.setNome(rs.getString("nome"));
+                u.setEmail(rs.getString("email"));
+                u.setTelefone(rs.getString("telefone"));
+                u.setCpf(rs.getString("cpf"));
+            } else {
+                System.out.println("Usuario não localizado.");
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return u;
+    }
+
     public Usuario getUsuarioByEmail(String email) {
         Usuario u = new Usuario();
         try {
