@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class Conexao {
     private static final String URL = "jdbc:mysql://localhost:3306/senai_final";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "1234";
 
     // public static Connection conectar() throws SQLException {
     //     return (Connection) DriverManager.getConnection(URL, USER, PASSWORD);

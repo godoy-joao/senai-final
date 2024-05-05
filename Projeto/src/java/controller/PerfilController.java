@@ -12,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Usuario;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -31,8 +33,15 @@ public class PerfilController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nextPage = "/WEB-INF/jsp/perfil.jsp";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-        dispatcher.forward(request, response);
+        UsuarioDAO uDao = new UsuarioDAO();
+        if (request.getParameter("u").equals("")) {
+            response.sendRedirect("./login");
+        } else {
+            Usuario u = uDao.getUsuarioById(Integer.parseInt(request.getParameter("u")));
+            request.setAttribute("usuario", u);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+            dispatcher.forward(request, response);
+        }
 
     }
 

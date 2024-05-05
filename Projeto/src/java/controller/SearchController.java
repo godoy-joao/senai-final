@@ -35,7 +35,13 @@ public class SearchController extends HttpServlet {
             throws ServletException, IOException {
         String nextPage = "WEB-INF/jsp/search.jsp";
         ProdutoDAO pdao = new ProdutoDAO();
-        List<Produto> produtos = pdao.listarPorPesquisa(request.getParameter("search"));
+        String busca = request.getParameter("search");
+        List<Produto> produtos = null;
+        if (busca.equals("")) {
+            produtos = pdao.listarTodos();
+        } else {
+            produtos = pdao.listarPorPesquisa(busca);
+        }
         request.setAttribute("produtos", produtos);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);

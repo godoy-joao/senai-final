@@ -13,6 +13,7 @@ public class Produto {
     private int idProduto;
     private int categoria;
     private String nome;
+    private String descricao;
     private Float valor;
     private Float desconto;
     private Float valorFinal;

@@ -39,13 +39,20 @@ create table produto (
     valor float(10,2) not null,
     desconto float(10,2) default 0,
     valorFinal float(10,2) GENERATED ALWAYS AS (valor - COALESCE(desconto, 0)) STORED,
-    categoria int not null,
     descricao varchar(2000),
     foreign key (categoria) references categoria(idCategoria)
 );
 
-create table produto_imagem (
-	idProduto_imagem int primary key auto_increment,
+create table produtoCategoria (
+	idProdutoCategoria int primary key auto_increment,
+    produto int not null,
+    categoria int not null,
+    foreign key (produto) references produto(idProduto),
+    foreign key (categoria) references categoria(idCategoria)
+);
+
+create table produtoImagem (
+	idProdutoImagem int primary key auto_increment,
     produto int not null,
     imagem int,
     foreign key (produto) references produto(idProduto),
@@ -77,16 +84,16 @@ create table carrinho (
     foreign key (usuario) references usuario(idUsuario)
 );
 
-create table carrinho_produto (
-	idCarrinho_produto int primary key auto_increment,
+create table carrinhoProduto (
+	idCarrinhoProduto int primary key auto_increment,
     carrinho int not null,
     produto int not null,
     foreign key (carrinho) references carrinho(idCarrinho),
     foreign key (produto) references produto(idProduto)
 );
 
-create table produto_pedido (
-	idProduto_pedido int primary key auto_increment,
+create table produtoPedido (
+	idProdutoPedido int primary key auto_increment,
     pedido int not null,
     produto int not null,
     foreign key (pedido) references pedido(idPedido),
@@ -94,7 +101,7 @@ create table produto_pedido (
 );
 
 DELIMITER //
-CREATE TRIGGER criar_carrinho
+CREATE TRIGGER criarCarrinho
 AFTER INSERT ON usuario
 FOR EACH ROW
 BEGIN

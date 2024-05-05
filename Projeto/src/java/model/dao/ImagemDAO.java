@@ -51,15 +51,13 @@ public class ImagemDAO {
                    
         }
      */
-    public void insertImagem(byte[] imagem) throws FileNotFoundException {
+    public void insertImagem(Imagem imagem) throws FileNotFoundException {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            
-
             stmt = conexao.prepareStatement("INSERT INTO imagem (imagem) VALUES (?)");
-            stmt.setBytes(1, imagem);
+            stmt.setBytes(1, imagem.getImagem());
 
             stmt.close();
             conexao.close();
