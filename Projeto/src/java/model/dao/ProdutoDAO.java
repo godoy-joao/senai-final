@@ -212,7 +212,8 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    public void create(Produto p) {
+    public int create(Produto p) {
+        int id = -1;
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -225,12 +226,17 @@ public class ProdutoDAO {
             stmt.setFloat(5, p.getValorFinal());
 
             stmt.executeUpdate();
-
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                }
+            }
             stmt.close();
             conexao.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
 
     public void update(Produto p) {

@@ -38,23 +38,21 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
      */
-    public Boolean login(String login, String senha) {
-        Boolean valida = false;
+    public int login(Usuario u) {
+        int idUsuario = -1;
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            String query = "SELECT * FROM usuario WHERE email = ? AND senha = ? OR telefone = ? AND senha = ?";
-
+            String query = "SELECT * FROM usuario WHERE (email = ? OR telefone = ?) AND senha = ?";
             stmt = conexao.prepareStatement(query);
-            stmt.setString(1, login);
-            stmt.setString(2, senha);
-            stmt.setString(3, login);
-            stmt.setString(4, senha);
+            stmt.setString(1, u.getEmail());
+            stmt.setString(2, u.getTelefone());
+            stmt.setString(3, u.getSenha());
 
             rs = stmt.executeQuery();
             if (rs.next()) {
-                valida = true;
+               idUsuario = rs.getInt(1);
             }
             rs.close();
             stmt.close();
@@ -62,7 +60,7 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return valida;
+        return idUsuario;
     }
 
     public Usuario getUsuarioById(int id) {
@@ -161,24 +159,32 @@ public class UsuarioDAO {
         return u;
     }
 
-    public void create(Usuario u) {
+    public int create(Usuario u) {
+        int idUsuario = -1;
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
-
-            stmt = conexao.prepareStatement("INSERT INTO usuario (nome, email, senha, cpf, telefone) values (?, ?, ?, ?, ?)");
+            
+            stmt = conexao.prepareStatement("INSERT INTO usuario (nome, email, senha, cpf, telefone, dataNascimento) values (?, ?, ?, ?, ?, ?)");
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
             stmt.setString(4, u.getCpf());
             stmt.setString(5, u.getTelefone());
+            stmt.setDate(6, u.getDataNasc());
 
             stmt.executeUpdate();
+            
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                idUsuario = rs.getInt(1);
+            } 
             stmt.close();
             conexao.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return idUsuario;
     }
 
     public void update(Usuario u) {

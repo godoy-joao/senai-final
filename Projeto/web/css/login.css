@@ -11,9 +11,16 @@ body {
     opacity: 1
 }
 
-.formHeader button{
+.formHeader button {
     background-color: transparent;
     border: 0;
+    box-shadow: inset rgba(0, 0, 0, 0.4);
+}
+
+#backHome {
+    position: absolute;
+    top: 3rem;
+    left: 2rem;   
 }
 
 #backToIndex {
@@ -36,6 +43,7 @@ body {
     background-color: #fff;
     border-radius: 7px;
 }
+
 
 .formContainer label {
     font-size: 14px;

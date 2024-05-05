@@ -9,14 +9,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import model.bean.Categoria;
 import model.bean.Imagem;
 import model.bean.Produto;
+import model.dao.CategoriaDAO;
 
 /**
  *
@@ -35,7 +38,10 @@ public class AdminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nextPage = "WEB-INF/jsp/admin.jsp";
+        String nextPage = "/WEB-INF/jsp/admin.jsp";
+        CategoriaDAO cDao = new CategoriaDAO();
+        List<Categoria> categorias =  cDao.listarTodos();
+        request.setAttribute("categorias", categorias);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }

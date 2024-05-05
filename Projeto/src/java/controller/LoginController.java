@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -66,11 +67,14 @@ public class LoginController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/logon")) {
             UsuarioDAO uDAO = new UsuarioDAO();
-            String login = request.getParameter("login");
-            String senha = request.getParameter("senhaLogin");
+            Usuario usuario = new Usuario();
+             usuario.setEmail(request.getParameter("loginUser"));
+             usuario.setTelefone(request.getParameter("loginUser"));
+             usuario.setSenha(request.getParameter("loginPass"));
+           
             try {
-                if (uDAO.login(login, senha)) {
-                    response.sendRedirect("./home");
+                if (uDAO.login(usuario) != -1) {
+                    response.sendRedirect("./home?u="+uDAO.login(usuario));
                 } else {
                     response.sendRedirect("./login");
                     request.setAttribute("errorMessage", "Usuário ou senha inválidos");
@@ -85,9 +89,10 @@ public class LoginController extends HttpServlet {
             Usuario u = new Usuario();
             UsuarioDAO uDAO = new UsuarioDAO();
             u.setNome(request.getParameter("nome"));
+            u.setDataNasc(Date.valueOf(request.getParameter("dataNascimento")));
             u.setEmail(request.getParameter("email"));
-            u.setSenha(request.getParameter("senha"));
             u.setTelefone(request.getParameter("telefone"));
+            u.setSenha(request.getParameter("senha"));           
             u.setNome(u.getNome().replaceAll("Ã£", "ã"));
             try {
                 uDAO.create(u);

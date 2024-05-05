@@ -35,14 +35,20 @@ public class CarrinhoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nextPage = "WEB-INF/jsp/carrinho.jsp";
+        String nextPage = "/WEB-INF/jsp/carrinho.jsp";
         CarrinhoDAO cDao = new CarrinhoDAO();
         UsuarioDAO uDao = new UsuarioDAO();
-        Usuario u = uDao.getUsuarioById(Integer.parseInt(request.getParameter("u")));
+        String id = request.getParameter("u");
+        if (id == null) {
+            response.sendRedirect("./login");
+        } else {
+            Usuario u = uDao.getUsuarioById(Integer.parseInt(request.getParameter("u")));
         List<Produto> produtos = cDao.lerProdutos(u);
         request.setAttribute("produtos", produtos);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

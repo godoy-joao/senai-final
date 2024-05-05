@@ -1,5 +1,6 @@
 header {
     background-color: rgb(41, 80, 255);
+    box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.4);
 }
 
 #searchWrapper {
