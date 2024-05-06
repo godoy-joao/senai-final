@@ -94,6 +94,7 @@ public class LoginController extends HttpServlet {
             u.setTelefone(request.getParameter("telefone"));
             u.setSenha(request.getParameter("senha"));           
             u.setNome(u.getNome().replaceAll("Ã£", "ã"));
+            System.out.println(u.getNome()+" "+u.getEmail()+" "+u.getCpf()+" "+u.getSenha()+" "+u.getTelefone()+" "+u.getDataNasc());
             try {
                 uDAO.create(u);
                 response.sendRedirect("./login");

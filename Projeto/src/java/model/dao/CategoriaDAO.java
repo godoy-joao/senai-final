@@ -10,6 +10,7 @@ import conexao.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.bean.Categoria;
@@ -19,6 +20,30 @@ import model.bean.Categoria;
  * @author Joao Guilherme
  */
 public class CategoriaDAO {
+    
+    public int create(Categoria c) {
+        int idCategoria = -1;
+         try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            stmt = conexao.prepareStatement("INSERT INTO categoria (nome) values (?)", Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, c.getNome());
+          
+
+            stmt.executeUpdate();
+            
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                idCategoria = rs.getInt(1);
+            } 
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idCategoria;
+    }
 
     public List<Categoria> listarTodos() {
         List<Categoria> categorias = new ArrayList();
