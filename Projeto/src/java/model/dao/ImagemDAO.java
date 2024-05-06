@@ -19,6 +19,7 @@ import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -51,21 +52,27 @@ public class ImagemDAO {
                    
         }
      */
-    public void insertImagem(Imagem imagem) throws FileNotFoundException {
+    public int insertImagem(Imagem imagem) throws FileNotFoundException {
+        int idImagem = -1;
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO imagem (imagem) VALUES (?)");
+            stmt = conexao.prepareStatement("INSERT INTO imagem (imagem) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setBytes(1, imagem.getImagem());
-
+            
+            stmt.executeUpdate();
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    idImagem = rs.getInt(1);
+                }
+            }
             stmt.close();
             conexao.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
+        return idImagem;
     }
 
     public Imagem getImagem(int id) {

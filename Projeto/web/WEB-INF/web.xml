@@ -57,6 +57,10 @@
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/logon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>PerfilController</servlet-name>
         <url-pattern>/perfil</url-pattern>
     </servlet-mapping>

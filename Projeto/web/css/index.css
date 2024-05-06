@@ -5,6 +5,14 @@ header {
 
 #searchWrapper {
     background-color: white;
+    transition: all ease-in-out 50ms 50ms;
+}
+.addShadow:hover {
+    box-shadow: 1px 3px 5px 3px rgba(0, 0, 0, 0.4);
+}
+
+.btnIcon{
+    font-size: 1.5rem;
 }
 
 #searchInput {

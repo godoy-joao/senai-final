@@ -7,10 +7,10 @@ idUsuario int primary key auto_increment,
 nome varchar(100) not null,
 email varchar(100) not null,
 senha varchar(100) not null,
-    cpf char(14),
-    telefone varchar(15) not null,
-    dataNascimento date not null,
-    tipo int default 2
+cpf char(14) default "0",
+telefone varchar(15) not null,
+dataNascimento date not null,
+tipo int default 2
 );
 
 create table endereco (
@@ -39,8 +39,7 @@ create table produto (
     valor float(10,2) not null,
     desconto float(10,2) default 0,
     valorFinal float(10,2) GENERATED ALWAYS AS (valor - COALESCE(desconto, 0)) STORED,
-    descricao varchar(2000),
-    foreign key (categoria) references categoria(idCategoria)
+    descricao varchar(2000)
 );
 
 create table produtoCategoria (
@@ -70,11 +69,11 @@ create table estoque (
 create table pedido (
 	idPedido int primary key auto_increment,
     usuario int not null,
-    endereco_entrega int not null,
-    data_pedido date not null,
+    enderecoEntrega int not null,
+    dataPedido date not null,
     valorTotal float,
     status int default 1,
-    foreign key (endereco_entrega) references endereco(idEndereco),
+    foreign key (enderecoEntrega) references endereco(idEndereco),
     foreign key (usuario) references usuario(idUsuario)
 );
 

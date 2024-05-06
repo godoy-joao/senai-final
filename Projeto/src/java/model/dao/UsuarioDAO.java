@@ -10,6 +10,7 @@ import conexao.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import model.bean.Usuario;
 
 /**
@@ -165,13 +166,13 @@ public class UsuarioDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conexao.prepareStatement("INSERT INTO usuario (nome, email, senha, cpf, telefone, dataNascimento) values (?, ?, ?, ?, ?, ?)");
+            stmt = conexao.prepareStatement("INSERT INTO usuario (nome, email, senha, telefone, dataNascimento, cpf) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
-            stmt.setString(4, u.getCpf());
-            stmt.setString(5, u.getTelefone());
-            stmt.setDate(6, u.getDataNasc());
+            stmt.setString(4, u.getTelefone());
+            stmt.setDate(5, u.getDataNasc());
+            stmt.setString(6, "0");
 
             stmt.executeUpdate();
             
@@ -192,13 +193,14 @@ public class UsuarioDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("UPDATE usuario SET nome = ?, email = ?, senha = ?, cpf = ?, telefone = ? WHERE idUsuario = ?");
+            stmt = conexao.prepareStatement("UPDATE usuario SET nome = ?, email = ?, senha = ?, cpf = ?, dataNascimento = ?, telefone = ? WHERE idUsuario = ?");
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
             stmt.setString(4, u.getCpf());
-            stmt.setString(5, u.getTelefone());
-            stmt.setInt(6, u.getIdUsuario());
+            stmt.setDate(5, u.getDataNasc());
+            stmt.setString(6, u.getTelefone());
+            stmt.setInt(7, u.getIdUsuario());
 
             stmt.executeUpdate();
 
