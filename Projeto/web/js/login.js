@@ -3,8 +3,10 @@ var inputLogin = document.getElementById("loginUser");
 $("#telefone").mask('(00) 00000-0000');
 tipoInput[0].addEventListener("click", function () {
     inputLogin.setAttribute("type", "email");
+    inputLogin.setAttribute("maxlength", 50);
     $("#loginUser").val('');
     $("#loginUser").unmask();
+
 });
 tipoInput[1].addEventListener("click", function () {
     inputLogin.setAttribute("type", "tel");
@@ -31,7 +33,7 @@ const formLogin = document.getElementById("formLoginWrapper");
 const formCadastro = document.getElementById("formSignupWrapper");
 
 formLogin.addEventListener("submit", function (event) {
-   
+
 
     const login = document.getElementById("loginUser").value.trim();
     const senha = document.getElementById("loginPass").value.trim();
@@ -44,7 +46,7 @@ formLogin.addEventListener("submit", function (event) {
 })
 
 formCadastro.addEventListener("submit", function (event) {
-    
+
 
     const nome = document.getElementById("nome").value.trim();
     const email = document.getElementById("email").value.trim();
