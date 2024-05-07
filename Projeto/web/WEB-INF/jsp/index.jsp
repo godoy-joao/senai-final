@@ -21,30 +21,30 @@
                     <div class="vw-100 row px-lg-5 px-sm-3 justify-content-center">
                         <div class="col-2 m-auto">
                             <div class="d-flex justify-content-center">
-                                <a href="./home" class="text-black text-decoration-none" style="font-size: 1.5rem;">
+                                <a href="./home?u=${usuario}" class="text-black text-decoration-none"
+                                    style="font-size: 1.5rem;">
                                     <p class="m-0">Aqui terá a logo</p>
                                 </a>
                             </div>
                         </div>
                         <div class="col-6 col-sm-5 m-auto">
-                            <div id="searchWrapper" class="addShadow w-100 rounded rounded-pill">
-                                <form action="search" method="get" class="row mw-100">
-                                    <div id="searchInputDiv" class="col-11 px-0">
-                                        <input class="w-100 border-0 bg-transparent ps-3 fs-5" type="search"
-                                            name="search" id="searchInput">
-                                    </div>
-                                    <div id="searchButtonDiv" class="col-1 ps-0 d-flex align-items-center">
-                                        <button type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                            <form action="search" method="get" id="searchWrapper"
+                                class="addShadow w-100 rounded rounded-pill row justify-content-evenly px-2">
+                                <div id="searchInputDiv" class="col-10 col-sm-11 ps-1 px-0">
+                                    <input class="w-100 border-0 bg-transparent ps-0 fs-5" type="search" name="search"
+                                        id="searchInput">
+                                </div>
+                                <div id="searchButtonDiv" class="col-2 col-sm-1 px-0 d-flex align-items-center">
+                                    <button type="submit" class="h-100 bg-transparent border-0 w-100">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                         <div class="col-4 col-sm-3 m-auto align-items-center justify-content-center d-flex">
                             <div class="row w-75 justify-content-between">
                                 <div class="col-3 g-0 d-flex justify-content-center align-items-center mx-sm-1">
-                                    <a href="./carrinho" class="text-black fs-4"><i
+                                    <a href="./carrinho?u=${usuario}" class="text-black fs-4"><i
                                             class="fa-solid fa-shopping-cart"></i></a>
                                 </div>
                                 <div class="col-3 p-0 mx-sm-1 d-flex justify-content-center">
@@ -66,12 +66,10 @@
                 <div id="div-nav" class="row justify-content-evenly px-2">
                 </div>
             </header>
-
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
                 aria-labelledby="offcanvasExampleLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
-
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" id="close-offcanvas"
                         aria-label="Close"></button><label class="ms-1" for="close-offcanvas">Fechar</label>
                 </div>
@@ -83,7 +81,12 @@
                 </div>
             </div>
             <main>
+                <div class="bg-primary">
 
+                </div>
+                <div>
+
+                </div>
             </main>
             <footer>
 
