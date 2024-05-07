@@ -28,11 +28,6 @@ create table categoria (
     nome varchar(100) not null
 );
 
-create table imagem ( 
-idImagem int primary key auto_increment,
-imagem longblob
-);
-
 create table produto (
 	idProduto int primary key auto_increment,
     nome varchar(100) not null,
@@ -40,6 +35,13 @@ create table produto (
     desconto float(10,2) default 0,
     valorFinal float(10,2) GENERATED ALWAYS AS (valor - COALESCE(desconto, 0)) STORED,
     descricao varchar(2000)
+);
+
+create table imagem ( 
+idImagem int primary key auto_increment,
+produto int,
+imagem longblob,
+foreign key (produto) references produto(idProduto)
 );
 
 create table produtoCategoria (
@@ -50,13 +52,6 @@ create table produtoCategoria (
     foreign key (categoria) references categoria(idCategoria)
 );
 
-create table produtoImagem (
-	idProdutoImagem int primary key auto_increment,
-    produto int not null,
-    imagem int,
-    foreign key (produto) references produto(idProduto),
-    foreign key (imagem) references imagem(idImagem)
-);
 
 create table estoque (
 	idEstoque int primary key auto_increment,
@@ -110,3 +105,5 @@ END //
 DELIMITER ;
 
 select * from usuario;
+select * from produto;
+select * from imagem;

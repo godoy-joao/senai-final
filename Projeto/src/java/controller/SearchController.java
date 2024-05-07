@@ -33,16 +33,8 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nextPage = "WEB-INF/jsp/search.jsp";
-        ProdutoDAO pdao = new ProdutoDAO();
-        String busca = request.getParameter("search");
-        List<Produto> produtos = null;
-        if (busca.equals("")) {
-            produtos = pdao.listarTodos();
-        } else {
-            produtos = pdao.listarPorPesquisa(busca);
-        }
-        request.setAttribute("produtos", produtos);
+        String nextPage = "/WEB-INF/jsp/search.jsp";
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }
@@ -60,6 +52,23 @@ public class SearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        ProdutoDAO pdao = new ProdutoDAO();
+        String busca = request.getParameter("s");
+        List<Produto> produtos = null;
+        System.out.println("BUSCA: " + busca);
+        if (busca.equals("")) {
+            produtos = pdao.listarTodos();
+            request.setAttribute("produtos", produtos);
+        } else {
+            busca = "%" + busca + "%";
+            produtos = pdao.listarPorPesquisa(busca);
+            if (produtos.isEmpty()) {
+                request.setAttribute("vazio", true);
+                produtos = pdao.listarTodos();
+            }
+            request.setAttribute("produtos", produtos);
+        }
+
     }
 
     /**

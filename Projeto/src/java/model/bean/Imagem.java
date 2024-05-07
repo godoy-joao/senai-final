@@ -12,15 +12,26 @@ import java.sql.Blob;
  * @author Joao Guilherme
  */
 public class Imagem {
+
     private int idImagem;
+    private int produto;
     private byte[] imagem;
 
     public Imagem() {
     }
 
-    public Imagem(int idImagem, byte[] imagem) {
+    public Imagem(int idImagem, int produto, byte[] imagem) {
         this.idImagem = idImagem;
+        this.produto = produto;
         this.imagem = imagem;
+    }
+
+    public int getProduto() {
+        return produto;
+    }
+
+    public void setProduto(int produto) {
+        this.produto = produto;
     }
 
     public int getIdImagem() {
@@ -39,6 +50,4 @@ public class Imagem {
         this.imagem = imagem;
     }
 
-    
-    
 }

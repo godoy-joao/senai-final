@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,11 +21,14 @@ import model.bean.Categoria;
 import model.bean.Imagem;
 import model.bean.Produto;
 import model.dao.CategoriaDAO;
+import model.dao.ImagemDAO;
+import model.dao.ProdutoDAO;
 
 /**
  *
  * @author Senai
  */
+@MultipartConfig
 public class AdminController extends HttpServlet {
 
     /**
@@ -75,12 +79,11 @@ public class AdminController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/addProduto")) {
             Produto p = new Produto();
-        p.setNome("parameternome");
-        p.setCategoria(1);
-        //p.setDescricao("");
-        p.setValor(Float.NaN);
-        p.setValorFinal(Float.NaN);
-        p.setDesconto(Float.NaN);
+            ProdutoDAO pDao = new ProdutoDAO();
+        p.setNome(request.getParameter("nome"));
+        p.setDescricao(request.getParameter("descricao"));
+        p.setValor(Float.parseFloat(request.getParameter("valor")));
+        p.setDesconto(Float.parseFloat(request.getParameter("desconto")));
         Part filePart = request.getPart("imagem");
         InputStream iStream = filePart.getInputStream();
         ByteArrayOutputStream byteA = new ByteArrayOutputStream();
@@ -91,7 +94,11 @@ public class AdminController extends HttpServlet {
         }
         byte[] imgBytes = byteA.toByteArray();
         Imagem imagem = new Imagem();
+        imagem.setProduto(pDao.create(p));
         imagem.setImagem(img);
+        ImagemDAO iDao = new ImagemDAO();
+        iDao.insertImagem(imagem);
+        response.sendRedirect("./admin");
         }
     }
 

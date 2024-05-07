@@ -13,6 +13,7 @@
             <script src="https://code.jquery.com/jquery-3.7.1.min.js"
                 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="./css/index.css">
+            <link rel="stylesheet" href="./css/header.css">
         </head>
 
         <body>
@@ -31,7 +32,7 @@
                             <form action="search" method="get" id="searchWrapper"
                                 class="addShadow w-100 rounded rounded-pill row justify-content-evenly px-2">
                                 <div id="searchInputDiv" class="col-10 col-sm-11 ps-1 px-0">
-                                    <input class="w-100 border-0 bg-transparent ps-0 fs-5" type="search" name="search"
+                                    <input class="w-100 border-0 bg-transparent ps-0 fs-5" type="search" name="s"
                                         id="searchInput">
                                 </div>
                                 <div id="searchButtonDiv" class="col-2 col-sm-1 px-0 d-flex align-items-center">
@@ -74,9 +75,13 @@
                         aria-label="Close"></button><label class="ms-1" for="close-offcanvas">Fechar</label>
                 </div>
                 <div class="offcanvas-body">
-                    <div>
-                        Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
-                        images, lists, etc.
+                    <div class="d-flex flex-column">
+                        <div>
+                            <button>
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <label for="">Ver pedidos</label>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

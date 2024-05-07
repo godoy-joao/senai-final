@@ -10,8 +10,8 @@ package model.bean;
  * @author Joao Guilherme
  */
 public class Produto {
+
     private int idProduto;
-    private int categoria;
     private String nome;
     private String descricao;
     private Float valor;
@@ -21,10 +21,10 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(int idProduto, int categoria, String nome, Float valor, Float desconto, Float valorFinal) {
+    public Produto(int idProduto, String nome, String descricao, Float valor, Float desconto, Float valorFinal) {
         this.idProduto = idProduto;
-        this.categoria = categoria;
         this.nome = nome;
+        this.descricao = descricao;
         this.valor = valor;
         this.desconto = desconto;
         this.valorFinal = valorFinal;
@@ -38,20 +38,20 @@ public class Produto {
         this.idProduto = idProduto;
     }
 
-    public int getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(int categoria) {
-        this.categoria = categoria;
-    }
-
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Float getValor() {
@@ -77,5 +77,5 @@ public class Produto {
     public void setValorFinal(Float valorFinal) {
         this.valorFinal = valorFinal;
     }
-    
+
 }

@@ -39,7 +39,7 @@ public class CarrinhoController extends HttpServlet {
         CarrinhoDAO cDao = new CarrinhoDAO();
         UsuarioDAO uDao = new UsuarioDAO();
         String id = request.getParameter("u");
-        if (id == null) {
+        if (id.equals("")) {
             response.sendRedirect("./login");
         } else {
             Usuario u = uDao.getUsuarioById(Integer.parseInt(request.getParameter("u")));

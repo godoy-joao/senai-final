@@ -1,0 +1,24 @@
+header {
+    background-color: rgb(41, 80, 255);
+    box-shadow: 0px 0px 5px 6px rgba(0, 0, 0, 0.4);
+}
+
+#searchWrapper {
+    background-color: white;
+    transition: all ease-in-out 50ms 50ms;
+}
+.addShadow:hover {
+    box-shadow: 1px 3px 5px 3px rgba(0, 0, 0, 0.4);
+}
+
+.btnIcon{
+    font-size: 1.5rem;
+}
+
+#searchInput {
+    outline: none;
+}
+
+#searchInput:focus-visible {
+    outline: none;
+}

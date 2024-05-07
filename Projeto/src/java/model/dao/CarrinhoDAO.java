@@ -51,7 +51,7 @@ public class CarrinhoDAO {
                 p.setValor(rs.getFloat("valor"));
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
-                p.setCategoria(rs.getInt("categoria"));
+                p.setDescricao(rs.getString("descricao"));
                 produtos.add(p);
             }
             

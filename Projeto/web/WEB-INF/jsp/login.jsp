@@ -13,6 +13,7 @@
             <script src="https://code.jquery.com/jquery-3.7.1.min.js"
                 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="./css/login.css">
+
             <title>Login</title>
         </head>
 
@@ -34,7 +35,7 @@
                         </button>
                     </div>
 
-                    
+
                     <form class="border-start ps-3" action="logon" method="post" id="formLogin">
                         <div class="mb-3">
                             <label class="mb-1" for="form-label">Selecione uma das opções</label>
@@ -57,7 +58,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="loginUser" class="form-label">Email ou telefone</label>
-                            <input type="email" class="form-control" id="loginUser" name="loginUser" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" id="loginUser" name="loginUser"
+                                aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="loginPass" class="form-label">Senha</label>
@@ -103,8 +105,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="confirmaSenha" class="form-label">Confirme a senha</label>
-                            <input type="password" class="form-control" name="confirmaSenha"
-                                id="confirmaSenha">
+                            <input type="password" class="form-control" name="confirmaSenha" id="confirmaSenha">
                             <label id="passHelper" class="form-text text-danger" for="confirmaSenha"></label>
                         </div>
                         <div class="w-100 d-flex justify-content-center">
@@ -115,6 +116,7 @@
                     </form>
                 </div>
             </div>
+
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -126,6 +128,13 @@
                 integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
                 crossorigin="anonymous"></script>
             <script src="./js/login.js"></script>
+            <script>
+                var tela = '${telaInicial}';
+                if (tela === "cadastro") {
+                    goToSignup();
+                }
+
+            </script>
         </body>
 
         </html>

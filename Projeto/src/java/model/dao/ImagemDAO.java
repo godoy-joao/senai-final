@@ -58,8 +58,9 @@ public class ImagemDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO imagem (imagem) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            stmt.setBytes(1, imagem.getImagem());
+            stmt = conexao.prepareStatement("INSERT INTO imagem (produto, imagem) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, imagem.getProduto());
+            stmt.setBytes(2, imagem.getImagem());
             
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
