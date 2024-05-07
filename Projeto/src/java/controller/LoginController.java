@@ -89,20 +89,20 @@ public class LoginController extends HttpServlet {
             Usuario u = new Usuario();
             UsuarioDAO uDAO = new UsuarioDAO();
             u.setNome(request.getParameter("nome"));
+            System.out.println("Teste data: "+request.getParameter("dataNascimento")+"<fim");
             u.setDataNasc(Date.valueOf(request.getParameter("dataNascimento")));
             u.setEmail(request.getParameter("email"));
             u.setTelefone(request.getParameter("telefone"));
             u.setSenha(request.getParameter("senha"));           
             u.setNome(u.getNome().replaceAll("Ã£", "ã"));
-            System.out.println(u.getNome()+" "+u.getEmail()+" "+u.getCpf()+" "+u.getSenha()+" "+u.getTelefone()+" "+u.getDataNasc());
             try {
                 uDAO.create(u);
                 response.sendRedirect("./login");
             } catch (Exception e) {
                 e.printStackTrace();
-                request.setAttribute("errorMessage", "Algo deu errado. Tente novamente.");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-                dispatcher.forward(request, response);
+                request.setAttribute("errorCadastro", "Algo deu errado. Confira os dados e tente novamente.");
+                request.setAttribute("telaInicial", "cadastro");
+                response.sendRedirect("./login");
             }
         } else {
             processRequest(request, response);

@@ -10,6 +10,9 @@
                     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                     crossorigin="anonymous">
                 <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+                <link rel="stylesheet" href="./css/header.css">
                 <title>Search</title>
             </head>
 
@@ -84,25 +87,31 @@
                     <div class="col-4" id="side-bar">
                         <label for="checkbox-group">Selecionar categoria:</label>
                         <div id="checkbox-group" class="d-flex flex-column">
-                            <c:forEach items="categorias" var="categoria">
-                                <input type="checkbox" name="" id="checkbox-${categoria.nome}">
-                                <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
-                            </c:forEach>
+                            <c:if test="${categorias.size() > 0}">
+                                <c:forEach items="categorias" var="categoria">
+                                    <input type="checkbox" name="" id="checkbox-${categoria.nome}">
+                                    <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
+                                </c:forEach>
+                            </c:if>
                         </div>
                     </div>
                     <div class="col-8" id="result-body">
                         <div class="row">
-                            <c:forEach items="produtos" var="produto">
-                                <div class="card col-4 col-lg-3">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${produto.nome}</h5>
-                                        <p class="card-text">${produto.descricao}</p>
-                                        <a href="./produto?prod=${produto.idProduto}" class="btn btn-primary">Adicionar
-                                            ao carrinho</a>
+                            <c:if test="${produtos.size() > 0}">
+                                <c:forEach items="produtos" var="produto">
+                                    <div class="card col-4 col-lg-3">
+                                        <img src="..." class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${produto.nome}</h5>
+                                            <p class="card-text">${produto.descricao}</p>
+                                            <a href="./produto?prod=${produto.idProduto}"
+                                                class="btn btn-primary">Adicionar
+                                                ao carrinho</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </c:forEach>
+                                </c:forEach>
+                            </c:if>
+
                         </div>
                     </div>
                 </div>

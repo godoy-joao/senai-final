@@ -33,7 +33,7 @@ public class HomeController extends HttpServlet {
         String nextPage = "/WEB-INF/jsp/index.jsp";
         request.setAttribute("usuario", request.getParameter("u"));
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-        dispatcher.forward(request, response);        
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +48,13 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String url = request.getServletPath();
+        if (url.equals("/search")) {
+            String busca = request.getParameter("search");
+            response.sendRedirect("./search?s="+busca);
+        } else {
+            processRequest(request, response);
+        }
     }
 
     /**

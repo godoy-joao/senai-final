@@ -38,10 +38,10 @@ public class ProdutoDAO {
                 Produto p = new Produto();
                 p.setIdProduto(rs.getInt("idProduto"));
                 p.setNome(rs.getString("nome"));
-                p.setCategoria(rs.getInt("categoria"));
                 p.setValor(rs.getFloat("valor"));
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDescricao(rs.getString("descricao"));
                 produtos.add(p);
             }
             rs.close();
@@ -71,16 +71,12 @@ public class ProdutoDAO {
                 Produto p = new Produto();
                 p.setIdProduto(rs.getInt("idProduto"));
                 p.setNome(rs.getString("nome"));
-                p.setCategoria(rs.getInt("categoria"));
                 p.setValor(rs.getFloat("valor"));
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDescricao(rs.getString("descricao"));
                 produtos.add(p);
             }
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("Tamanho da Array: " + produtos.size());
-            System.out.println("--------------------------------------------------------------------");
-
             rs.close();
             stmt.close();
             conexao.close();
@@ -109,10 +105,10 @@ public class ProdutoDAO {
                 Produto p = new Produto();
                 p.setIdProduto(rs.getInt("idProduto"));
                 p.setNome(rs.getString("nome"));
-                p.setCategoria(rs.getInt("categoria"));
                 p.setValor(rs.getFloat("valor"));
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDescricao(rs.getString("descricao"));
                 produtos.add(p);
             }
             rs.close();
@@ -131,7 +127,7 @@ public class ProdutoDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            stmt = conexao.prepareStatement("SELECT * FROM produto WHERE nome LIKE '%?%'");
+            stmt = conexao.prepareStatement("SELECT * FROM produto WHERE nome LIKE ?");
             stmt.setString(1, search);
 
             rs = stmt.executeQuery();
@@ -140,10 +136,10 @@ public class ProdutoDAO {
                 Produto p = new Produto();
                 p.setIdProduto(rs.getInt("idProduto"));
                 p.setNome(rs.getString("nome"));
-                p.setCategoria(rs.getInt("categoria"));
                 p.setValor(rs.getFloat("valor"));
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDescricao(rs.getString("descricao"));
                 produtos.add(p);
             }
 
@@ -172,10 +168,10 @@ public class ProdutoDAO {
             if (rs.next()) {
                 p.setIdProduto(rs.getInt("idProduto"));
                 p.setNome(rs.getString("nome"));
-                p.setCategoria(rs.getInt("categoria"));
                 p.setValor(rs.getFloat("valor"));
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDescricao(rs.getString("descricao"));
             }
             rs.close();
             stmt.close();
@@ -198,7 +194,7 @@ public class ProdutoDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Produto p = new Produto(rs.getInt("idProduto"), rs.getInt("categoria"), rs.getString("nome"), rs.getFloat("valor"), rs.getFloat("desconto"), rs.getFloat("valorFinal"));
+                Produto p = new Produto(rs.getInt("idProduto"), rs.getString("nome"), rs.getString("descricao"), rs.getFloat("valor"), rs.getFloat("desconto"), rs.getFloat("valorFinal"));
                 produtos.add(p);
             }
 
@@ -219,12 +215,11 @@ public class ProdutoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO produto (nome, categoria, valor, desconto, valorFinal) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt = conexao.prepareStatement("INSERT INTO produto (nome, descricao, valor, desconto) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, p.getNome());
-            stmt.setInt(2, p.getCategoria());
+            stmt.setString(2, p.getDescricao());
             stmt.setFloat(3, p.getValor());
             stmt.setFloat(4, p.getDesconto());
-            stmt.setFloat(5, p.getValorFinal());
 
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -247,7 +242,7 @@ public class ProdutoDAO {
 
             stmt = conexao.prepareStatement("UPDATE produto SET nome = ?, categoria = ?, valor = ?, desconto = ?, valorFinal = ? WHERE idProduto = ?");
             stmt.setString(1, p.getNome());
-            stmt.setInt(2, p.getCategoria());
+            stmt.setString(2, p.getDescricao());
             stmt.setFloat(3, p.getValor());
             stmt.setFloat(4, p.getDesconto());
             stmt.setFloat(5, p.getValorFinal());
@@ -272,7 +267,7 @@ public class ProdutoDAO {
 
             stmt.executeUpdate();
 
-            stmt = conexao.prepareStatement("DELETE FROM produto_imagem WHERE produto = ?");
+            stmt = conexao.prepareStatement("DELETE FROM imagem WHERE produto = ?");
             stmt.setInt(1, id);
 
             stmt.executeUpdate();

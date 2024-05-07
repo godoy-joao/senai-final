@@ -49,12 +49,13 @@ formCadastro.addEventListener("submit", function (event) {
 
 
     const nome = document.getElementById("nome").value.trim();
+    const data = document.getElementById("dataNascimento").value.trim();
     const email = document.getElementById("email").value.trim();
     const telefone = document.getElementById("telefone").value.trim();
     const senha = document.getElementById("senha").value.trim();
     const confirmaSenha = document.getElementById("confirmaSenha").value.trim();
 
-    if (nome === "" || email === "" || telefone === "" || senha === "" || confirmaSenha === "") {
+    if (nome === "" || email === "" || data === "" || telefone === "" || senha === "" || confirmaSenha === "") {
         alert("Todos os campos devem ser corretamente preenchidos!");
         event.preventDefault();
     } else {
