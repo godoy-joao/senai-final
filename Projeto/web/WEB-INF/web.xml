@@ -84,6 +84,10 @@
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/addProduto</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/addCategoria</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

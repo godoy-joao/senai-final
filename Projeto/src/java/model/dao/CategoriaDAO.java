@@ -29,9 +29,9 @@ public class CategoriaDAO {
             
             stmt = conexao.prepareStatement("INSERT INTO categoria (nome) values (?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, c.getNome());
-          
-
+            
             stmt.executeUpdate();
+             System.out.println("Categoria inserida");
             
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
