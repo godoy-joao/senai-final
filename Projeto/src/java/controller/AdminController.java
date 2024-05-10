@@ -44,7 +44,9 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         String nextPage = "/WEB-INF/jsp/admin.jsp";
         CategoriaDAO cDao = new CategoriaDAO();
-        List<Categoria> categorias =  cDao.listarTodos();
+        List<Categoria> categorias = cDao.listarTodos();
+        System.out.println(categorias.size());
+        System.out.println("TAMANHO DA ARRAY");
         request.setAttribute("categorias", categorias);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
@@ -80,25 +82,36 @@ public class AdminController extends HttpServlet {
         if (url.equals("/addProduto")) {
             Produto p = new Produto();
             ProdutoDAO pDao = new ProdutoDAO();
-        p.setNome(request.getParameter("nome"));
-        p.setDescricao(request.getParameter("descricao"));
-        p.setValor(Float.parseFloat(request.getParameter("valor")));
-        p.setDesconto(Float.parseFloat(request.getParameter("desconto")));
-        Part filePart = request.getPart("imagem");
-        InputStream iStream = filePart.getInputStream();
-        ByteArrayOutputStream byteA = new ByteArrayOutputStream();
-        byte[] img = new byte[4096];
-        int byteRead = -1;
-        while ((byteRead = iStream.read(img)) !=-1) {
-            byteA.write(img, 0, byteRead);
-        }
-        byte[] imgBytes = byteA.toByteArray();
-        Imagem imagem = new Imagem();
-        imagem.setProduto(pDao.create(p));
-        imagem.setImagem(img);
-        ImagemDAO iDao = new ImagemDAO();
-        iDao.insertImagem(imagem);
-        response.sendRedirect("./admin");
+            p.setNome(request.getParameter("nome"));
+            p.setDescricao(request.getParameter("descricao"));
+            p.setValor(Float.parseFloat(request.getParameter("valor")));
+            p.setDesconto(Float.parseFloat(request.getParameter("desconto")));
+            Part filePart = request.getPart("imagem");
+            InputStream iStream = filePart.getInputStream();
+            ByteArrayOutputStream byteA = new ByteArrayOutputStream();
+            byte[] img = new byte[4096];
+            int byteRead = -1;
+            while ((byteRead = iStream.read(img)) != -1) {
+                byteA.write(img, 0, byteRead);
+            }
+            byte[] imgBytes = byteA.toByteArray();
+            Imagem imagem = new Imagem();
+            imagem.setProduto(pDao.create(p));
+            imagem.setImagem(img);
+            ImagemDAO iDao = new ImagemDAO();
+            iDao.insertImagem(imagem);
+            response.sendRedirect("./admin");
+        } else if (url.equals("/addCategoria")) {
+            Categoria c = new Categoria();
+            CategoriaDAO cDao = new CategoriaDAO();
+            c.setNome(request.getParameter("nomeCategoria"));
+            try {
+                cDao.create(c);
+                response.sendRedirect("./admin");
+            } catch (Exception e) {
+                System.out.println("FALHA AO ADICIONAR CATEGORIA");
+                e.printStackTrace();
+            }
         }
     }
 

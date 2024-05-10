@@ -41,6 +41,7 @@ create table imagem (
 idImagem int primary key auto_increment,
 produto int,
 imagem longblob,
+formato varchar(10),
 foreign key (produto) references produto(idProduto)
 );
 

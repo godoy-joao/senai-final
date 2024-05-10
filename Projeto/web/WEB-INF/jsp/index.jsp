@@ -72,25 +72,31 @@
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" id="close-offcanvas"
-                        aria-label="Close"></button><label class="ms-1" for="close-offcanvas">Fechar</label>
+                        aria-label="Close"></button>
+                    <label class="ms-1" for="close-offcanvas">Fechar</label>
                 </div>
                 <div class="offcanvas-body">
-                    <div class="d-flex flex-column">
-                        <div>
-                            <button>
-                                <i class="fa-solid fa-clipboard-list"></i>
-                                <label for="">Ver pedidos</label>
-                            </button>
-                        </div>
+                    <div>
+                        
                     </div>
                 </div>
             </div>
             <main>
-                <div class="bg-primary">
+                <div class="bg-primary ">
 
                 </div>
                 <div>
+                    <div>
+                        <c:if test="${fn:length(categorias) > 0}">
+                            <c:forEach items="${categorias}" var="categoria">
+                                <p class="h3">${categoria.nome}</p>
+                                <c:forEach items="produtos" var="produto">
+                                    <p class="fs-5">${produto.nome}</p>
+                                </c:forEach>
+                            </c:forEach>
+                        </c:if>
 
+                    </div>
                 </div>
             </main>
             <footer>
