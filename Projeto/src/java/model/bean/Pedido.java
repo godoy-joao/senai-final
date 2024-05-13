@@ -15,27 +15,23 @@ public class Pedido {
 
     private int idPedido;
     private int usuario;
-    private int endereco_entrega;
-    private Timestamp data_pedido;
-    private float valor_total;
+    private int enderecoEntrega;
+    private Timestamp dataPedido;
+    private float valorTotal;
+    private String formaPagamento;
+    private int status; // 1 - Aguardando pagamento, 2 - Confirmado, 3 - Em Trânsito, 4 - Entregue, 5 - Concluído, 0 - Cancelado
 
     public Pedido() {
     }
 
-    public Pedido(int idPedido, int usuario, int endereco_entrega, Timestamp data_pedido, float valor_total) {
+    public Pedido(int idPedido, int usuario, int enderecoEntrega, Timestamp dataPedido, float valorTotal, String formaPagamento, int status) {
         this.idPedido = idPedido;
         this.usuario = usuario;
-        this.endereco_entrega = endereco_entrega;
-        this.data_pedido = data_pedido;
-        this.valor_total = valor_total;
-    }
-
-    public float getValor_total() {
-        return valor_total;
-    }
-
-    public void setValor_total(float valor_total) {
-        this.valor_total = valor_total;
+        this.enderecoEntrega = enderecoEntrega;
+        this.dataPedido = dataPedido;
+        this.valorTotal = valorTotal;
+        this.formaPagamento = formaPagamento;
+        this.status = status;
     }
 
     public int getIdPedido() {
@@ -54,20 +50,45 @@ public class Pedido {
         this.usuario = usuario;
     }
 
-    public int getEndereco_entrega() {
-        return endereco_entrega;
+    public int getEnderecoEntrega() {
+        return enderecoEntrega;
     }
 
-    public void setEndereco_entrega(int endereco_entrega) {
-        this.endereco_entrega = endereco_entrega;
+    public void setEnderecoEntrega(int enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
     }
 
-    public Timestamp getData_pedido() {
-        return data_pedido;
+    public Timestamp getDataPedido() {
+        return dataPedido;
     }
 
-    public void setData_pedido(Timestamp data_pedido) {
-        this.data_pedido = data_pedido;
+    public void setDataPedido(Timestamp dataPedido) {
+        this.dataPedido = dataPedido;
     }
 
+    public float getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(float valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    
 }

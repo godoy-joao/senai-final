@@ -6,7 +6,7 @@
                 <html>
 
                 <head>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8">
                     <title>Admin</title>
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
                         rel="stylesheet"
@@ -19,7 +19,7 @@
                     <link rel="stylesheet" href="./css/header.css">
                 </head>
 
-                <body>
+                <body class="overflow-hidden">
                     <header class="overflow-hidden">
                         <div id="div-header" class="d-flex justify-content-center py-2">
                             <div class="vw-100 row px-lg-5 px-sm-3 justify-content-center">
@@ -72,18 +72,18 @@
                         <div id="div-nav" class="row justify-content-evenly px-2">
                         </div>
                     </header>
-                    <div class="row gap-4 justify-content-evenly">
-                        <div class="col-3 d-flex justify-content-center align-items-center">
-                            <button>
+                    <div class="overflow-hidden row gap-4 justify-content-evenly mt-4">
+                        <div class="btn col-3 d-flex justify-content-center align-items-center">
+                            <button onclick="showAddProduto()">
                                 <p>Adicionar/editar produto</p>
                             </button>
                         </div>
-                        <div class="col-3 d-flex justify-content-center align-items-center">
-                            <button>
+                        <div class="btn col-3 d-flex justify-content-center align-items-center">
+                            <button onclick="showAddCategoria()">
                                 <p>Adicionar categoria</p>
                             </button>
                         </div>
-                        <div class="col-3 d-flex justify-content-center align-items-center">
+                        <div class="btn col-3 d-flex justify-content-center align-items-center">
                             <button>
                                 <p>Gerenciar estoque</p>
                             </button>

@@ -97,7 +97,7 @@ public class AdminController extends HttpServlet {
             byte[] imgBytes = byteA.toByteArray();
             Imagem imagem = new Imagem();
             imagem.setProduto(pDao.create(p));
-            imagem.setImagem(img);
+            imagem.setImagem(imgBytes);
             ImagemDAO iDao = new ImagemDAO();
             iDao.insertImagem(imagem);
             response.sendRedirect("./admin");

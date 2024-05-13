@@ -7,11 +7,19 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Categoria;
+import model.bean.Imagem;
+import model.bean.Produto;
+import model.dao.CategoriaDAO;
+import model.dao.ImagemDAO;
+import model.dao.ProdutoDAO;
 
 /**
  *
@@ -31,7 +39,27 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nextPage = "/WEB-INF/jsp/index.jsp";
-        request.setAttribute("usuario", request.getParameter("u"));
+        CategoriaDAO cDao = new CategoriaDAO();
+        List<Categoria> categorias = cDao.listarTodos();
+        ProdutoDAO pDao = new ProdutoDAO();
+        List<Produto> produtos = pDao.listarTodos();
+        ImagemDAO iDao = new ImagemDAO();
+        Produto p = new Produto();
+        p.setIdProduto(1);
+        List<Imagem> imagens = iDao.getImageList(p);
+        request.setAttribute("categorias", categorias);
+        request.setAttribute("produtos", produtos);
+        request.setAttribute("imagens", imagens);
+        for (int i = 0; i < produtos.size(); i++) {
+
+            if (imagens.get(i) != null) {
+                String imagemBase64 = Base64.getEncoder().encodeToString(imagens.get(i));
+                System.out.println("aqui");
+                System.out.println(imagemBase64);
+                produtos.get(i).setImagemBase64(imagemBase64);
+
+            }
+        }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }
@@ -51,7 +79,7 @@ public class HomeController extends HttpServlet {
         String url = request.getServletPath();
         if (url.equals("/search")) {
             String busca = request.getParameter("search");
-            response.sendRedirect("./search?s="+busca);
+            response.sendRedirect("./search?s=" + busca);
         } else {
             processRequest(request, response);
         }

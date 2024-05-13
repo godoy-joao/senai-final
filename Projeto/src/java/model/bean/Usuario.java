@@ -21,11 +21,9 @@ public class Usuario {
     private String telefone;
     private Date dataNasc;
     private int tipo;
+    private byte[] foto;
 
-    public Usuario() {
-    }
-
-    public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone, Date dataNasc, int tipo) {
+    public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone, Date dataNasc, int tipo, byte[] foto) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
@@ -34,22 +32,10 @@ public class Usuario {
         this.telefone = telefone;
         this.dataNasc = dataNasc;
         this.tipo = tipo;
+        this.foto = foto;
     }
 
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
-    public Date getDataNasc() {
-        return dataNasc;
-    }
-
-    public void setDataNasc(Date dataNasc) {
-        this.dataNasc = dataNasc;
+    public Usuario() {
     }
 
     public int getIdUsuario() {
@@ -100,4 +86,29 @@ public class Usuario {
         this.telefone = telefone;
     }
 
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    
 }

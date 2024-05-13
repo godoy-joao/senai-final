@@ -42,6 +42,7 @@ public class ProdutoDAO {
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
                 p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
             rs.close();
@@ -75,6 +76,7 @@ public class ProdutoDAO {
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
                 p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
             rs.close();
@@ -109,6 +111,7 @@ public class ProdutoDAO {
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
                 p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
             rs.close();
@@ -140,6 +143,7 @@ public class ProdutoDAO {
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
                 p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
 
@@ -172,6 +176,7 @@ public class ProdutoDAO {
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
                 p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
             }
             rs.close();
             stmt.close();
@@ -194,7 +199,14 @@ public class ProdutoDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Produto p = new Produto(rs.getInt("idProduto"), rs.getString("nome"), rs.getString("descricao"), rs.getFloat("valor"), rs.getFloat("desconto"), rs.getFloat("valorFinal"));
+                Produto p = new Produto();
+                p.setIdProduto(rs.getInt("idProduto")); 
+                p.setNome(rs.getString("nome"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setValor(rs.getFloat("valor"));
+                p.setDesconto(rs.getFloat("desconto"));
+                p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
 

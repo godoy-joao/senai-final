@@ -10,14 +10,16 @@ senha varchar(100) not null,
 cpf char(14) default "0",
 telefone varchar(15) not null,
 dataNascimento date not null,
-tipo int default 2
+tipo int default 2,
+fotoPerfil longblob
 );
 
 create table endereco (
 	idEndereco int primary key auto_increment,
-    estado varchar(50) not null,
+    estado varchar(20) not null,
     cidade varchar(50) not null,
     cep char(9),
+    bairro varchar(30),
     rua varchar(100) not null,
     numero varchar(10) not null,
     complemento varchar(100)
@@ -34,7 +36,8 @@ create table produto (
     valor float(10,2) not null,
     desconto float(10,2) default 0,
     valorFinal float(10,2) GENERATED ALWAYS AS (valor - COALESCE(desconto, 0)) STORED,
-    descricao varchar(2000)
+    descricao varchar(2000),
+    dataRegistro date default (CURRENT_DATE)
 );
 
 create table imagem ( 
@@ -68,6 +71,7 @@ create table pedido (
     enderecoEntrega int not null,
     dataPedido date not null,
     valorTotal float,
+    formaPagamento varchar(20),
     status int default 1,
     foreign key (enderecoEntrega) references endereco(idEndereco),
     foreign key (usuario) references usuario(idUsuario)

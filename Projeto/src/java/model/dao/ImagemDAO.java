@@ -109,14 +109,16 @@ public class ImagemDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            stmt = conexao.prepareStatement("SELECT i.* FROM imagem i "
-                    + "JOIN produto_imagem pi ON i.idImagem = pi.imagem WHERE pi.produto = ?");
+            stmt = conexao.prepareStatement("SELECT * FROM imagem WHERE produto = ?");
+            stmt.setInt(1, p.getIdProduto());
             
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Imagem i = new Imagem();
                 i.setIdImagem(rs.getInt("idImagem"));
-                //i.setImagem(rs.getBlob("imagem"));
+                i.setProduto(rs.getInt("produto"));
+                i.setImagem(rs.getBytes("imagem"));
+                i.setFormato(rs.getString("formato"));
                 imagens.add(i);
             }
             
@@ -127,13 +129,6 @@ public class ImagemDAO {
             e.printStackTrace();
         }
         return imagens;
-    }
-
-    public ImageIcon blobToImage(Blob blob) throws SQLException, IOException {
-        byte[] imageBytes = blob.getBytes(1, (int) blob.length());
-        Image imagem = ImageIO.read(new ByteArrayInputStream(imageBytes));
-        ImageIcon img = new ImageIcon(imagem);
-        return img;
     }
 
     public void delete(int id) {

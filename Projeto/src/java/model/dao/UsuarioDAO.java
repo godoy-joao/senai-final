@@ -82,6 +82,9 @@ public class UsuarioDAO {
                 u.setEmail(rs.getString("email"));
                 u.setTelefone(rs.getString("telefone"));
                 u.setCpf(rs.getString("cpf"));
+                u.setDataNasc(rs.getDate("dataNascimento"));
+                u.setTipo(rs.getInt("tipo"));
+                u.setFoto(rs.getBytes("fotoPerfil"));
             } else {
                 System.out.println("Usuario não localizado.");
             }
@@ -114,6 +117,9 @@ public class UsuarioDAO {
                 u.setEmail(rs.getString("email"));
                 u.setTelefone(rs.getString("telefone"));
                 u.setCpf(rs.getString("cpf"));
+                u.setDataNasc(rs.getDate("dataNascimento"));
+                u.setTipo(rs.getInt("tipo"));
+                u.setFoto(rs.getBytes("fotoPerfil"));
             } else {
                 System.out.println("Usuario não localizado.");
             }
@@ -141,11 +147,14 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                u.setIdUsuario(rs.getInt("idUsuario"));
+               u.setIdUsuario(rs.getInt("idUsuario"));
                 u.setNome(rs.getString("nome"));
-                u.setEmail(email);
+                u.setEmail(rs.getString("email"));
                 u.setTelefone(rs.getString("telefone"));
                 u.setCpf(rs.getString("cpf"));
+                u.setDataNasc(rs.getDate("dataNascimento"));
+                u.setTipo(rs.getInt("tipo"));
+                u.setFoto(rs.getBytes("fotoPerfil"));
             } else {
                 System.out.println("Usuario não localizado.");
             }
@@ -193,14 +202,13 @@ public class UsuarioDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("UPDATE usuario SET nome = ?, email = ?, senha = ?, cpf = ?, dataNascimento = ?, telefone = ? WHERE idUsuario = ?");
+            stmt = conexao.prepareStatement("UPDATE usuario SET nome = ?, email = ?, senha = ?, telefone = ?, fotoPerfil = ? WHERE idUsuario = ?");
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
-            stmt.setString(4, u.getCpf());
-            stmt.setDate(5, u.getDataNasc());
-            stmt.setString(6, u.getTelefone());
-            stmt.setInt(7, u.getIdUsuario());
+            stmt.setString(4, u.getTelefone());
+            stmt.setBytes(5, u.getFoto());
+            stmt.setInt(6, u.getIdUsuario());
 
             stmt.executeUpdate();
 
@@ -216,7 +224,7 @@ public class UsuarioDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("UPDATE usuario SET nome = ?, email = ?, senha = ?, cpf = ?, telefone = ? WHERE idUsuario = ?");
+            stmt = conexao.prepareStatement("DELETE FROM usuario WHERE idUsuario = ?");
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, "");
