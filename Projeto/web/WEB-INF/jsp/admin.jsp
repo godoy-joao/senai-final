@@ -72,21 +72,34 @@
                         <div id="div-nav" class="row justify-content-evenly px-2">
                         </div>
                     </header>
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                        aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" id="close-offcanvas"
-                                aria-label="Close"></button><label class="ms-1" for="close-offcanvas">Fechar</label>
+                    <div class="row gap-4 justify-content-evenly">
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <button>
+                                <p>Adicionar/editar produto</p>
+                            </button>
                         </div>
-                        <div class="offcanvas-body">
-                            <div>
-                                <label for="escolhaTela">Escolha a tela a ser exibida:</label><br>
-                                <select name="tela" id="escolhaTela">
-                                    <option value="1">Adicionar produto</option>
-                                    <option value="2">Adicionar categoria</option>
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <button>
+                                <p>Adicionar categoria</p>
+                            </button>
+                        </div>
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <button>
+                                <p>Gerenciar estoque</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-start">
+                        <div class="col-3 justify-content-center">
+                            <c:if test="${fn:length(produtos) > 0}">
+                                <select name="produtoSelecionado" id="selectProduto">
+                                    <c:forEach items="${produtos}" var="produto">
+                                        <option value="${produto.idProduto}">
+                                            ${produto.idProduto}. ${produto.nome}
+                                        </option>
+                                    </c:forEach>
                                 </select>
-                            </div>
+                            </c:if>
                         </div>
                     </div>
                     <main class="mx-5 mt-4 px-5 d-flex justify-content-center">
@@ -99,11 +112,13 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="valor" class="form-label">Valor</label>
-                                    <input type="number" step="0.01" class="form-control" id="valor" name="valor" autocomplete="off">
+                                    <input type="number" step="0.01" class="form-control" id="valor" name="valor"
+                                        autocomplete="off">
                                 </div>
                                 <div class="mb-3">
                                     <label for="desconto" class="form-label">Desconto (se aplicável)</label>
-                                    <input type="number" step="0.01" class="form-control" id="desconto" name="desconto" autocomplete="off">
+                                    <input type="number" step="0.01" class="form-control" id="desconto" name="desconto"
+                                        autocomplete="off">
                                 </div>
                                 <div class="mb-3">
                                     <label for="imagem" class="form-label">Selecione a imagem do produto</label>
@@ -137,7 +152,8 @@
                             <form action="addCategoria" method="post">
                                 <div class="mb-3">
                                     <label for="nomeCategoria" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="nomeCategoria" name="nomeCategoria" autocomplete="off">
+                                    <input type="text" class="form-control" id="nomeCategoria" name="nomeCategoria"
+                                        autocomplete="off">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Adicionar</button>
                             </form>
