@@ -44,11 +44,11 @@ public class PedidoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO pedido (usuario, endereco_entrega, data_pedido, valor_total) VALUES (?, ?, ?, ?)");
+            stmt = conexao.prepareStatement("INSERT INTO pedido (usuario, enderecoEntrega, dataPedido, valorTotal) VALUES (?, ?, ?, ?)");
             stmt.setInt(1, p.getUsuario());
-            stmt.setInt(2, p.getEndereco_entrega());
-            stmt.setTimestamp(3, p.getData_pedido());
-            stmt.setFloat(4, p.getValor_total());
+            stmt.setInt(2, p.getEnderecoEntrega());
+            stmt.setTimestamp(3, p.getDataPedido());
+            stmt.setFloat(4, p.getValorTotal());
 
             stmt.executeUpdate();
 
@@ -77,9 +77,9 @@ public class PedidoDAO {
                 Pedido p = new Pedido();
                 p.setIdPedido(rs.getInt("idPedido"));
                 p.setUsuario(rs.getInt("usuario"));
-                p.setEndereco_entrega(rs.getInt("endereco_entrega"));
-                p.setValor_total(rs.getFloat("valor_total"));
-                p.setData_pedido(rs.getTimestamp("data_pedido"));
+                p.setEnderecoEntrega(rs.getInt("enderecoEntrega"));
+                p.setValorTotal(rs.getFloat("valorTotal"));
+                p.setDataPedido(rs.getTimestamp("dataPedido"));
                 pedidos.add(p);
             }
             

@@ -5,6 +5,8 @@
  */
 package model.bean;
 
+import java.sql.Date;
+
 /**
  *
  * @author Joao Guilherme
@@ -17,17 +19,29 @@ public class Produto {
     private Float valor;
     private Float desconto;
     private Float valorFinal;
+    private Date dataRegistro;
+    private String imagemBase64;
 
     public Produto() {
     }
 
-    public Produto(int idProduto, String nome, String descricao, Float valor, Float desconto, Float valorFinal) {
+    public Produto(int idProduto, String nome, String descricao, Float valor, Float desconto, Float valorFinal, Date dataRegistro, String imagemBase64) {
         this.idProduto = idProduto;
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
         this.desconto = desconto;
         this.valorFinal = valorFinal;
+        this.dataRegistro = dataRegistro;
+        this.imagemBase64 = imagemBase64;
+    }
+
+    public String getImagemBase64() {
+        return imagemBase64;
+    }
+
+    public void setImagemBase64(String imagemBase64) {
+        this.imagemBase64 = imagemBase64;
     }
 
     public int getIdProduto() {
@@ -76,6 +90,14 @@ public class Produto {
 
     public void setValorFinal(Float valorFinal) {
         this.valorFinal = valorFinal;
+    }
+
+    public Date getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 
 }

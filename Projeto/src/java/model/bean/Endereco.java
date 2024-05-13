@@ -10,10 +10,12 @@ package model.bean;
  * @author Joao Guilherme
  */
 public class Endereco {
+
     private int idEndereco;
     private String estado;
     private String cidade;
     private String cep;
+    private String bairro;
     private String rua;
     private String numero;
     private String complemento;
@@ -21,14 +23,23 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(int idEndereco, String estado, String cidade, String cep, String rua, String numero, String complemento) {
+    public Endereco(int idEndereco, String estado, String cidade, String cep, String bairro, String rua, String numero, String complemento) {
         this.idEndereco = idEndereco;
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
+        this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;
         this.complemento = complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public int getIdEndereco() {
@@ -86,6 +97,5 @@ public class Endereco {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-    
-    
+
 }
