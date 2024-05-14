@@ -79,8 +79,9 @@ public class LoginController extends HttpServlet {
                     response.addCookie(cookie);
                     response.sendRedirect("./home");
                 } else {
-                    response.sendRedirect("./login");
                     request.setAttribute("errorMessage", "Usuário ou senha inválidos");
+                    response.sendRedirect("./login");
+                    
                 }                
             } catch (Exception e) {
                 e.printStackTrace();
@@ -92,7 +93,6 @@ public class LoginController extends HttpServlet {
             Usuario u = new Usuario();
             UsuarioDAO uDAO = new UsuarioDAO();
             u.setNome(request.getParameter("nome"));
-            System.out.println("Teste data: "+request.getParameter("dataNascimento")+"<fim");
             u.setDataNasc(Date.valueOf(request.getParameter("dataNascimento")));
             u.setEmail(request.getParameter("email"));
             u.setTelefone(request.getParameter("telefone"));

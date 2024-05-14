@@ -28,8 +28,10 @@
                                             class="active" aria-current="true" aria-label="Slide 1"></button>
                                     </div>
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="" class="d-block w-100" alt="...">
+                                        <div class="carousel-item active d-flex justify-content-center">
+                                            <img src="./assets/banner.png" class="" alt="..."
+                                                style="object-fit: cover; max-height: 30vh;">
+
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carroselHeader"
@@ -45,57 +47,49 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-primary px-5">
-                            <div class="bg-light">
+                        <div id="produtos-main" class="bg-primary vh-100">
+                            <div class="bg-light w-100 h-100 p-5">
                                 <div class="">
-                                    <c:if test="${fn:length(categorias) > 0}">
-                                        <c:forEach items="${categorias}" var="categoria">
-                                            <p class="h3 mb-2">${categoria.nome}</p>
-
-                                            <div>
-                                                <div id="carroselProdutos${categoria.idCategoria}"
-                                                    class="carousel slide">
-                                                    <div class="carousel-indicators">
-                                                        <button type="button"
-                                                            data-bs-target="#carroselProdutos${categoria.idCategoria}"
-                                                            data-bs-slide-to="0" class="active" aria-current="true"
-                                                            aria-label="Slide 1">
-                                                        </button>
-                                                    </div>
-                                                    <div class="carousel-inner">
-                                                        <div class="carousel-item">
-                                                            <c:forEach items="${produtos}" var="produto">
-                                                                <div class="card" style="width: 15vw;">
-                                                                    <c:forEach items="${imagens}" var="imagem"><img src="data:image/png;base64,${imagem.imagem}" class="card-img-top" alt="..."> </c:forEach>
-                                                                    
-                                                                    <div class="card-body">
-                                                                      <p class="card-title h5">${produto.nome}</p>
-                                                                      <p class="card-text">${produto.descricao}</p>
-                                                                      <a href="./produto?id=${produto.idProduto}" class="btn">Deixe-me ver</a>
-                                                                    </div>
-                                                                  </div>
-                                                            </c:forEach>
+                                    <p class="h3">Descontos</p>
+                                    <div>
+                                        <div id="carroselProdutos${categoria.idCategoria}" class="carousel slide">
+                                            <div class="carousel-indicators">
+                                                <button type="button"
+                                                    data-bs-target="#carroselProdutos${categoria.idCategoria}"
+                                                    data-bs-slide-to="0" class="active" aria-current="true"
+                                                    aria-label="Slide 1">
+                                                </button>
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item">
+                                                    <c:forEach items="${descontos}" var="produtoD">
+                                                        <div class="card" style="width: 15vw;">
+                                                            <img src="data:image/png;base64,${produtoD.imagemBase64}"
+                                                                class="card-img-top" alt="...">
+                                                            <div class="card-body">
+                                                                <p class="card-title h5">${produto.nome}</p>
+                                                                <p class="card-text">${produto.descricao}</p>
+                                                                <a href="./produto?id=${produto.idProduto}"
+                                                                    class="btn">Deixe-me ver</a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <button class="carousel-control-prev" type="button"
-                                                        data-bs-target="#carroselProdutos${categoria.idCategoria}"
-                                                        data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon"
-                                                            aria-hidden="false"></span>
-                                                        <span class="">Ant.</span>
-                                                    </button>
-                                                    <button class="carousel-control-next" type="button"
-                                                        data-bs-target="#carroselProdutos${categoria.idCategoria}"
-                                                        data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon"
-                                                            aria-hidden="false"></span>
-                                                        <span class="">Próx.</span>
-                                                    </button>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
-
-                                        </c:forEach>
-                                    </c:if>
+                                            <button class="carousel-control-prev" type="button"
+                                                data-bs-target="#carroselProdutos${categoria.idCategoria}"
+                                                data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                                                <span class="">Ant.</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button"
+                                                data-bs-target="#carroselProdutos${categoria.idCategoria}"
+                                                data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                                                <span class="">Próx.</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -44,22 +44,21 @@ public class HomeController extends HttpServlet {
         ProdutoDAO pDao = new ProdutoDAO();
         List<Produto> produtos = pDao.listarTodos();
         ImagemDAO iDao = new ImagemDAO();
-        Produto p = new Produto();
-        p.setIdProduto(1);
-        List<Imagem> imagens = iDao.getImageList(p);
+        List<Produto> descontos = pDao.listarTodosComDesconto();
+
+        for (int i = 0; i < descontos.size(); i++) {
+            Imagem img = iDao.getFirstImagem(descontos.get(i));
+            String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
+            descontos.get(i).setImagemBase64(imagemBase64);
+        }
+        for (int i = 0; i < produtos.size(); i++) {
+            Imagem img = iDao.getFirstImagem(produtos.get(i));
+            String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
+            produtos.get(i).setImagemBase64(imagemBase64);
+        }
         request.setAttribute("categorias", categorias);
         request.setAttribute("produtos", produtos);
-        request.setAttribute("imagens", imagens);
-        for (int i = 0; i < produtos.size(); i++) {
-
-            if (imagens.get(i) != null) {
-                String imagemBase64 = Base64.getEncoder().encodeToString(imagens.get(i));
-                System.out.println("aqui");
-                System.out.println(imagemBase64);
-                produtos.get(i).setImagemBase64(imagemBase64);
-
-            }
-        }
+        request.setAttribute("descontos", descontos);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }
