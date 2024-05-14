@@ -22,6 +22,36 @@ import model.bean.Produto;
  */
 public class ProdutoDAO {
 
+    public List<Produto> listarRecentes(int quantidade) {
+        List<Produto> produtos = new ArrayList();
+
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM produto ORDER BY dataRegistro LIMIT ?");
+            stmt.setInt(1, quantidade);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setIdProduto(rs.getInt("idProduto"));
+                p.setNome(rs.getString("nome"));
+                p.setValor(rs.getFloat("valor"));
+                p.setDesconto(rs.getFloat("desconto"));
+                p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
+                produtos.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produtos;
+    }
+
     public List<Produto> listarTodosDisponiveis() {
         List<Produto> produtos = new ArrayList();
 
@@ -200,7 +230,7 @@ public class ProdutoDAO {
 
             while (rs.next()) {
                 Produto p = new Produto();
-                p.setIdProduto(rs.getInt("idProduto")); 
+                p.setIdProduto(rs.getInt("idProduto"));
                 p.setNome(rs.getString("nome"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setValor(rs.getFloat("valor"));
@@ -252,13 +282,12 @@ public class ProdutoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("UPDATE produto SET nome = ?, categoria = ?, valor = ?, desconto = ?, valorFinal = ? WHERE idProduto = ?");
+            stmt = conexao.prepareStatement("UPDATE produto SET nome = ?, valor = ?, desconto = ?, descricao = ? WHERE idProduto = ?");
             stmt.setString(1, p.getNome());
-            stmt.setString(2, p.getDescricao());
-            stmt.setFloat(3, p.getValor());
-            stmt.setFloat(4, p.getDesconto());
-            stmt.setFloat(5, p.getValorFinal());
-            stmt.setInt(6, p.getIdProduto());
+            stmt.setFloat(2, p.getValor());
+            stmt.setFloat(3, p.getDesconto());
+            stmt.setString(4, p.getDescricao());
+            stmt.setInt(5, p.getIdProduto());
 
             stmt.executeUpdate();
 

@@ -45,8 +45,6 @@ public class AdminController extends HttpServlet {
         String nextPage = "/WEB-INF/jsp/admin.jsp";
         CategoriaDAO cDao = new CategoriaDAO();
         List<Categoria> categorias = cDao.listarTodos();
-        System.out.println(categorias.size());
-        System.out.println("TAMANHO DA ARRAY");
         request.setAttribute("categorias", categorias);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);

@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,19 +37,8 @@ public class CarrinhoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nextPage = "/WEB-INF/jsp/carrinho.jsp";
-        CarrinhoDAO cDao = new CarrinhoDAO();
-        UsuarioDAO uDao = new UsuarioDAO();
-        String id = request.getParameter("u");
-        if (id.equals("")) {
-            response.sendRedirect("./login");
-        } else {
-            Usuario u = uDao.getUsuarioById(Integer.parseInt(request.getParameter("u")));
-        List<Produto> produtos = cDao.lerProdutos(u);
-        request.setAttribute("produtos", produtos);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +53,28 @@ public class CarrinhoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        CarrinhoDAO cDao = new CarrinhoDAO();
+        UsuarioDAO uDao = new UsuarioDAO();
+        Cookie[] cookies = request.getCookies();
+        String id = "";
+        for (int i = 0; i < 10; i++) {
+            if (cookies[i].getName().equals("usuario")) {
+                id = cookies[i].getValue();
+                i = 11;
+            }
+        }
+        if (id.equals("")) {
+            response.sendRedirect("./login");
+        } else {
+            try {
+                Usuario u = uDao.getUsuarioById(Integer.parseInt(id));
+                List<Produto> produtos = cDao.lerProdutos(u);
+                request.setAttribute("produtos", produtos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     /**

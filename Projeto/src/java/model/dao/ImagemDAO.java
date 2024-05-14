@@ -58,9 +58,10 @@ public class ImagemDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO imagem (produto, imagem) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt = conexao.prepareStatement("INSERT INTO imagem (produto, imagem, formato) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, imagem.getProduto());
             stmt.setBytes(2, imagem.getImagem());
+            stmt.setString(3, imagem.getFormato());
             
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -74,6 +75,34 @@ public class ImagemDAO {
             e.printStackTrace();
         }
         return idImagem;
+    }
+    
+    public Imagem getFirstImagem(Produto p) {
+        Imagem img = new Imagem();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM imagem WHERE produto = ? LIMIT 1");
+            stmt.setInt(1, p.getIdProduto());
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                img.setIdImagem(rs.getInt("idImagem"));
+                img.setProduto(rs.getInt("produto"));
+                img.setImagem(rs.getBytes("imagem"));
+                img.setFormato(rs.getString("formato"));
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return img;
     }
 
     public Imagem getImagem(int id) {
