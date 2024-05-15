@@ -1,4 +1,4 @@
-drop database senai_final;
+
 create database senai_final;
 use senai_final;
 
@@ -108,7 +108,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-select * from usuario;
-select * from produto;
-select * from imagem;
