@@ -33,11 +33,20 @@
                                     </div>
                                 </div>
                                 <div class="row w-50">
-                                    <div>
-
+                                    <div class="col-4">
+                                        <p class="fs-5 me-1">
+                                            TOTAL: 
+                                        </p>
+                                        <p class="fs-5 text-bold">
+                                            ${totalCarrinho}
+                                        </p>
                                     </div>
-                                    <div>
-
+                                    <div class="col-6">
+                                        <button class="laranja-fundo-2">
+                                            <p class="preto-texto">
+                                                Finalizar pedido 
+                                            </p>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

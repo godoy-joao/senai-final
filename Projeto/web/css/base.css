@@ -1,3 +1,6 @@
+body{
+    overflow-x:hidden
+}
 .azul-fundo-1 {
     background-color: #003bb3;
 }
