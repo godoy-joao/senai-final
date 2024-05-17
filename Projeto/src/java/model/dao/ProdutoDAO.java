@@ -46,6 +46,9 @@ public class ProdutoDAO {
                 p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
+            rs.close();
+            stmt.close();
+            conexao.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -249,6 +252,41 @@ public class ProdutoDAO {
         }
 
         return produtos;
+    }
+    
+    public int addCategoria(int produto, int categoria) {
+        int totalCategorias = -1;
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conexao.prepareStatement("INSERT INTO produtoCategoria (produto, categoria) VALUES (?, ?)");
+            stmt.setInt(1, produto);
+            stmt.setInt(2, categoria);
+            
+            stmt.executeUpdate();
+            
+            stmt = conexao.prepareStatement("SELECT * FROM produtoCategoria WHERE produto = ?");
+            stmt.setInt(1, produto);
+            
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                if (!(totalCategorias == -1)) {
+                    totalCategorias++;
+                } else {
+                    totalCategorias = 1;
+                }
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+            
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCategorias;
     }
 
     public int create(Produto p) {

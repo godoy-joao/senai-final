@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.Base64;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -76,8 +77,8 @@ public class LoginController extends HttpServlet {
 
             try {
                 if (uDAO.login(usuario) != -1) {
-                    Cookie cookie = new Cookie("usuario", Integer.toString(uDAO.login(usuario)));
-                    response.addCookie(cookie);
+                    Cookie cookieLogin = new Cookie("login", Integer.toString(uDAO.login(usuario)));
+                    response.addCookie(cookieLogin);
                     response.sendRedirect("./home");
                 } else {
                     request.setAttribute("errorMessage", "Usuário ou senha inválidos");

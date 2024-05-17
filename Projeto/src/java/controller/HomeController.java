@@ -11,6 +11,7 @@ import java.util.Base64;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import model.bean.Produto;
 import model.dao.CategoriaDAO;
 import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -55,6 +57,17 @@ public class HomeController extends HttpServlet {
             Imagem img = iDao.getFirstImagem(produtos.get(i));
             String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
             produtos.get(i).setImagemBase64(imagemBase64);
+        }
+        UsuarioDAO uDao = new UsuarioDAO();
+        Cookie[] cookies = request.getCookies();
+        int idUsuario = 0;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("login")) {
+                idUsuario = Integer.parseInt(cookie.getValue());
+            }
+        }
+        if (idUsuario > 0) {
+            request.setAttribute("user", uDao.getUsuarioById(idUsuario));
         }
         request.setAttribute("categorias", categorias);
         request.setAttribute("produtos", produtos);

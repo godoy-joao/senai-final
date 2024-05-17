@@ -18,7 +18,7 @@
                 <title>Search</title>
             </head>
 
-            <body>
+            <body class="overflow-x-hidden">
                 <%@ include file="/WEB-INF/jspf/header.jspf" %>
                     <div class="row">
                         <div class="col-4" id="side-bar">

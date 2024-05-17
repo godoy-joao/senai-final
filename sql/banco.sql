@@ -109,3 +109,6 @@ BEGIN
 END //
 
 DELIMITER ;
+
+select * from imagem;
+select * from usuario;

@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="./css/base.css">
         </head>
 
-        <body>
+        <body class="overflow-x-hidden">
             <%@ include file="/WEB-INF/jspf/header.jspf" %>
                 <main>
                     <div id="barraLateral">

@@ -80,29 +80,41 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        //
         String url = request.getServletPath();
         if (url.equals("/addProduto")) {
+            //----------------------------
             Produto p = new Produto();
             Estoque e = new Estoque();
             EstoqueDAO eDao = new EstoqueDAO();
             ProdutoDAO pDao = new ProdutoDAO();
             ImagemDAO iDao = new ImagemDAO();
+            //----------------------------
             p.setNome(request.getParameter("nome"));
             p.setDescricao(request.getParameter("descricao"));
             p.setValor(Float.parseFloat(request.getParameter("valor")));
             p.setDesconto(Float.parseFloat(request.getParameter("desconto")));
-            Collection<Part> filePart = request.getParts();
-            System.out.println(filePart+"AQUI");
-            Imagem imagem = new Imagem();
             int idProduto = pDao.create(p);
-            imagem.setProduto(idProduto);
+            //Pegando as 'parts' do documento e transformando o conteúdo em bytes
+            Collection<Part> parts = request.getParts();
+            for (Part part : parts) {
+                if (part.getName().equals("imagem")) {
+                    Imagem imagem = new Imagem();
+                    imagem.setImagem(iDao.partToBytes(part));
+                    imagem.setProduto(idProduto);
+                    iDao.insertImagem(imagem);
+                }
+            }
+            //Adicionando categorias
+            String[] categorias = request.getParameterValues("categoria");
+            for (String categoria : categorias) {
+                pDao.addCategoria(idProduto, Integer.parseInt(categoria));
+            }
+            
+            //Definindo estoque
             e.setProduto(idProduto);
             e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
             e.setCusto(p.getValor());
             eDao.create(e);
-            //imagem.setImagem(iDao.partToBytes(filePart)); 
-            iDao.insertImagem(imagem);
             response.sendRedirect("./admin");
         } else if (url.equals("/addCategoria")) {
             Categoria c = new Categoria();
