@@ -27,7 +27,8 @@ create table endereco (
 
 create table categoria (
 	idCategoria int primary key auto_increment,
-    nome varchar(100) not null
+    nome varchar(100) not null,
+    capa longblob
 );
 
 create table produto (
@@ -109,6 +110,9 @@ END //
 
 DELIMITER ;
 
+select * from categoria;
 select * from usuario;
 select * from produto;
 select * from imagem;
+
+delete from categoria where idCategoria = 4;

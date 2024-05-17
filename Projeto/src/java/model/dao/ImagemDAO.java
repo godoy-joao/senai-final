@@ -10,12 +10,14 @@ import conexao.Conexao;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import javax.servlet.http.Part;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,6 +54,18 @@ public class ImagemDAO {
                    
         }
      */
+    public byte[] partToBytes(Part filePart) throws IOException {
+        InputStream iStream = filePart.getInputStream();
+        ByteArrayOutputStream byteA = new ByteArrayOutputStream();
+        byte[] img = new byte[4096];
+        int byteRead = -1;
+        while ((byteRead = iStream.read(img)) != -1) {
+            byteA.write(img, 0, byteRead);
+        }
+        byte[] imgBytes = byteA.toByteArray();
+        return imgBytes;
+    }
+
     public int insertImagem(Imagem imagem) throws FileNotFoundException {
         int idImagem = -1;
         try {
@@ -62,7 +76,7 @@ public class ImagemDAO {
             stmt.setInt(1, imagem.getProduto());
             stmt.setBytes(2, imagem.getImagem());
             stmt.setString(3, imagem.getFormato());
-            
+
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -76,7 +90,7 @@ public class ImagemDAO {
         }
         return idImagem;
     }
-    
+
     public Imagem getFirstImagem(Produto p) {
         Imagem img = new Imagem();
         try {
@@ -140,7 +154,7 @@ public class ImagemDAO {
 
             stmt = conexao.prepareStatement("SELECT * FROM imagem WHERE produto = ?");
             stmt.setInt(1, p.getIdProduto());
-            
+
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Imagem i = new Imagem();
@@ -150,7 +164,7 @@ public class ImagemDAO {
                 i.setFormato(rs.getString("formato"));
                 imagens.add(i);
             }
-            
+
             rs.close();
             stmt.close();
             conexao.close();

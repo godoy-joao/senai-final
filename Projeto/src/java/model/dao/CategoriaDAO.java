@@ -20,23 +20,24 @@ import model.bean.Categoria;
  * @author Joao Guilherme
  */
 public class CategoriaDAO {
-    
+
     public int create(Categoria c) {
         int idCategoria = -1;
-         try {
+        try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
-            
-            stmt = conexao.prepareStatement("INSERT INTO categoria (nome) values (?)", Statement.RETURN_GENERATED_KEYS);
+
+            stmt = conexao.prepareStatement("INSERT INTO categoria (nome, capa) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, c.getNome());
-            
+            stmt.setBytes(2, c.getCapa());
+
             stmt.executeUpdate();
-             System.out.println("Categoria inserida");
-            
+            System.out.println("Categoria inserida");
+
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 idCategoria = rs.getInt(1);
-            } 
+            }
             stmt.close();
             conexao.close();
         } catch (SQLException e) {
@@ -60,6 +61,7 @@ public class CategoriaDAO {
                 Categoria c = new Categoria();
                 c.setIdCategoria(rs.getInt("idCategoria"));
                 c.setNome(rs.getString("nome"));
+                c.setCapa(rs.getBytes("capa"));
                 categorias.add(c);
             }
             rs.close();
@@ -88,6 +90,7 @@ public class CategoriaDAO {
             if (rs.next()) {
                 c.setIdCategoria(id);
                 c.setNome(rs.getString("nome"));
+                c.setCapa(rs.getBytes("capa"));
             }
 
             rs.close();
@@ -114,7 +117,8 @@ public class CategoriaDAO {
 
             if (rs.next()) {
                 c.setIdCategoria(rs.getInt("idCategoria"));
-                c.setNome(nome);
+                c.setNome(rs.getString("nome"));
+                c.setCapa(rs.getBytes("capa"));
             }
 
             rs.close();
@@ -140,6 +144,8 @@ public class CategoriaDAO {
 
             if (rs.next()) {
                 c.setIdCategoria(rs.getInt("idCategoria"));
+                c.setNome(rs.getString("nome"));
+                c.setCapa(rs.getBytes("capa"));
             }
 
             rs.close();
