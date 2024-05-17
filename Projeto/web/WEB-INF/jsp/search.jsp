@@ -13,6 +13,8 @@
                 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
                     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="./css/header.css">
+                <link rel="stylesheet" href="./css/base.css">
+                <link rel="stylesheet" href="./css/search.css">
                 <title>Search</title>
             </head>
 

@@ -15,8 +15,8 @@
                     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="./css/index.css">
                 <link rel="stylesheet" href="./css/header.css">
+                <link rel="stylesheet" href="./css/base.css">
             </head>
-
             <body>
                 <%@ include file="/WEB-INF/jspf/header.jspf" %>
                     <main>
@@ -26,22 +26,31 @@
                                     <div class="carousel-indicators">
                                         <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="0"
                                             class="active" aria-current="true" aria-label="Slide 1"></button>
+                                            <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="1"
+                                            class="active" aria-current="true" aria-label="Slide 2"></button>
                                     </div>
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active d-flex justify-content-center">
-                                            <img src="./assets/banner.png" class="" alt="..."
-                                                style="object-fit: cover; max-height: 30vh;">
-
+                                        <div class="carousel-item active">
+                                            <div class="d-flex justify-content-center">
+                                                <img src="./assets/banner.png" class="" alt="..."
+                                                    style="object-fit: cover; max-height: 30vh;">
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <div class="d-flex justify-content-center">
+                                                <img src="./assets/banner.png" class="" alt="..."
+                                                    style="object-fit: cover; max-height: 30vh;">
+                                            </div>
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carroselHeader"
                                         data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="">Ant.</span>
                                     </button>
                                     <button class="carousel-control-next" type="button" data-bs-target="#carroselHeader"
                                         data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="">Próx.</span>
                                     </button>
                                 </div>
@@ -52,13 +61,16 @@
                                 <div class="">
                                     <p class="h3">Descontos</p>
                                     <div>
-                                        <div id="carroselProdutos${categoria.idCategoria}" class="carousel slide">
+                                        <div id="carroselProdutos${categoria.idCategoria}" class="carousel carousel-dark">
                                             <div class="carousel-indicators">
-                                                <button type="button"
+                                                <c:forEach items="${descontos}" var="temp" varStatus="counting">
+                                                    <button type="button"
                                                     data-bs-target="#carroselProdutos${categoria.idCategoria}"
-                                                    data-bs-slide-to="0" class="active" aria-current="true"
+                                                    data-bs-slide-to="${counting.index}" class="active" aria-current="true"
                                                     aria-label="Slide 1">
                                                 </button>
+                                                </c:forEach>
+                                                
                                             </div>
                                             <div class="carousel-inner">
                                                 <div class="carousel-item">

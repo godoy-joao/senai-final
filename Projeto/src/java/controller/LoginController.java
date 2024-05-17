@@ -70,20 +70,20 @@ public class LoginController extends HttpServlet {
         if (url.equals("/logon")) {
             UsuarioDAO uDAO = new UsuarioDAO();
             Usuario usuario = new Usuario();
-             usuario.setEmail(request.getParameter("loginUser"));
-             usuario.setTelefone(request.getParameter("loginUser"));
-             usuario.setSenha(request.getParameter("loginPass"));
-           
+            usuario.setEmail(request.getParameter("loginUser"));
+            usuario.setTelefone(request.getParameter("loginUser"));
+            usuario.setSenha(request.getParameter("loginPass"));
+
             try {
                 if (uDAO.login(usuario) != -1) {
-                    Cookie cookie = new Cookie("usuario",Integer.toString(uDAO.login(usuario)));
+                    Cookie cookie = new Cookie("usuario", Integer.toString(uDAO.login(usuario)));
                     response.addCookie(cookie);
                     response.sendRedirect("./home");
                 } else {
                     request.setAttribute("errorMessage", "Usuário ou senha inválidos");
                     response.sendRedirect("./login");
-                    
-                }                
+
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 response.sendRedirect("./login");
@@ -94,11 +94,11 @@ public class LoginController extends HttpServlet {
             Usuario u = new Usuario();
             UsuarioDAO uDAO = new UsuarioDAO();
             u.setNome(request.getParameter("nome"));
+            System.out.println("Nome: "+u.getNome());
             u.setDataNasc(Date.valueOf(request.getParameter("dataNascimento")));
             u.setEmail(request.getParameter("email"));
             u.setTelefone(request.getParameter("telefone"));
-            u.setSenha(request.getParameter("senha"));           
-            u.setNome(u.getNome().replaceAll("Ã£", "ã"));
+            u.setSenha(request.getParameter("senha"));
             try {
                 uDAO.create(u);
                 response.sendRedirect("./login");

@@ -1,4 +1,4 @@
-drop database senai_final;
+
 create database senai_final;
 use senai_final;
 
@@ -109,10 +109,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-select * from categoria;
-select * from usuario;
-select * from produto;
-select * from imagem;
-
-delete from categoria where idCategoria = 4;
