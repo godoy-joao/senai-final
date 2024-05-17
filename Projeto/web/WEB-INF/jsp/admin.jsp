@@ -17,28 +17,29 @@
                         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
                         crossorigin="anonymous"></script>
                     <link rel="stylesheet" href="./css/header.css">
+                    <link rel="stylesheet" href="./css/base.css">
                 </head>
 
-                <body class="overflow-hidden">
+                <body class="branco-fundo-2">
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
-                    <div class="overflow-hidden row gap-4 justify-content-evenly mt-4">
-                        <div class="btn col-3 d-flex justify-content-center align-items-center">
-                            <button onclick="showAddProduto()">
-                                <p>Adicionar/editar produto</p>
+                    <div class="overflow-hidden row gap-4 justify-content-evenly mt-4 mb-2">
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <button class="borda-botao-1 w-100 botao" onclick="showAddProduto()">
+                                <p class="my-3 fs-5">Adicionar/editar produto</p>
                             </button>
                         </div>
-                        <div class="btn col-3 d-flex justify-content-center align-items-center">
-                            <button onclick="showAddCategoria()">
-                                <p>Adicionar categoria</p>
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <button class="borda-botao-1 w-100 botao" onclick="showAddCategoria()">
+                                <p class="my-3 fs-5">Adicionar categoria</p>
                             </button>
                         </div>
-                        <div class="btn col-3 d-flex justify-content-center align-items-center">
-                            <button>
-                                <p>Gerenciar estoque</p>
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <button class="borda-botao-1 w-100 botao" onclick="showEstoque()">
+                                <p class="my-3 fs-5">Gerenciar estoque</p>
                             </button>
                         </div>
                     </div>
-                    <div class="row justify-content-start">
+                    <div class="row justify-content-start mb-2">
                         <div class="col-3 justify-content-center">
                             <c:if test="${fn:length(produtos) > 0}">
                                 <select name="produtoSelecionado" id="selectProduto">
@@ -51,8 +52,8 @@
                             </c:if>
                         </div>
                     </div>
-                    <main class="mx-5 mt-4 px-5 d-flex justify-content-center">
-                        <div class="w-50 d-flex flex-column" id="addProduto">
+                    <main class="mx-5 mt-4 d-flex justify-content-center ">
+                        <div class="w-80 p-4 d-flex flex-column branco-fundo" id="addProduto">
                             <p class="h3">Adicionar produto</p>
                             <form action="addProduto" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
@@ -71,7 +72,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="imagem" class="form-label">Selecione a imagem do produto</label>
-                                    <input type="file" accept="image/*" class="form-control" id="imagem" name="imagem">
+                                    <input type="file" accept="image/*" class="form-control" id="imagem" name="imagem" multiple>
                                 </div>
                                 <div class="mb-3">
                                     <label for="descricao" class="form-label">Descrição do produto</label>
@@ -83,26 +84,35 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="selectCategoria">
-                                        Categoria:
+                                        Categorias:
                                     </label>
                                     <c:if test="${fn:length(categorias) > 0}">
-                                        <select name="selectCategoria" class="form-select" id="selectCategoria">
+                                        <select name="selectCategoria" class="form-select" id="selectCategoria" multiple>
                                             <c:forEach items="${categorias}" var="categoria">
                                                 <option value="${categoria.idCategoria}">${categoria.nome}</option>
                                             </c:forEach>
                                         </select>
                                     </c:if>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="quantidade" class="form-label">Quantidade</label>
+                                    <input type="number" class="form-control" id="quantidade" name="quantidade"
+                                        autocomplete="off">
+                                </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                         <div class="d-none flex-column w-50" id="addCategoria">
                             <p class="h3">Adicionar categoria</p>
-                            <form action="addCategoria" method="post">
+                            <form action="addCategoria" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="nomeCategoria" class="form-label">Nome</label>
                                     <input type="text" class="form-control" id="nomeCategoria" name="nomeCategoria"
                                         autocomplete="off">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagemCategoria" class="form-label">Selecione a imagem da capa</label>
+                                    <input type="file" accept="image/*" class="form-control" id="imagemCategoria" name="imagemCategoria" >
                                 </div>
                                 <button type="submit" class="btn btn-primary">Adicionar</button>
                             </form>

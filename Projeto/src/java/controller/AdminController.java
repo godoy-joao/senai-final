@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.bean.Categoria;
+import model.bean.Estoque;
 import model.bean.Imagem;
 import model.bean.Produto;
 import model.dao.CategoriaDAO;
+import model.dao.EstoqueDAO;
 import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
 
@@ -76,33 +79,38 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        //
         String url = request.getServletPath();
         if (url.equals("/addProduto")) {
             Produto p = new Produto();
+            Estoque e = new Estoque();
+            EstoqueDAO eDao = new EstoqueDAO();
             ProdutoDAO pDao = new ProdutoDAO();
+            ImagemDAO iDao = new ImagemDAO();
             p.setNome(request.getParameter("nome"));
             p.setDescricao(request.getParameter("descricao"));
             p.setValor(Float.parseFloat(request.getParameter("valor")));
             p.setDesconto(Float.parseFloat(request.getParameter("desconto")));
-            Part filePart = request.getPart("imagem");
-            InputStream iStream = filePart.getInputStream();
-            ByteArrayOutputStream byteA = new ByteArrayOutputStream();
-            byte[] img = new byte[4096];
-            int byteRead = -1;
-            while ((byteRead = iStream.read(img)) != -1) {
-                byteA.write(img, 0, byteRead);
-            }
-            byte[] imgBytes = byteA.toByteArray();
+            Collection<Part> filePart = request.getParts();
+            System.out.println(filePart+"AQUI");
             Imagem imagem = new Imagem();
-            imagem.setProduto(pDao.create(p));
-            imagem.setImagem(imgBytes);
-            ImagemDAO iDao = new ImagemDAO();
+            int idProduto = pDao.create(p);
+            imagem.setProduto(idProduto);
+            e.setProduto(idProduto);
+            e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
+            e.setCusto(p.getValor());
+            eDao.create(e);
+            //imagem.setImagem(iDao.partToBytes(filePart)); 
             iDao.insertImagem(imagem);
             response.sendRedirect("./admin");
         } else if (url.equals("/addCategoria")) {
             Categoria c = new Categoria();
             CategoriaDAO cDao = new CategoriaDAO();
+            ImagemDAO iDao = new ImagemDAO();
             c.setNome(request.getParameter("nomeCategoria"));
+            Part filePart = request.getPart("imagemCategoria");
+            c.setCapa(iDao.partToBytes(filePart));
             try {
                 cDao.create(c);
                 response.sendRedirect("./admin");

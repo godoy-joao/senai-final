@@ -10,6 +10,7 @@ import conexao.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.bean.Estoque;
@@ -96,5 +97,30 @@ public class EstoqueDAO {
 
         }
         return estoque;
+    }
+
+    public int create(Estoque e) {
+        int idEstoque = -1;
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("INSERT INTO estoque (produto, quantidade, custo) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, e.getProduto());
+            stmt.setInt(2, e.getQuantidade());
+            stmt.setFloat(3, e.getCusto());
+
+            stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    idEstoque = rs.getInt(1);
+                }
+            }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return idEstoque;
     }
 }

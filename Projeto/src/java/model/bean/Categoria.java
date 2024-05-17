@@ -12,13 +12,15 @@ package model.bean;
 public class Categoria {
     private int idCategoria;
     private String nome;
+    private byte[] capa;
 
     public Categoria() {
     }
 
-    public Categoria(int idCategoria, String nome) {
+    public Categoria(int idCategoria, String nome, byte[] capa) {
         this.idCategoria = idCategoria;
         this.nome = nome;
+        this.capa = capa;
     }
 
     public int getIdCategoria() {
@@ -36,5 +38,15 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public byte[] getCapa() {
+        return capa;
+    }
+
+    public void setCapa(byte[] capa) {
+        this.capa = capa;
+    }
+
+    
     
 }

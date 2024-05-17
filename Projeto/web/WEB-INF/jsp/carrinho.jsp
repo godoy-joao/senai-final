@@ -23,28 +23,28 @@
                         <div class="bg-light p-2">
                             <div id="carrinho-header" class="d-flex justify-content-between align-items-center">
                                 <div class="row w-50 pe-5">
-                                    <div class="col-4">
-                                        <p class="h3 preto">Carrinho</p>
+                                    <div class="col-4 d-flex justify-content-center">
+                                        <p class="h3 cinza-texto-1">Carrinho</p>
                                     </div>
-                                    <div class="col-4">
-                                        <button>
+                                    <div class="col-4 d-flex justify-content-start ps-4">
+                                        <button class="bg-transparent">
                                             <p class="fs-6 text-decoration-underline azul-2">Limpar carrinho</p>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="row w-50">
                                     <div class="col-4">
-                                        <p class="fs-5 me-1">
-                                            TOTAL: 
+                                        <p class="h4 cinza-texto-1">
+                                            Total:
                                         </p>
-                                        <p class="fs-5 text-bold">
-                                            ${totalCarrinho}
+                                        <p id="resultado-carrinho" class="h4 laranja-texto-2">
+
                                         </p>
                                     </div>
-                                    <div class="col-6">
-                                        <button class="laranja-fundo-2">
-                                            <p class="preto-texto">
-                                                Finalizar pedido 
+                                    <div class="col-5">
+                                        <button class="laranja-fundo-3">
+                                            <p class="branco-texto">
+                                                Finalizar pedido
                                             </p>
                                         </button>
                                     </div>
