@@ -60,9 +60,7 @@
                     </div>
                     <div class="offcanvas-body">
                         <div>
-                            Some text as placeholder. In real life you can have the elements you have chosen. Like,
-                            text,
-                            images, lists, etc.
+                           <p class="fs-5">Atualmente logado como: ${user.nome}</p>
                         </div>
                     </div>
                 </div>
