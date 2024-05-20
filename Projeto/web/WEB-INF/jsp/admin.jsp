@@ -61,17 +61,17 @@
                                     <input type="text" class="form-control" name="nome" id="nome" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="valor" class="form-label">Valor</label>
+                                    <label for="valor" class="form-label">Valor do produto</label>
                                     <input type="number" step="0.01" class="form-control" id="valor" name="valor"
                                         autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="desconto" class="form-label">Desconto (se aplicável)</label>
+                                    <label for="desconto" class="form-label">Valor do desconto</label>
                                     <input type="number" step="0.01" class="form-control" id="desconto" name="desconto"
                                         autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagem" class="form-label">Selecione a imagem do produto</label>
+                                    <label for="imagem" class="form-label">Selecione as imagens</label>
                                     <input type="file" accept="image/*" class="form-control" id="imagem" name="imagem" multiple>
                                 </div>
                                 <div class="mb-3">
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="selectCategoria">
-                                        Categorias:
+                                        Selecione todas as categorias
                                     </label>
                                     <c:if test="${fn:length(categorias) > 0}">
                                         <select name="selectCategoria" class="form-select" id="selectCategoria" multiple>
@@ -95,11 +95,11 @@
                                     </c:if>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="quantidade" class="form-label">Quantidade</label>
+                                    <label for="quantidade" class="form-label">Quantidade de estoque</label>
                                     <input type="number" class="form-control" id="quantidade" name="quantidade"
                                         autocomplete="off">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
                             </form>
                         </div>
                         <div class="d-none flex-column w-50" id="addCategoria">

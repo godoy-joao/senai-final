@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Base64;
 import model.bean.Usuario;
 
 /**
@@ -53,7 +54,7 @@ public class UsuarioDAO {
 
             rs = stmt.executeQuery();
             if (rs.next()) {
-               idUsuario = rs.getInt(1);
+                idUsuario = rs.getInt(1);
             }
             rs.close();
             stmt.close();
@@ -66,6 +67,9 @@ public class UsuarioDAO {
 
     public Usuario getUsuarioById(int id) {
         Usuario u = new Usuario();
+        if (id == -1) {
+            return u;
+        }
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -85,6 +89,10 @@ public class UsuarioDAO {
                 u.setDataNasc(rs.getDate("dataNascimento"));
                 u.setTipo(rs.getInt("tipo"));
                 u.setFoto(rs.getBytes("fotoPerfil"));
+                if (u.getFoto() != null) {
+                    u.setFotoBase64(Base64.getEncoder().encodeToString(u.getFoto()));
+                }
+
             } else {
                 System.out.println("Usuario não localizado.");
             }
@@ -134,6 +142,60 @@ public class UsuarioDAO {
         return u;
     }
 
+    public void updateEmail(int id, String email) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("UPDATE usuario SET email = ? WHERE idUsuario = ?");
+            stmt.setString(1, email);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSenha(int id, String senha) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("UPDATE usuario SET senha = ? WHERE idUsuario = ?");
+            stmt.setString(1, senha);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTel(int id, String tel) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("UPDATE usuario SET telefone = ? WHERE idUsuario = ?");
+            stmt.setString(1, tel);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Usuario getUsuarioByEmail(String email) {
         Usuario u = new Usuario();
         try {
@@ -147,7 +209,7 @@ public class UsuarioDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-               u.setIdUsuario(rs.getInt("idUsuario"));
+                u.setIdUsuario(rs.getInt("idUsuario"));
                 u.setNome(rs.getString("nome"));
                 u.setEmail(rs.getString("email"));
                 u.setTelefone(rs.getString("telefone"));
@@ -174,7 +236,7 @@ public class UsuarioDAO {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
-            
+
             stmt = conexao.prepareStatement("INSERT INTO usuario (nome, email, senha, telefone, dataNascimento, cpf) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
@@ -184,11 +246,11 @@ public class UsuarioDAO {
             stmt.setString(6, "0");
 
             stmt.executeUpdate();
-            
+
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 idUsuario = rs.getInt(1);
-            } 
+            }
             stmt.close();
             conexao.close();
         } catch (SQLException e) {
