@@ -1,3 +1,7 @@
+body {
+    min-height: 100vh;
+    max-width: 100vw;
+}
 
 .overflow-x-hidden {
     overflow-x: hidden;
@@ -157,6 +161,9 @@
 .branco-fundo-2 {
     background-color: #F5F5F5;
 }
+.branco-3 {
+    background-color: #dee2e6;
+}
 
 .branco-texto {
     color: #FFFFFF;
@@ -232,4 +239,7 @@
 
 .cinza-fundo-9 {
     background-color: #e6e6e6;
+}
+.fundo-1{
+    background-color: rgb(243, 250, 255);
 }

@@ -5,7 +5,7 @@
             <html>
 
             <head>
-                <meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8">
+                <meta http-equiv="Content-Type" name="viewport" content="text/html, charset=UTF-8">
                 <title>Home</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -17,6 +17,7 @@
                 <link rel="stylesheet" href="./css/header.css">
                 <link rel="stylesheet" href="./css/base.css">
             </head>
+
             <body class="overflow-x-hidden">
                 <%@ include file="/WEB-INF/jspf/header.jspf" %>
                     <main>
@@ -26,8 +27,9 @@
                                     <div class="carousel-indicators">
                                         <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="0"
                                             class="active" aria-current="true" aria-label="Slide 1"></button>
-                                            <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="1"
+                                        <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="1"
                                             class="active" aria-current="true" aria-label="Slide 2"></button>
+
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
@@ -44,12 +46,12 @@
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carroselHeader"
-                                        data-bs-slide="prev">
+                                        data-bs-slide="next">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="">Ant.</span>
                                     </button>
                                     <button class="carousel-control-next" type="button" data-bs-target="#carroselHeader"
-                                        data-bs-slide="next">
+                                        data-bs-slide="prev">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="">Próx.</span>
                                     </button>
@@ -61,49 +63,47 @@
                                 <div class="">
                                     <p class="h3">Descontos</p>
                                     <div>
-                                        <div id="carroselProdutos${categoria.idCategoria}" class="carousel carousel-dark">
-                                            <div class="carousel-indicators">
-                                                <c:forEach items="${descontos}" var="temp" varStatus="counting">
-                                                    <button type="button"
-                                                    data-bs-target="#carroselProdutos${categoria.idCategoria}"
-                                                    data-bs-slide-to="${counting.index}" class="active" aria-current="true"
-                                                    aria-label="Slide 1">
-                                                </button>
-                                                </c:forEach>
-                                                
-                                            </div>
+                                        <div id="carroselDescontos" class="carousel carousel-dark">
                                             <div class="carousel-inner">
-                                                <div class="carousel-item">
-                                                    <c:forEach items="${descontos}" var="produtoD">
-                                                        <div class="card" style="width: 15vw;">
+                                                <c:forEach items="${descontos}" var="produtoD" varStatus="contagem">
+                                                    <c:choose>
+                                                        <c:when test="${contagem.count > 1}">
+                                                            <div class="carousel-item">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="carousel-item active">
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="card" style="width: 15vw; height: 45vh;">
                                                             <img src="data:image/png;base64,${produtoD.imagemBase64}"
-                                                                class="card-img-top" alt="...">
+                                                                class="card-img-top p-2" alt="..." style="height: 20vh; object-fit: contain;">
                                                             <div class="card-body">
-                                                                <p class="card-title h5">${produto.nome}</p>
-                                                                <p class="card-text">${produto.descricao}</p>
-                                                                <a href="./produto?id=${produto.idProduto}"
-                                                                    class="btn">Deixe-me ver</a>
+                                                                <p class="card-title h5">${produtoD.nome}</p>
+                                                                <p class="card-text">${produtoD.descricao}</p>
+                                                                <a href="./produto?id=${produtoD.idProduto}"
+                                                                    class="text-undecorated preto-texto botao laranja-fundo-1">Deixe-me ver</a>
                                                             </div>
                                                         </div>
-                                                    </c:forEach>
-                                                </div>
+                                                    </div>
                                             </div>
-                                            <button class="carousel-control-prev" type="button"
-                                                data-bs-target="#carroselProdutos${categoria.idCategoria}"
-                                                data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
-                                                <span class="">Ant.</span>
-                                            </button>
-                                            <button class="carousel-control-next" type="button"
-                                                data-bs-target="#carroselProdutos${categoria.idCategoria}"
-                                                data-bs-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="false"></span>
-                                                <span class="">Próx.</span>
-                                            </button>
+                                            </c:forEach>
+
                                         </div>
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#carroselDescontos" data-bs-slide="none">
+                                            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                                            <span class="">Ant.</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#carroselDescontos" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                                            <span class="">Próx.</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </main>
                     <footer>

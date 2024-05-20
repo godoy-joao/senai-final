@@ -22,8 +22,9 @@ public class Usuario {
     private Date dataNasc;
     private int tipo;
     private byte[] foto;
+    private String fotoBase64;
 
-    public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone, Date dataNasc, int tipo, byte[] foto) {
+    public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone, Date dataNasc, int tipo, byte[] foto, String fotoBase64) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
@@ -33,6 +34,7 @@ public class Usuario {
         this.dataNasc = dataNasc;
         this.tipo = tipo;
         this.foto = foto;
+        this.fotoBase64 = fotoBase64;
     }
 
     public Usuario() {
@@ -110,5 +112,12 @@ public class Usuario {
         this.foto = foto;
     }
 
-    
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
+    }
+
 }

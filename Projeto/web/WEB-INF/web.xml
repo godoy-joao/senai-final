@@ -65,6 +65,18 @@
         <url-pattern>/perfil</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>PerfilController</servlet-name>
+        <url-pattern>/updEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PerfilController</servlet-name>
+        <url-pattern>/updTel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PerfilController</servlet-name>
+        <url-pattern>/updSenha</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,10 +35,19 @@ public class PerfilController extends HttpServlet {
             throws ServletException, IOException {
         String nextPage = "/WEB-INF/jsp/perfil.jsp";
         UsuarioDAO uDao = new UsuarioDAO();
-        if (request.getParameter("u").equals("")) {
+        Cookie[] cookies = request.getCookies();
+        Cookie login = new Cookie("login", "null");
+        int id = -1;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("login")) {
+                login = cookie;
+                id = Integer.parseInt(cookie.getValue());
+            }
+        }
+        if (login.getValue().equals("null")) {
             response.sendRedirect("./login");
         } else {
-            Usuario u = uDao.getUsuarioById(Integer.parseInt(request.getParameter("u")));
+            Usuario u = uDao.getUsuarioById(id);
             request.setAttribute("usuario", u);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
             dispatcher.forward(request, response);
@@ -72,16 +82,43 @@ public class PerfilController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        processRequest(request, response);
-    }
+        String url = request.getServletPath();
+        Cookie[] cookies = request.getCookies();
+        Cookie login = new Cookie("login", "null");
+        int id = -1;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("login")) {
+                login = cookie;
+                id = Integer.parseInt(cookie.getValue());
+            }
+        }
+        UsuarioDAO uDao = new UsuarioDAO();
+        Usuario user = uDao.getUsuarioById(id);
+        if (url.equals("/updEmail")) {
+            user.setEmail(request.getParameter("input-updEmail"));
+            System.out.println(user.getEmail());
+            uDao.updateEmail(user.getIdUsuario(), user.getEmail());
+            response.sendRedirect("./perfil");
+        } else if (url.equals("/updTel")) {
+            user.setTelefone(request.getParameter("input-updTel"));
+            uDao.updateTel(user.getIdUsuario(), user.getTelefone());
+            response.sendRedirect("./perfil");
+        } else if (url.equals("/updSenha")) {
+            user.setSenha(request.getParameter("input-updSenha"));
+            uDao.updateSenha(user.getIdUsuario(), user.getSenha());
+            response.sendRedirect("./perfil");
+        } else {
+            processRequest(request, response);
+        }
+}
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+/**
+ * Returns a short description of the servlet.
+ *
+ * @return a String containing servlet description
+ */
+@Override
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
