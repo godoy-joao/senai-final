@@ -75,14 +75,15 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <div class="d-flex justify-content-center">
-                                                        <div class="card" style="width: 15vw; height: 45vh;">
+                                                        <div class="card px-1 py-2 cardDescontos" style="object-fit: contain;">
                                                             <img src="data:image/png;base64,${produtoD.imagemBase64}"
                                                                 class="card-img-top p-2" alt="..." style="height: 20vh; object-fit: contain;">
-                                                            <div class="card-body">
+                                                            <div class="card-body d-flex flex-column justify-content-evenly align-items-center">
                                                                 <p class="card-title h5">${produtoD.nome}</p>
-                                                                <p class="card-text">${produtoD.descricao}</p>
+                                                                <p class="card-text text-break">${produtoD.descricao}</p>
+                                                                <p class="laranja-texto-2 fs-3">R$${produtoD.valor}</p>
                                                                 <a href="./produto?id=${produtoD.idProduto}"
-                                                                    class="text-undecorated preto-texto botao laranja-fundo-1">Deixe-me ver</a>
+                                                                    class="text-decoration-none preto-texto botao laranja-fundo-3 border fs-3">Deixe-me ver</a>
                                                             </div>
                                                         </div>
                                                     </div>

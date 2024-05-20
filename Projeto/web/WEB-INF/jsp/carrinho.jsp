@@ -15,13 +15,14 @@
                     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="./css/carrinho.css">
                 <link rel="stylesheet" href="./css/base.css">
+                <link rel="stylesheet" href="./css/header.css">
             </head>
 
             <body>
                 <%@ include file="/WEB-INF/jspf/header.jspf" %>
-                    <main class="d-flex justify-content-center w-100">
-                        <div class="bg-light p-2">
-                            <div id="carrinho-header" class="d-flex justify-content-between align-items-center">
+                    <main class="d-flex justify-content-center h-100 w-100 branco-fundo-2">
+                        <div class="bg-light p-2 w-75 h-80" id="carrinho-container">
+                            <div id="carrinho-header" class="d-flex justify-content-between align-items-center w-100 px-3 pb-2 mt-3 border-bottom vertical-align-bottom">
                                 <div class="row w-50 pe-5">
                                     <div class="col-4 d-flex justify-content-center">
                                         <p class="h3 cinza-texto-1">Carrinho</p>
@@ -49,6 +50,9 @@
                                         </button>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="carrinho-body" class="w-100 px-3 mt-3">
+
                             </div>
                         </div>
                     </main>
