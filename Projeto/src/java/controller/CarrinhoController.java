@@ -36,6 +36,27 @@ public class CarrinhoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CarrinhoDAO cDao = new CarrinhoDAO();
+        UsuarioDAO uDao = new UsuarioDAO();
+        Cookie[] cookies = request.getCookies();
+        String id = "";
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                id = cookies[i].getValue();
+            }
+        }
+        if (id.equals("")) {
+            response.sendRedirect("./login");
+        } else {
+            try {
+                Usuario u = uDao.getUsuarioById(Integer.parseInt(id));
+                List<Produto> produtos = cDao.lerProdutos(u);
+                request.setAttribute("produtos", produtos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
         String nextPage = "/WEB-INF/jsp/carrinho.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
@@ -53,28 +74,7 @@ public class CarrinhoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CarrinhoDAO cDao = new CarrinhoDAO();
-        UsuarioDAO uDao = new UsuarioDAO();
-        Cookie[] cookies = request.getCookies();
-        String id = "";
-        for (int i = 0; i < 10; i++) {
-            if (cookies[i].getName().equals("usuario")) {
-                id = cookies[i].getValue();
-                i = 11;
-            }
-        }
-        if (id.equals("")) {
-            response.sendRedirect("./login");
-        } else {
-            try {
-                Usuario u = uDao.getUsuarioById(Integer.parseInt(id));
-                List<Produto> produtos = cDao.lerProdutos(u);
-                request.setAttribute("produtos", produtos);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
+        processRequest(request, response);
     }
 
     /**

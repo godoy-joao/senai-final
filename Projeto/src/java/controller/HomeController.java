@@ -50,7 +50,6 @@ public class HomeController extends HttpServlet {
         if (descontos.size() > 0) {
             for (int i = 0; i < descontos.size(); i++) {
                 Imagem img = iDao.getFirstImagem(descontos.get(i));
-                System.out.println(descontos.get(i).getIdProduto());
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 descontos.get(i).setImagemBase64(imagemBase64);
             }

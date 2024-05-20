@@ -105,11 +105,12 @@ public class AdminController extends HttpServlet {
                 }
             }
             //Adicionando categorias
-            String[] categorias = request.getParameterValues("categoria");
-            for (String categoria : categorias) {
+            String[] categorias = request.getParameterValues("selectCategoria");
+            for (int i = 0; i < categorias.length; i++) {
+                String categoria = categorias[i];
                 pDao.addCategoria(idProduto, Integer.parseInt(categoria));
             }
-            
+
             //Definindo estoque
             e.setProduto(idProduto);
             e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
@@ -122,7 +123,9 @@ public class AdminController extends HttpServlet {
             ImagemDAO iDao = new ImagemDAO();
             c.setNome(request.getParameter("nomeCategoria"));
             Part filePart = request.getPart("imagemCategoria");
-            c.setCapa(iDao.partToBytes(filePart));
+            if (filePart != null) {
+                c.setCapa(iDao.partToBytes(filePart));
+            }
             try {
                 cDao.create(c);
                 response.sendRedirect("./admin");

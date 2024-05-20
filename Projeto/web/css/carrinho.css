@@ -1,0 +1,9 @@
+#carrinho-container {
+    position: absolute;
+    bottom: 0%;
+}
+main {
+    top: 0%;
+    position: absolute;
+    z-index: 0;
+}
