@@ -367,3 +367,6 @@ DELIMITER ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-05-20 17:04:56
+
+ALTER TABLE produto DROP COLUMN valorFinal;
+ALTER TABLE produto ADD COLUMN valorFinal GENERATED ALWAYS AS (valor - COALESCE(desconto,0)) STORED;

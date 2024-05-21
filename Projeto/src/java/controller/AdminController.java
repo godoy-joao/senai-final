@@ -82,7 +82,7 @@ public class AdminController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String url = request.getServletPath();
         if (url.equals("/addProduto")) {
-            //----------------------------
+            //---------------------------- separadores pra ler isso daqui, até pq ngm é de ferro
             Produto p = new Produto();
             Estoque e = new Estoque();
             EstoqueDAO eDao = new EstoqueDAO();
@@ -98,7 +98,7 @@ public class AdminController extends HttpServlet {
             Collection<Part> parts = request.getParts();
             for (Part part : parts) {
                 if (part.getName().equals("imagem")) {
-                    Imagem imagem = new Imagem();
+                    Imagem imagem = new Imagem();  
                     imagem.setImagem(iDao.partToBytes(part));
                     imagem.setProduto(idProduto);
                     imagem.setFormato(iDao.getFileExtension(part.getSubmittedFileName()).toString());

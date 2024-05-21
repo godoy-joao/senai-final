@@ -1,4 +1,4 @@
-const productContainers = [...document.querySelectorAll('.product-container')];
+const productContainers = [...document.querySelectorAll('.produto-container')];
 const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
 const preBtn = [...document.querySelectorAll('.pre-btn')];
 

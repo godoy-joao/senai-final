@@ -17,3 +17,16 @@
         </div>
     </div>
 </section>
+
+<div class="produto-card">
+    <div class="produto-imagem">
+        <span class="tag-desconto">R$${produto.desconto}</span>
+        <img src="data:image/png;base64,${produto.imagemBase64}" class="produto-capa" alt="">
+        <button class="card-btn fs-5">Adicionar ao carrinho</button>
+    </div>
+    <div class="produto-info">
+        <p class="produto-descricao">${produto.descricao}</p>
+        <span class="valor">R$${produto.valor}</span>
+        <span class="preco">R$${produto.valorFinal}</span>
+    </div>
+</div>

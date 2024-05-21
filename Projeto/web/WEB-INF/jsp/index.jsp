@@ -16,6 +16,7 @@
                 <link rel="stylesheet" href="./css/index.css">
                 <link rel="stylesheet" href="./css/header.css">
                 <link rel="stylesheet" href="./css/base.css">
+                <link rel="stylesheet" href="./css/slider.css">
             </head>
 
             <body class="overflow-x-hidden">
@@ -46,12 +47,12 @@
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carroselHeader"
-                                        data-bs-slide="next">
+                                        data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="">Ant.</span>
                                     </button>
                                     <button class="carousel-control-next" type="button" data-bs-target="#carroselHeader"
-                                        data-bs-slide="prev">
+                                        data-bs-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="">Próx.</span>
                                     </button>
@@ -63,44 +64,34 @@
                                 <div class="">
                                     <p class="h3">Descontos</p>
                                     <div>
-                                        <div id="carroselDescontos" class="carousel carousel-dark">
-                                            <div class="carousel-inner">
-                                                <c:forEach items="${descontos}" var="produtoD" varStatus="contagem">
-                                                    <c:choose>
-                                                        <c:when test="${contagem.count > 1}">
-                                                            <div class="carousel-item">
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <div class="carousel-item active">
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="card px-1 py-2 cardDescontos" style="object-fit: contain;">
-                                                            <img src="data:image/png;base64,${produtoD.imagemBase64}"
-                                                                class="card-img-top p-2" alt="..." style="height: 20vh; object-fit: contain;">
-                                                            <div class="card-body d-flex flex-column justify-content-evenly align-items-center">
-                                                                <p class="card-title h5">${produtoD.nome}</p>
-                                                                <p class="card-text text-break">${produtoD.descricao}</p>
-                                                                <p class="laranja-texto-2 fs-3">R$${produtoD.valor}</p>
-                                                                <a href="./produto?id=${produtoD.idProduto}"
-                                                                    class="text-decoration-none preto-texto botao laranja-fundo-3 border fs-3">Deixe-me ver</a>
+                                        <section class="produtos">
+                                            <button class="pre-btn"><img src="./assets/arrow.png" alt=""></button>
+                                            <button class="nxt-btn"><img src="./assets/arrow.png" alt=""></button>
+                                            <div class="produto-container">
+                                                <c:if test="${produtos.size() > 0}">
+                                                    <c:forEach items="${produtos}" var="produto">
+                                                        <div class="produto-card">
+                                                            <div class="produto-imagem">
+                                                                <span class="tag-desconto">-R$${produto.desconto}</span>
+                                                                <img src="data:image/png;base64,${produto.imagemBase64}"
+                                                                    class="produto-capa" alt="">
+                                                            </div>
+                                                            <div class="produto-info">
+                                                                <div id="div-valor">
+                                                                    <span class="valor">R$${produto.valor}</span>
+                                                                    <span
+                                                                        class="preco laranja-texto-3">R$${produto.valorFinal}</span>
+                                                                </div>
+                                                                <div id="div-btn">
+                                                                    <button
+                                                                        class="card-btn verde-fundo fs-6">Comprar!</button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </c:forEach>
+                                                </c:if>
                                             </div>
-                                            </c:forEach>
-
-                                        </div>
-                                        <button class="carousel-control-prev" type="button"
-                                            data-bs-target="#carroselDescontos" data-bs-slide="none">
-                                            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
-                                            <span class="">Ant.</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                            data-bs-target="#carroselDescontos" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="false"></span>
-                                            <span class="">Próx.</span>
-                                        </button>
+                                        </section>
                                     </div>
                                 </div>
                             </div>
@@ -119,6 +110,7 @@
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
                         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
                         crossorigin="anonymous"></script>
+                        <script src="./js/slider.js"></script>
             </body>
 
             </html>
