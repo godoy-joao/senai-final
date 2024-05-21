@@ -101,6 +101,7 @@ public class AdminController extends HttpServlet {
                     Imagem imagem = new Imagem();
                     imagem.setImagem(iDao.partToBytes(part));
                     imagem.setProduto(idProduto);
+                    imagem.setFormato(iDao.getFileExtension(part.getSubmittedFileName()).toString());
                     iDao.insertImagem(imagem);
                 }
             }

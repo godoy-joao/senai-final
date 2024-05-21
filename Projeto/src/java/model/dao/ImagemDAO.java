@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import model.bean.Imagem;
@@ -54,6 +55,10 @@ public class ImagemDAO {
                    
         }
      */
+    public Optional<String> getFileExtension(String name) {
+        return Optional.ofNullable(name).filter(f -> f.contains(".")).map(f -> f.substring(name.lastIndexOf(".") + 1));
+    }
+    
     public byte[] partToBytes(Part filePart) throws IOException {
         InputStream iStream = filePart.getInputStream();
         ByteArrayOutputStream byteA = new ByteArrayOutputStream();
