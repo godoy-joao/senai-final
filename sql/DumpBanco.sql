@@ -225,9 +225,9 @@ CREATE TABLE `produto` (
   `nome` varchar(100) NOT NULL,
   `valor` float(10,2) NOT NULL,
   `desconto` float(10,2) DEFAULT 0.00,
-  `valorFinal` float(10,2) GENERATED ALWAYS AS (`valor` - coalesce(`desconto`,0)) STORED,
+  `valorFinal` float(10,2),
   `descricao` varchar(2000) DEFAULT NULL,
-  `dataRegistro` date DEFAULT curdate(),
+  `dataRegistro` date DEFAULT (curdate()),
   PRIMARY KEY (`idProduto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
