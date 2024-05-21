@@ -20,36 +20,42 @@
 
             <body class="overflow-x-hidden">
                 <%@ include file="/WEB-INF/jspf/header.jspf" %>
-                    <div class="row">
-                        <div class="col-4" id="side-bar">
-                            <label for="checkbox-group">Selecionar categoria:</label>
-                            <div id="checkbox-group" class="d-flex flex-column">
-                                <c:if test="${categorias.size() > 0}">
-                                    <c:forEach items="categorias" var="categoria">
-                                        <input type="checkbox" name="" id="checkbox-${categoria.nome}">
-                                        <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
-                                    </c:forEach>
-                                </c:if>
-                            </div>
+                    <div id="side-bar">
+                        <div class="w-100" id="lateral-divisor"></div>
+                        <label for="checkbox-group">Selecionar categoria:</label>
+                        <div id="checkbox-group" class="d-flex flex-column">
+                            <c:if test="${categorias.size() > 0}">
+                                <c:forEach items="${categorias}" var="categoria">
+                                    <input type="checkbox" name="" id="checkbox-${categoria.nome}">
+                                    <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
+                                </c:forEach>
+                            </c:if>
                         </div>
-                        <div class="col-8" id="result-body">
-                            <div class="row">
-                                <c:if test="${produtos.size() > 0}">
-                                    <c:forEach items="produtos" var="produto">
-                                        <div class="card col-4 col-lg-3">
-                                            <img src="..." class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${produto.nome}</h5>
-                                                <p class="card-text">${produto.descricao}</p>
-                                                <a href="./produto?prod=${produto.idProduto}"
-                                                    class="btn btn-primary">Adicionar
-                                                    ao carrinho</a>
-                                            </div>
+                    </div>
+                    <div id="result-body">
+                        <div class="row">
+                            <c:if test="${produtos.size() > 0}">
+                                <c:forEach items="${produtos}" var="produto">
+                                    <div class="produto-card">
+                                        <div class="produto-imagem">
+                                            <span class="tag-desconto">-R$${produto.desconto}</span>
+                                            <img src="data:image/png;base64,${produto.imagemBase64}"
+                                                class="produto-capa" alt="">
                                         </div>
-                                    </c:forEach>
-                                </c:if>
-                            </div>
+                                        <div class="produto-info">
+                                            <div id="div-valor">
+                                                <span class="valor">R$${produto.valor}</span>
+                                                <span class="preco laranja-texto-3">R$${produto.valorFinal}</span>
+                                            </div>
+                                            <div id="div-btn">
+                                                <button class="card-btn verde-fundo fs-6">Comprar!</button>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
                         </div>
+                    </div>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

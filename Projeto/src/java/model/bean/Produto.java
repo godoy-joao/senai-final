@@ -21,7 +21,6 @@ public class Produto {
     private Float valorFinal;
     private Date dataRegistro;
     private String imagemBase64;
-
     public Produto() {
     }
 

@@ -7,13 +7,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Imagem;
 import model.bean.Produto;
+import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
 
 /**
@@ -33,8 +36,26 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ProdutoDAO pdao = new ProdutoDAO();
+        ImagemDAO iDao = new ImagemDAO();
+        String busca = request.getParameter("s");
+        List<Produto> produtos = null;
+        if (busca.equals("")) {
+            produtos = pdao.listarTodos();
+        } else {
+            busca = "%" + busca + "%";
+            produtos = pdao.listarPorPesquisa(busca);
+        }
+        if (produtos.size() > 0) {
+            for (int i = 0; i < produtos.size(); i++) {
+                Imagem img = iDao.getFirstImagem(produtos.get(i));
+                String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
+                produtos.get(i).setImagemBase64(imagemBase64);
+               
+            }
+        }
+        request.setAttribute("produtos", produtos);
         String nextPage = "/WEB-INF/jsp/search.jsp";
-
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }
@@ -52,23 +73,6 @@ public class SearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        ProdutoDAO pdao = new ProdutoDAO();
-        String busca = request.getParameter("s");
-        List<Produto> produtos = null;
-        System.out.println("BUSCA: " + busca);
-        if (busca.equals("")) {
-            produtos = pdao.listarTodos();
-            request.setAttribute("produtos", produtos);
-        } else {
-            busca = "%" + busca + "%";
-            produtos = pdao.listarPorPesquisa(busca);
-            if (produtos.isEmpty()) {
-                request.setAttribute("vazio", true);
-                produtos = pdao.listarTodos();
-            }
-            request.setAttribute("produtos", produtos);
-        }
-
     }
 
     /**
