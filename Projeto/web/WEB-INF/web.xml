@@ -66,6 +66,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PerfilController</servlet-name>
+        <url-pattern>/updImg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PerfilController</servlet-name>
         <url-pattern>/updEmail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

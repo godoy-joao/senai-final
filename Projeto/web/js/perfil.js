@@ -15,3 +15,7 @@ function actvSenha() {
 function showEditImg() {
     $('#div-updImg').removeClass('d-none').addClass('d-flex');
 }
+
+function hideEditImg() {
+    $('#div-updImg').removeClass('d-flex').addClass('d-none')
+}

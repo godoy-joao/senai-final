@@ -53,6 +53,7 @@ public class HomeController extends HttpServlet {
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 descontos.get(i).setImagemBase64(imagemBase64);
             }
+            request.setAttribute("descontos", descontos);
         }
         if (produtos.size() > 0) {
             for (int i = 0; i < produtos.size(); i++) {
@@ -60,6 +61,7 @@ public class HomeController extends HttpServlet {
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 produtos.get(i).setImagemBase64(imagemBase64);
             }
+            request.setAttribute("produtos", produtos); 
         }
 
         UsuarioDAO uDao = new UsuarioDAO();
@@ -74,8 +76,7 @@ public class HomeController extends HttpServlet {
             request.setAttribute("user", uDao.getUsuarioById(idUsuario));
         }
         request.setAttribute("categorias", categorias);
-        request.setAttribute("produtos", produtos);
-        request.setAttribute("descontos", descontos);
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }

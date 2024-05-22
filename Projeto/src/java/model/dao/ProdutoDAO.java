@@ -228,7 +228,7 @@ public class ProdutoDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            stmt = conexao.prepareStatement("SELECT * FROM produto WHERE desconto > 0");
+            stmt = conexao.prepareStatement("SELECT * FROM produto WHERE desconto > 1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
