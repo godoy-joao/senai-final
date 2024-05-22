@@ -20,7 +20,7 @@
 
         <body class="overflow-x-hidden">
             <%@ include file="/WEB-INF/jspf/header.jspf" %>
-                <div id="div-updImg" class="w-20 h-25 py-3 px-4 flex-column gap-2">
+                <div id="div-updImg" class="w-20 h-25 d-none py-3 px-4 flex-column gap-2">
                     <form action="updImg" method="post" id="form-updImg" class="h-50 w-100 d-flex flex-row gap-2">
                         <input type="file" id="input-updImg" accept="image/*" class="border">
                         <button type="submit" id="submitImg" class="border">
@@ -28,7 +28,7 @@
                         </button>
 
                     </form>
-                    <button type="button" id="cancel-updImg" class="border h-20">Cancelar</button>
+                    <button type="button" id="cancel-updImg" onclick="hideEditImg()" class="border h-20">Cancelar</button>
                 </div>
                 <main class="branco-fundo-2">
                     <div class="row justify-content-between">

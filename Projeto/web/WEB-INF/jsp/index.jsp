@@ -5,7 +5,8 @@
             <html>
 
             <head>
-                <meta http-equiv="Content-Type" name="viewport" content="text/html, charset=UTF-8">
+                <meta http-equiv="Content-Type" name="viewport"
+                    content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
                 <title>Home</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -59,17 +60,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="produtos-main" class="bg-primary vh-100">
-                            <div class="bg-light w-100 h-100 p-5">
-                                <div class="">
+                        <div id="produtos-main" class="bg-primary">
+                            <div id="main-container" class="bg-light w-100 h-100">
+                                <div class="container-carrosel">
                                     <p class="h3">Descontos</p>
                                     <div>
                                         <section class="produtos">
                                             <button class="pre-btn"><img src="./assets/arrow.png" alt=""></button>
                                             <button class="nxt-btn"><img src="./assets/arrow.png" alt=""></button>
                                             <div class="produto-container">
-                                                <c:if test="${produtos.size() > 0}">
-                                                    <c:forEach items="${produtos}" var="produto">
+                                                <c:if test="${descontos.size() > 0}">
+                                                    <c:forEach items="${descontos}" var="produto">
                                                         <div class="produto-card">
                                                             <div class="produto-imagem">
                                                                 <span class="tag-desconto">-R$${produto.desconto}</span>
@@ -94,8 +95,44 @@
                                         </section>
                                     </div>
                                 </div>
+                                <div class="container-carrosel">
+                                    <p class="h3">Descontos</p>
+                                    <div>
+                                        <section class="produtos">
+                                            <button class="pre-btn"><img src="./assets/arrow.png" alt=""></button>
+                                            <button class="nxt-btn"><img src="./assets/arrow.png" alt=""></button>
+                                            <div class="produto-container">
+                                                <c:if test="${produtos.size() > 0}">
+                                                    <c:forEach items="${produtos}" var="produto">
+                                                        <div class="produto-card">
+                                                            <div class="produto-imagem">
+                                                                <c:if test="${produto.desconto > 0}">
+
+                                                                    <span
+                                                                        class="tag-desconto">-R$${produto.desconto}</span>
+                                                                </c:if>
+                                                                <img src="data:image/png;base64,${produto.imagemBase64}"
+                                                                    class="produto-capa" alt="">
+                                                            </div>
+                                                            <div class="produto-info">
+                                                                <div id="div-valor">
+                                                                    <span class="valor">R$${produto.valor}</span>
+                                                                    <span
+                                                                        class="preco laranja-texto-3">R$${produto.valorFinal}</span>
+                                                                </div>
+                                                                <div id="div-btn">
+                                                                    <button
+                                                                        class="card-btn verde-fundo fs-6">Comprar!</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </div>                                           
+                                        </section>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </main>
                     <footer>
@@ -110,7 +147,7 @@
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
                         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
                         crossorigin="anonymous"></script>
-                        <script src="./js/slider.js"></script>
+                    <script src="./js/slider.js"></script>
             </body>
 
             </html>

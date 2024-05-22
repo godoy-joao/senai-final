@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import model.dao.UsuarioDAO;
  *
  * @author Senai
  */
+@MultipartConfig
 public class PerfilController extends HttpServlet {
 
     /**
@@ -36,21 +38,31 @@ public class PerfilController extends HttpServlet {
         String nextPage = "/WEB-INF/jsp/perfil.jsp";
         UsuarioDAO uDao = new UsuarioDAO();
         Cookie[] cookies = request.getCookies();
-        Cookie login = new Cookie("login", "null");
+
+        System.out.println(cookies.length);
+        System.out.println("1." + cookies[0].getName() + ":" + cookies[0].getValue());
+        System.out.println("2." + cookies[1].getName() + ":" + cookies[1].getValue());
+        Cookie login = new Cookie("login", "");
         int id = -1;
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("login")) {
-                login = cookie;
+                login.setValue(cookie.getValue());
                 id = Integer.parseInt(cookie.getValue());
             }
         }
-        if (login.getValue().equals("null")) {
+        System.out.println("Login:" + login.getValue() + ".");
+        if (login.getValue().equals("")) {
             response.sendRedirect("./login");
         } else {
             Usuario u = uDao.getUsuarioById(id);
-            request.setAttribute("usuario", u);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-            dispatcher.forward(request, response);
+            if (u.getIdUsuario() == 0) {
+                response.sendRedirect("./login");
+            } else {
+                request.setAttribute("usuario", u);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+                dispatcher.forward(request, response);
+            }
+
         }
 
     }
@@ -107,18 +119,19 @@ public class PerfilController extends HttpServlet {
             user.setSenha(request.getParameter("input-updSenha"));
             uDao.updateSenha(user.getIdUsuario(), user.getSenha());
             response.sendRedirect("./perfil");
+        } else if (url.equals("/updImg")) {
         } else {
             processRequest(request, response);
         }
-}
+    }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-        public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

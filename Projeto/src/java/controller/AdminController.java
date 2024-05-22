@@ -5,15 +5,13 @@
  */
 package controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,10 +20,12 @@ import model.bean.Categoria;
 import model.bean.Estoque;
 import model.bean.Imagem;
 import model.bean.Produto;
+import model.bean.Usuario;
 import model.dao.CategoriaDAO;
 import model.dao.EstoqueDAO;
 import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -45,12 +45,25 @@ public class AdminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nextPage = "/WEB-INF/jsp/admin.jsp";
         CategoriaDAO cDao = new CategoriaDAO();
+        UsuarioDAO uDao = new UsuarioDAO();
         List<Categoria> categorias = cDao.listarTodos();
         request.setAttribute("categorias", categorias);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-        dispatcher.forward(request, response);
+        Cookie[] cookies = request.getCookies();
+        Usuario u = null;
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                u = uDao.getUsuarioById(Integer.parseInt(cookies[i].getValue()));
+            }
+        }
+        if (u.getTipo() != 1) {
+            response.sendRedirect("./home");
+        } else {
+            String nextPage = "/WEB-INF/jsp/admin.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+            dispatcher.forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,7 +111,7 @@ public class AdminController extends HttpServlet {
             Collection<Part> parts = request.getParts();
             for (Part part : parts) {
                 if (part.getName().equals("imagem")) {
-                    Imagem imagem = new Imagem();  
+                    Imagem imagem = new Imagem();
                     imagem.setImagem(iDao.partToBytes(part));
                     imagem.setProduto(idProduto);
                     imagem.setFormato(iDao.getFileExtension(part.getSubmittedFileName()).toString());
