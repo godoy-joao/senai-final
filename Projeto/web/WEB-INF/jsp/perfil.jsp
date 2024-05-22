@@ -18,7 +18,7 @@
             <link rel="stylesheet" href="./css/perfil.css">
         </head>
 
-        <body class="overflow-x-hidden">
+        <body class="overflow-hidden">
             <%@ include file="/WEB-INF/jspf/header.jspf" %>
                 <div id="div-updImg" class="w-20 h-25 d-none py-3 px-4 flex-column gap-2">
                     <form action="updImg" method="post" id="form-updImg" class="h-50 w-100 d-flex flex-row gap-2">
@@ -30,8 +30,8 @@
                     </form>
                     <button type="button" id="cancel-updImg" onclick="hideEditImg()" class="border h-20">Cancelar</button>
                 </div>
-                <main class="branco-fundo-2">
-                    <div class="row justify-content-between">
+                <main class="branco-fundo-2 vh-100 overflow-hidden">
+                    <div class="row justify-content-between h-100">
                         <div id="barraLateral" class="col-3 d-flex flex-column p-0 branco-fundo">
                             <div class="border-end border-top-0 h-100 d-flex px-2 flex-column gap-1 overflow-x-hidden">
                                 <div class="px-1 mt-5 mb-1">

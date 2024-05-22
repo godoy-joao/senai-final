@@ -77,8 +77,17 @@ public class LoginController extends HttpServlet {
 
             try {
                 if (uDAO.login(usuario) != -1) {
-                    Cookie cookieLogin = new Cookie("login", Integer.toString(uDAO.login(usuario)));
-                    response.addCookie(cookieLogin);
+                    boolean cookieExiste = false;
+                    for (Cookie cookie : request.getCookies()) {
+                        if (cookie.getName().equals("login")) {
+                            cookieExiste = true;
+                            cookie.setValue(Integer.toString(uDAO.login(usuario)));
+                        }
+                    }
+                    if (!cookieExiste) {
+                        Cookie cookieLogin = new Cookie("login", Integer.toString(uDAO.login(usuario)));
+                        response.addCookie(cookieLogin);
+                    }                
                     response.sendRedirect("./home");
                 } else {
                     request.setAttribute("errorMessage", "Usuário ou senha inválidos");
@@ -95,7 +104,7 @@ public class LoginController extends HttpServlet {
             Usuario u = new Usuario();
             UsuarioDAO uDAO = new UsuarioDAO();
             u.setNome(request.getParameter("nome"));
-            System.out.println("Nome: "+u.getNome());
+            System.out.println("Nome: " + u.getNome());
             u.setDataNasc(Date.valueOf(request.getParameter("dataNascimento")));
             u.setEmail(request.getParameter("email"));
             u.setTelefone(request.getParameter("telefone"));
