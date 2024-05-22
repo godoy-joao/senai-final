@@ -39,17 +39,18 @@ public class CarrinhoController extends HttpServlet {
         CarrinhoDAO cDao = new CarrinhoDAO();
         UsuarioDAO uDao = new UsuarioDAO();
         Cookie[] cookies = request.getCookies();
-        String id = "";
+        Usuario u = null;
         for (int i = 0; i < cookies.length; i++) {
             if (cookies[i].getName().equals("login")) {
-                id = cookies[i].getValue();
+                if (!cookies[i].getValue().equals("")) {
+                    u = uDao.getUsuarioById(Integer.parseInt(cookies[i].getValue()));
+                }
             }
         }
-        if (id.equals("")) {
+        if (u.getIdUsuario() <= 0) {
             response.sendRedirect("./login");
         } else {
             try {
-                Usuario u = uDao.getUsuarioById(Integer.parseInt(id));
                 List<Produto> produtos = cDao.lerProdutos(u);
                 request.setAttribute("produtos", produtos);
             } catch (Exception e) {
@@ -57,9 +58,11 @@ public class CarrinhoController extends HttpServlet {
             }
 
         }
-        String nextPage = "/WEB-INF/jsp/carrinho.jsp";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-        dispatcher.forward(request, response);
+        if (!response.isCommitted()) {
+            String nextPage = "/WEB-INF/jsp/carrinho.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

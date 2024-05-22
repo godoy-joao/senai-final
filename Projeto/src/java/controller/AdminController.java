@@ -51,9 +51,12 @@ public class AdminController extends HttpServlet {
         request.setAttribute("categorias", categorias);
         Cookie[] cookies = request.getCookies();
         Usuario u = null;
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                u = uDao.getUsuarioById(Integer.parseInt(cookies[i].getValue()));
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("login")) {
+                    u = uDao.getUsuarioById(Integer.parseInt(cookie.getValue()));
+                }
             }
         }
         if (u.getTipo() != 1) {

@@ -61,15 +61,17 @@ public class HomeController extends HttpServlet {
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 produtos.get(i).setImagemBase64(imagemBase64);
             }
-            request.setAttribute("produtos", produtos); 
+            request.setAttribute("produtos", produtos);
         }
 
         UsuarioDAO uDao = new UsuarioDAO();
         Cookie[] cookies = request.getCookies();
         int idUsuario = 0;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("login")) {
-                idUsuario = Integer.parseInt(cookie.getValue());
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("login")) {
+                    idUsuario = Integer.parseInt(cookie.getValue());
+                }
             }
         }
         if (idUsuario > 0) {

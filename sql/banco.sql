@@ -1,6 +1,6 @@
 
-create database senai_final;
-use senai_final;
+create database senai_final1;
+use senai_final1;
 
 create table usuario (
 idUsuario int primary key auto_increment,
@@ -36,9 +36,9 @@ create table produto (
     nome varchar(100) not null,
     valor float(10,2) not null,
     desconto float(10,2) default 0,
-    valorFinal float(10,2) GENERATED ALWAYS AS (valor - COALESCE(desconto, 0)) STORED,
+    valorFinal float(10,2),
     descricao varchar(2000),
-    dataRegistro date default (CURRENT_DATE)
+    dataRegistro date
 );
 
 create table imagem ( 
