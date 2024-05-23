@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.bean.Pedido;
+import model.bean.Produto;
 import model.bean.Usuario;
 
 /**
@@ -82,7 +83,6 @@ public class PedidoDAO {
                 p.setDataPedido(rs.getTimestamp("dataPedido"));
                 pedidos.add(p);
             }
-            
 
             rs.close();
             stmt.close();
@@ -94,6 +94,59 @@ public class PedidoDAO {
         }
 
         return pedidos;
+    }
+
+    /*
+    TABELA STATUS
+    1 - Aguardando pagamento
+    2 - Pagamento confirmado
+    3 - Em trânsito
+    4 - Entregue, aguardando confirmação do usuário
+    5 - Concluído
+    6 - Cancelado
+    
+     */
+    public void setStatus(Pedido p, int status) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            stmt = conexao.prepareStatement("UPDATE pedido SET status = ? WHERE idPedido = ?");
+            stmt.setInt(1, status);
+            stmt.setInt(2, p.getIdPedido());
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            conexao.close();
+                    
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addProdutos(List<Produto> produtos, Pedido p) {
+        if (produtos == null) {
+            return;
+        }
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            for (int i = 0; i < produtos.size(); i++) {
+                stmt = conexao.prepareStatement("INSERT INTO produtopedido (produto, pedido) VALUES (?, ?)");
+                stmt.setInt(1, produtos.get(i).getIdProduto());
+                stmt.setInt(2, p.getIdPedido());
+
+                stmt.executeUpdate();
+            }
+            stmt.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

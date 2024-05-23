@@ -286,13 +286,15 @@ public class UsuarioDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
+            stmt = conexao.prepareStatement("DELETE FROM carrinho WHERE usuario = ?");
+            stmt.setInt(1, u.getIdUsuario());
+            
+            stmt.executeUpdate();
+            
             stmt = conexao.prepareStatement("DELETE FROM usuario WHERE idUsuario = ?");
-            stmt.setString(1, u.getNome());
-            stmt.setString(2, u.getEmail());
-            stmt.setString(3, "");
-            stmt.setString(4, u.getCpf());
-            stmt.setString(5, u.getTelefone());
-            stmt.setInt(6, u.getIdUsuario());
+            stmt.setInt(1, u.getIdUsuario());
+            
+            stmt.executeUpdate();
 
             stmt.close();
             conexao.close();

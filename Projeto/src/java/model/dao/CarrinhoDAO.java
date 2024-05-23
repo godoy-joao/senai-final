@@ -38,7 +38,7 @@ public class CarrinhoDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conexao.prepareStatement("SELECT p.* FROM carrinho_produto AS cp JOIN produto AS p ON cp.produto = p.idProduto"
+            stmt = conexao.prepareStatement("SELECT p.* FROM carrinhoProduto AS cp JOIN produto AS p ON cp.produto = p.idProduto"
                     + " JOIN carrinho AS c ON cp.carrinho = c.idCarrinho JOIN usuario AS u ON c.usuario = u.idUsuario WHERE u.idUsuario = ?");
             stmt.setInt(1, u.getIdUsuario());
             
@@ -48,10 +48,11 @@ public class CarrinhoDAO {
                 Produto p = new Produto();
                 p.setIdProduto(rs.getInt("idProduto"));
                 p.setNome(rs.getString("nome"));
+                p.setDescricao(rs.getString("descricao"));
                 p.setValor(rs.getFloat("valor"));
                 p.setDesconto(rs.getFloat("desconto"));
                 p.setValorFinal(rs.getFloat("valorFinal"));
-                p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
             
@@ -64,5 +65,25 @@ public class CarrinhoDAO {
                    
         }
         return produtos;
+    }
+    
+    private void addProduto(Produto p, Carrinho c) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("INSERT INTO produtoCarrinho (carrinho, produto) VALUES (?, ?)");
+            stmt.setInt(1, c.getIdCarrinho());
+            stmt.setInt(2, p.getIdProduto());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
     }
 }

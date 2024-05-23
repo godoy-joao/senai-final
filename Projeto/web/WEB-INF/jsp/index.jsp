@@ -84,8 +84,14 @@
                                                                         class="preco laranja-texto-3">R$${produto.valorFinal}</span>
                                                                 </div>
                                                                 <div id="div-btn">
-                                                                    <button
-                                                                        class="card-btn verde-fundo fs-6">Comprar!</button>
+                                                                    <form action="sendToCart" method="post" class="w-100 h-100 d-flex align-items-center justify-content-center">
+                                                                        <button type="submit" value="${produto.idProduto}" name="addProduto"
+                                                                            class="card-btn verde-fundo fs-6">
+                                                                            <span class="msg1">Comprar!</span>
+                                                                            <span class="msg2"><i class="fa-solid fa-shopping-cart me-1"></i>Adicionar</span>
+                                                                        </button>
+                                                                    </form>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -128,7 +134,7 @@
                                                         </div>
                                                     </c:forEach>
                                                 </c:if>
-                                            </div>                                           
+                                            </div>
                                         </section>
                                     </div>
                                 </div>

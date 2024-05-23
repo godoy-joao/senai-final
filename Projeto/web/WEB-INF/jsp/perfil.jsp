@@ -76,6 +76,22 @@
                                         </div>
                                     </button>
                                 </div>
+                                <div class="px-1 my-1">
+                                    <form action="logout" method="post">
+                                        <button id="btnOpcoes" type="submit"
+                                        class="h-100 w-100 bg-transparent border-0 my-0">
+                                        <div class="d-flex w-100 flex-row m-3 justify-content-start">
+                                            <div class="ms-4 mb-0 text-center fs-2 d-flex align-items-center">
+                                                <img src="./assets/logout.svg" alt="" style="width: 30px; height: 30px; transform:rotate(180deg)">
+                                                <p class="ms-2 mb-0  text-center fs-5 d-flex align-items-center">
+                                                    Logout
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    </form>
+                                    
+                                </div>
                             </div>
                         </div>
                         <div id="areaPrincipal" class="col-8 p-0 border-start branco-fundo">

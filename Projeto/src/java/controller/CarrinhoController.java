@@ -47,7 +47,7 @@ public class CarrinhoController extends HttpServlet {
                 }
             }
         }
-        if (u.getIdUsuario() <= 0) {
+        if ( u == null || u.getIdUsuario() <= 0) {
             response.sendRedirect("./login");
         } else {
             try {
