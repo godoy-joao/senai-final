@@ -15,9 +15,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Carrinho;
 import model.bean.Categoria;
 import model.bean.Imagem;
 import model.bean.Produto;
+import model.bean.Usuario;
+import model.dao.CarrinhoDAO;
 import model.dao.CategoriaDAO;
 import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
@@ -116,7 +119,28 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        processRequest(request, response);
+        Cookie[] cookies = request.getCookies();
+        Usuario user = new Usuario();
+        Carrinho cart = new Carrinho();
+        UsuarioDAO uDao = new UsuarioDAO();
+        CarrinhoDAO cDao = new CarrinhoDAO();
+        Produto prod = new Produto();
+        ProdutoDAO pDao = new ProdutoDAO();
+        String url = request.getServletPath();
+        if (url.equals("/sendToCart")) {
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
+                        user = uDao.getUsuarioById(Integer.parseInt(cookie.getValue()));
+                    }
+                }
+            }
+            if (user != null) {
+                
+            } else {
+                
+            }
+        }
     }
 
     /**

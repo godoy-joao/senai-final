@@ -46,11 +46,11 @@ public class PerfilController extends HttpServlet {
                 }
             }
         }
-        
+
         if (u == null || u.getIdUsuario() <= 0) {
             response.sendRedirect("./login");
         } else {
-            
+
             request.setAttribute("user", u);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
             dispatcher.forward(request, response);
@@ -110,6 +110,16 @@ public class PerfilController extends HttpServlet {
             uDao.updateSenha(user.getIdUsuario(), user.getSenha());
             response.sendRedirect("./perfil");
         } else if (url.equals("/updImg")) {
+
+        } else if (url.equals("/logout")) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("login")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+            }
+            System.out.println("aqui" + response.isCommitted());
+            response.sendRedirect("./home");
         } else {
             processRequest(request, response);
         }
