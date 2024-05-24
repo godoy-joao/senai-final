@@ -21,12 +21,12 @@
         <body class="overflow-hidden">
             <%@ include file="/WEB-INF/jspf/header.jspf" %>
                 <div id="div-updImg" class="w-20 h-25 d-none py-3 px-4 flex-column gap-2">
-                    <form action="updImg" method="post" id="form-updImg" class="h-50 w-100 d-flex flex-row gap-2">
-                        <input type="file" id="input-updImg" accept="image/*" class="border">
+                    <form action="updImg" method="post" id="form-updImg" class="h-50 w-100 d-flex flex-row gap-2" enctype="multipart/form-data">
+                        <label for="input-updImg"><i class="fa-solid fa-arrow-up-from-bracket fs-5 preto-texto"></i><br> Selecionar imagem </label>
+                        <input type="file" id="input-updImg" name="input-updImg" accept="image/*" class="border">
                         <button type="submit" id="submitImg" class="border">
                             Enviar
                         </button>
-
                     </form>
                     <button type="button" id="cancel-updImg" onclick="hideEditImg()" class="border h-20">Cancelar</button>
                 </div>
@@ -96,12 +96,12 @@
                         </div>
                         <div id="areaPrincipal" class="col-8 p-0 border-start branco-fundo">
                             <div class="h-100 w-100">
-                                <div class="d-flex flex-row p-4 mt-4 gx-0 border-bottom">
+                                <div class="d-flex flex-row p-4 mt-4 gx-0 border-bottom" style="height: 256px;">
                                     <div class="w-25">
-                                        <div class="d-flex" id="fotoPerfil">
-                                            <div class="d-flex">
-                                                <img src="./assets/Pinguim.png" id="foto"
-                                                    class="rounded-pill border border-2 w-100 h-auto"
+                                        <div class="d-flex w-100" id="fotoPerfil">
+                                            <div class="d-flex" id="foto">
+                                                <img src="data:image/png;base64,${user.fotoBase64}" id="fotoImg"
+                                                    class="rounded-pill border border-2"
                                                     style="object-fit: contain;" alt="">
                                                 <div id="editarImagem">
                                                     <button id="editImgPen" onclick="showEditImg()">
@@ -117,13 +117,13 @@
                                         <div class="row w-100">
                                             <div class="col-6 d-flex ms-3 flex-column w-100">
                                                 <div class="fs-4">
-                                                    ${usuario.nome}
+                                                    ${user.nome}
                                                 </div>
                                                 <div class="fs-5">
-                                                    ${usuario.cpf}
+                                                    ${user.cpf}
                                                 </div>
                                                 <div class="fs-5">
-                                                    ${usuario.dataNasc}
+                                                    ${user.dataNasc}
                                                 </div>
                                             </div>
                                         </div>

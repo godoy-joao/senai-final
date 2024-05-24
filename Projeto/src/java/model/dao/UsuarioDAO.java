@@ -142,14 +142,14 @@ public class UsuarioDAO {
         return u;
     }
 
-    public void updateEmail(int id, String email) {
+    public void updateEmail(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
             stmt = conexao.prepareStatement("UPDATE usuario SET email = ? WHERE idUsuario = ?");
-            stmt.setString(1, email);
-            stmt.setInt(2, id);
+            stmt.setString(1, u.getEmail());
+            stmt.setInt(2, u.getIdUsuario());
             stmt.executeUpdate();
 
             stmt.close();
@@ -160,14 +160,14 @@ public class UsuarioDAO {
         }
     }
 
-    public void updateSenha(int id, String senha) {
+    public void updateSenha(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
             stmt = conexao.prepareStatement("UPDATE usuario SET senha = ? WHERE idUsuario = ?");
-            stmt.setString(1, senha);
-            stmt.setInt(2, id);
+            stmt.setString(1, u.getSenha());
+            stmt.setInt(2, u.getIdUsuario());
             stmt.executeUpdate();
 
             stmt.close();
@@ -178,14 +178,32 @@ public class UsuarioDAO {
         }
     }
 
-    public void updateTel(int id, String tel) {
+    public void updateTel(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
             stmt = conexao.prepareStatement("UPDATE usuario SET telefone = ? WHERE idUsuario = ?");
-            stmt.setString(1, tel);
-            stmt.setInt(2, id);
+            stmt.setString(1, u.getTelefone());
+            stmt.setInt(2, u.getIdUsuario());
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateFoto(Usuario u) {
+         try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("UPDATE usuario SET fotoPerfil = ? WHERE idUsuario = ?");
+            stmt.setBytes(1, u.getFoto());
+            stmt.setInt(2, u.getIdUsuario());
             stmt.executeUpdate();
 
             stmt.close();
