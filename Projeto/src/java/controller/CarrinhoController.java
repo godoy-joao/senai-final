@@ -43,7 +43,7 @@ public class CarrinhoController extends HttpServlet {
         for (int i = 0; i < cookies.length; i++) {
             if (cookies[i].getName().equals("login")) {
                 if (!cookies[i].getValue().equals("")) {
-                    u = uDao.getUsuarioById(Integer.parseInt(cookies[i].getValue()));
+                    u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookies[i].getValue()));
                 }
             }
         }

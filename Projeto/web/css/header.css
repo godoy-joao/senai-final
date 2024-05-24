@@ -17,6 +17,11 @@ header {
 
 .btnIcon{
     font-size: 1.5rem;
+    color: black;
+}
+
+.btnIcon:hover {
+    color: white;
 }
 
 #searchInput {

@@ -21,7 +21,7 @@ import model.bean.Categoria;
  */
 public class CategoriaDAO {
 
-    public int create(Categoria c) {
+    public int criar(Categoria c) {
         int idCategoria = -1;
         try {
             Connection conexao = Conexao.conectar();
@@ -75,7 +75,7 @@ public class CategoriaDAO {
         return categorias;
     }
 
-    public Categoria readById(int id) {
+    public Categoria selecionarPorId(int id) {
         Categoria c = new Categoria();
         try {
             Connection conexao = Conexao.conectar();
@@ -103,7 +103,7 @@ public class CategoriaDAO {
         return c;
     }
 
-    public Categoria readByNome(String nome) {
+    public Categoria selecionarPorNome(String nome) {
         Categoria c = new Categoria();
         try {
             Connection conexao = Conexao.conectar();
@@ -131,7 +131,7 @@ public class CategoriaDAO {
         return c;
     }
 
-    public Categoria readByNome(Categoria c) {
+    public Categoria selecionarPorNome(Categoria c) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;

@@ -47,7 +47,7 @@ public class PerfilController extends HttpServlet {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
-                    u = uDao.getUsuarioById(Integer.parseInt(cookie.getValue()));
+                    u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
                 }
             }
         }
@@ -99,25 +99,25 @@ public class PerfilController extends HttpServlet {
                 id = Integer.parseInt(cookie.getValue());
             }
         }
-        Usuario user = uDao.getUsuarioById(id);
+        Usuario user = uDao.selecionarUsuarioPorId(id);
         if (url.equals("/updEmail")) {
             user.setEmail(request.getParameter("input-updEmail"));
             System.out.println(user.getEmail());
-            uDao.updateEmail(user);
+            uDao.atualizarEmail(user);
             response.sendRedirect("./perfil");
         } else if (url.equals("/updTel")) {
             user.setTelefone(request.getParameter("input-updTel"));
-            uDao.updateTel(user);
+            uDao.atualizarTel(user);
             response.sendRedirect("./perfil");
         } else if (url.equals("/updSenha")) {
             user.setSenha(request.getParameter("input-updSenha"));
-            uDao.updateSenha(user);
+            uDao.atualizarSenha(user);
             response.sendRedirect("./perfil");   
         } else if (url.equals("/updImg")) {
             Part filePart = request.getPart("input-updImg");
             if (filePart != null) {
-                user.setFoto(iDao.partToBytes(filePart));
-                uDao.updateFoto(user);
+                user.setFoto(iDao.partParaBytes(filePart));
+                uDao.atualizarFoto(user);
             } else {
                 
             }

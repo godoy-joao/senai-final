@@ -40,7 +40,12 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
      */
-    public int login(Usuario u) {
+    
+    /*
+    Seleciona um usuário usando com base um email ou telefone, e uma senha.
+    Se bem sucedido retorna o id do usuário, do contrário retornará -1.
+    */
+    public int logar(Usuario u) {
         int idUsuario = -1;
         try {
             Connection conexao = Conexao.conectar();
@@ -65,7 +70,7 @@ public class UsuarioDAO {
         return idUsuario;
     }
 
-    public Usuario getUsuarioById(int id) {
+    public Usuario selecionarUsuarioPorId(int id) {
         Usuario u = new Usuario();
         if (id == -1) {
             return u;
@@ -95,6 +100,7 @@ public class UsuarioDAO {
 
             } else {
                 System.out.println("Usuario não localizado.");
+                u = null;
             }
 
             rs.close();
@@ -107,7 +113,7 @@ public class UsuarioDAO {
         return u;
     }
 
-    public Usuario getUsuarioByTel(String telefone) {
+    public Usuario selecionarUsuarioPorTelefone(String telefone) {
         Usuario u = new Usuario();
         try {
             Connection conexao = Conexao.conectar();
@@ -142,7 +148,7 @@ public class UsuarioDAO {
         return u;
     }
 
-    public void updateEmail(Usuario u) {
+    public void atualizarEmail(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -160,7 +166,7 @@ public class UsuarioDAO {
         }
     }
 
-    public void updateSenha(Usuario u) {
+    public void atualizarSenha(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -178,7 +184,7 @@ public class UsuarioDAO {
         }
     }
 
-    public void updateTel(Usuario u) {
+    public void atualizarTel(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -196,7 +202,7 @@ public class UsuarioDAO {
         }
     }
     
-    public void updateFoto(Usuario u) {
+    public void atualizarFoto(Usuario u) {
          try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -214,7 +220,7 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario getUsuarioByEmail(String email) {
+    public Usuario selecionarUsuarioPorEmail(String email) {
         Usuario u = new Usuario();
         try {
             Connection conexao = Conexao.conectar();
@@ -249,7 +255,7 @@ public class UsuarioDAO {
         return u;
     }
 
-    public int create(Usuario u) {
+    public int criar(Usuario u) {
         int idUsuario = -1;
         try {
             Connection conexao = Conexao.conectar();
@@ -277,7 +283,7 @@ public class UsuarioDAO {
         return idUsuario;
     }
 
-    public void update(Usuario u) {
+    public void atualizar(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -299,7 +305,7 @@ public class UsuarioDAO {
         }
     }
 
-    public void delete(Usuario u) {
+    public void deletar(Usuario u) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;

@@ -18,7 +18,7 @@ import model.bean.Endereco;
  */
 public class EnderecoDAO {
 
-    public void create(Endereco end) {
+    public void criar(Endereco end) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -43,7 +43,7 @@ public class EnderecoDAO {
 
     }
 
-    public void delete(Endereco end) {
+    public void deletar(Endereco end) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;

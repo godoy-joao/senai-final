@@ -191,7 +191,7 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    public Produto readById(int id) {
+    public Produto selecionarPorId(int id) {
         Produto p = new Produto();
         try {
             Connection conexao = Conexao.conectar();
@@ -254,7 +254,7 @@ public class ProdutoDAO {
         return produtos;
     }
     
-    public int addCategoria(int produto, int categoria) {
+    public int adicionarCategoria(int produto, int categoria) {
         int totalCategorias = -1;
         try {
             Connection conexao = Conexao.conectar();
@@ -289,7 +289,7 @@ public class ProdutoDAO {
         return totalCategorias;
     }
 
-    public int create(Produto p) {
+    public int criar(Produto p) {
         int id = -1;
         try {
             Connection conexao = Conexao.conectar();
@@ -315,7 +315,7 @@ public class ProdutoDAO {
         return id;
     }
 
-    public void update(Produto p) {
+    public void atualizar(Produto p) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -336,7 +336,7 @@ public class ProdutoDAO {
         }
     }
 
-    public void delete(int id) {
+    public void deletar(int id) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;

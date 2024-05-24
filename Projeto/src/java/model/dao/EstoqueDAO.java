@@ -99,7 +99,7 @@ public class EstoqueDAO {
         return estoque;
     }
 
-    public int create(Estoque e) {
+    public int criar(Estoque e) {
         int idEstoque = -1;
         try {
             Connection conexao = Conexao.conectar();

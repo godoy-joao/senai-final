@@ -55,7 +55,7 @@ public class AdminController extends HttpServlet {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("login")) {
-                    u = uDao.getUsuarioById(Integer.parseInt(cookie.getValue()));
+                    u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
                 }
             }
         }
@@ -109,30 +109,30 @@ public class AdminController extends HttpServlet {
             p.setDescricao(request.getParameter("descricao"));
             p.setValor(Float.parseFloat(request.getParameter("valor")));
             p.setDesconto(Float.parseFloat(request.getParameter("desconto")));
-            int idProduto = pDao.create(p);
+            int idProduto = pDao.criar(p);
             //Pegando as 'parts' do documento e transformando o conteúdo em bytes
             Collection<Part> parts = request.getParts();
             for (Part part : parts) {
                 if (part.getName().equals("imagem")) {
                     Imagem imagem = new Imagem();
-                    imagem.setImagem(iDao.partToBytes(part));
+                    imagem.setImagem(iDao.partParaBytes(part));
                     imagem.setProduto(idProduto);
-                    imagem.setFormato(iDao.getFileExtension(part.getSubmittedFileName()).toString());
-                    iDao.insertImagem(imagem);
+                    imagem.setFormato(iDao.pegarExtensaoDoArquivo(part.getSubmittedFileName()).toString());
+                    iDao.inserirImagem(imagem);
                 }
             }
             //Adicionando categorias
             String[] categorias = request.getParameterValues("selectCategoria");
             for (int i = 0; i < categorias.length; i++) {
                 String categoria = categorias[i];
-                pDao.addCategoria(idProduto, Integer.parseInt(categoria));
+                pDao.adicionarCategoria(idProduto, Integer.parseInt(categoria));
             }
 
             //Definindo estoque
             e.setProduto(idProduto);
             e.setQuantidade(Integer.parseInt(request.getParameter("quantidade")));
             e.setCusto(p.getValor());
-            eDao.create(e);
+            eDao.criar(e);
             response.sendRedirect("./admin");
         } else if (url.equals("/addCategoria")) {
             Categoria c = new Categoria();
@@ -141,10 +141,10 @@ public class AdminController extends HttpServlet {
             c.setNome(request.getParameter("nomeCategoria"));
             Part filePart = request.getPart("imagemCategoria");
             if (filePart != null) {
-                c.setCapa(iDao.partToBytes(filePart));
+                c.setCapa(iDao.partParaBytes(filePart));
             }
             try {
-                cDao.create(c);
+                cDao.criar(c);
                 response.sendRedirect("./admin");
             } catch (Exception e) {
                 System.out.println("FALHA AO ADICIONAR CATEGORIA");

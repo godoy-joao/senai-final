@@ -22,8 +22,9 @@
                 <%@ include file="/WEB-INF/jspf/header.jspf" %>
                     <main class="d-flex justify-content-center h-100 w-100 branco-fundo-2">
                         <div class="bg-light p-2 w-75 h-80" id="carrinho-container">
-                            <div id="carrinho-header" class="d-flex justify-content-between align-items-center w-100 px-3 pb-2 mt-3 border-bottom vertical-align-bottom">
-                                <div class="row w-50 pe-5">
+                            <div id="carrinho-header"
+                                class="d-flex justify-content-between px-2 pb-3 pt-3 border-bottom">
+                                <div class="row w-50">
                                     <div class="col-4 d-flex justify-content-center">
                                         <p class="h3 cinza-texto-1">Carrinho</p>
                                     </div>
@@ -33,22 +34,20 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="row w-50">
-                                    <div class="col-4">
-                                        <p class="h4 cinza-texto-1">
+                                <div class="d-flex w-30 h-100 justify-content-between">
+                                    <div class="me-5">
+                                        <span class="fs-5">
                                             Total:
-                                        </p>
-                                        <p id="resultado-carrinho" class="h4 laranja-texto-2">
+                                        </span>
+                                        <br>
+                                        <span class="valor fs-5">
+                                            Valor final
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <button class="w-100 h-100">FInalizar pedido</button>
+                                    </div>
 
-                                        </p>
-                                    </div>
-                                    <div class="col-5">
-                                        <button class="laranja-fundo-3">
-                                            <p class="branco-texto">
-                                                Finalizar pedido
-                                            </p>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                             <div id="carrinho-body" class="w-100 px-3 mt-3">
@@ -61,12 +60,6 @@
                     </footer>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                        crossorigin="anonymous"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-                        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-                        crossorigin="anonymous"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-                        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
                         crossorigin="anonymous"></script>
             </body>
 
