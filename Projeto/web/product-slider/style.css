@@ -151,7 +151,7 @@ button:hover {
 
 .product-container::-webkit-scrollbar {
   display: none;
-}
+} 
 
 .product-card {
   flex: 0 0 auto;

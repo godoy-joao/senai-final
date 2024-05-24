@@ -33,7 +33,7 @@ public class ProdutoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProdutoDAO pDao = new ProdutoDAO();
-        Produto produto = pDao.readById(Integer.parseInt(request.getParameter("id")));
+        Produto produto = pDao.selecionarPorId(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("produto", produto);
         String nextPage = "/WEB-INF/jsp/produto.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);

@@ -76,16 +76,16 @@ public class LoginController extends HttpServlet {
             usuario.setSenha(request.getParameter("loginPass"));
 
             try {
-                if (uDAO.login(usuario) != -1) {
+                if (uDAO.logar(usuario) != -1) {
                     boolean cookieExiste = false;
                     for (Cookie cookie : request.getCookies()) {
                         if (cookie.getName().equals("login")) {
                             cookieExiste = true;
-                            cookie.setValue(Integer.toString(uDAO.login(usuario)));
+                            cookie.setValue(Integer.toString(uDAO.logar(usuario)));
                         }
                     }
                     if (!cookieExiste) {
-                        Cookie cookieLogin = new Cookie("login", Integer.toString(uDAO.login(usuario)));
+                        Cookie cookieLogin = new Cookie("login", Integer.toString(uDAO.logar(usuario)));
                         response.addCookie(cookieLogin);
                     }                
                     response.sendRedirect("./home");
@@ -110,7 +110,7 @@ public class LoginController extends HttpServlet {
             u.setTelefone(request.getParameter("telefone"));
             u.setSenha(request.getParameter("senha"));
             try {
-                uDAO.create(u);
+                uDAO.criar(u);
                 response.sendRedirect("./login");
             } catch (Exception e) {
                 e.printStackTrace();

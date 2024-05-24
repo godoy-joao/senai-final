@@ -55,11 +55,11 @@ public class ImagemDAO {
                    
         }
      */
-    public Optional<String> getFileExtension(String name) {
+    public Optional<String> pegarExtensaoDoArquivo(String name) {
         return Optional.ofNullable(name).filter(f -> f.contains(".")).map(f -> f.substring(name.lastIndexOf(".") + 1));
     }
     
-    public byte[] partToBytes(Part filePart) throws IOException {
+    public byte[] partParaBytes(Part filePart) throws IOException {
         InputStream iStream = filePart.getInputStream();
         ByteArrayOutputStream byteA = new ByteArrayOutputStream();
         byte[] img = new byte[4096];
@@ -71,7 +71,7 @@ public class ImagemDAO {
         return imgBytes;
     }
 
-    public int insertImagem(Imagem imagem) throws FileNotFoundException {
+    public int inserirImagem(Imagem imagem) throws FileNotFoundException {
         int idImagem = -1;
         try {
             Connection conexao = Conexao.conectar();
@@ -96,7 +96,7 @@ public class ImagemDAO {
         return idImagem;
     }
 
-    public Imagem getFirstImagem(Produto p) {
+    public Imagem selecionarPrimeiraImagem(Produto p) {
         Imagem img = new Imagem();
         try {
             Connection conexao = Conexao.conectar();
@@ -124,7 +124,7 @@ public class ImagemDAO {
         return img;
     }
 
-    public Imagem getImagem(int id) {
+    public Imagem selecionarImagem(int id) {
         Imagem img = new Imagem();
         try {
             Connection conexao = Conexao.conectar();
@@ -150,7 +150,7 @@ public class ImagemDAO {
         return img;
     }
 
-    public List<Imagem> getImageList(Produto p) {
+    public List<Imagem> selecionarListaDeImagens(Produto p) {
         List<Imagem> imagens = new ArrayList();
         try {
             Connection conexao = Conexao.conectar();
@@ -179,7 +179,7 @@ public class ImagemDAO {
         return imagens;
     }
 
-    public void delete(int id) {
+    public void deletar(int id) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;

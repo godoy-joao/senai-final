@@ -40,7 +40,7 @@ public class PedidoDAO {
                    
         }
      */
-    public void create(Pedido p) {
+    public void criar(Pedido p) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -106,7 +106,7 @@ public class PedidoDAO {
     6 - Cancelado
     
      */
-    public void setStatus(Pedido p, int status) {
+    public void definirStatus(Pedido p, int status) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -126,7 +126,7 @@ public class PedidoDAO {
         }
     }
 
-    public void addProdutos(List<Produto> produtos, Pedido p) {
+    public void adicionarProdutos(List<Produto> produtos, Pedido p) {
         if (produtos == null) {
             return;
         }

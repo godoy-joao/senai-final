@@ -48,7 +48,7 @@ public class SearchController extends HttpServlet {
         }
         if (produtos.size() > 0) {
             for (int i = 0; i < produtos.size(); i++) {
-                Imagem img = iDao.getFirstImagem(produtos.get(i));
+                Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 produtos.get(i).setImagemBase64(imagemBase64);
                

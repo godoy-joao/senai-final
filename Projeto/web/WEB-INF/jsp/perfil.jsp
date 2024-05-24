@@ -21,14 +21,17 @@
         <body class="overflow-hidden">
             <%@ include file="/WEB-INF/jspf/header.jspf" %>
                 <div id="div-updImg" class="w-20 h-25 d-none py-3 px-4 flex-column gap-2">
-                    <form action="updImg" method="post" id="form-updImg" class="h-50 w-100 d-flex flex-row gap-2" enctype="multipart/form-data">
-                        <label for="input-updImg"><i class="fa-solid fa-arrow-up-from-bracket fs-5 preto-texto"></i><br> Selecionar imagem </label>
+                    <form action="updImg" method="post" id="form-updImg" class="h-50 w-100 d-flex flex-row gap-2"
+                        enctype="multipart/form-data">
+                        <label for="input-updImg"><i class="fa-solid fa-arrow-up-from-bracket fs-5 preto-texto"></i><br>
+                            Selecionar imagem </label>
                         <input type="file" id="input-updImg" name="input-updImg" accept="image/*" class="border">
                         <button type="submit" id="submitImg" class="border">
                             Enviar
                         </button>
                     </form>
-                    <button type="button" id="cancel-updImg" onclick="hideEditImg()" class="border h-20">Cancelar</button>
+                    <button type="button" id="cancel-updImg" onclick="hideEditImg()"
+                        class="border h-20">Cancelar</button>
                 </div>
                 <main class="branco-fundo-2 vh-100 overflow-hidden">
                     <div class="row justify-content-between h-100">
@@ -79,18 +82,19 @@
                                 <div class="px-1 my-1">
                                     <form action="logout" method="post">
                                         <button id="btnOpcoes" type="submit"
-                                        class="h-100 w-100 bg-transparent border-0 my-0">
-                                        <div class="d-flex w-100 flex-row m-3 justify-content-start">
-                                            <div class="ms-4 mb-0 text-center fs-2 d-flex align-items-center">
-                                                <img src="./assets/logout.svg" alt="" style="width: 30px; height: 30px; transform:rotate(180deg)">
-                                                <p class="ms-2 mb-0  text-center fs-5 d-flex align-items-center">
-                                                    Logout
-                                                </p>
+                                            class="h-100 w-100 bg-transparent border-0 my-0">
+                                            <div class="d-flex w-100 flex-row m-3 justify-content-start">
+                                                <div class="ms-4 mb-0 text-center fs-2 d-flex align-items-center">
+                                                    <img src="./assets/logout.svg" alt=""
+                                                        style="width: 30px; height: 30px; transform:rotate(180deg)">
+                                                    <p class="ms-2 mb-0  text-center fs-5 d-flex align-items-center">
+                                                        Logout
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </button>
+                                        </button>
                                     </form>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -101,15 +105,15 @@
                                         <div class="d-flex w-100" id="fotoPerfil">
                                             <div class="d-flex" id="foto">
                                                 <img src="data:image/png;base64,${user.fotoBase64}" id="fotoImg"
-                                                    class="rounded-pill border border-2"
-                                                    style="object-fit: contain;" alt="">
-                                                <div id="editarImagem">
-                                                    <button id="editImgPen" onclick="showEditImg()">
-                                                        <p class="preto-texto m-0 p-0">
-                                                            <i class="fa-solid fa-pen"></i>
-                                                        </p>
-                                                    </button>
-                                                </div>
+                                                    class="rounded-pill border border-2" style="object-fit: contain;"
+                                                    alt="">
+                                            </div>
+                                            <div id="editarImagem">
+                                                <button id="editImgPen" onclick="showEditImg()">
+                                                    <p class="preto-texto m-0 p-0">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </p>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -207,12 +211,6 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                    crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-                    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-                    crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-                    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
                     crossorigin="anonymous"></script>
                 <script src="./js/perfil.js"></script>
         </body>

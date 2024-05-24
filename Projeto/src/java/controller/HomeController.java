@@ -52,7 +52,7 @@ public class HomeController extends HttpServlet {
         List<Produto> descontos = pDao.listarTodosComDesconto();
         if (descontos.size() > 0) {
             for (int i = 0; i < descontos.size(); i++) {
-                Imagem img = iDao.getFirstImagem(descontos.get(i));
+                Imagem img = iDao.selecionarPrimeiraImagem(descontos.get(i));
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 descontos.get(i).setImagemBase64(imagemBase64);
             }
@@ -60,7 +60,7 @@ public class HomeController extends HttpServlet {
         }
         if (produtos.size() > 0) {
             for (int i = 0; i < produtos.size(); i++) {
-                Imagem img = iDao.getFirstImagem(produtos.get(i));
+                Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 produtos.get(i).setImagemBase64(imagemBase64);
             }
@@ -78,7 +78,7 @@ public class HomeController extends HttpServlet {
             }
         }
         if (idUsuario > 0) {
-            request.setAttribute("user", uDao.getUsuarioById(idUsuario));
+            request.setAttribute("user", uDao.selecionarUsuarioPorId(idUsuario));
         }
         request.setAttribute("categorias", categorias);
 
@@ -100,7 +100,7 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         String url = request.getServletPath();
         if (url.equals("/search")) {
-            String busca = request.getParameter("search");
+            String busca = request.getParameter("busca");
             response.sendRedirect("./search?s=" + busca);
         } else {
             processRequest(request, response);
@@ -131,14 +131,18 @@ public class HomeController extends HttpServlet {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
-                        user = uDao.getUsuarioById(Integer.parseInt(cookie.getValue()));
+                        user = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
                     }
                 }
             }
+            System.out.println(user.getIdUsuario());
             if (user != null) {
-                
+                prod = pDao.selecionarPorId(Integer.parseInt(request.getParameter("addProduto")));
+                cart = cDao.selecionarCarrinho(user);
+                cDao.adicionarProduto(prod, cart);
+                response.sendRedirect("./home");
             } else {
-                
+                response.sendRedirect("./login");
             }
         }
     }
