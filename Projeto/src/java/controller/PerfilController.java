@@ -14,7 +14,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.bean.Usuario;
+import model.dao.ImagemDAO;
 import model.dao.UsuarioDAO;
 
 /**
@@ -23,6 +25,9 @@ import model.dao.UsuarioDAO;
  */
 @MultipartConfig
 public class PerfilController extends HttpServlet {
+
+    UsuarioDAO uDao = new UsuarioDAO();
+    ImagemDAO iDao = new ImagemDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +41,7 @@ public class PerfilController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nextPage = "/WEB-INF/jsp/perfil.jsp";
-        UsuarioDAO uDao = new UsuarioDAO();
+
         Cookie[] cookies = request.getCookies();
         Usuario u = null;
         if (cookies != null) {
@@ -94,23 +99,29 @@ public class PerfilController extends HttpServlet {
                 id = Integer.parseInt(cookie.getValue());
             }
         }
-        UsuarioDAO uDao = new UsuarioDAO();
         Usuario user = uDao.getUsuarioById(id);
         if (url.equals("/updEmail")) {
             user.setEmail(request.getParameter("input-updEmail"));
             System.out.println(user.getEmail());
-            uDao.updateEmail(user.getIdUsuario(), user.getEmail());
+            uDao.updateEmail(user);
             response.sendRedirect("./perfil");
         } else if (url.equals("/updTel")) {
             user.setTelefone(request.getParameter("input-updTel"));
-            uDao.updateTel(user.getIdUsuario(), user.getTelefone());
+            uDao.updateTel(user);
             response.sendRedirect("./perfil");
         } else if (url.equals("/updSenha")) {
             user.setSenha(request.getParameter("input-updSenha"));
-            uDao.updateSenha(user.getIdUsuario(), user.getSenha());
-            response.sendRedirect("./perfil");
+            uDao.updateSenha(user);
+            response.sendRedirect("./perfil");   
         } else if (url.equals("/updImg")) {
-
+            Part filePart = request.getPart("input-updImg");
+            if (filePart != null) {
+                user.setFoto(iDao.partToBytes(filePart));
+                uDao.updateFoto(user);
+            } else {
+                
+            }
+            response.sendRedirect("./perfil");
         } else if (url.equals("/logout")) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("login")) {

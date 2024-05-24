@@ -25,7 +25,7 @@ public class Usuario {
     private String fotoBase64;
 
     public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone, Date dataNasc, int tipo, byte[] foto, String fotoBase64) {
-        this.idUsuario = idUsuario;
+        this.idUsuario = idUsuario; 
         this.nome = nome;
         this.email = email;
         this.senha = senha;
