@@ -79,7 +79,7 @@ public class CarrinhoDAO {
                 c.setIdCarrinho(rs.getInt("idCarrinho"));
                 c.setUsuario(rs.getInt("usuario"));
             }
-            
+
             rs.close();
             stmt.close();
             conexao.close();
@@ -90,12 +90,49 @@ public class CarrinhoDAO {
         return c;
     }
 
+    public void esvaziarCarrinho(Usuario u) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("DELETE FROM carrinhoProduto WHERE carrinho = ?");
+            stmt.setInt(1, u.getIdUsuario());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void adicionarProduto(Produto p, Carrinho c) {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
             stmt = conexao.prepareStatement("INSERT INTO carrinhoproduto (carrinho, produto) VALUES (?, ?)");
+            stmt.setInt(1, c.getIdCarrinho());
+            stmt.setInt(2, p.getIdProduto());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public void removerProduto(Produto p, Carrinho c) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("DELETE FROM carrinhoProduto WHERE carrinho = ? AND produto = ?");
             stmt.setInt(1, c.getIdCarrinho());
             stmt.setInt(2, p.getIdProduto());
 

@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,9 +15,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Imagem;
 import model.bean.Produto;
 import model.bean.Usuario;
 import model.dao.CarrinhoDAO;
+import model.dao.ImagemDAO;
 import model.dao.UsuarioDAO;
 
 /**
@@ -24,6 +27,10 @@ import model.dao.UsuarioDAO;
  * @author João Guilherme
  */
 public class CarrinhoController extends HttpServlet {
+
+    CarrinhoDAO cDao = new CarrinhoDAO();
+    UsuarioDAO uDao = new UsuarioDAO();
+    ImagemDAO iDao = new ImagemDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,23 +43,27 @@ public class CarrinhoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CarrinhoDAO cDao = new CarrinhoDAO();
-        UsuarioDAO uDao = new UsuarioDAO();
-        Cookie[] cookies = request.getCookies();
+
         Usuario u = null;
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                if (!cookies[i].getValue().equals("")) {
-                    u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookies[i].getValue()));
-                }
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
+                u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
             }
         }
-        if ( u == null || u.getIdUsuario() <= 0) {
+        if (u == null || u.getIdUsuario() <= 0) {
             response.sendRedirect("./login");
         } else {
             try {
                 List<Produto> produtos = cDao.lerProdutos(u);
+                Float valorFinal = 0f;
+                for (int i = 0; i < produtos.size(); i++) {
+                    Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
+                    produtos.get(i).setImagemBase64(Base64.getEncoder().encodeToString(img.getImagem()));
+                    valorFinal += produtos.get(i).getValorFinal();
+                }
                 request.setAttribute("produtos", produtos);
+                request.setAttribute("valorFinal", valorFinal);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -92,7 +103,20 @@ public class CarrinhoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        processRequest(request, response);
+        String url = request.getServletPath();
+        Cookie[] cookies = request.getCookies();
+        Usuario u = null;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
+                u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+            }
+        }
+        if (url.equals("/esvaziarCarrinho")) {
+            cDao.esvaziarCarrinho(u);
+            response.sendRedirect("./carrinho");
+        } else if (url.equals("/removerItem")) {
+            
+        }
     }
 
     /**

@@ -1,5 +1,5 @@
 <%-- Document : perfil Created on : 30/04/2024, 14:48:25 Author : João guilherme --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html>
@@ -52,7 +52,7 @@
                                     </button>
                                 </div>
                                 <div class="px-1 my-1">
-                                    <button id="btnPedidos" onclick="verPedidos()"
+                                    <button id="btnPedidos" onclick="window.location='./pedidos'"
                                         class="h-100 w-100 bg-transparent border-0 my-0">
                                         <div class="d-flex w-100 flex-row m-3 justify-content-start">
                                             <div class="ms-4 mb-0 text-center fs-3 d-flex align-items-center">
@@ -100,12 +100,12 @@
                         </div>
                         <div id="areaPrincipal" class="col-8 p-0 border-start branco-fundo">
                             <div class="h-100 w-100">
-                                <div class="d-flex flex-row p-4 mt-4 gx-0 border-bottom" style="height: 256px;">
+                                <div class="d-flex flex-row p-4 mt-4 gx-0 border-bottom" id="div-top">
                                     <div class="w-25">
                                         <div class="d-flex w-100" id="fotoPerfil">
                                             <div class="d-flex" id="foto">
                                                 <img src="data:image/png;base64,${user.fotoBase64}" id="fotoImg"
-                                                    class="rounded-pill border border-2" style="object-fit: contain;"
+                                                    class="rounded-pill border border-2" 
                                                     alt="">
                                             </div>
                                             <div id="editarImagem">
@@ -127,7 +127,7 @@
                                                     ${user.cpf}
                                                 </div>
                                                 <div class="fs-5">
-                                                    ${user.dataNasc}
+                                                   <fmt:formatDate value="${user.dataNasc}" pattern="dd/MM/yyyy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +150,7 @@
                                                     class="updDados d-flex flex-row border border-dark-subtle w-100 ">
                                                     <div class="w-100 ">
                                                         <input type="text" name="input-updEmail" id="input-updEmail"
-                                                            placeholder="${usuario.email}"
+                                                            placeholder="${user.email}"
                                                             class="border-0 w-100 outline-0 inputShadow ps-1" disabled>
                                                     </div>
                                                     <div class="w-auto ">
@@ -169,7 +169,7 @@
                                                     class="updDados d-flex flex-row border border-dark-subtle w-100 ">
                                                     <div class="w-100 ">
                                                         <input type="tel" name="input-updTel" id="input-updTel"
-                                                            placeholder="${usuario.telefone}"
+                                                            placeholder="${user.telefone}"
                                                             class="border-0 w-100 outline-0 inputShadow ps-1" disabled>
                                                     </div>
                                                     <div class="w-auto ">
