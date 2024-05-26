@@ -24,10 +24,10 @@
     flex: 0 0 auto;
     width: 14vw;
     height: 34vh;
-    margin: 4px 10px;
+    margin: 5px;
     border: 1px #cee2e6 solid;
     padding: 3px 5px;
-    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.247)
+    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.3)
 }
 
 .produto-imagem {
@@ -59,6 +59,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;   
 }
 #div-btn {
     width: 100%;
@@ -71,8 +72,9 @@
 .card-btn {
     margin-top: 10px;
     padding: 4px;
+    padding-bottom: 5px;
     width: 45%;
-    height: 50%;
+    height: 60%;
     position: relative;
     bottom: 0;
     text-transform: capitalize;
@@ -83,13 +85,41 @@
     opacity: 1;
     font-size: 0.6rem;
     font-weight: 600;
-}
-
-.card-btn:hover {
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.27);
+    overflow: hidden;
+  }
+  
+  .card-btn span {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    font-size: 0.9rem;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-btn:hover .msg2 {
+    display: flex;
+    font-size: 0.8rem;
+  }
+  
+  .card-btn:hover .msg1 {
+    display: none;
+  }
+  
+  .card-btn .msg2 {
+    display: none;
+  }
+  
+  .card-btn:hover {
     background: #13a343;
     color: #fff;
-    transform: scale(1.10);
-}
+    transform: scale(1.2);
+  }
 
 .produto-info {
     width: 100%;

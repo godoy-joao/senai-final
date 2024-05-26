@@ -40,6 +40,10 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>controller.AdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HistoricoPedidosController</servlet-name>
+        <servlet-class>controller.HistoricoPedidosController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -97,6 +101,10 @@
         <url-pattern>/carrinho</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CarrinhoController</servlet-name>
+        <url-pattern>/esvaziarCarrinho</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProdutoController</servlet-name>
         <url-pattern>/produto</url-pattern>
     </servlet-mapping>
@@ -111,6 +119,10 @@
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/addCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoricoPedidosController</servlet-name>
+        <url-pattern>/pedidos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
