@@ -36,8 +36,8 @@
                                                 </div>
                                                 <div id="header-limpar-div">
                                                     <form action="esvaziarCarrinho" method="post">
-                                                        <button id="header-limpar-btn">Esvaziar <i
-                                                            class="fa-solid fa-trash"></i></button>
+                                                        <button id="header-limpar-btn" type="submit">Esvaziar <i
+                                                                class="fa-solid fa-trash"></i></button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -49,7 +49,8 @@
                                                     </span>
                                                 </div>
                                                 <div id="header-finalizar-div">
-                                                    <button id="header-finalizar-btn">Finalizar pedido</button>
+                                                    <button id="header-finalizar-btn" type="submit">Finalizar
+                                                        pedido</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -65,10 +66,6 @@
                                             <c:otherwise>
                                                 <c:forEach items="${produtos}" var="produto">
                                                     <div class="produto-box" id="box-id-${produto.idProduto}">
-                                                        <div class="div-check">
-                                                            <input type="checkbox" name="adicionar" id="" value="true"
-                                                                class="produto-check">
-                                                        </div>
                                                         <div class="div-img">
                                                             <img src="data:image/png;base64,${produto.imagemBase64}"
                                                                 alt="" class="produto-img">
@@ -77,33 +74,19 @@
                                                             <div class="info-nome">
                                                                 <span class="produto-nome">${produto.nome}</span>
                                                             </div>
-                                                            <div class="info-valor-unit">
-                                                                <span>
-                                                                    Valor unit.:
-                                                                </span>
-                                                                <span class="valor-unit">
+                                                            <div class="info-valor-final">
+                                                                <span class="valor-final">
                                                                     <fmt:formatNumber type="currency"
                                                                         value="${produto.valorFinal}" />
                                                                 </span>
                                                             </div>
                                                             <div class="info-qtd">
-                                                                <label for="qtd-wrapper">Quantidade:</label>
-                                                                <div class="qtd-wrapper">
-                                                                    <button class="qtd-menos qtd-btn">
-                                                                        <i class="fa-solid fa-minus"></i>
+                                                                <form action="adicionar" method="post">
+                                                                    <button class="qtd-btn">
+                                                                        <i class="fa-solid fa-plus me-2"></i>
+                                                                        Adicionar
                                                                     </button>
-                                                                    <span class="produto-qtd">
-                                                                        100
-                                                                    </span>
-                                                                    <button class="qtd-mais qtd-btn">
-                                                                        <i class="fa-solid fa-plus"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="info-valor-final">
-                                                                <span class="valor-final">
-
-                                                                </span>
+                                                                </form>
                                                             </div>
                                                         </div>
 

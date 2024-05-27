@@ -132,7 +132,7 @@ public class CarrinhoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("DELETE FROM carrinhoProduto WHERE carrinho = ? AND produto = ?");
+            stmt = conexao.prepareStatement("DELETE FROM carrinhoProduto WHERE carrinho = ? AND produto = ? LIMIT 1");
             stmt.setInt(1, c.getIdCarrinho());
             stmt.setInt(2, p.getIdProduto());
 

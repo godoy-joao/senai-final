@@ -122,18 +122,6 @@ main {
     height: 180px !important;
 }
 
-.div-check {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 3px;
-}
-
-.div-check input {
-    width: 1.2rem;
-    height: 1.2rem;
-}
-
 .produto-img {
     object-fit: contain;
     max-width: 100%;
@@ -141,6 +129,7 @@ main {
 }
 
 .div-img {
+    margin-left: 15px;
     width: 20%;
     height: 100%;
     display: flex;
@@ -162,17 +151,25 @@ main {
     line-height: 1.2rem;
 }
 
-.info-valor-unit span {
-    font-size: 1.15rem;
+.info-valor-final span {
+    font-size: 1.30rem;
+    color: #ff9100;
+    font-weight: 600;
 }
 
+
 .info-qtd {
-    margin-top: 4px;
-    width: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 30%;
     display: flex;
     flex-direction: row;
     gap: 3px;
+    padding-bottom: 5px;
+    
 }
+
+
 
 .info-qtd label {
     font-size: 1.15rem;
@@ -184,33 +181,21 @@ main {
     gap: 0;
     border: 1px #008cff solid;
 }
-.qtd-wrapper span {
-    font-size: 1.1rem;
-    font-weight: 600;
-    width: 2rem;
-    height: 1.6rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .qtd-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3px 0;
-    width: 1.6rem;
-    height: 1.6rem;
+    padding: 3px 4px;
+    width: 32%;
+    height: 1.8rem;
     border: none;
     color: white;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    background-color: #004de6d7;
+    background-color: #2e68db;
 }
 .qtd-btn:active {
     background-color: #0046d3;
-}
-.qtd-menos svg{
-    margin-top: 2px;
 }
 
 .div-remover-produto {
@@ -225,8 +210,10 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 26px;
     padding: 0;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
 }
