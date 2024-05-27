@@ -105,6 +105,10 @@
         <url-pattern>/esvaziarCarrinho</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CarrinhoController</servlet-name>
+        <url-pattern>/removerItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProdutoController</servlet-name>
         <url-pattern>/produto</url-pattern>
     </servlet-mapping>

@@ -27,12 +27,18 @@
                             <div class="w-100" id="lateral-divisor"></div>
                             <label for="checkbox-group">Selecionar categoria:</label>
                             <div id="checkbox-group" class="d-flex flex-column">
-                                <c:if test="${categorias.size() > 0}">
+                                <form action="search" method="get">
                                     <c:forEach items="${categorias}" var="categoria">
-                                        <input type="checkbox" name="" id="checkbox-${categoria.nome}">
-                                        <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
+                                        <div class="d-flex flex-row checkbox-div">
+                                            <input type="checkbox" name="c" class="input-check" value="${categoria.idCategoria}" id="checkbox-${categoria.nome}">
+                                            <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
+                                        </div>                                        
                                     </c:forEach>
-                                </c:if>
+                                    <div class="w-100 d-flex justify-content-center">
+                                        <button type="submit" id="aplicar-categorias">Aplicar</button>
+                                    </div>                 
+                                </form>
+                                
                             </div>
                         </div>
                         <div id="result-body">
@@ -43,15 +49,20 @@
                                             <div class="produto-imagem">
                                                 <c:if test="${produto.desconto > 0.0}">
                                                     <span class="tag-desconto">
-                                                        -<fmt:formatNumber type="currency" value="${produto.desconto}" />
+                                                        -
+                                                        <fmt:formatNumber type="currency" value="${produto.desconto}" />
                                                     </span>
                                                 </c:if>
                                                 <img src="data:image/png;base64,${produto.imagemBase64}"
                                                     class="produto-capa" alt="">
                                             </div>
                                             <div class="produto-info">
+                                                <div class="div-nome">
+                                                    <span class="produto-nome">
+                                                        ${produto.nome}
+                                                    </span>
+                                                </div>
                                                 <div id="div-valor">
-
                                                     <span class="valor">
                                                         <c:if test="${produto.valor != produto.valorFinal}">
                                                             <fmt:formatNumber type="currency"
