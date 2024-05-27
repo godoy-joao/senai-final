@@ -35,8 +35,10 @@
                                                     <span id="header-titulo">Carrinho</span>
                                                 </div>
                                                 <div id="header-limpar-div">
-                                                    <button id="header-limpar-btn">Esvaziar <i
+                                                    <form action="esvaziarCarrinho" method="post">
+                                                        <button id="header-limpar-btn">Esvaziar <i
                                                             class="fa-solid fa-trash"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="header-separador">
@@ -85,29 +87,33 @@
                                                                 </span>
                                                             </div>
                                                             <div class="info-qtd">
+                                                                <label for="qtd-wrapper">Quantidade:</label>
                                                                 <div class="qtd-wrapper">
                                                                     <button class="qtd-menos qtd-btn">
-                                                                        -
+                                                                        <i class="fa-solid fa-minus"></i>
                                                                     </button>
                                                                     <span class="produto-qtd">
-
+                                                                        100
                                                                     </span>
                                                                     <button class="qtd-mais qtd-btn">
-                                                                        +
+                                                                        <i class="fa-solid fa-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                             <div class="info-valor-final">
                                                                 <span class="valor-final">
-                                                                    
+
                                                                 </span>
                                                             </div>
                                                         </div>
 
                                                         <div class="div-remover-produto">
-                                                            <button>
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
+                                                            <form action="removerItem" method="post">
+                                                                <button type="submit" name="item"
+                                                                    value="${produto.idProduto}">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </c:forEach>

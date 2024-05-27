@@ -7,6 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.bean.Imagem;
 import model.bean.Produto;
+import model.dao.CategoriaDAO;
 import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
 
@@ -24,6 +27,10 @@ import model.dao.ProdutoDAO;
  * @author João Guilherme
  */
 public class SearchController extends HttpServlet {
+
+    ProdutoDAO pdao = new ProdutoDAO();
+    ImagemDAO iDao = new ImagemDAO();
+    CategoriaDAO cDao = new CategoriaDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,25 +43,24 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProdutoDAO pdao = new ProdutoDAO();
-        ImagemDAO iDao = new ImagemDAO();
+
         String busca = request.getParameter("s");
         List<Produto> produtos = null;
-        if (busca.equals("")) {
+        if (busca == null || busca.equals("")) {
             produtos = pdao.listarTodos();
         } else {
-            busca = "%" + busca + "%";
-            produtos = pdao.listarPorPesquisa(busca);
+
         }
         if (produtos.size() > 0) {
             for (int i = 0; i < produtos.size(); i++) {
                 Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
                 String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
                 produtos.get(i).setImagemBase64(imagemBase64);
-               
+
             }
         }
         request.setAttribute("produtos", produtos);
+        request.setAttribute("categorias", cDao.listarTodos());
         String nextPage = "/WEB-INF/jsp/search.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
@@ -72,7 +78,27 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String[] cat = request.getParameterValues("c");
+        List<Produto> produtos = null;
+        List<String> categorias = new ArrayList();
+        if (cat != null) {
+            categorias.addAll(Arrays.asList(cat));
+        }
+        String busca = request.getParameter("s");
+        produtos = pdao.listarPorPesquisaCategoria(busca, categorias);
+        if (produtos.size() > 0) {
+            for (int i = 0; i < produtos.size(); i++) {
+                Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
+                String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
+                produtos.get(i).setImagemBase64(imagemBase64);
+            }
+        }
+        request.setAttribute("produtos", produtos);
+        request.setAttribute("categorias", cDao.listarTodos());
+        String nextPage = "/WEB-INF/jsp/search.jsp";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+        dispatcher.forward(request, response);
+
     }
 
     /**

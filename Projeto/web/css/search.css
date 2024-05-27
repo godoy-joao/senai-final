@@ -10,20 +10,65 @@
     width: 20vw;
     border-right: 1px #cee2e6 solid;
     z-index: 100;
+    font-size: 30px;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
-#result-body{
+.checkbox-div {
+    width: 100%;
+    height: 2rem;
+    padding-left: 20px;
+    align-items: center;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.input-check {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 5px;
+    border: 1px rgb(114, 114, 114) solid;
+}
+
+#checkbox-group {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+#aplicar-categorias {
+    margin-top: 30px;
+    padding: 5px 7px;
+    border: none;
+    width: 30%;
+    background-color: #008cff;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.27);
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(39, 41, 43);
+}
+
+#aplicar-categorias:active {
+    background-color: #004ce6;
+    color: white;
+}
+
+#result-body {
     position: absolute;
     right: 0;
     margin-left: 5vw;
     margin-top: 7vh;
-    max-width: 70vw;
+    width: 75vw;
+    max-width: 75vw;
 }
 
 .produto-card {
     flex: 0 0 auto;
     width: 14vw;
-    height: 34vh;
+    min-width: 260px;
+    height: 40vh;
     margin: 5px;
     border: 1px #cee2e6 solid;
     padding: 3px 5px;
@@ -33,7 +78,7 @@
 .produto-imagem {
     position: relative;
     width: 100%;
-    height: 50%;
+    height: 40%;
     overflow: hidden;
     padding: 2px 1px;
 }
@@ -59,8 +104,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;   
+    justify-content: center;
 }
+
 #div-btn {
     width: 100%;
     display: flex;
@@ -87,9 +133,9 @@
     font-weight: 600;
     box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.27);
     overflow: hidden;
-  }
-  
-  .card-btn span {
+}
+
+.card-btn span {
     position: absolute;
     left: 0%;
     top: 0%;
@@ -100,30 +146,30 @@
     justify-content: center;
     display: flex;
     align-items: center;
-  }
-  
-  .card-btn:hover .msg2 {
+}
+
+.card-btn:hover .msg2 {
     display: flex;
     font-size: 0.8rem;
-  }
-  
-  .card-btn:hover .msg1 {
+}
+
+.card-btn:hover .msg1 {
     display: none;
-  }
-  
-  .card-btn .msg2 {
+}
+
+.card-btn .msg2 {
     display: none;
-  }
-  
-  .card-btn:hover {
+}
+
+.card-btn:hover {
     background: #13a343;
     color: #fff;
     transform: scale(1.2);
-  }
+}
 
 .produto-info {
     width: 100%;
-    height: 50%;
+    height: 60%;
     padding-top: 10px;
     display: flex;
     flex-direction: column;
@@ -132,7 +178,24 @@
 }
 
 .produto-info div {
-    height: 50%;
+    height: 33.33%;
+}
+
+.div-nome {
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.produto-nome {
+    display: flex;
+    line-height: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    max-height: 100%;
+    max-width: 100%;
+    text-align: center;
 }
 
 .produto-descricao {

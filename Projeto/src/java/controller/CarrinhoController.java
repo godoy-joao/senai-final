@@ -20,6 +20,7 @@ import model.bean.Produto;
 import model.bean.Usuario;
 import model.dao.CarrinhoDAO;
 import model.dao.ImagemDAO;
+import model.dao.ProdutoDAO;
 import model.dao.UsuarioDAO;
 
 /**
@@ -31,6 +32,7 @@ public class CarrinhoController extends HttpServlet {
     CarrinhoDAO cDao = new CarrinhoDAO();
     UsuarioDAO uDao = new UsuarioDAO();
     ImagemDAO iDao = new ImagemDAO();
+    ProdutoDAO pDao = new ProdutoDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -115,7 +117,8 @@ public class CarrinhoController extends HttpServlet {
             cDao.esvaziarCarrinho(u);
             response.sendRedirect("./carrinho");
         } else if (url.equals("/removerItem")) {
-            
+            cDao.removerProduto(pDao.selecionarPorId(Integer.parseInt(request.getParameter("item"))), cDao.selecionarCarrinho(u));
+            response.sendRedirect("./carrinho");
         }
     }
 

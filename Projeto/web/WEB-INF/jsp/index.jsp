@@ -25,10 +25,10 @@
 
                 <body class="overflow-x-hidden">
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
-                        <main>
-                            <div class="bg-primary px-5">
+                        <main class="bg-primary pt-5">
+                            <div class="px-5">
                                 <div class="px-5">
-                                    <div id="carroselHeader" class="carousel slide">
+                                    <div id="carroselHeader" class="carousel slide mb-5">
                                         <div class="carousel-indicators">
                                             <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="0"
                                                 class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="produtos-main" class="bg-primary">
+                            <div id="produtos-main">
                                 <div id="main-container" class="bg-light w-100 h-100">
                                     <div class="container-carrosel">
                                         <p class="h3">Descontos</p>
@@ -77,14 +77,20 @@
                                                             <div class="produto-card">
                                                                 <div class="produto-imagem">
                                                                     <span class="tag-desconto">
-                                                                        -<fmt:formatNumber type="currency"
+                                                                        -
+                                                                        <fmt:formatNumber type="currency"
                                                                             value="${produto.desconto}" />
                                                                     </span>
                                                                     <img src="data:image/png;base64,${produto.imagemBase64}"
                                                                         class="produto-capa" alt="">
                                                                 </div>
                                                                 <div class="produto-info">
-                                                                    <div id="div-valor">
+                                                                    <div class="div-nome">
+                                                                        <span class="produto-nome">
+                                                                            ${produto.nome}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="div-valor">
                                                                         <span class="valor">
                                                                             <c:if
                                                                                 test="${produto.valor != produto.valorFinal}">
@@ -97,7 +103,7 @@
                                                                                 value="${produto.valorFinal}" />
                                                                         </span>
                                                                     </div>
-                                                                    <div id="div-btn">
+                                                                    <div class="div-btn">
                                                                         <form action="sendToCart" method="post"
                                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
                                                                             <button type="submit"
@@ -133,7 +139,8 @@
                                                                     <c:if test="${produto.desconto > 0}">
 
                                                                         <span class="tag-desconto">
-                                                                            -<fmt:formatNumber type="currency"
+                                                                            -
+                                                                            <fmt:formatNumber type="currency"
                                                                                 value="${produto.desconto}" />
                                                                         </span>
                                                                     </c:if>
@@ -141,7 +148,12 @@
                                                                         class="produto-capa" alt="">
                                                                 </div>
                                                                 <div class="produto-info">
-                                                                    <div id="div-valor">
+                                                                    <div class="div-nome">
+                                                                        <span class="produto-nome">
+                                                                            ${produto.nome}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="div-valor">
                                                                         <span class="valor">
                                                                             <c:if
                                                                                 test="${produto.valor != produto.valorFinal}">
@@ -154,7 +166,7 @@
                                                                                 value="${produto.valorFinal}" />
                                                                         </span>
                                                                     </div>
-                                                                    <div id="div-btn">
+                                                                    <div class="div-btn">
                                                                         <form action="sendToCart" method="post"
                                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
                                                                             <button type="submit"

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.bean.Categoria;
 import model.bean.Produto;
 
@@ -156,6 +157,59 @@ public class ProdutoDAO {
         return produtos;
     }
 
+    public List<Produto> listarPorPesquisaCategoria(String busca, List<String> categorias) {
+        List<Produto> produtos = new ArrayList();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            String distinct = "";
+            if (categorias != null) {
+                distinct = "DISTINCT";
+            }
+            if (busca == null) {
+                busca = "";
+            }
+            busca = "%" + busca + "%";
+            String sql = "SELECT "+distinct+" p.* FROM produto AS p JOIN produtocategoria AS pc ON p.idProduto = pc.produto JOIN categoria AS c ON pc.categoria = c.idCategoria WHERE p.nome LIKE ?";
+            if (categorias != null) {
+                for (int i = 0; i < categorias.size(); i++) {
+                    if (i == 0) {
+                      sql += " AND c.idCategoria = ?";  
+                    } else {
+                         sql += " OR c.idCategoria = ?";
+                    }
+                   
+                }  
+            }
+            stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, busca);
+            if (categorias != null) {
+                for (int i = 0; i < categorias.size(); i++) {
+                    stmt.setInt(2 + i, Integer.parseInt(categorias.get(i)));
+                }
+            }
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setIdProduto(rs.getInt("idProduto"));
+                p.setNome(rs.getString("nome"));
+                p.setValor(rs.getFloat("valor"));
+                p.setDesconto(rs.getFloat("desconto"));
+                p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
+                produtos.add(p);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produtos;
+    }
+
     public List<Produto> listarPorPesquisa(String search) {
         List<Produto> produtos = new ArrayList();
         try {
@@ -253,23 +307,23 @@ public class ProdutoDAO {
 
         return produtos;
     }
-    
+
     public int adicionarCategoria(int produto, int categoria) {
         int totalCategorias = -1;
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            
+
             stmt = conexao.prepareStatement("INSERT INTO produtoCategoria (produto, categoria) VALUES (?, ?)");
             stmt.setInt(1, produto);
             stmt.setInt(2, categoria);
-            
+
             stmt.executeUpdate();
-            
+
             stmt = conexao.prepareStatement("SELECT * FROM produtoCategoria WHERE produto = ?");
             stmt.setInt(1, produto);
-            
+
             rs = stmt.executeQuery();
             while (rs.next()) {
                 if (!(totalCategorias == -1)) {
@@ -278,12 +332,12 @@ public class ProdutoDAO {
                     totalCategorias = 1;
                 }
             }
-            
+
             rs.close();
             stmt.close();
             conexao.close();
-            
-        } catch(SQLException e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return totalCategorias;
