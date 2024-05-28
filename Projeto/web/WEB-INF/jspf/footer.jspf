@@ -1,0 +1,36 @@
+<%-- any content can be specified here e.g.: --%>
+    <%@ page pageEncoding="UTF-8" %>
+        <footer>
+            <div id="footer-container">
+                <div class="lateral">
+                    <div class="footer-titulo">
+                        Está com problemas? Envie um e-mail para:
+                    </div>
+                    <div>
+                        joaoguilherme-est@hotmail.com
+                    </div>
+                </div>
+                <div class="lateral">
+                    <div class="footer-titulo">
+                        Acompanhe nossas promoções e novidades!
+                    </div>
+                    <div id="footer-icones">
+                        <div class="div-icones">
+                            <a href="https://instagram.com">
+                                <img src="./assets/icon-instagram.png" alt="">
+                            </a>
+                        </div>
+                        <div class="div-icones">
+                            <a href="https://twitter.com">
+                                <img src="./assets/icon-x.png" alt="">
+                            </a>
+                        </div>
+                        <div class="div-icones">
+                            <a href="https://youtube.com">
+                                <img src="./assets/icon-youtube.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>

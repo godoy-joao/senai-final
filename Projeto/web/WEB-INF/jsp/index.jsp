@@ -179,7 +179,7 @@
                                                                             </button>
                                                                         </form>
                                                                     </div>
-                                                                </div>
+                                                                </div> 
                                                             </div>
                                                         </c:forEach>
                                                     </c:if>
