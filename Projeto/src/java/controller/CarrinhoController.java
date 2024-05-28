@@ -119,6 +119,9 @@ public class CarrinhoController extends HttpServlet {
         } else if (url.equals("/removerItem")) {
             cDao.removerProduto(pDao.selecionarPorId(Integer.parseInt(request.getParameter("item"))), cDao.selecionarCarrinho(u));
             response.sendRedirect("./carrinho");
+        } else if (url.equals("/adicionarItem")) {
+            cDao.adicionarProduto(pDao.selecionarPorId(Integer.parseInt(request.getParameter("item"))), cDao.selecionarCarrinho(u));
+            response.sendRedirect("./carrinho");
         }
     }
 

@@ -81,8 +81,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="info-qtd">
-                                                                <form action="adicionar" method="post">
-                                                                    <button class="qtd-btn">
+                                                                <form action="adicionarItem" method="post">
+                                                                    <button class="qtd-btn" name="item" type="submit" value="${produto.idProduto}">
                                                                         <i class="fa-solid fa-plus me-2"></i>
                                                                         Adicionar
                                                                     </button>
