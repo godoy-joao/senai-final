@@ -56,22 +56,26 @@
     background-color: #004ce6;
     color: white;
 }
+#result-container {
+    padding-left: 25vw;
+    padding-right: 4vw;
+    padding-top: 7vh;
+    padding-bottom: 10vh;
+    width: 100%;
+}
 
 #result-body {
     position: relative;
     right: 0%;
     min-height: 93vh;
-    margin-left: 25vw;
-    margin-right: 4vw;
-    margin-top: 7vh;
     width: 70vw;
-    padding: 3vw 4vw;
+    padding: 5% 5%;
 }
 
 .produto-card {
     flex: 0 0 auto;
-    width: 15vw;
-    min-width: 260px;
+    width: 23%;
+    max-width: 25%;
     height: 40vh;
     margin: 5px;
     border: 1px #cee2e6 solid;

@@ -6,7 +6,8 @@
                 <html>
 
                 <head>
-                    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
+                    <meta http-equiv="Content-Type" name="viewport"
+                        content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
                         rel="stylesheet"
                         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -22,28 +23,29 @@
 
                 <body class="overflow-x-hidden azul-fundo-3">
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
-                  
-                            <div id="side-bar" class="branco-fundo">
-                                <div class="w-100" id="lateral-divisor"></div>
-                                <label for="checkbox-group">Selecionar categoria:</label>
-                                <div id="checkbox-group" class="d-flex flex-column">
-                                    <form action="search" method="get">
-                                        <c:forEach items="${categorias}" var="categoria">
-                                            <div class="d-flex flex-row checkbox-div">
-                                                <input type="checkbox" name="c" class="input-check"
-                                                    value="${categoria.idCategoria}" id="checkbox-${categoria.nome}">
-                                                <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
-                                            </div>
-                                        </c:forEach>
-                                        <div class="w-100 d-flex justify-content-center">
-                                            <button type="submit" id="aplicar-categorias">Aplicar</button>
-                                        </div>
-                                    </form>
 
-                                </div>
+                        <div id="side-bar" class="branco-fundo">
+                            <div class="w-100" id="lateral-divisor"></div>
+                            <label for="checkbox-group">Selecionar categoria:</label>
+                            <div id="checkbox-group" class="d-flex flex-column">
+                                <form action="search" method="get">
+                                    <c:forEach items="${categorias}" var="categoria">
+                                        <div class="d-flex flex-row checkbox-div">
+                                            <input type="checkbox" name="c" class="input-check"
+                                                value="${categoria.idCategoria}" id="checkbox-${categoria.nome}">
+                                            <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
+                                        </div>
+                                    </c:forEach>
+                                    <div class="w-100 d-flex justify-content-center">
+                                        <button type="submit" id="aplicar-categorias">Aplicar</button>
+                                    </div>
+                                </form>
+
                             </div>
+                        </div>
+                        <div id="result-container">
                             <div id="result-body" class="branco-fundo">
-                                <div class="row gx-0">
+                                <div class="row justify-content-center gx-0">
                                     <c:if test="${produtos.size() > 0}">
                                         <c:forEach items="${produtos}" var="produto">
                                             <div class="produto-card">
@@ -94,10 +96,11 @@
                                     </c:if>
                                 </div>
                             </div>
-                            <%@ include file="/WEB-INF/jspf/footer.jspf" %>
-                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                            crossorigin="anonymous"></script>
+                        </div>
+                        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                                crossorigin="anonymous"></script>
                 </body>
 
                 </html>

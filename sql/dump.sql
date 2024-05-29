@@ -113,6 +113,8 @@ CREATE TABLE `endereco` (
   `rua` varchar(100) NOT NULL,
   `numero` varchar(10) NOT NULL,
   `complemento` varchar(100) DEFAULT NULL,
+  `usuario` int DEFAULT NULL,
+  CONSTRAINT `enderecousuario_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`idUsuario`),
   PRIMARY KEY (`idEndereco`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
