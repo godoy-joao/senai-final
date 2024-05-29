@@ -15,17 +15,17 @@
                         Acompanhe nossas promoções e novidades!
                     </div>
                     <div id="footer-icones">
-                        <div class="div-icones">
+                        <div class="div-icones" id="icon-instagram">
                             <a href="https://instagram.com">
                                 <img src="./assets/icon-instagram.png" alt="">
                             </a>
                         </div>
-                        <div class="div-icones">
+                        <div class="div-icones" id="icon-x">
                             <a href="https://twitter.com">
                                 <img src="./assets/icon-x.png" alt="">
                             </a>
                         </div>
-                        <div class="div-icones">
+                        <div class="div-icones" id="icon-youtube">
                             <a href="https://youtube.com">
                                 <img src="./assets/icon-youtube.png" alt="">
                             </a>

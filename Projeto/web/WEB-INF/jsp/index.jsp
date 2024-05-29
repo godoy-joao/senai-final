@@ -18,13 +18,13 @@
                         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
                         crossorigin="anonymous"></script>
                     <link rel="stylesheet" href="./css/index.css">
-                    <link rel="stylesheet" href="./css/header.css">
                     <link rel="stylesheet" href="./css/base.css">
                     <link rel="stylesheet" href="./css/slider.css">
                 </head>
 
                 <body class="overflow-x-hidden">
-                    <%@ include file="/WEB-INF/jspf/header.jspf" %>
+                  
+                    
                         <main class="bg-primary pt-5">
                             <div class="px-5">
                                 <div class="px-5">
