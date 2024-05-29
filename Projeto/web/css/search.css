@@ -4,16 +4,18 @@
     height: 25vh;
 }
 
-#side-bar {
-    position: absolute;
+#side-bar {  
+    position: fixed;
     height: 100%;
     width: 20vw;
+    top: 0;
     border-right: 1px #cee2e6 solid;
-    z-index: 100;
+    z-index: 999;
     font-size: 30px;
     font-weight: 600;
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 100px;
+    left: 0;
 }
 
 .checkbox-div {
@@ -56,17 +58,19 @@
 }
 
 #result-body {
-    position: absolute;
-    right: 0;
-    margin-left: 5vw;
+    position: relative;
+    right: 0%;
+    min-height: 93vh;
+    margin-left: 25vw;
+    margin-right: 4vw;
     margin-top: 7vh;
-    width: 75vw;
-    max-width: 75vw;
+    width: 70vw;
+    padding: 3vw 4vw;
 }
 
 .produto-card {
     flex: 0 0 auto;
-    width: 14vw;
+    width: 15vw;
     min-width: 260px;
     height: 40vh;
     margin: 5px;

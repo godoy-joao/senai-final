@@ -135,14 +135,13 @@ public class HomeController extends HttpServlet {
                     }
                 }
             }
-            System.out.println(user.getIdUsuario());
-            if (user != null) {
+            if (user == null || user.getIdUsuario() == 0) {
+                response.sendRedirect("./login");        
+            } else {
                 prod = pDao.selecionarPorId(Integer.parseInt(request.getParameter("addProduto")));
                 cart = cDao.selecionarCarrinho(user);
                 cDao.adicionarProduto(prod, cart);
                 response.sendRedirect("./home");
-            } else {
-                response.sendRedirect("./login");
             }
         }
     }
