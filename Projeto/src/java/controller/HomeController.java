@@ -32,6 +32,12 @@ import model.dao.UsuarioDAO;
  */
 public class HomeController extends HttpServlet {
 
+    CategoriaDAO cDao = new CategoriaDAO();
+    ImagemDAO iDao = new ImagemDAO();
+    ProdutoDAO pDao = new ProdutoDAO();
+    UsuarioDAO uDao = new UsuarioDAO();
+    CarrinhoDAO cartDao = new CarrinhoDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,11 +50,8 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nextPage = "/WEB-INF/jsp/index.jsp";
-        CategoriaDAO cDao = new CategoriaDAO();
         List<Categoria> categorias = cDao.listarTodos();
-        ProdutoDAO pDao = new ProdutoDAO();
         List<Produto> produtos = pDao.listarTodos();
-        ImagemDAO iDao = new ImagemDAO();
         List<Produto> descontos = pDao.listarTodosComDesconto();
         if (descontos.size() > 0) {
             for (int i = 0; i < descontos.size(); i++) {
@@ -66,8 +69,6 @@ public class HomeController extends HttpServlet {
             }
             request.setAttribute("produtos", produtos);
         }
-
-        UsuarioDAO uDao = new UsuarioDAO();
         Cookie[] cookies = request.getCookies();
         int idUsuario = 0;
         if (cookies != null) {
@@ -81,7 +82,6 @@ public class HomeController extends HttpServlet {
             request.setAttribute("user", uDao.selecionarUsuarioPorId(idUsuario));
         }
         request.setAttribute("categorias", categorias);
-
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
     }
@@ -121,11 +121,7 @@ public class HomeController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         Cookie[] cookies = request.getCookies();
         Usuario user = new Usuario();
-        Carrinho cart = new Carrinho();
-        UsuarioDAO uDao = new UsuarioDAO();
-        CarrinhoDAO cDao = new CarrinhoDAO();
-        Produto prod = new Produto();
-        ProdutoDAO pDao = new ProdutoDAO();
+
         String url = request.getServletPath();
         if (url.equals("/sendToCart")) {
             if (cookies != null) {
@@ -136,11 +132,11 @@ public class HomeController extends HttpServlet {
                 }
             }
             if (user == null || user.getIdUsuario() == 0) {
-                response.sendRedirect("./login");        
+                response.sendRedirect("./login");
             } else {
-                prod = pDao.selecionarPorId(Integer.parseInt(request.getParameter("addProduto")));
-                cart = cDao.selecionarCarrinho(user);
-                cDao.adicionarProduto(prod, cart);
+                Produto prod = pDao.selecionarPorId(Integer.parseInt(request.getParameter("addProduto")));
+                Carrinho cart = cartDao.selecionarCarrinho(user);
+                cartDao.adicionarProduto(prod, cart);
                 response.sendRedirect("./home");
             }
         }

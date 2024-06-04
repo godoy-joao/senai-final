@@ -87,7 +87,7 @@ public class LoginController extends HttpServlet {
                     if (!cookieExiste) {
                         Cookie cookieLogin = new Cookie("login", Integer.toString(uDAO.logar(usuario)));
                         response.addCookie(cookieLogin);
-                    }                
+                    }
                     response.sendRedirect("./home");
                 } else {
                     request.setAttribute("errorMessage", "Usuário ou senha inválidos");
@@ -100,7 +100,6 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("errorMessage", "Usuário ou senha inválidos");
             }
         } else if (url.equals("/signup")) {
-            String nextPage = "/WEB-INF/jsp/login.jsp";
             Usuario u = new Usuario();
             UsuarioDAO uDAO = new UsuarioDAO();
             u.setNome(request.getParameter("nome"));
