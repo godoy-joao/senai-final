@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.bean.Categoria;
+import model.bean.Produto;
 
 /**
  *
@@ -73,6 +74,33 @@ public class CategoriaDAO {
 
         }
         return categorias;
+    }
+
+    public List<Categoria> listarCategoriasDoProduto(Produto p) {
+        List<Categoria> categorias = new ArrayList();
+
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = conexao.prepareStatement("SELECT c.* FROM categoria AS c JOIN produtocategoria AS pc ON c.idCategoria = pc.categoria JOIN produto AS p ON pc.produto = p.idProduto WHERE p.idProduto = ?");
+            stmt.setInt(1, p.getIdProduto());
+            
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Categoria c = new Categoria();
+                c.setIdCategoria(rs.getInt("idCategoria"));
+                c.setNome(rs.getString("nome"));
+                c.setCapa(rs.getBytes("capa"));
+                categorias.add(c);
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categorias;
+
     }
 
     public Categoria selecionarPorId(int id) {

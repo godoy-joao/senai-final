@@ -27,9 +27,8 @@
 .produto-card {
   flex: 0 0 auto;
   width: 14vw;
-  width: 14vw;
   min-width: 260px;
-  height: 40vh;
+  height: 35vh;
   margin: 5px;
   border: 1px #cee2e6 solid;
   padding: 3px 5px;
@@ -39,9 +38,10 @@
 .produto-imagem {
   position: relative;
   width: 100%;
-  height: 40%;
+  height: 50%;
   overflow: hidden;
   padding: 2px 1px;
+  border-bottom: 1px #cee2e6 solid;
 }
 
 .produto-capa {
@@ -130,8 +130,7 @@
 
 .produto-info {
   width: 100%;
-  height: 60%;
-  padding-top: 10px;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,7 +138,7 @@
 }
 
 .produto-info div {
-  height: 33.33%;
+  height: 30%;
 }
 
 .div-nome {
@@ -181,7 +180,7 @@
 .pre-btn,
 .nxt-btn {
   border: none;
-  width: 10vw;
+  width: 7vw;
   height: 100%;
   position: absolute;
   top: 0;

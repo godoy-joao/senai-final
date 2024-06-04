@@ -7,7 +7,7 @@ main {
 
 #carrinho-container {
     height: 75vh;
-    width: 70vw; 
+    width: 70vw;
     margin-left: 15vw;
     margin-right: 15vw;
     display: flex;
@@ -119,8 +119,8 @@ main {
 .produto-box {
     position: relative;
     display: flex;
-    border: 2px #cee2e6 solid;
-    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
+    border: 2px #b8cace solid;
+    box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.4);
     padding: 3px 5px;
     width: 100%;
     min-height: 180px;
@@ -162,7 +162,6 @@ main {
     font-weight: 600;
 }
 
-
 .info-qtd {
     position: absolute;
     bottom: 10%;
@@ -171,21 +170,20 @@ main {
     flex-direction: row;
     gap: 3px;
     padding-bottom: 5px;
-    
+
 }
-
-
 
 .info-qtd label {
     font-size: 1.15rem;
 }
 
-.qtd-wrapper {    
+.qtd-wrapper {
     display: flex;
     flex-direction: row;
     gap: 0;
     border: 1px #008cff solid;
 }
+
 .qtd-btn {
     display: flex;
     align-items: center;
@@ -199,6 +197,7 @@ main {
     font-weight: 600;
     background-color: #2e68db;
 }
+
 .qtd-btn:active {
     background-color: #0046d3;
 }
