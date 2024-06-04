@@ -31,9 +31,12 @@ public class ProdutoDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            stmt = conexao.prepareStatement("SELECT * FROM produto ORDER BY dataRegistro LIMIT ?");
-            stmt.setInt(1, quantidade);
-
+            if (quantidade > 0) {
+                stmt = conexao.prepareStatement("SELECT * FROM produto ORDER BY dataRegistro LIMIT ?");
+                stmt.setInt(1, quantidade);
+            } else {
+                stmt = conexao.prepareStatement("SELECT * FROM produto ORDER BY dataRegistro");
+            }
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -163,7 +166,7 @@ public class ProdutoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            
+
             String distinct = "";
             if (categorias != null) {
                 distinct = "DISTINCT";
@@ -172,16 +175,16 @@ public class ProdutoDAO {
                 busca = "";
             }
             busca = "%" + busca + "%";
-            String sql = "SELECT "+distinct+" p.* FROM produto AS p JOIN produtocategoria AS pc ON p.idProduto = pc.produto JOIN categoria AS c ON pc.categoria = c.idCategoria WHERE p.nome LIKE ?";
+            String sql = "SELECT " + distinct + " p.* FROM produto AS p JOIN produtocategoria AS pc ON p.idProduto = pc.produto JOIN categoria AS c ON pc.categoria = c.idCategoria WHERE p.nome LIKE ?";
             if (categorias != null) {
                 for (int i = 0; i < categorias.size(); i++) {
                     if (i == 0) {
-                      sql += " AND c.idCategoria = ?";  
+                        sql += " AND c.idCategoria = ?";
                     } else {
-                         sql += " OR c.idCategoria = ?";
+                        sql += " OR c.idCategoria = ?";
                     }
-                   
-                }  
+
+                }
             }
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, busca);

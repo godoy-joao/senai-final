@@ -22,7 +22,7 @@ public class Usuario {
     private Date dataNasc;
     private int tipo;
     private byte[] foto;
-    private String fotoBase64;
+    private String fotoBase64; 
 
     public Usuario(int idUsuario, String nome, String email, String senha, String cpf, String telefone, Date dataNasc, int tipo, byte[] foto, String fotoBase64) {
         this.idUsuario = idUsuario; 

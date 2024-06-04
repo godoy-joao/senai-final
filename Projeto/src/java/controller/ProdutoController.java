@@ -6,14 +6,22 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Categoria;
 import model.bean.Produto;
+import model.bean.Imagem;
+import model.bean.Usuario;
+import model.dao.CategoriaDAO;
+import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
-
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -33,11 +41,29 @@ public class ProdutoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProdutoDAO pDao = new ProdutoDAO();
+        ImagemDAO iDao = new ImagemDAO();
+        CategoriaDAO cDao = new CategoriaDAO();
+        UsuarioDAO uDao = new UsuarioDAO();
         Produto produto = pDao.selecionarPorId(Integer.parseInt(request.getParameter("id")));
+        produto.setImagemBase64(Base64.getEncoder().encodeToString(iDao.selecionarPrimeiraImagem(produto).getImagem()));
+        List<Imagem> imagens = iDao.selecionarListaDeImagens(produto);
+        List<Categoria> categorias = cDao.listarCategoriasDoProduto(produto);
+        Usuario usuario = new Usuario();
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("login") && !(cookie.getValue().equals(""))) {
+                    usuario = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+                    request.setAttribute("usuario", usuario);
+                }
+            }
+        }    
+        request.setAttribute("produtoCategorias", categorias);
+        request.setAttribute("produtoImagens", imagens);
         request.setAttribute("produto", produto);
         String nextPage = "/WEB-INF/jsp/produto.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-        dispatcher.forward(request, response);     
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,7 +93,7 @@ public class ProdutoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
+
     }
 
     /**

@@ -17,15 +17,25 @@ public class Imagem {
     private int produto;
     private byte[] imagem;
     private String formato;
+    private String imagemBase64;
 
     public Imagem() {
     }
 
-    public Imagem(int idImagem, int produto, byte[] imagem, String formato) {
+    public Imagem(int idImagem, int produto, byte[] imagem, String formato, String imagemBase64) {
         this.idImagem = idImagem;
         this.produto = produto;
         this.imagem = imagem;
         this.formato = formato;
+        this.imagemBase64 = imagemBase64;
+    }
+
+    public String getImagemBase64() {
+        return imagemBase64;
+    }
+
+    public void setImagemBase64(String imagemBase64) {
+        this.imagemBase64 = imagemBase64;
     }
 
     public int getIdImagem() {
@@ -60,5 +70,4 @@ public class Imagem {
         this.formato = formato;
     }
 
-    
 }

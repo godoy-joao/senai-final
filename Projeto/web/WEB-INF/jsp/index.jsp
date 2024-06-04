@@ -23,8 +23,8 @@
                 </head>
 
                 <body class="overflow-x-hidden">
-                  
-                    
+
+                    <%@ include file="/WEB-INF/jspf/header.jspf" %>
                         <main class="bg-primary pt-5">
                             <div class="px-5">
                                 <div class="px-5">
@@ -76,13 +76,15 @@
                                                         <c:forEach items="${descontos}" var="produto">
                                                             <div class="produto-card">
                                                                 <div class="produto-imagem">
-                                                                    <span class="tag-desconto">
-                                                                        -
-                                                                        <fmt:formatNumber type="currency"
-                                                                            value="${produto.desconto}" />
-                                                                    </span>
-                                                                    <img src="data:image/png;base64,${produto.imagemBase64}"
-                                                                        class="produto-capa" alt="">
+                                                                    <a href="./produto?id=${produto.idProduto}">
+                                                                        <span class="tag-desconto">
+                                                                            -
+                                                                            <fmt:formatNumber type="currency"
+                                                                                value="${produto.desconto}" />
+                                                                        </span>
+                                                                        <img src="data:image/png;base64,${produto.imagemBase64}"
+                                                                            class="produto-capa" alt="">
+                                                                    </a>
                                                                 </div>
                                                                 <div class="produto-info">
                                                                     <div class="div-nome">
@@ -115,7 +117,6 @@
                                                                                         class="fa-solid fa-shopping-cart me-1"></i>Adicionar</span>
                                                                             </button>
                                                                         </form>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -136,8 +137,8 @@
                                                         <c:forEach items="${produtos}" var="produto">
                                                             <div class="produto-card">
                                                                 <div class="produto-imagem">
+                                                                    <a href="./produto?id=${produto.idProduto}">
                                                                     <c:if test="${produto.desconto > 0}">
-
                                                                         <span class="tag-desconto">
                                                                             -
                                                                             <fmt:formatNumber type="currency"
@@ -146,6 +147,7 @@
                                                                     </c:if>
                                                                     <img src="data:image/png;base64,${produto.imagemBase64}"
                                                                         class="produto-capa" alt="">
+                                                                    </a>
                                                                 </div>
                                                                 <div class="produto-info">
                                                                     <div class="div-nome">
@@ -179,7 +181,7 @@
                                                                             </button>
                                                                         </form>
                                                                     </div>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         </c:forEach>
                                                     </c:if>
@@ -190,13 +192,11 @@
                                 </div>
                             </div>
                         </main>
-                        <footer>
-
-                        </footer>
-                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                            crossorigin="anonymous"></script>
-                        <script src="./js/slider.js"></script>
+                        <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                                crossorigin="anonymous"></script>
+                            <script src="./js/slider.js"></script>
                 </body>
 
                 </html>

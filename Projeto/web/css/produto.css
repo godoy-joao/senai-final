@@ -1,10 +1,102 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 15/05/2024, 16:46:54
-    Author     : Senai
-*/
+main {
+    padding: 8vh 10vw 0;
+}
 
+#container {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    width: 100%;
+    background-color: white;
+    border: 1px #cee2e6 solid;
+}
+
+#info-produto {
+    border-bottom: 2px #cee2e6 solid;
+    display: flex;
+}
+
+#div-imagem {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#imagem-produto {
+    height: 23vw;
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px #cee2e6 solid;
+    background-color: #f5f5f5;
+
+}
+#imagem-produto img {
+    max-width: 100%;
+    min-height: 90%;
+    object-fit: fill;
+}
+
+#div-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+    border: 1px #cee2e6 solid;
+}
+
+.div-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 80px;
+}
+
+.div-img button {
+    padding: 1px;
+    max-width: 100%;
+    max-height: 100%;
+}
+.div-img button img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: fill;
+}
+
+#btn-volta {
+    position: absolute;
+    top: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    height: 40px;
+    width: 40px;
+}
+
+#btn-volta img {
+    transform: rotate(-90deg);
+}
+
+#btn-avanca {
+    position: absolute;
+    bottom: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    height: 40px;
+    width: 40px;
+}
+
+#btn-avanca img {
+    transform: rotate(90deg);
+}

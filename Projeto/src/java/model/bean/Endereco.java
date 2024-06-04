@@ -12,6 +12,7 @@ package model.bean;
 public class Endereco {
 
     private int idEndereco;
+    private int usuario;
     private String estado;
     private String cidade;
     private String cep;
@@ -23,8 +24,9 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(int idEndereco, String estado, String cidade, String cep, String bairro, String rua, String numero, String complemento) {
+    public Endereco(int idEndereco, int usuario, String estado, String cidade, String cep, String bairro, String rua, String numero, String complemento) {
         this.idEndereco = idEndereco;
+        this.usuario = usuario;
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
@@ -32,6 +34,14 @@ public class Endereco {
         this.rua = rua;
         this.numero = numero;
         this.complemento = complemento;
+    }
+
+    public int getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
     }
 
     public String getBairro() {
