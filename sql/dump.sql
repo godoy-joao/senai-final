@@ -54,7 +54,6 @@ CREATE TABLE `carrinhoproduto` (
   `idCarrinhoProduto` int(11) NOT NULL AUTO_INCREMENT,
   `carrinho` int(11) NOT NULL,
   `produto` int(11) NOT NULL,
-  `quantidade` int(11) NOT NULL,
   PRIMARY KEY (`idCarrinhoProduto`),
   KEY `carrinho` (`carrinho`),
   KEY `produto` (`produto`),

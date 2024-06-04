@@ -50,15 +50,17 @@
                                         <c:forEach items="${produtos}" var="produto">
                                             <div class="produto-card">
                                                 <div class="produto-imagem">
-                                                    <c:if test="${produto.desconto > 0.0}">
-                                                        <span class="tag-desconto">
-                                                            -
-                                                            <fmt:formatNumber type="currency"
-                                                                value="${produto.desconto}" />
-                                                        </span>
-                                                    </c:if>
-                                                    <img src="data:image/png;base64,${produto.imagemBase64}"
-                                                        class="produto-capa" alt="">
+                                                    <a href="./produto?id=${produto.idProduto}">
+                                                        <c:if test="${produto.desconto > 0}">
+                                                            <span class="tag-desconto">
+                                                                -
+                                                                <fmt:formatNumber type="currency"
+                                                                    value="${produto.desconto}" />
+                                                            </span>
+                                                        </c:if>
+                                                        <img src="data:image/png;base64,${produto.imagemBase64}"
+                                                            class="produto-capa" alt="">
+                                                        </a>
                                                 </div>
                                                 <div class="produto-info">
                                                     <div class="div-nome">

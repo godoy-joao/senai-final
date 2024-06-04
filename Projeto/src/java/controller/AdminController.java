@@ -50,8 +50,7 @@ public class AdminController extends HttpServlet {
         List<Categoria> categorias = cDao.listarTodos();
         request.setAttribute("categorias", categorias);
         Cookie[] cookies = request.getCookies();
-        Usuario u = null;
-
+        Usuario u = new Usuario();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("login")) {

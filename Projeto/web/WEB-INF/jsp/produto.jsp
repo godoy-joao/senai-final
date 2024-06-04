@@ -31,7 +31,17 @@
                                     <div id="info-produto">
                                         <div id="div-imagem">
                                             <div id="imagem-produto">
-                                                <img src="data:image/png;base64,${produto.imagemBase64}" alt="">
+                                                <a href="./produto?id=${produto.idProduto}">
+                                                    <c:if test="${produto.desconto > 0}">
+                                                        <span class="tag-desconto">
+                                                            -
+                                                            <fmt:formatNumber type="currency"
+                                                                value="${produto.desconto}" />
+                                                        </span>
+                                                    </c:if>
+                                                    <img src="data:image/png;base64,${produto.imagemBase64}"
+                                                        class="produto-capa" alt="">
+                                                    </a>
                                             </div>
                                             <div id="div-slider">
                                                 <button id="btn-volta">

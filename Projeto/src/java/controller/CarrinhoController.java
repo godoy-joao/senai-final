@@ -46,14 +46,14 @@ public class CarrinhoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Usuario u = null;
+        Usuario u = new Usuario();
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
                 u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
             }
         }
-        if (u == null || u.getIdUsuario() <= 0) {
+        if (u.getIdUsuario() <= 0) {
             response.sendRedirect("./login");
         } else {
             try {
