@@ -55,10 +55,10 @@ public class ImagemDAO {
                    
         }
      */
-    public Optional<String> pegarExtensaoDoArquivo(String name) {
-        return Optional.ofNullable(name).filter(f -> f.contains(".")).map(f -> f.substring(name.lastIndexOf(".") + 1));
+    public String pegarExtensaoDoArquivo(String name) {
+        return Optional.ofNullable(name).filter(f -> f.contains(".")).map(f -> f.substring(name.lastIndexOf(".") + 1)).get();
     }
-    
+
     public byte[] partParaBytes(Part filePart) throws IOException {
         InputStream iStream = filePart.getInputStream();
         ByteArrayOutputStream byteA = new ByteArrayOutputStream();
@@ -82,6 +82,7 @@ public class ImagemDAO {
             stmt.setBytes(2, imagem.getImagem());
             stmt.setString(3, imagem.getFormato());
 
+            System.out.println(imagem.getFormato());
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {

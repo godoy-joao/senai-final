@@ -57,7 +57,10 @@ public class ProdutoController extends HttpServlet {
                     request.setAttribute("usuario", usuario);
                 }
             }
-        }    
+        }
+        for (int i = 0; i < imagens.size(); i++) {
+            imagens.get(i).setImagemBase64(Base64.getEncoder().encodeToString(imagens.get(i).getImagem()));
+        }
         request.setAttribute("produtoCategorias", categorias);
         request.setAttribute("produtoImagens", imagens);
         request.setAttribute("produto", produto);
