@@ -20,7 +20,9 @@ main {
     display: flex;
     flex-direction: row;
     gap: 5px;
-    margin-right: 10px;
+    width: 55%;
+    justify-content: space-between;
+    border: 1px #cee2e6 solid;
 }
 
 #imagem-produto {
@@ -48,8 +50,7 @@ main {
     height: 100%;
     justify-content: center;
     align-items: center;
-    padding: 40px 10px;
-    border: 1px #cee2e6 solid;
+    padding: 40px 20px 40px 10px;
     overflow-y: scroll;
 }
 
@@ -114,23 +115,21 @@ main {
 }
 
 #wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
+    width: 45%;
+    padding-left: 20px;
 }
 
-#div-nome {
-    width: 100%;
-    height: 30%;
-}
-
-#nome span {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 40px;
+#nome span { 
+    font-size: 2.3rem;
     font-weight: 800;
+    line-height: 2.1rem;
 }
 
 #categorias {
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: 500;
 }
 
@@ -149,10 +148,48 @@ main {
 }
 
 #div-comprar {
-    padding: 5%;
+    padding-left: 10px;
 }
+
 
 #div-comprar button {
     width: 10vw;
     height: 8vh;
 }
+
+#div-valor {
+    display: flex;
+    flex-direction: column;
+    padding: 7px 3px;
+}
+
+#div-valor div {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+#div-valor div #custo {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: rgb(190, 190, 190);
+    text-decoration: line-through;
+}
+
+#div-valor #valor-final {
+    color: #ff9100;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2rem;
+}
+
+#btn-wrapper {
+    position: absolute;
+    bottom: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
