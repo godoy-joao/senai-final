@@ -28,83 +28,87 @@
 
                             <main class="branco-fundo-2">
                                 <div id="container">
-                                    <div id="info-produto">
-                                        <div id="div-imagem">
-                                            <div id="imagem-produto">
-                                                <a href="./produto?id=${produto.idProduto}">
-                                                    <c:if test="${produto.desconto > 0}">
-                                                        <span class="tag-desconto">
-                                                            -
-                                                            <fmt:formatNumber type="currency"
-                                                                value="${produto.desconto}" />
-                                                        </span>
-                                                    </c:if>
+                                    <div id="produto-wrapper">
+                                        <div id="info-produto">
+                                            <div id="div-imagem">
+                                                <div id="imagem-produto">
                                                     <img src="data:image/png;base64,${produto.imagemBase64}"
                                                         class="produto-capa" alt="">
-                                                    </a>
-                                            </div>
-                                            <div id="div-slider">
-                                                <button id="btn-volta">
-                                                    <img src="./assets/arrow.png" alt="">
-                                                </button>
-                                                <button id="btn-avanca">
-                                                    <img src="./assets/arrow.png" alt="">
-                                                </button>
-                                                <c:choose>
-                                                    <c:when test="${produtoImagens.size() > 1}">
-                                                        <c:forEach items="${produtoImagens}" var="imagem">
+                                                </div>
+                                                <div id="div-slider">
+                                                    <button id="btn-volta">
+                                                        <img src="./assets/arrow.png" alt="">
+                                                    </button>
+                                                    <button id="btn-avanca">
+                                                        <img src="./assets/arrow.png" alt="">
+                                                    </button>
+                                                    <c:choose>
+                                                        <c:when test="${produtoImagens.size() > 1}">
+                                                            <c:forEach items="${produtoImagens}" var="imagem">
+                                                                <div class="div-img">
+                                                                    <button class="img-btn">
+                                                                        <img src="data:image/png;base64,${imagem.imagemBase64}"
+                                                                            alt="">
+                                                                    </button>
+                                                                </div>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
                                                             <div class="div-img">
-                                                                <button class="img-btn">
-                                                                    <img src="data:image/png;base64,${imagem.imagemBase64}"
-                                                                        alt="">
-                                                                </button>
+                                                                <button>Sem imagens...</button>
                                                             </div>
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <div class="div-img">
-                                                            <button>Sem imagens...</button>
-                                                        </div>
-                                                        <div class="div-img">
-                                                            <button>Sem imagens...</button>
-                                                        </div>
-                                                        <div class="div-img">
-                                                            <button>Sem imagens...</button>
-                                                        </div>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                            <div class="div-img">
+                                                                <button>Sem imagens...</button>
+                                                            </div>
+                                                            <div class="div-img">
+                                                                <button>Sem imagens...</button>
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </div>
+                                            <div id="wrapper">
+                                                <div id="div-nome">
+                                                    <div id="nome">
+                                                        <span>
+                                                            ${produto.nome}
+                                                        </span>
+                                                    </div>
+                                                    <div id="categorias">
+                                                        <span>Categorias: <c:forEach items="${produtoCategorias}"
+                                                                var="categoria" varStatus="contagem">
+                                                                <c:choose>
+                                                                    <c:when
+                                                                        test="${contagem.count < produtoCategorias.size()}">
+                                                                        ${categoria.nome},
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        ${categoria.nome}.
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div id="div-valor">
+                                                    <fmt:formatNumber type="currency" value="${produto.valor}" />
+                                                    <fmt:formatNumber type="currency" value="${produto.desconto}" />
+                                                    <fmt:formatNumber type="currency" value="${produto.valorFinal}" />
+                                                </div>
                                             </div>
                                         </div>
-                                        <div id="div-nome">
-                                            <div id="nome">
-                                                <span>
-                                                    ${produto.nome}
-                                                </span>
+                                        <div id="div-info">
+                                            <div id="div-descricao">
+                                                <span>${produto.descricao}</span>
                                             </div>
-                                            <div id="categorias">
-                                                <span>Categorias: <c:forEach items="${produtoCategorias}"
-                                                        var="categoria" varStatus="contagem">
-                                                        <c:choose>
-                                                            <c:when test="${contagem.count < produtoCategorias.size()}">
-                                                                ${categoria.nome},
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                ${categoria.nome}.
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </c:forEach></span>
+                                            <div id="div-comprar">
+                                                <button id="comprar-btn">
+                                                    <span>
+                                                        <i class="fa-solid fa-shopping-cart"></i>
+                                                    </span>
+                                                    <span class="ms-2">Adicionar ao carrinho</span>
+                                                </button>
                                             </div>
-                                        </div>
-                                        <div id="div-valor">
-                                            <fmt:formatNumber type="currency" value="${produto.valor}" />
-                                            <fmt:formatNumber type="currency" value="${produto.desconto}" />
-                                            <fmt:formatNumber type="currency" value="${produto.valorFinal}" />
-                                        </div>
-                                        <div id="div-descricao">
-                                            <span></span>
-                                        </div>
-                                        <div id="div-comprar">
-
                                         </div>
                                     </div>
                                     <div id="avaliacoes">
