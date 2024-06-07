@@ -68,12 +68,27 @@
                                                 </div>
                                             </div>
                                             <div id="wrapper">
-                                                <div id="div-nome">
-                                                    <div id="nome">
-                                                        <span>
-                                                            ${produto.nome}
+                                                <div id="nome">
+                                                    <span>
+                                                        ${produto.nome}
+                                                    </span>
+                                                </div>
+                                                <div id="div-valor">
+                                                    <span id="valor-final">
+                                                        <fmt:formatNumber type="currency"
+                                                            value="${produto.valorFinal}" />
+                                                        <span class="ps-3 text-black">
+                                                            NO PIX ou à vista
+                                                        </span>
+                                                    </span>
+                                                    <div>
+                                                        <span id="custo">
+                                                            <fmt:formatNumber type="currency"
+                                                                value="${produto.valor}" />
                                                         </span>
                                                     </div>
+                                                </div>
+                                                <div id="btn-wrapper">
                                                     <div id="categorias">
                                                         <span>Categorias: <c:forEach items="${produtoCategorias}"
                                                                 var="categoria" varStatus="contagem">
@@ -89,11 +104,14 @@
                                                             </c:forEach>
                                                         </span>
                                                     </div>
-                                                </div>
-                                                <div id="div-valor">
-                                                    <fmt:formatNumber type="currency" value="${produto.valor}" />
-                                                    <fmt:formatNumber type="currency" value="${produto.desconto}" />
-                                                    <fmt:formatNumber type="currency" value="${produto.valorFinal}" />
+                                                    <div id="div-comprar">
+                                                        <button id="comprar-btn">
+                                                            <span>
+                                                                <i class="fa-solid fa-shopping-cart"></i>
+                                                            </span>
+                                                            <span class="ms-2">Adicionar ao carrinho</span>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,14 +119,7 @@
                                             <div id="div-descricao">
                                                 <span>${produto.descricao}</span>
                                             </div>
-                                            <div id="div-comprar">
-                                                <button id="comprar-btn">
-                                                    <span>
-                                                        <i class="fa-solid fa-shopping-cart"></i>
-                                                    </span>
-                                                    <span class="ms-2">Adicionar ao carrinho</span>
-                                                </button>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <div id="avaliacoes">
