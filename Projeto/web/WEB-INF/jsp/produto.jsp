@@ -123,26 +123,67 @@
                                         </div>
                                     </div>
                                     <div id="avaliacoes">
-                                        <div>
-                                            <div id="aval-perfil">
-                                                <img src="data:image/png;base64,${usuario.fotoBase64}" alt=""
-                                                    style="width: 48px; height: 48px; object-fit: fill;">
+                                        <div id="aval">
+                                            <form action="enviarAvaliacao" method="post">
+                                                <div id="div-perfil">
+                                                    <img src="data:image/png;base64,${usuario.fotoBase64}" alt=""
+                                                        style="width: 54px; height: 54px; object-fit: fill;">
+                                                </div>
+                                                <div id="wrapper-comentario">
+                                                    <div id="wrapper-nome">
+                                                        <div id="div-coment-nome">
+                                                            <span>
+                                                                ${usuario.nome}
+                                                            </span>
+                                                        </div>
+                                                        <div id="div-select">
+                                                            <select name="aval-nota" id="">
+                                                                <option value="1">1 Estrela</option>
+                                                                <option value="2">2 Estrelas</option>
+                                                                <option value="3">3 Estrelas</option>
+                                                                <option value="4">4 Estrelas</option>
+                                                                <option value="5">5 Estrelas</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div id="div-coment">
+                                                        <c:choose>
+                                                            <c:when test="${usuario.idUsuario > 0}">
+                                                                <textarea name="comentario" id="area-comentario"
+                                                                    maxlength="2000"
+                                                                    placeholder="Adicione um comentário..."></textarea>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span>
+                                                                    É preciso ter uma conta para avaliar produtos. <a
+                                                                        href="">Clique aqui</a> para fazer login.
+                                                                </span>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </div>
+                                                <div id="div-enviar">
+                                                    <button type="submit" value="${usuario.idUsuario}" name="enviar">
+                                                        Enviar
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <c:choose>
+                                            <c:when test="${comentarios.size() > 0}">
+                                                <c:forEach items="${comentarios}" var="comentario" varStatus="contagem">
+                                                    <div>
+
+                                                    </div>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <div>
+                                                Não há comentários
                                             </div>
-                                            <c:choose>
-                                                <c:when test="${usuario.idUsuario > 0}">
-                                                    <textarea name="comentario" id="area-comentario" cols="30"
-                                                        rows="10"></textarea>
-                                                </c:when>
-                                                <c:otherwise>
-
-                                                </c:otherwise>
-                                            </c:choose>
-
-                                        </div>
-                                        <p>Adicionar forEach aqui</p>
-                                        <div>
-
-                                        </div>
+                                            </c:otherwise>
+                                        </c:choose>
 
                                     </div>
                                     <div id="recomendados">

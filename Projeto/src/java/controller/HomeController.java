@@ -123,7 +123,7 @@ public class HomeController extends HttpServlet {
         Usuario user = new Usuario();
 
         String url = request.getServletPath();
-        if (url.equals("/sendToCart")) {
+        if (url.equals("/enviarParaCarrinho")) {
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
@@ -134,7 +134,7 @@ public class HomeController extends HttpServlet {
             if (user == null || user.getIdUsuario() == 0) {
                 response.sendRedirect("./login");
             } else {
-                Produto prod = pDao.selecionarPorId(Integer.parseInt(request.getParameter("addProduto")));
+                Produto prod = pDao.selecionarPorId(Integer.parseInt(request.getParameter("item")));
                 Carrinho cart = cartDao.selecionarCarrinho(user);
                 cartDao.adicionarProduto(prod, cart);
                 response.sendRedirect("./home");

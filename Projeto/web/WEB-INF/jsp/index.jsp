@@ -106,11 +106,11 @@
                                                                         </span>
                                                                     </div>
                                                                     <div class="div-btn">
-                                                                        <form action="sendToCart" method="post"
+                                                                        <form action="enviarParaCarrinho" method="post"
                                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
                                                                             <button type="submit"
                                                                                 value="${produto.idProduto}"
-                                                                                name="addProduto"
+                                                                                name="item"
                                                                                 class="card-btn verde-fundo fs-6">
                                                                                 <span class="msg1">Comprar</span>
                                                                                 <span class="msg2"><i
@@ -169,11 +169,11 @@
                                                                         </span>
                                                                     </div>
                                                                     <div class="div-btn">
-                                                                        <form action="sendToCart" method="post"
+                                                                        <form action="enviarParaCarrinho" method="post"
                                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
                                                                             <button type="submit"
                                                                                 value="${produto.idProduto}"
-                                                                                name="addProduto"
+                                                                                name="item"
                                                                                 class="card-btn verde-fundo fs-6">
                                                                                 <span class="msg1">Comprar</span>
                                                                                 <span class="msg2"><i

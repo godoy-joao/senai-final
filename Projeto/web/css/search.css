@@ -75,7 +75,7 @@
 .produto-card {
     flex: 0 0 auto;
     width: 23%;
-    max-width: 25%;
+    max-width: 300px;
     height: 40vh;
     margin: 5px;
     border: 1px #cee2e6 solid;
