@@ -375,3 +375,13 @@ DELIMITER ;
 -- Dump completed on 2024-06-04 15:04:07
 ALTER TABLE produto DROP COLUMN valorFinal;
 ALTER TABLE produto ADD COLUMN valorFinal float GENERATED ALWAYS AS (valor - coalesce(desconto,0)) STORED;
+
+create table avaliacao (
+idAvaliacao int primary key auto_increment,
+usuario int not null,
+produto int not null,
+nota int not null,
+conteudo varchar(2000),
+foreign key (usuario) references usuario(idUsuario),
+foreign key (produto) references produto(idProduto)
+)
