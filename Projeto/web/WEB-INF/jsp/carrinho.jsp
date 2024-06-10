@@ -80,10 +80,11 @@
                                                                         value="${produto.valorFinal}" />
                                                                 </span>
                                                             </div>
-                                                            <div class="info-qtd">
-                                                                <form action="adicionarItem" method="post" class="d-flex flex-row border border-1 w-50">
+                                                            <div class="info-qtd">]
+                                                                <label for="qtd-wrapper">Quantidade: </label>
+                                                                <form id="qtd-wrapper" action="adicionarItem" method="post" class="d-flex flex-row border border-1 w-50">
                                                                     <div>
-                                                                        <button class="border-0">
+                                                                        <button class="qtd-btn">
                                                                             <span>-</span>
                                                                         </button>
                                                                     </div>
@@ -91,7 +92,7 @@
                                                                         <input type="number" step="1" class="qtd-item w-100" >
                                                                     </div>
                                                                     <div>
-                                                                        <button class="border-0">
+                                                                        <button class="qtd-btn">
                                                                             <span>+</span>
                                                                         </button>
                                                                     </div>
