@@ -64,6 +64,36 @@ public class CarrinhoDAO {
         return produtos;
     }
 
+    public List<CarrinhoProduto> selecionarQuantidades(Carrinho c) {
+        List<CarrinhoProduto> cps = new ArrayList();
+
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM carrinhoProduto WHERE carrinho = ?");
+            stmt.setInt(1, c.getIdCarrinho());
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                CarrinhoProduto cp = new CarrinhoProduto();
+                cp.setIdCarrinhoProduto(rs.getInt("carrinhoproduto"));
+                cp.setCarrinho(rs.getInt("carrinho"));
+                cp.setProduto(rs.getInt("produto"));
+                cp.setQuantidade(rs.getInt("quantidade"));
+                cps.add(cp);
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cps;
+    }
+
     public Carrinho selecionarCarrinho(Usuario u) {
         Carrinho c = new Carrinho();
         try {
@@ -112,7 +142,7 @@ public class CarrinhoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO carrinhoproduto (carrinho, produto) VALUES (?, ?)");
+            stmt = conexao.prepareStatement("INSERT INTO carrinhoproduto (carrinho, produto, quantidade) VALUES (?, ?, 1)");
             stmt.setInt(1, c.getIdCarrinho());
             stmt.setInt(2, p.getIdProduto());
 
