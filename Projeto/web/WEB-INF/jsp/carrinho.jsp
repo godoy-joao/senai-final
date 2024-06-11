@@ -16,12 +16,8 @@
                             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                             crossorigin="anonymous">
                         <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
-                        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-                            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-                            crossorigin="anonymous"></script>
                         <link rel="stylesheet" href="./css/carrinho.css">
                         <link rel="stylesheet" href="./css/base.css">
-                        <link rel="stylesheet" href="./css/header.css">
                     </head>
 
                     <body>
@@ -64,7 +60,7 @@
                                                 </div>
                                             </c:when>
                                             <c:otherwise>
-                                                <c:forEach items="${produtos}" var="produto">
+                                                <c:forEach items="${produtos}" var="produto" varStatus="contagem">
                                                     <div class="produto-box" id="box-id-${produto.idProduto}">
                                                         <div class="div-img">
                                                             <img src="data:image/png;base64,${produto.imagemBase64}"
@@ -75,28 +71,51 @@
                                                                 <span class="produto-nome">${produto.nome}</span>
                                                             </div>
                                                             <div class="info-valor-final">
+                                                                <span class="valor-unit">
+                                                                    Valor unit.:
+                                                                    <span class="valor-unit-inner">
+                                                                        <fmt:formatNumber type="currency"
+                                                                            value="${produto.valorFinal}" />
+                                                                    </span>
+
+                                                                </span>
                                                                 <span class="valor-final">
-                                                                    <fmt:formatNumber type="currency"
-                                                                        value="${produto.valorFinal}" />
+                                                                    Total:
+                                                                    <span class="valor-final-inner">
+                                                                        <fmt:formatNumber type="currency"
+                                                                            value="${produto.valorFinal * produtoQtd[contagem.index].quantidade}" />
+                                                                    </span>
                                                                 </span>
                                                             </div>
-                                                            <div class="info-qtd">]
-                                                                <label for="qtd-wrapper">Quantidade: </label>
-                                                                <form id="qtd-wrapper" action="adicionarItem" method="post" class="d-flex flex-row border border-1 w-50">
-                                                                    <div>
-                                                                        <button class="qtd-btn">
-                                                                            <span>-</span>
-                                                                        </button>
+                                                            <div class="info-qtd">
+                                                                <label for="qtd-form">Quantidade: </label>
+                                                                <form class="qtd-form" action="mudarQuantidade"
+                                                                    method="post"
+                                                                    class="d-flex flex-row border border-1 w-50">
+                                                                    <div class="qtd-wrapper">
+                                                                        <div>
+                                                                            <button class="qtd-btn btn-menos"
+                                                                                type="button">
+                                                                                <span><i
+                                                                                        class="fa-solid fa-minus"></i></span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="qtd-input">
+                                                                            <input type="number" step="1"
+                                                                                value="${produtoQtd[contagem.index].quantidade}"
+                                                                                class="qtd-item" name="inputQtd">
+                                                                        </div>
+                                                                        <div>
+                                                                            <button class="qtd-btn btn-mais"
+                                                                                type="button">
+                                                                                <span><i
+                                                                                        class="fa-solid fa-plus"></i></span>
+                                                                            </button>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="">
-                                                                        <input type="number" step="1" class="qtd-item w-100" >
-                                                                    </div>
-                                                                    <div>
-                                                                        <button class="qtd-btn">
-                                                                            <span>+</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <button type="submit">
+                                                                    <button type="submit" class="qtd-submit"
+                                                                        name="submitQtd"
+                                                                        value="${produtoQtd[contagem.index].idCarrinhoProduto}">
                                                                         <i class="fa-solid fa-check"></i>
                                                                     </button>
                                                                 </form>
@@ -123,6 +142,7 @@
                                     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                                     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                                     crossorigin="anonymous"></script>
+                                <script src="./js/carrinho.js"></script>
                     </body>
 
                     </html>

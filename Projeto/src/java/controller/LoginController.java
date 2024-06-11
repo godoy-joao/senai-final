@@ -5,10 +5,14 @@
  */
 package controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Base64;
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -108,6 +112,12 @@ public class LoginController extends HttpServlet {
             u.setEmail(request.getParameter("email"));
             u.setTelefone(request.getParameter("telefone"));
             u.setSenha(request.getParameter("senha"));
+           
+            BufferedImage buffer = ImageIO.read(new File("placeholder.png"));
+            ByteArrayOutputStream bOut = new ByteArrayOutputStream();
+            ImageIO.write(buffer, "png", bOut);
+            byte[] data = bOut.toByteArray();
+            u.setFoto(data);
             try {
                 uDAO.criar(u);
                 response.sendRedirect("./login");

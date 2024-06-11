@@ -155,8 +155,17 @@ main {
     font-weight: 600;
     line-height: 1.2rem;
 }
-
-.info-valor-final span {
+.info-valor-final {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.valor-unit {
+    font-size: 1rem;
+    color: #00000067;
+    font-weight: 500;
+}
+.valor-final {
     font-size: 1.30rem;
     color: #ff9100;
     font-weight: 600;
@@ -174,26 +183,31 @@ main {
 }
 
 .info-qtd label {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
+}
+
+.qtd-form {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
 }
 
 .qtd-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 0;
-    border: 1px #008cff solid;
+    border: 1px #0046d3 solid;
 }
 
 .qtd-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3px 4px;
-    width: 100%;
-    height: 1.8rem;
+    padding: 0;
+    width: 1.8rem;
+    height: 100%;
     border: none;
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 600;
     background-color: #2e68db;
 }
@@ -201,6 +215,36 @@ main {
 .qtd-btn:active {
     background-color: #0046d3;
 }
+
+.qtd-input input {
+    border: none;
+    width: 2.6rem;
+    text-align: center;
+}
+
+.qtd-input input:focus-visible {
+    outline: solid 2px black;
+}
+
+.qtd-input input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    display: none;
+}
+
+.qtd-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    border: 1px #cee2e6 solid;
+    padding: 0;
+    width: 1.8rem;
+}
+
+.qtd-submit:active {
+    background-color: #929ea0;
+}
+
 
 .div-remover-produto {
     position: absolute;

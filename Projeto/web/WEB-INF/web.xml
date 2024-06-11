@@ -110,7 +110,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CarrinhoController</servlet-name>
-        <url-pattern>/adicionarItem</url-pattern>
+        <url-pattern>/mudarQuantidade</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProdutoController</servlet-name>

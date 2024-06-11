@@ -64,6 +64,53 @@ public class CarrinhoDAO {
         return produtos;
     }
 
+    public void alterarQuantidade(CarrinhoProduto pc) {
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+
+            stmt = conexao.prepareStatement("UPDATE carrinhoproduto SET quantidade = ? WHERE idCarrinhoProduto = ?");
+            stmt.setInt(1, pc.getQuantidade());
+            stmt.setInt(2, pc.getIdCarrinhoProduto());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public CarrinhoProduto selecionarCartProd(int id) {
+        CarrinhoProduto pc = new CarrinhoProduto();
+
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM carrinhoproduto WHERE idCarrinhoProduto = ?");
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                pc.setIdCarrinhoProduto(rs.getInt("idCarrinhoProduto"));
+                pc.setCarrinho(rs.getInt("carrinho"));
+                pc.setProduto(rs.getInt("produto"));
+                pc.setQuantidade(rs.getInt("quantidade"));
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pc;
+    }
+
     public List<CarrinhoProduto> selecionarQuantidades(Carrinho c) {
         List<CarrinhoProduto> cps = new ArrayList();
 
@@ -78,7 +125,7 @@ public class CarrinhoDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 CarrinhoProduto cp = new CarrinhoProduto();
-                cp.setIdCarrinhoProduto(rs.getInt("carrinhoproduto"));
+                cp.setIdCarrinhoProduto(rs.getInt("idCarrinhoproduto"));
                 cp.setCarrinho(rs.getInt("carrinho"));
                 cp.setProduto(rs.getInt("produto"));
                 cp.setQuantidade(rs.getInt("quantidade"));
