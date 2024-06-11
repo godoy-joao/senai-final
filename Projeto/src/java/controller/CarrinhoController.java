@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.CarrinhoProduto;
 import model.bean.Imagem;
 import model.bean.Produto;
 import model.bean.Usuario;
@@ -56,14 +57,17 @@ public class CarrinhoController extends HttpServlet {
         if (u.getIdUsuario() <= 0) {
             response.sendRedirect("./login");
         } else {
+            List<CarrinhoProduto> pq = cDao.selecionarQuantidades(cDao.selecionarCarrinho(u));
             try {
                 List<Produto> produtos = cDao.lerProdutos(u);
                 Float valorFinal = 0f;
                 for (int i = 0; i < produtos.size(); i++) {
                     Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
                     produtos.get(i).setImagemBase64(Base64.getEncoder().encodeToString(img.getImagem()));
-                    valorFinal += produtos.get(i).getValorFinal();
+                    valorFinal += produtos.get(i).getValorFinal() * pq.get(i).getQuantidade();
                 }
+                System.out.println(pq.size());
+                request.setAttribute("produtoQtd", pq);
                 request.setAttribute("produtos", produtos);
                 request.setAttribute("valorFinal", valorFinal);
             } catch (Exception e) {
@@ -119,8 +123,10 @@ public class CarrinhoController extends HttpServlet {
         } else if (url.equals("/removerItem")) {
             cDao.removerProduto(pDao.selecionarPorId(Integer.parseInt(request.getParameter("item"))), cDao.selecionarCarrinho(u));
             response.sendRedirect("./carrinho");
-        } else if (url.equals("/adicionarItem")) {
-            cDao.adicionarProduto(pDao.selecionarPorId(Integer.parseInt(request.getParameter("item"))), cDao.selecionarCarrinho(u));
+        } else if (url.equals("/mudarQuantidade")) {
+            CarrinhoProduto cartprod = cDao.selecionarCartProd(Integer.parseInt(request.getParameter("submitQtd")));
+            cartprod.setQuantidade(Integer.parseInt(request.getParameter("inputQtd")));
+            cDao.alterarQuantidade(cartprod);
             response.sendRedirect("./carrinho");
         }
     }
