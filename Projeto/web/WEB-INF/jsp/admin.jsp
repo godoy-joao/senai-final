@@ -41,7 +41,7 @@
                         </div>
                         <div class="row justify-content-start mb-2">
                             <div class="col-3 justify-content-center">
-                                <c:if test="${fn:length(produtos) > 0}">
+                                <c:if test="${produtos.size() > 0}">
                                     <select name="produtoSelecionado" id="selectProduto">
                                         <c:forEach items="${produtos}" var="produto">
                                             <option value="${produto.idProduto}">
@@ -129,15 +129,24 @@
                                 <div class="overflow-y-scroll overflow-x-hidden">
                                     <c:forEach items="${estoques}" var="estoque" varStatus="contagem">
                                         <div class="estoque-box d-flex flex-row">
-                                            <div>
-
+                                            <div class="estoque-capa">
+                                                <img src="data:image/png;base64,${produtos[contagem.index].imagemBase64}"
+                                                    alt="">
                                             </div>
-                                            <div>
-                                                <div>
-
+                                            <div class="estoque-info">
+                                                <div class="estoque-nome">
+                                                    <span>${produtos[contagem.index].nome}</span>
                                                 </div>
-                                                <div>
-
+                                                <div class="estoque-quantidade">
+                                                    <span>${estoque.quantidade}</span>
+                                                </div>
+                                                <div class="estoque-custo">
+                                                    <div class="custo">
+                                                        Valor unidade: ${estoque.custo}
+                                                    </div>
+                                                    <div class="total">
+                                                        Valor total de estoque: ${estoque.custo * estoque.quantidade}
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div>

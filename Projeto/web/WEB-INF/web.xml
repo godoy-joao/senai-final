@@ -44,6 +44,10 @@
         <servlet-name>HistoricoPedidosController</servlet-name>
         <servlet-class>controller.HistoricoPedidosController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckoutController</servlet-name>
+        <servlet-class>controller.CheckoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
@@ -113,6 +117,14 @@
         <url-pattern>/mudarQuantidade</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/finalizarPedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProdutoController</servlet-name>
         <url-pattern>/produto</url-pattern>
     </servlet-mapping>
@@ -131,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>HistoricoPedidosController</servlet-name>
         <url-pattern>/pedidos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

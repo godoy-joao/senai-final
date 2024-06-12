@@ -67,6 +67,7 @@ public class CarrinhoController extends HttpServlet {
                     valorFinal += produtos.get(i).getValorFinal() * pq.get(i).getQuantidade();
                 }
                 System.out.println(pq.size());
+                request.setAttribute("usuario", u);
                 request.setAttribute("produtoQtd", pq);
                 request.setAttribute("produtos", produtos);
                 request.setAttribute("valorFinal", valorFinal);
@@ -128,6 +129,8 @@ public class CarrinhoController extends HttpServlet {
             cartprod.setQuantidade(Integer.parseInt(request.getParameter("inputQtd")));
             cDao.alterarQuantidade(cartprod);
             response.sendRedirect("./carrinho");
+        } else {
+            processRequest(request, response);
         }
     }
 
