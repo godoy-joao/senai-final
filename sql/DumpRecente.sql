@@ -227,8 +227,8 @@ DROP TABLE IF EXISTS `pedido`;
 CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` int(11) NOT NULL,
-  `enderecoEntrega` int(11) NOT NULL,
-  `dataPedido` date NOT NULL,
+  `enderecoEntrega` int(11) DEFAULT NULL,
+  `dataPedido` date DEFAULT (curdate()),
   `valorTotal` float DEFAULT NULL,
   `formaPagamento` varchar(20) DEFAULT NULL,
   `status` int(11) DEFAULT 1,
@@ -262,7 +262,7 @@ CREATE TABLE `produto` (
   `valor` float(10,2) NOT NULL,
   `desconto` float(10,2) DEFAULT 0.00,
   `descricao` varchar(2000) DEFAULT NULL,
-  `dataRegistro` date DEFAULT curdate(),
+  `dataRegistro` date DEFAULT (curdate()),
   `valorFinal` float,
   PRIMARY KEY (`idProduto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;

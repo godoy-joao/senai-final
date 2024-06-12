@@ -11,11 +11,13 @@
                     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                     crossorigin="anonymous">
                 <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
-                <title>Document</title>
+                <title>Checkout</title>
             </head>
 
             <body>
-
+                <%@ include file="/WEB-INF/jspf/header.jspf" %>
+                    <main> </main>
+                    <%@ include file="/WEB-INF/jspf/footer.jspf" %>
             </body>
 
             </html>

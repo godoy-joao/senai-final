@@ -45,8 +45,11 @@
                                                     </span>
                                                 </div>
                                                 <div id="header-finalizar-div">
-                                                    <button id="header-finalizar-btn" type="submit">Finalizar
-                                                        pedido</button>
+                                                    <form action="finalizarPedido" method="post">
+                                                        <button id="header-finalizar-btn" value="${usuario.idUsuario}" name="finalizar" type="submit">
+                                                            Finalizar pedido
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

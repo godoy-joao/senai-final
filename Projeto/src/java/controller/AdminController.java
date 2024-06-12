@@ -46,10 +46,10 @@ public class AdminController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoriaDAO cDao = new CategoriaDAO();
+        ProdutoDAO pDao = new ProdutoDAO();
         UsuarioDAO uDao = new UsuarioDAO();
-        List<Categoria> categorias = cDao.listarTodos();
-        request.setAttribute("categorias", categorias);
-        Cookie[] cookies = request.getCookies();
+        EstoqueDAO eDao = new EstoqueDAO();
+       Cookie[] cookies = request.getCookies();
         Usuario u = new Usuario();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -58,6 +58,12 @@ public class AdminController extends HttpServlet {
                 }
             }
         }
+        List<Categoria> categorias = cDao.listarTodos();
+        request.setAttribute("categorias", categorias);
+        List<Produto> produtos = pDao.listarTodos(); 
+        request.setAttribute("produtos", produtos);
+        List<Estoque> estoques = eDao.listarTodos();
+        request.setAttribute("estoques", estoques);
         if (u.getTipo() != 1) {
             response.sendRedirect("./home");
         } else {
