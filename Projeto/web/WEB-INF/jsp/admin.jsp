@@ -22,24 +22,29 @@
 
                 <body class="branco-fundo-2">
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
-                        <div class="overflow-hidden row gap-4 justify-content-evenly mt-4 mb-2">
-                            <div class="col-3 d-flex justify-content-center align-items-center">
-                                <button class="borda-botao-1 w-100 botao" onclick="showAddProduto()">
+                        <div class="overflow-hidden row justify-content-evenly mt-4 mb-2 px-5">
+                            <div class="col-3 d-flex justify-content-center align-items-center px-3">
+                                <button class="borda-botao-1 w-100 botao" onclick="mostrarAddProduto()">
                                     <p class="my-3 fs-5">Adicionar/editar produto</p>
                                 </button>
                             </div>
-                            <div class="col-3 d-flex justify-content-center align-items-center">
-                                <button class="borda-botao-1 w-100 botao" onclick="showAddCategoria()">
+                            <div class="col-3 d-flex justify-content-center align-items-center px-3">
+                                <button class="borda-botao-1 w-100 botao" onclick="mostrarAddCategoria()">
                                     <p class="my-3 fs-5">Adicionar categoria</p>
                                 </button>
                             </div>
-                            <div class="col-3 d-flex justify-content-center align-items-center">
-                                <button class="borda-botao-1 w-100 botao" onclick="showEstoque()">
+                            <div class="col-3 d-flex justify-content-center align-items-center px-3">
+                                <button class="borda-botao-1 w-100 botao" onclick="mostrarEstoque()">
                                     <p class="my-3 fs-5">Gerenciar estoque</p>
                                 </button>
                             </div>
+                            <div class="col-3 d-flex justify-content-center align-items-center px-3">
+                                <button class="borda-botao-1 w-100 botao" onclick="mostrarPedidos()">
+                                    <p class="my-3 fs-5">Exibir Pedidos</p>
+                                </button>
+                            </div>
                         </div>
-                        <div class="row justify-content-start mb-2">
+                        <div class="row justify-content-center w-100 mb-2" id="produtos">
                             <div class="col-3 justify-content-center">
                                 <c:if test="${produtos.size() > 0}">
                                     <select name="produtoSelecionado" id="selectProduto">
@@ -53,8 +58,8 @@
                             </div>
                         </div>
                         <main class="mx-5 mt-4 d-flex justify-content-center ">
-                            <div class="w-80 p-4 d-flex flex-column branco-fundo" id="addProduto">
-                                <p class="h3">Adicionar produto</p>
+                            <div class="d-flex flex-column p-5 pt-3 w-80 gap-4 branco-fundo" id="addProduto">
+                                <p class="h3 w-100 justify-content-start">
                                 <form action="addProduto" method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="nome" class="form-label">Nome</label>
@@ -105,8 +110,8 @@
                                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                                 </form>
                             </div>
-                            <div class="d-none flex-column w-50" id="addCategoria">
-                                <p class="h3">Adicionar categoria</p>
+                            <div class="d-none flex-column p-5 pt-3 w-80 gap-4 branco-fundo" id="addCategoria">
+                                <p class="h3 w-100 justify-content-start">Adicionar categoria</p>
                                 <form action="addCategoria" method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="nomeCategoria" class="form-label">Nome</label>
@@ -122,8 +127,8 @@
                                     <button type="submit" class="btn btn-primary">Adicionar</button>
                                 </form>
                             </div>
-                            <div class="d-none w-60" id="estoque">
-                                <p class="h3">
+                            <div class="d-none flex-column p-5 pt-3 w-80 gap-4 branco-fundo" id="estoque">
+                                <p class="h3 w-100 justify-content-start">
                                     Gerenciar estoque
                                 </p>
                                 <div class="overflow-y-scroll overflow-x-hidden">
@@ -142,21 +147,44 @@
                                                 </div>
                                                 <div class="estoque-custo">
                                                     <div class="custo">
-                                                        Valor unidade: ${estoque.custo}
+                                                        Valor unidade:
+                                                        <fmt:formatNumber type="currency" value="${estoque.custo}" />
                                                     </div>
                                                     <div class="total">
-                                                        Valor total de estoque: ${estoque.custo * estoque.quantidade}
+                                                        Valor total de estoque:
+                                                        <fmt:formatNumber type="currency"
+                                                            value="${estoque.custo * estoque.quantidade}" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div>
                                                 <div>
-                                                    <button onclick="abrirConfirmar()">
+                                                    <button onclick="abrirEditar('${estoque.idEstoque}')">
+
+                                                    </button>
+                                                </div>
+                                                <form action="editarProduto" method="post"
+                                                    class="d-none flex-column border" id="confirmarEditar">
+                                                    <span class="fs-3">Edição de produto</span>
+                                                        <input type="text" name="novoNome" placeholder="${produtos[contagem.index].nome}">
+                                                        <input type="text" name="novoValor" placeholder="Valor atual: ${produtos[contagem.index].valor}">
+                                                        <input type="text" name="novoDesconto" placeholder="Desconto: ${produtos[contagem.index].desconto}">
+                                                        <input type="text" name="novaQtd" placeholder="Quantidade: ${estoque.quantidade}">
+                                                        <textarea name="novaDescricao">${produtos[contagem.index].descricao}</textarea>
+                                                        <button value="${estoque.produto}" name="editId" type="submit">
+                                                            Confirmar
+                                                        </button>
+                                                        <button type="button">
+                                                            Cancelar
+                                                        </button>
+                                                </form>
+                                                <div>
+                                                    <button onclick="abrirExcluir('${estoque.idEstoque}')">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>
-                                                <form class="d-none flex-column confirmarExcluir border"
-                                                    action="excluirEstoque">
+                                                <form class="d-none flex-column border" id="confirmarExcluir" method="post"
+                                                    action="excluirProduto">
                                                     <div class="d-flex justify-content-center align-items-center h-70">
                                                         <span>
                                                             Tem certeza que deseja excluir o produto?
@@ -174,6 +202,14 @@
                                             </div>
                                         </div>
                                     </c:forEach>
+                                </div>
+                            </div>
+                            <div id="pedidos" class="d-none flex-column p-5 pt-3 w-80 gap-4 branco-fundo">
+                                <p class="h3 w-100 justify-content-start">
+                                    Histórico de pedidos
+                                </p>
+                                <div class="w-80 overflow-y-scroll overflow-x-hidden">
+
                                 </div>
                             </div>
                         </main>

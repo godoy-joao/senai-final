@@ -33,7 +33,11 @@ import model.dao.UsuarioDAO;
  */
 @MultipartConfig
 public class AdminController extends HttpServlet {
-
+CategoriaDAO cDao = new CategoriaDAO();
+        ProdutoDAO pDao = new ProdutoDAO();
+        UsuarioDAO uDao = new UsuarioDAO();
+        EstoqueDAO eDao = new EstoqueDAO();
+        ImagemDAO iDao = new ImagemDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,10 +49,7 @@ public class AdminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoriaDAO cDao = new CategoriaDAO();
-        ProdutoDAO pDao = new ProdutoDAO();
-        UsuarioDAO uDao = new UsuarioDAO();
-        EstoqueDAO eDao = new EstoqueDAO();
+        
        Cookie[] cookies = request.getCookies();
         Usuario u = new Usuario();
         if (cookies != null) {
@@ -106,9 +107,8 @@ public class AdminController extends HttpServlet {
             //---------------------------- separadores pra ler isso daqui, até pq ngm é de ferro
             Produto p = new Produto();
             Estoque e = new Estoque();
-            EstoqueDAO eDao = new EstoqueDAO();
-            ProdutoDAO pDao = new ProdutoDAO();
-            ImagemDAO iDao = new ImagemDAO();
+            
+            
             //----------------------------
             p.setNome(request.getParameter("nome"));
             p.setDescricao(request.getParameter("descricao"));
@@ -141,8 +141,7 @@ public class AdminController extends HttpServlet {
             response.sendRedirect("./admin");
         } else if (url.equals("/addCategoria")) {
             Categoria c = new Categoria();
-            CategoriaDAO cDao = new CategoriaDAO();
-            ImagemDAO iDao = new ImagemDAO();
+            
             c.setNome(request.getParameter("nomeCategoria"));
             Part filePart = request.getPart("imagemCategoria");
             if (filePart != null) {
@@ -155,6 +154,21 @@ public class AdminController extends HttpServlet {
                 System.out.println("FALHA AO ADICIONAR CATEGORIA");
                 e.printStackTrace();
             }
+        } else if (url.equals("editarProduto")) {
+            Produto p = new Produto();
+            p.setIdProduto(Integer.parseInt(request.getParameter("editId")));
+            p.setNome(request.getParameter("novoNome"));
+            p.setValor(Float.parseFloat(request.getParameter("novoValor")));
+            p.setDesconto(Float.parseFloat(request.getParameter("novoDesconto")));
+            p.setDescricao(request.getParameter("novaDescricao"));
+            Estoque e = new Estoque();
+            e = eDao.selecionarEstoquePorIdProduto(p);
+            e.setQuantidade(Integer.parseInt(request.getParameter("novaQtd")));
+            pDao.atualizar(p);
+            
+            
+        } else if (url.equals("excluirProduto")) {
+            
         }
     }
 

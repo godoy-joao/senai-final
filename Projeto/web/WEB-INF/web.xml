@@ -141,6 +141,14 @@
         <url-pattern>/addCategoria</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/editarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/excluirProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>HistoricoPedidosController</servlet-name>
         <url-pattern>/pedidos</url-pattern>
     </servlet-mapping>
