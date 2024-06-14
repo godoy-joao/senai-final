@@ -66,7 +66,6 @@ public class CarrinhoController extends HttpServlet {
                     produtos.get(i).setImagemBase64(Base64.getEncoder().encodeToString(img.getImagem()));
                     valorFinal += produtos.get(i).getValorFinal() * pq.get(i).getQuantidade();
                 }
-                System.out.println(pq.size());
                 request.setAttribute("usuario", u);
                 request.setAttribute("produtoQtd", pq);
                 request.setAttribute("produtos", produtos);

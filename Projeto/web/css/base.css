@@ -55,16 +55,29 @@ header {
 #header-input-div {
     position: relative;
     left: 20%;
-    font-size: 1.5rem;
     border-radius: 20px;
+    max-width: 432.27px;
+
 }
 
+#header-input-div form {
+    padding: 5px;
+}
 #header-input-div input:focus-visible {
     outline: none;
 }
 
 #header-input-div input {
     background: transparent;
+    font-size: 1.5rem;
+    height: 2.1rem;
+}
+
+#submit-search {
+    font-size: 1.5rem;
+    height: 2.1rem;
+    display: flex;
+    align-items: center;
 }
 
 #header-icones-div {
@@ -96,13 +109,14 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 30px;
+    padding: 0px 30px;
     max-height: 100%;
 }
 
 .lateral {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 40%;
     max-height: 100%;

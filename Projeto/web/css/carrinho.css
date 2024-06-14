@@ -2,11 +2,11 @@ main {
     z-index: 0;
     height: 100%;
     width: 100%;
-    padding-top: 5vh;
+
 }
 
 #carrinho-container {
-    height: 75vh;
+    height: 70vh;
     width: 70vw;
     margin-left: 15vw;
     margin-right: 15vw;
@@ -16,6 +16,8 @@ main {
     overflow: hidden;
     border: 1px #cee2e6 solid;
     box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.295);
+    position: absolute;
+    bottom: 12vh;
 }
 
 /* HEADER */
