@@ -1,0 +1,135 @@
+header form {
+    margin-bottom: 0 !important;
+}
+
+body {
+    background-color: #e6e7ee;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+#detalhes-pedido {
+    position: absolute;
+    left: 0;
+    height: 78vh;
+    z-index: 1100;
+    width: 24vw;
+    font-weight: 500;
+    border-right: 1px #a1a1a1 solid;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+}
+
+#detalhes-header {
+    height: 12%;
+    display: flex;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    align-items: end;
+    border-bottom: 1px #a1a1a1 solid;
+    background-color: white;
+    box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.253);
+}
+
+#detalhes-body {
+    height: 68%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 3px 5px;
+    box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.404);
+    background-color: #dbdee4;
+}
+
+.produto-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
+    margin: 5px 0;
+    background-color: white;
+    border: 1px #a1a1a1 solid;
+    box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.322);
+}
+
+.produto-imagem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    min-width: 40%;
+    padding: 5px;
+    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.377);
+}
+
+.produto-imagem img {
+    object-fit: fill;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.produto-detalhes {
+    position: relative;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 60%;
+}
+
+.detalhes-nome {
+    width: 100%;
+}
+
+.detalhes-nome span {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.2rem;
+    height: 100%;
+    display: flex;
+    text-align: start;
+}
+
+.detalhes-qtd {
+    font-size: 1.05rem;
+}
+
+.detalhes-total {
+    position: absolute;
+    bottom: 5%;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e68000;
+}
+
+#detalhes-footer {
+    height: 20%;
+    border-top: 1px #a1a1a1 solid;
+    padding: 5px 0 0 15px;
+    display: flex;
+    box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.253);
+}
+
+#total-pedido {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#total-pedido span {
+    font-weight: 700;
+    color: #e68000;
+}
+
+#preenchimento {
+    position: absolute;
+    right: 0;
+    width: 72vw;
+}

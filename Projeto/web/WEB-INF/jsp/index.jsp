@@ -14,15 +14,13 @@
                         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                         crossorigin="anonymous">
                     <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
-                    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-                        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-                        crossorigin="anonymous"></script>
+
                     <link rel="stylesheet" href="./css/index.css">
                     <link rel="stylesheet" href="./css/base.css">
                     <link rel="stylesheet" href="./css/slider.css">
                 </head>
 
-                <body class="overflow-x-hidden">
+                <body>
 
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
                         <main class="bg-primary pt-5">
@@ -109,8 +107,7 @@
                                                                         <form action="enviarParaCarrinho" method="post"
                                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
                                                                             <button type="submit"
-                                                                                value="${produto.idProduto}"
-                                                                                name="item"
+                                                                                value="${produto.idProduto}" name="item"
                                                                                 class="card-btn verde-fundo fs-6">
                                                                                 <span class="msg1">Comprar</span>
                                                                                 <span class="msg2"><i
@@ -138,15 +135,15 @@
                                                             <div class="produto-card">
                                                                 <div class="produto-imagem">
                                                                     <a href="./produto?id=${produto.idProduto}">
-                                                                    <c:if test="${produto.desconto > 0}">
-                                                                        <span class="tag-desconto">
-                                                                            -
-                                                                            <fmt:formatNumber type="currency"
-                                                                                value="${produto.desconto}" />
-                                                                        </span>
-                                                                    </c:if>
-                                                                    <img src="data:image/png;base64,${produto.imagemBase64}"
-                                                                        class="produto-capa" alt="">
+                                                                        <c:if test="${produto.desconto > 0}">
+                                                                            <span class="tag-desconto">
+                                                                                -
+                                                                                <fmt:formatNumber type="currency"
+                                                                                    value="${produto.desconto}" />
+                                                                            </span>
+                                                                        </c:if>
+                                                                        <img src="data:image/png;base64,${produto.imagemBase64}"
+                                                                            class="produto-capa" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="produto-info">
@@ -172,8 +169,7 @@
                                                                         <form action="enviarParaCarrinho" method="post"
                                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
                                                                             <button type="submit"
-                                                                                value="${produto.idProduto}"
-                                                                                name="item"
+                                                                                value="${produto.idProduto}" name="item"
                                                                                 class="card-btn verde-fundo fs-6">
                                                                                 <span class="msg1">Comprar</span>
                                                                                 <span class="msg2"><i

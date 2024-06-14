@@ -6,7 +6,7 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Base64;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,10 +14,13 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.CarrinhoProduto;
+import model.bean.Imagem;
 import model.bean.Pedido;
 import model.bean.Produto;
 import model.bean.Usuario;
 import model.dao.CarrinhoDAO;
+import model.dao.ImagemDAO;
 import model.dao.PedidoDAO;
 import model.dao.ProdutoDAO;
 import model.dao.UsuarioDAO;
@@ -32,6 +35,7 @@ public class CheckoutController extends HttpServlet {
     CarrinhoDAO cDao = new CarrinhoDAO();
     ProdutoDAO pDao = new ProdutoDAO();
     PedidoDAO pedDao = new PedidoDAO();
+    ImagemDAO iDao = new ImagemDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,25 +50,43 @@ public class CheckoutController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Cookie[] cookies = request.getCookies();
+        Usuario u = new Usuario();
         boolean permite = false;
         for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("criarPedido") && cookie.getName().equals("true")) {
+            if (cookie.getName().equals("criarPedido") && cookie.getValue().equals("true")) {
                 permite = true;
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
+                //cookie.setMaxAge(0);
+                //response.addCookie(cookie);
+            }
+            if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
+                u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
             }
         }
+
         if (!permite) {
-            response.sendRedirect("./home");
-        }
-        
-        
-        
-        if (!response.isCommitted()) {
-            String page = "/WEB-INF/jsp/checkout.jsp";
-            RequestDispatcher rd = getServletContext().getRequestDispatcher(page);
-            rd.forward(request, response);
-        }
+            response.sendRedirect("./carrinho");
+        } else {
+            System.out.println(u.getIdUsuario());
+            List<Produto> produtos = cDao.lerProdutos(u);
+            
+            List<CarrinhoProduto> cartProd = cDao.selecionarQuantidades(cDao.selecionarCarrinho(u));
+            float total = 0;
+            for (int i = 0; i < produtos.size(); i++) {
+                float valor = produtos.get(i).getValorFinal();
+                int quantidade = cartProd.get(i).getQuantidade();
+                total += valor * quantidade;
+                Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
+                produtos.get(i).setImagemBase64(Base64.getEncoder().encodeToString(img.getImagem()));
+            }
+            System.out.println("Produtos: "+produtos.size());
+            request.setAttribute("produtos", produtos);
+            request.setAttribute("cartProd", cartProd);
+            request.setAttribute("usuario", u);
+            request.setAttribute("totalPedido", total);
+            String nextPage = "/WEB-INF/jsp/checkout.jsp";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+            dispatcher.forward(request, response); 
+       }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,7 +101,7 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**
@@ -99,9 +121,11 @@ public class CheckoutController extends HttpServlet {
             response.addCookie(c);
             response.sendRedirect("./checkout");
         } else if (url.equals("/salvarEndereco")) {
-            
+
         } else if (url.equals("/criarPedido")) {
-            
+
+        } else {
+            processRequest(request, response);
         }
     }
 
