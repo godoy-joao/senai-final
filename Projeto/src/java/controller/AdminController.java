@@ -106,9 +106,7 @@ CategoriaDAO cDao = new CategoriaDAO();
         if (url.equals("/addProduto")) {
             //---------------------------- separadores pra ler isso daqui, até pq ngm é de ferro
             Produto p = new Produto();
-            Estoque e = new Estoque();
-            
-            
+            Estoque e = new Estoque();    
             //----------------------------
             p.setNome(request.getParameter("nome"));
             p.setDescricao(request.getParameter("descricao"));

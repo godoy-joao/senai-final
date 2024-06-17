@@ -49,11 +49,14 @@ public class CarrinhoController extends HttpServlet {
 
         Usuario u = new Usuario();
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
-                u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
+                    u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+                }
             }
         }
+
         if (u.getIdUsuario() <= 0) {
             response.sendRedirect("./login");
         } else {
