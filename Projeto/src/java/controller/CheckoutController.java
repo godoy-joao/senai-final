@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.bean.CarrinhoProduto;
+import model.bean.Endereco;
 import model.bean.Imagem;
 import model.bean.Pedido;
 import model.bean.Produto;
 import model.bean.Usuario;
 import model.dao.CarrinhoDAO;
+import model.dao.EnderecoDAO;
 import model.dao.ImagemDAO;
 import model.dao.PedidoDAO;
 import model.dao.ProdutoDAO;
@@ -36,7 +38,7 @@ public class CheckoutController extends HttpServlet {
     ProdutoDAO pDao = new ProdutoDAO();
     PedidoDAO pedDao = new PedidoDAO();
     ImagemDAO iDao = new ImagemDAO();
-
+    EnderecoDAO eDao = new EnderecoDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -119,7 +121,8 @@ public class CheckoutController extends HttpServlet {
             response.addCookie(c);
             response.sendRedirect("./checkout");
         } else if (url.equals("/concluirPedido")) {
-
+            Endereco e = new Endereco();
+            
         } else {
             response.sendRedirect("./checkout");
         }
