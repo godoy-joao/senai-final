@@ -155,6 +155,7 @@ public class CarrinhoDAO {
             if (rs.next()) {
                 c.setIdCarrinho(rs.getInt("idCarrinho"));
                 c.setUsuario(rs.getInt("usuario"));
+
             }
 
             rs.close();
@@ -184,11 +185,58 @@ public class CarrinhoDAO {
         }
     }
 
-    public void adicionarProduto(Produto p, Carrinho c) {
+    /*
+    Método que retorna caso item tenha inserido no carrinho do usuário ou não
+     */
+    public boolean adicionarProduto(Produto p, Carrinho c) {
+        boolean produtoInserido = false;
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
+            List<CarrinhoProduto> cps = new ArrayList();
+            //Seleciona todos os produtos do carrinho do usuário
+            stmt = conexao.prepareStatement("select * from carrinhoproduto WHERE carrinho = ?");
+            stmt.setInt(1, c.getIdCarrinho());
+
+            ResultSet rs = stmt.executeQuery();
+            int quantidade = 0;
+            stmt = conexao.prepareStatement("select * from carrinhoproduto WHERE carrinho = ?");
+            stmt.setInt(1, c.getIdCarrinho());
+
+            ResultSet rs1 = stmt.executeQuery();
+
+            while (rs1.next()) {
+                quantidade += rs1.getInt("quantidade");
+            }
+            while (rs.next()) {
+                CarrinhoProduto cp = new CarrinhoProduto();
+                cp.setIdCarrinhoProduto(rs.getInt("idCarrinhoProduto"));
+                cp.setProduto(rs.getInt("produto"));
+                cp.setCarrinho(rs.getInt("carrinho"));
+                cp.setQuantidade(rs.getInt("quantidade"));
+                //Caso produto a ser inserido já esteja no carrinho do usuário, verificará se a soma da quantidade de todos os produtos no carrinho do usuário é
+                // menor que 10, caso seja, aumentará a quantidade do mesmo produto no banco
+                if (rs.getInt("produto") == p.getIdProduto()) {
+
+                    if (quantidade < 10) {
+                        stmt = conexao.prepareStatement("UPDATE carrinhoproduto SET quantidade = ? WHERE idCarrinhoProduto = ?");
+                        stmt.setInt(1, cp.getQuantidade() + 1);
+                        stmt.setInt(2, cp.getIdCarrinhoProduto());
+                        stmt.executeUpdate();
+                        produtoInserido = true;
+                        return produtoInserido;
+                    }
+
+                }
+                cps.add(cp);
+            }
+            //Caso o produto a ser inserido não esteja no carrinho do usuário, verificará a quantidade de produtos no carrinho, caso seja maior ou igual a 10, retornará falso
+            // e o produto não será inserido no carrinho.
+            if (quantidade >= 10) {
+                return produtoInserido;
+            } 
+            // Caso o produto não esteja no carrinho e a quantidade de produtos seja menor que 10, adicionará uma unidade do produto no carrinho do usuário.
             stmt = conexao.prepareStatement("INSERT INTO carrinhoproduto (carrinho, produto, quantidade) VALUES (?, ?, 1)");
             stmt.setInt(1, c.getIdCarrinho());
             stmt.setInt(2, p.getIdProduto());
@@ -202,6 +250,7 @@ public class CarrinhoDAO {
             e.printStackTrace();
 
         }
+        return true;
     }
 
     public void removerProduto(Produto p, Carrinho c) {

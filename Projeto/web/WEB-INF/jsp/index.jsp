@@ -193,6 +193,15 @@
                                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                                 crossorigin="anonymous"></script>
                             <script src="./js/slider.js"></script>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    var valor = '${prodAdd}';
+                                    if (valor === "1") {
+                                        alert("O produto não foi adicionado. Limite de itens no carrinho: 10");
+                                    }
+                                })
+
+                            </script>
                 </body>
 
                 </html>

@@ -10,6 +10,8 @@
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                     crossorigin="anonymous">
+                <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
                 <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="./css/checkout.css">
                 <link rel="stylesheet" href="./css/base.css">
@@ -68,21 +70,96 @@
                                         <span class="fs-3">Endereço de entrega: </span>
                                     </div>
                                     <div id="endereco-body">
-                                        <div>
-                                            <!--
-                                            estado
-                                            cep
-                                            frete
-                                        -->
+                                        <div id="endereco-esquerda">
+                                            <c:if test="${enderecosDoUsuario.size() > 0}">
+                                                <div id="select-enderecos">
+                                                    <label for="enderecosDoUsuario">
+                                                        Selecione um endereço
+                                                    </label>
+                                                    <select name="select-endereco" id="enderecosDoUsuario">
+                                                        <c:forEach items="${enderecosDoUsuario}" var="endereco" varStatus="contagem">
+                                                            <option value="${endereco.idEndereco}">${contagem.count}. ${endereco.rua}, ${endereco.numero}</option>
+                                                        </c:forEach>
+                                                        <option value="novo" selected>Adicionar novo</option>
+                                                    </select>
+                                                </div>
+                                            </c:if>
+                                            <div id="div-select">
+                                                <label for="select-estado">
+                                                    Estado:
+                                                </label>
+                                                <select name="select-estado" id="select-estado">
+                                                    <option value="AC">Acre</option>
+                                                    <option value="AL">Alagoas</option>
+                                                    <option value="AP">Amapá</option>
+                                                    <option value="AM">Amazonas</option>
+                                                    <option value="BA">Bahia</option>
+                                                    <option value="CE">Ceará</option>
+                                                    <option value="ES">Espírito Santo</option>
+                                                    <option value="GO">Goiânia</option>
+                                                    <option value="MA">Maranhão</option>
+                                                    <option value="MT">Mato Grosso</option>
+                                                    <option value="MS">Mato Grosso do Sul</option>
+                                                    <option value="MG">Minas Gerais</option>
+                                                    <option value="PA">Pará</option>
+                                                    <option value="PB">Paraíba</option>
+                                                    <option value="PR">Paraná</option>
+                                                    <option value="PE">Pernambuco</option>
+                                                    <option value="PI">Piauí</option>
+                                                    <option value="RJ">Rio de Janeiro</option>
+                                                    <option value="RN">Rio Grande do Norte</option>
+                                                    <option value="RS">Rio Grande do Sul</option>
+                                                    <option value="RO">Rondônia</option>
+                                                    <option value="RR">Roraima</option>
+                                                    <option value="SC">Santa Catarina</option>
+                                                    <option value="SP">São Paulo</option>
+                                                    <option value="SE">Sergipe</option>
+                                                    <option value="TO">Tocantins</option>
+                                                </select>
+                                            </div>
+                                            <div id="div-cep">
+                                                <label for="input-cep">CEP ou Código Postal</label>
+                                                <input type="text" id="input-cep" minlength="9" name="endereco-cep"
+                                                    placeholder="00000-000">
+                                            </div>
+                                            <div id="info-frete">
+                                                <span>
+                                                    Frete:
+                                                </span>
+                                                <span id="valor-frete">
+                                                    R$0,00
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <!--
-                                            cidade
-                                            bairro
-                                            rua
-                                            numero
-                                            complemento
-                                        -->
+                                        <div id="endereco-direita">
+                                            <div>
+                                                <label for="input-cidade">Cidade </label>
+                                                <input type="text" name="endereco-cidade" id="input-cidade"
+                                                    placeholder="Pindamonhangaba">
+                                            </div>
+                                            <div>
+                                                <label for="input-bairro">Bairro </label>
+                                                <input type="text" name="endereco-bairro" id="input-bairro"
+                                                    placeholder="Bairro do limoeiro">
+                                            </div>
+                                            <div>
+                                                <label for="input-rua">Rua </label>
+                                                <input type="text" name="endereco-rua" id="input-rua"
+                                                    placeholder="Rua sem saída">
+                                            </div>
+                                            <div>
+                                                <label for="input-numero">Número (Deixe em branco caso sem número)
+                                                </label>
+                                                <input type="text" name="endereco-numero" id="input-numero"
+                                                    placeholder="1234" maxlength="5">
+                                            </div>
+                                            <div>
+                                                <label for="input-complemento">Complemento </label>
+                                                <input type="text" name="endereco-complemento" id="input-complemento" placeholder="Ap. 123">
+                                            </div>
+                                            <div>
+                                                <a href="#pagamento">Salvar endereço</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +170,7 @@
                                     <div id="pagamento-body">
                                         <div id="formas-de-pagamento">
                                             <div class="radio-option">
-                                                <input type="radio" value="PIX" name="radio-pagamento" id="">
+                                                <input type="radio" value="PIX" name="radio-pagamento" id="" checked>
                                                 <span>Pix</span>
                                             </div>
                                             <div class="radio-option">
@@ -114,10 +191,48 @@
                                             </div>
                                         </div>
                                         <div id="area-pix">
+                                            <div>
+                                                <label for="qrcode-pix">Escaneie o QRCode para realizar o pagamento e
+                                                    concluir seu pedido.</label>
+                                                <img src="" id="qrcode-pix" alt="">
+                                            </div>
 
+                                            <div>
+                                                <button class="btn-finalizar">
+                                                    Finalizar pedido
+                                                </button>
+                                            </div>
                                         </div>
                                         <div id="area-cartao">
+                                            <div class="div-input">
+                                                <label for="cartao-titular">Nome do Titular do cartão</label>
+                                                <input type="text" name="cartao-titular" id="cartao-titular"
+                                                    placeholder="Nome E. Exemplo" required>
 
+                                            </div>
+                                            <div class="div-input">
+                                                <label for="cartao-numero">Número do cartão</label>
+                                                <input type="text" maxlength="19" minlength="19" id="cartao-numero"
+                                                    placeholder="1111.1111.1111.1111" required>
+                                            </div>
+                                            <div class="div-input">
+                                                <div id="div-data">
+                                                    <label for="cartao-data">Data de vencimento</label>
+                                                    <input type="text" id="cartao-data" minlength="5" maxlength="5"
+                                                        placeholder="MM/AA" required>
+                                                    <span id="data-aviso"></span>
+                                                </div>
+                                                <div id="div-cvv">
+                                                    <label for="cartao-cvv">Código de segurança</label>
+                                                    <input type="text" id="cartao-cvv" minlength="3" maxlength="3"
+                                                        placeholder="000" required>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button class="btn-finalizar">
+                                                    Finalizar pedido
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -128,6 +243,9 @@
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                             crossorigin="anonymous"></script>
+                        <script
+                            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+                        <script src="./js/checkout.js"></script>
 
             </body>
 

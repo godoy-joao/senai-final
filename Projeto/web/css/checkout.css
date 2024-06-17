@@ -4,6 +4,7 @@ header form {
 
 body {
     background-color: #e6e7ee;
+    overflow: hidden;
 }
 
 main {
@@ -26,9 +27,9 @@ main {
 }
 
 #detalhes-header {
-    height: 12%;
+    height: 5rem;
     display: flex;
-    padding-left: 15px;
+    padding-left: 20px;
     padding-bottom: 5px;
     align-items: end;
     border-bottom: 1px #a1a1a1 solid;
@@ -132,4 +133,60 @@ main {
     position: absolute;
     right: 0;
     width: 72vw;
+    height: 78vh;
+    border-left: 1px #a1a1a1 solid;
+    padding: 10px 15px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+#preenchimento form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#endereco {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 2px #a1a1a1 solid;
+    padding-bottom: 10px;
+}
+
+#endereco-header {
+    display: flex;
+    align-items: end;
+    font-size: 2rem;
+    font-weight: 500;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px #a1a1a1 solid;
+    height: calc(5rem - 10px);
+}
+
+#endereco-body {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#endereco-esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 50%;
+    padding: 15px 20px;
+}
+
+input:focus-visible {
+    outline: 1px #acacac solid;
+}
+
+#endereco-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 50%;
+    padding: 15px 20px;
 }
