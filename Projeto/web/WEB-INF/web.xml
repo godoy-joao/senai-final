@@ -118,7 +118,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckoutController</servlet-name>
-        <url-pattern>/finalizarPedido</url-pattern>
+        <url-pattern>/toCheckout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckoutController</servlet-name>

@@ -76,11 +76,19 @@ public class HomeController extends HttpServlet {
                 if (cookie.getName().equals("login")) {
                     idUsuario = Integer.parseInt(cookie.getValue());
                 }
+                System.out.println(cookie.getName() +"<< Cookie" + " VALOR >>"+cookie.getValue());
+                if (cookie.getName().equals("produtoAdicionado") && cookie.getValue().equals("1")) {
+                    request.setAttribute("prodAdd", "1");
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                    
+                }
             }
         }
         if (idUsuario > 0) {
             request.setAttribute("user", uDao.selecionarUsuarioPorId(idUsuario));
         }
+
         request.setAttribute("categorias", categorias);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
@@ -136,7 +144,10 @@ public class HomeController extends HttpServlet {
             } else {
                 Produto prod = pDao.selecionarPorId(Integer.parseInt(request.getParameter("item")));
                 Carrinho cart = cartDao.selecionarCarrinho(user);
-                cartDao.adicionarProduto(prod, cart);
+                if (!cartDao.adicionarProduto(prod, cart)) {
+                    Cookie cookie = new Cookie("produtoAdicionado", "1");
+                    response.addCookie(cookie);
+                }
                 response.sendRedirect("./home");
             }
         }
