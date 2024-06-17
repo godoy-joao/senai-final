@@ -4,7 +4,12 @@ const inputCep = document.getElementById("input-cep");
 const valorFrete = document.getElementById("valor-frete");
 
 inputCep.addEventListener("change", function () {
-    valorFrete.innerText = "R$30,00";
+    if (inputCep.value.length < 9) {
+        valorFrete.innerText = "R$0,00";
+    } else {
+        valorFrete.innerText = "R$30,00";
+    }
+
 })
 
 //Pagamento
@@ -22,7 +27,7 @@ cartaoData.addEventListener("focusout", function () {
     let ano1 = parseInt(ano.charAt(0));
     let ano2 = parseInt(ano.charAt(1));
 
-    if ((((mes1*10) + mes2) > 12) || (((mes1*10) + mes2) <= 0) || (((ano1*10) + ano2) < 24)) {
+    if ((((mes1 * 10) + mes2) > 12) || (((mes1 * 10) + mes2) <= 0) || (((ano1 * 10) + ano2) < 24)) {
         cartaoData.style.borderColor = "red";
         avisoData.style.color = "red";
         avisoData.innerHTML = "Data inválida!";
@@ -32,3 +37,6 @@ cartaoData.addEventListener("focusout", function () {
         avisoData.innerHTML = "";
     }
 });
+
+'use strict'
+

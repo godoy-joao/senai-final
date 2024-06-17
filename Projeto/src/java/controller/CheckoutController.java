@@ -39,6 +39,7 @@ public class CheckoutController extends HttpServlet {
     PedidoDAO pedDao = new PedidoDAO();
     ImagemDAO iDao = new ImagemDAO();
     EnderecoDAO eDao = new EnderecoDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,16 +55,19 @@ public class CheckoutController extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         Usuario u = new Usuario();
         boolean permite = false;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("criarPedido") && cookie.getValue().equals("true")) {
-                permite = true;
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
-                u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("criarPedido") && cookie.getValue().equals("true")) {
+                    permite = true;
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+                if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
+                    u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+                }
             }
         }
+
         List<Produto> produtos = cDao.lerProdutos(u);
         if (!permite || produtos.size() < 1) {
             response.sendRedirect("./carrinho");
@@ -122,7 +126,7 @@ public class CheckoutController extends HttpServlet {
             response.sendRedirect("./checkout");
         } else if (url.equals("/concluirPedido")) {
             Endereco e = new Endereco();
-            
+
         } else {
             response.sendRedirect("./checkout");
         }
