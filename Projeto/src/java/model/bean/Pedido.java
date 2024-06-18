@@ -6,6 +6,7 @@
 package model.bean;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -49,6 +50,13 @@ public class Pedido {
     public void setUsuario(int usuario) {
         this.usuario = usuario;
     }
+    
+    public void setDataHoraAtual() {
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        this.dataPedido = timestamp;
+    }
+    
 
     public int getEnderecoEntrega() {
         return enderecoEntrega;

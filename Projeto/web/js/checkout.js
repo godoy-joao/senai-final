@@ -17,6 +17,26 @@ $('#cartao-numero').mask("0000.0000.0000.0000");
 $('#cartao-data').mask("00/00");
 $('#cartao-cvv').mask("000");
 
+$('input[name="radio-pagamento"]').change(function () {
+    atualizarAreaPagamento();
+})
+
+function atualizarAreaPagamento() {
+    var formaPagamento = document.querySelector('input[name="radio-pagamento"]:checked').value;
+    switch (formaPagamento) {
+        case "PIX":
+            $('#area-pix').removeClass("d-none").addClass("d-flex");
+            $('#area-cartao').removeClass("d-flex").addClass("d-none");
+            break;
+        default:
+            $('#area-cartao').removeClass("d-none").addClass("d-flex");
+            $('#area-pix').removeClass("d-flex").addClass("d-none");
+            break;
+    }
+}
+
+atualizarAreaPagamento();
+
 const cartaoData = document.getElementById("cartao-data");
 const avisoData = document.getElementById("data-aviso");
 cartaoData.addEventListener("focusout", function () {

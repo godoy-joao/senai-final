@@ -71,19 +71,21 @@
                                     </div>
                                     <div id="endereco-body">
                                         <div id="endereco-esquerda">
-                                            <c:if test="${enderecosDoUsuario.size() > 0}">
-                                                <div id="select-enderecos">
-                                                    <label for="enderecosDoUsuario">
-                                                        Selecione um endereço
-                                                    </label>
-                                                    <select name="select-endereco" id="enderecosDoUsuario">
-                                                        <c:forEach items="${enderecosDoUsuario}" var="endereco" varStatus="contagem">
-                                                            <option value="${endereco.idEndereco}">${contagem.count}. ${endereco.rua}, ${endereco.numero}</option>
+                                            <div id="select-enderecos">
+                                                <label for="enderecosDoUsuario">
+                                                    Selecione um endereço
+                                                </label>
+                                                <select name="select-endereco" id="enderecosDoUsuario">
+                                                    <c:if test="${enderecosDoUsuario.size() > 0}">
+                                                        <c:forEach items="${enderecosDoUsuario}" var="endereco"
+                                                            varStatus="contagem">
+                                                            <option value="${endereco.idEndereco}">${contagem.count}.
+                                                                ${endereco.rua}, ${endereco.numero}</option>
                                                         </c:forEach>
-                                                        <option value="novo" selected>Adicionar novo</option>
-                                                    </select>
-                                                </div>
-                                            </c:if>
+                                                    </c:if>
+                                                    <option value="novo" selected>Adicionar novo</option>
+                                                </select>
+                                            </div>
                                             <div id="div-select">
                                                 <label for="select-estado">
                                                     Estado:
@@ -155,7 +157,8 @@
                                             </div>
                                             <div>
                                                 <label for="input-complemento">Complemento </label>
-                                                <input type="text" name="endereco-complemento" id="input-complemento" placeholder="Ap. 123">
+                                                <input type="text" name="endereco-complemento" id="input-complemento"
+                                                    placeholder="Ap. 123">
                                             </div>
                                             <div>
                                                 <a href="#pagamento">Salvar endereço</a>
@@ -169,28 +172,30 @@
                                     </div>
                                     <div id="pagamento-body">
                                         <div id="formas-de-pagamento">
-                                            <div class="radio-option">
+                                            <div class="radio-option fs-4 mb-1 fw-normal">
                                                 <input type="radio" value="PIX" name="radio-pagamento" id="" checked>
                                                 <span>Pix</span>
                                             </div>
-                                            <div class="radio-option">
-                                                <input type="radio" value="VC" name="radio-pagamento" id="">
+                                            <div class="radio-option fs-4 mb-1 fw-normal">
+                                                <input type="radio" value="Visa Crédito" name="radio-pagamento" id="">
                                                 <span>Visa Crédito</span>
                                             </div>
-                                            <div class="radio-option">
-                                                <input type="radio" value="VD" name="radio-pagamento" id="">
+                                            <div class="radio-option fs-4 mb-1 fw-normal">
+                                                <input type="radio" value="Visa Débito" name="radio-pagamento" id="">
                                                 <span>Visa Débito</span>
                                             </div>
-                                            <div class="radio-option">
-                                                <input type="radio" value="MCC" name="radio-pagamento" id="">
+                                            <div class="radio-option fs-4 mb-1 fw-normal">
+                                                <input type="radio" value="MasterCard Crédito" name="radio-pagamento"
+                                                    id="">
                                                 <span>MasterCard Crédito</span>
                                             </div>
-                                            <div class="radio-option">
-                                                <input type="radio" value="MCD" name="radio-pagamento" id="">
+                                            <div class="radio-option fs-4 mb-1 fw-normal">
+                                                <input type="radio" value="Mastercard Débito" name="radio-pagamento"
+                                                    id="">
                                                 <span>Mastercard Débito</span>
                                             </div>
                                         </div>
-                                        <div id="area-pix">
+                                        <div id="area-pix" class="d-flex flex-column justify-content-between">
                                             <div>
                                                 <label for="qrcode-pix">Escaneie o QRCode para realizar o pagamento e
                                                     concluir seu pedido.</label>
@@ -203,33 +208,33 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div id="area-cartao">
-                                            <div class="div-input">
+                                        <div id="area-cartao" class="d-none flex-column justify-content-center gap-3">
+                                            <div class="div-input d-flex flex-column w-40 gap-2">
                                                 <label for="cartao-titular">Nome do Titular do cartão</label>
                                                 <input type="text" name="cartao-titular" id="cartao-titular"
                                                     placeholder="Nome E. Exemplo" required>
 
                                             </div>
-                                            <div class="div-input">
+                                            <div class="div-input d-flex flex-column w-40 gap-2">
                                                 <label for="cartao-numero">Número do cartão</label>
                                                 <input type="text" maxlength="19" minlength="19" id="cartao-numero"
                                                     placeholder="1111.1111.1111.1111" required>
                                             </div>
-                                            <div class="div-input">
-                                                <div id="div-data">
+                                            <div class="div-input d-flex flex-row w-40">
+                                                <div id="div-data" class="d-flex flex-column gap-2 w-50 pe-1">
                                                     <label for="cartao-data">Data de vencimento</label>
                                                     <input type="text" id="cartao-data" minlength="5" maxlength="5"
                                                         placeholder="MM/AA" required>
                                                     <span id="data-aviso"></span>
                                                 </div>
-                                                <div id="div-cvv">
+                                                <div id="div-cvv" class="d-flex flex-column gap-2 w-50 ps-1">
                                                     <label for="cartao-cvv">Código de segurança</label>
                                                     <input type="text" id="cartao-cvv" minlength="3" maxlength="3"
                                                         placeholder="000" required>
                                                 </div>
                                             </div>
                                             <div>
-                                                <button class="btn-finalizar">
+                                                <button class="btn-finalizar" type="submit">
                                                     Finalizar pedido
                                                 </button>
                                             </div>

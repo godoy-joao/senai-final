@@ -125,6 +125,10 @@
         <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/concluirPedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProdutoController</servlet-name>
         <url-pattern>/produto</url-pattern>
     </servlet-mapping>
