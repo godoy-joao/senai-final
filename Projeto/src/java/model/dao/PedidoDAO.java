@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.bean.CarrinhoProduto;
 import model.bean.Pedido;
 import model.bean.Produto;
 import model.bean.Usuario;
@@ -47,11 +48,12 @@ public class PedidoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             
-            stmt = conexao.prepareStatement("INSERT INTO pedido (usuario, enderecoEntrega, dataPedido, valorTotal) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt = conexao.prepareStatement("INSERT INTO pedido (usuario, enderecoEntrega, dataPedido, valorTotal, formaPagamento) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, p.getUsuario());
             stmt.setInt(2, p.getEnderecoEntrega());
             stmt.setTimestamp(3, p.getDataPedido());
             stmt.setFloat(4, p.getValorTotal());
+            stmt.setString(5, p.getFormaPagamento());
             
             stmt.executeUpdate();
             
@@ -163,7 +165,7 @@ public class PedidoDAO {
         }
     }
     
-    public void adicionarProdutos(List<Produto> produtos, Pedido p) {
+    public void adicionarProdutos(List<CarrinhoProduto> produtos, Pedido p) {
         if (produtos == null) {
             return;
         }
@@ -172,9 +174,10 @@ public class PedidoDAO {
             PreparedStatement stmt = null;
             
             for (int i = 0; i < produtos.size(); i++) {
-                stmt = conexao.prepareStatement("INSERT INTO produtopedido (produto, pedido) VALUES (?, ?)");
-                stmt.setInt(1, produtos.get(i).getIdProduto());
+                stmt = conexao.prepareStatement("INSERT INTO produtopedido (produto, pedido, quantidade) VALUES (?, ?, ?)");
+                stmt.setInt(1, produtos.get(i).getProduto());
                 stmt.setInt(2, p.getIdPedido());
+                stmt.setInt(3, produtos.get(i).getQuantidade());
                 
                 stmt.executeUpdate();
             }

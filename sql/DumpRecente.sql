@@ -318,6 +318,7 @@ CREATE TABLE `produtopedido` (
   `idProdutoPedido` int(11) NOT NULL AUTO_INCREMENT,
   `pedido` int(11) NOT NULL,
   `produto` int(11) NOT NULL,
+  `quantidade` int(11) NOT NULL,
   PRIMARY KEY (`idProdutoPedido`),
   KEY `pedido` (`pedido`),
   KEY `produto` (`produto`),

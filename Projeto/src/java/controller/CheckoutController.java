@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -59,8 +60,8 @@ public class CheckoutController extends HttpServlet {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("criarPedido") && cookie.getValue().equals("true")) {
                     permite = true;
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
+                    //cookie.setMaxAge(0);
+                    //response.addCookie(cookie);
                 }
                 if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
                     u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
@@ -120,13 +121,47 @@ public class CheckoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = request.getServletPath();
+        Cookie[] cookies = request.getCookies();
+        Usuario u = new Usuario();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
+                    u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+                }
+            }
+        }
         if (url.equals("/toCheckout")) {
             Cookie c = new Cookie("criarPedido", "true");
             response.addCookie(c);
             response.sendRedirect("./checkout");
         } else if (url.equals("/concluirPedido")) {
             Endereco e = new Endereco();
+            Pedido p = new Pedido();
+            if (!(request.getParameter("select-endereco").equals("novo"))) {
+                e = eDao.selecionarPorId(Integer.parseInt(request.getParameter("select-endereco")));
+                p.setEnderecoEntrega(e.getIdEndereco());
+            } else {
+                e.setCep(request.getParameter("endereco-cep"));
+                e.setEstado(request.getParameter("select-estado"));
+                e.setCidade(request.getParameter("endereco-cidade"));
+                e.setBairro(request.getParameter("endereco-bairro"));
+                e.setRua(request.getParameter("endereco-rua"));
+                e.setNumero(request.getParameter("endereco-numero"));
+                e.setComplemento(request.getParameter("endereco-complemento"));
+                e.setUsuario(u.getIdUsuario());
+                p.setEnderecoEntrega(eDao.criar(e));
+            }
+            p.setDataHoraAtual();
+            p.setValorTotal(Float.parseFloat(request.getAttribute("totalPedido").toString()));
+            p.setFormaPagamento(request.getParameter("radio-pagamento"));
+            p.setUsuario(u.getIdUsuario());
 
+            int idPedido = pedDao.criar(p);
+            p = pedDao.selecionarPorId(idPedido);
+            List<CarrinhoProduto> produtos = cDao.selecionarQuantidades(cDao.selecionarCarrinho(u));
+            pedDao.adicionarProdutos(produtos, p);
+            cDao.esvaziarCarrinho(u);
+            response.sendRedirect("./checkout");
         } else {
             response.sendRedirect("./checkout");
         }
