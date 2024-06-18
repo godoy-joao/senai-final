@@ -173,25 +173,28 @@
                                     <div id="pagamento-body">
                                         <div id="formas-de-pagamento">
                                             <div class="radio-option fs-4 mb-1 fw-normal">
-                                                <input type="radio" value="PIX" name="radio-pagamento" id="" checked>
+                                                <input type="radio" value="PIX" name="radio-pagamento"
+                                                    class="input-radio" id="" checked>
                                                 <span>Pix</span>
                                             </div>
                                             <div class="radio-option fs-4 mb-1 fw-normal">
-                                                <input type="radio" value="Visa Crédito" name="radio-pagamento" id="">
+                                                <input type="radio" value="Visa Crédito" class="input-radio"
+                                                    name="radio-pagamento" id="">
                                                 <span>Visa Crédito</span>
                                             </div>
                                             <div class="radio-option fs-4 mb-1 fw-normal">
-                                                <input type="radio" value="Visa Débito" name="radio-pagamento" id="">
+                                                <input type="radio" value="Visa Débito" class="input-radio"
+                                                    name="radio-pagamento" id="">
                                                 <span>Visa Débito</span>
                                             </div>
                                             <div class="radio-option fs-4 mb-1 fw-normal">
-                                                <input type="radio" value="MasterCard Crédito" name="radio-pagamento"
-                                                    id="">
+                                                <input type="radio" value="MasterCard Crédito" class="input-radio"
+                                                    name="radio-pagamento" id="">
                                                 <span>MasterCard Crédito</span>
                                             </div>
                                             <div class="radio-option fs-4 mb-1 fw-normal">
-                                                <input type="radio" value="Mastercard Débito" name="radio-pagamento"
-                                                    id="">
+                                                <input type="radio" value="Mastercard Débito" class="input-radio"
+                                                    name="radio-pagamento" id="">
                                                 <span>Mastercard Débito</span>
                                             </div>
                                         </div>
