@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `senai_final` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `senai_final`;
+CREATE DATABASE  IF NOT EXISTS `maxiecommerce` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `maxiecommerce`;
 -- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: senai_final
+-- Host: localhost    Database: maxiecommerce
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.4.24-MariaDB
 
@@ -363,7 +363,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Jo√£o Guilherme de Godoy','joaoguilherme-est@hotmail.com','123','121.104.049-65','(43) 99675-5176','2006-02-10',1,NULL);
+INSERT INTO `usuario` VALUES (1,'Jo„o Guilherme de Godoy','joaoguilherme-est@hotmail.com','123','121.104.049-65','(43) 99675-5176','2006-02-10',1,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -375,7 +375,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER criarCarrinho
+/*!50003 CREATE*/ /*!50017 DEFINER=`nab3rt`@`%`*/ /*!50003 TRIGGER criarCarrinho
 AFTER INSERT ON usuario
 FOR EACH ROW
 BEGIN
@@ -388,11 +388,11 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Dumping events for database 'senai_final'
+-- Dumping events for database 'maxiecommerce'
 --
 
 --
--- Dumping routines for database 'senai_final'
+-- Dumping routines for database 'maxiecommerce'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
