@@ -55,6 +55,20 @@
                                 </c:forEach>
                             </div>
                             <div id="detalhes-footer">
+                                <div id="valores" class="d-flex flex-column w-100">
+                                    <div class="d-flex flex-row gap-3 w-80 justify-content-between">
+                                        Produtos:
+                                        <span id="valores-produtos" class="text-start w-50">
+                                            <fmt:formatNumber type="currency" value="${totalPedido}" />
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-row gap-3 w-80 justify-content-between">
+                                        Frete:
+                                        <span id="valores-frete" class="text-start w-50">
+                                            R$ 0,00
+                                        </span>
+                                    </div>
+                                </div>
                                 <div id="total-pedido">
                                     Total do pedido:
                                     <span>

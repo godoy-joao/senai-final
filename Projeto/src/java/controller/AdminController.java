@@ -159,12 +159,9 @@ CategoriaDAO cDao = new CategoriaDAO();
             p.setValor(Float.parseFloat(request.getParameter("novoValor")));
             p.setDesconto(Float.parseFloat(request.getParameter("novoDesconto")));
             p.setDescricao(request.getParameter("novaDescricao"));
-            Estoque e = new Estoque();
-            e = eDao.selecionarEstoquePorIdProduto(p);
+            Estoque e = eDao.selecionarEstoquePorIdProduto(p);
             e.setQuantidade(Integer.parseInt(request.getParameter("novaQtd")));
-            pDao.atualizar(p);
-            
-            
+            pDao.atualizar(p);            
         } else if (url.equals("excluirProduto")) {
             
         }

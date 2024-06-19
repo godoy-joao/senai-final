@@ -2,12 +2,15 @@
 $('#input-cep').mask("00000-000");
 const inputCep = document.getElementById("input-cep");
 const valorFrete = document.getElementById("valor-frete");
+const valorFreteDetalhes = document.getElementById("valores-frete");
 
 inputCep.addEventListener("change", function () {
     if (inputCep.value.length < 9) {
-        valorFrete.innerText = "R$0,00";
+        valorFrete.innerText = "R$ 0,00";
+        valorFreteDetalhes.innerText = "R$ 0,00";
     } else {
-        valorFrete.innerText = "R$30,00";
+        valorFrete.innerText = "R$ 30,00";
+        valorFreteDetalhes.innerText = "R$ 30,00";
     }
 
 })
