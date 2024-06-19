@@ -21,11 +21,117 @@
         <body>
             <%@ include file="/WEB-INF/jspf/header.jspf" %>
                 <main>
-                    
+                    <div>
+                        <div id="historico-header">
+                            <span class="h-3">Histórico de pedidos</span>
+                        </div>
+                        <div id="historico-body">
+                            <div class="pedido-box">
+                                <c:forEach items="${pedidos}" var="pedido">
+                                    <button class="w-100 h-100 d-flex flex-row">
+                                        <div class="w-100 h-100 d-none btnHover">
+                                            <span>Clique para ver mais detalhes</span>
+                                        </div>
+                                        <div class="div-info">
+                                            <div class="info-detalhes">
+                                                <div class="div-id">
+                                                    <span>
+                                                        Id do pedido:
+                                                    </span>
+                                                    <span>
+                                                        ${pedido.idPedido}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        Quantidade de itens:
+                                                    </span>
+                                                    <span>
+                                                        ${qtdItens[contagem.index]}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        Valor total do pedido:
+                                                    </span>
+                                                    <span>
+                                                        ${pedido.valorTotal}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="info-endereco">
+                                                <div class="endereco-esquerda">
+                                                    <div>
+                                                        <span>
+                                                            Estado:
+                                                        </span>
+                                                        <span>
+                                                            ${enderecos[contagem.index].estado}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span>
+                                                            Cidade
+                                                        </span>
+                                                        <span>
+                                                            ${enderecos[contagem.index].cidade}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span>
+                                                            CEP:
+                                                        </span>
+                                                        <span>
+                                                            ${enderecos[contagem.index].cep}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="endereco-esquerda">
+                                                    <div>
+                                                        <span>
+                                                            Bairro:
+                                                        </span>
+                                                        <span>
+                                                            ${enderecos[contagem.index].bairro}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span>
+                                                            Rua:
+                                                        </span>
+                                                        <span>
+                                                            ${enderecos[contagem.index].rua}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span>
+                                                            Número:
+                                                        </span>
+                                                        <span>
+                                                            ${enderecos[contagem.index].numero}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span>
+                                                            Complemento:
+                                                        </span>
+                                                        <span>
+                                                            ${enderecos[contagem.index].complemento}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
                 </main>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                    crossorigin="anonymous"></script>
+                <%@ include file="/WEB-INF/jspf/footer.jspf" %>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                        crossorigin="anonymous"></script>
         </body>
 
         </html>

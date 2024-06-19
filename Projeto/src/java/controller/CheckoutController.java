@@ -160,7 +160,7 @@ public class CheckoutController extends HttpServlet {
             p = pedDao.selecionarPorId(idPedido);
             List<CarrinhoProduto> produtos = cDao.selecionarQuantidades(cDao.selecionarCarrinho(u));
             pedDao.adicionarProdutos(produtos, p);
-            cDao.esvaziarCarrinho(u); 
+            cDao.esvaziarCarrinho(u);
             String nextPage = "/WEB-INF/jsp/agradecimento.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
             dispatcher.forward(request, response);
