@@ -22,7 +22,7 @@
 
                 <body>
 
-                    <%@ include file="/WEB-INF/jspf/header.jspf" %>
+                    <%@ include file="/WEB-INF/jspf/header.jsp" %>
                         <main class="bg-primary pt-5">
                             <div class="px-5">
                                 <div class="px-5">

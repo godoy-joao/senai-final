@@ -239,7 +239,7 @@ select {
     appearance: none;
     margin: 0;
     font: inherit;
-    background-color: white;
+    background-color: #ffb55c;
     width: 25px;
     height: 25px;
     border: 2px black solid;
@@ -255,7 +255,7 @@ select {
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: #e68000;
+    background-color: white;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
 }
@@ -267,6 +267,7 @@ select {
 .radio-option input:focus {
     outline: max(2px, 0.05em) solid currentColor;
     outline-offset: max(2px, 0.05em);
+    outline-color: #ffb55c;
 }
 
 #endereco input {
