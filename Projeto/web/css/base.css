@@ -311,7 +311,7 @@ header {
         display: flex;
     }
 
-    #div-logo a {
+    #div-logo a, #div-icones, #canvas-desktop {
         display: none;
     }
 
@@ -321,10 +321,6 @@ header {
 
     #div-header {
         grid-template-columns: 2fr 7fr;
-    }
-
-    #div-icones {
-        display: none;
     }
 
     #div-search form {

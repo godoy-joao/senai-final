@@ -16,7 +16,7 @@ main {
 #detalhes-pedido {
     position: absolute;
     left: 0;
-    height: 78vh;
+    height: 76vh;
     z-index: 1100;
     width: 24vw;
     font-weight: 500;
@@ -27,7 +27,7 @@ main {
 }
 
 #detalhes-header {
-    height: 5rem;
+    height: 9vh;
     display: flex;
     padding-left: 20px;
     padding-bottom: 5px;
@@ -38,7 +38,7 @@ main {
 }
 
 #detalhes-body {
-    height: 68%;
+    height: 52vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -112,7 +112,7 @@ main {
 }
 
 #detalhes-footer {
-    height: 20%;
+    height: 15vh;
     border-top: 1px #a1a1a1 solid;
     padding: 5px 0 0 15px;
     display: flex;
@@ -163,7 +163,7 @@ main {
     padding-left: 20px;
     padding-bottom: 5px;
     border-bottom: 1px #a1a1a1 solid;
-    height: calc(5rem - 10px);
+    height: calc(9vh - 10px);
 }
 
 #pagamento-header {
@@ -239,7 +239,7 @@ select {
     appearance: none;
     margin: 0;
     font: inherit;
-    background-color: #ffb55c;
+    background-color: white;
     width: 25px;
     height: 25px;
     border: 2px black solid;
@@ -255,7 +255,7 @@ select {
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #ffb55c;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
 }
@@ -270,7 +270,7 @@ select {
     outline-color: #ffb55c;
 }
 
-#endereco input {
+#endereco input, #area-cartao input {
     border: 2px rgb(80, 80, 80) solid;
     border-radius: 5px;
     text-align: start;
@@ -282,8 +282,8 @@ select {
 }
 
 #pagamento-body {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 3fr 5fr;
 }
 
 #formas-de-pagamento {

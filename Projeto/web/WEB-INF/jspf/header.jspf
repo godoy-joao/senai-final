@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="canvas-mob">
+                <div id="canvas-mob" class="flex-column">
                     <div class="canvas-item">
                         <div class="item-icone">
                             <i class="fa-solid fa-house"></i>

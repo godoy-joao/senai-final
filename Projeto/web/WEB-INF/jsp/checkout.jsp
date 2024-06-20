@@ -212,7 +212,7 @@
                                                 <span>Mastercard Débito</span>
                                             </div>
                                         </div>
-                                        <div id="area-pix" class="d-flex flex-column justify-content-between">
+                                        <div id="area-pix" class="d-flex flex-column justify-content-between pb-5">
                                             <div>
                                                 <label for="qrcode-pix">Escaneie o QRCode para realizar o pagamento e
                                                     concluir seu pedido.</label>
@@ -225,19 +225,24 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div id="area-cartao" class="d-none flex-column justify-content-center gap-3">
-                                            <div class="div-input d-flex flex-column w-40 gap-2">
+                                        <div id="area-cartao" class="d-none flex-column justify-content-center gap-3 pb-5">
+                                            <div>
+                                                <span class="fs-3">
+                                                    Dados do cartão
+                                                </span>
+                                            </div>
+                                            <div class="div-input d-flex flex-column w-50 gap-2">
                                                 <label for="cartao-titular">Nome do Titular do cartão</label>
                                                 <input type="text" name="cartao-titular" id="cartao-titular"
                                                     placeholder="Nome E. Exemplo" required>
 
                                             </div>
-                                            <div class="div-input d-flex flex-column w-40 gap-2">
+                                            <div class="div-input d-flex flex-column w-50 gap-2">
                                                 <label for="cartao-numero">Número do cartão</label>
                                                 <input type="text" maxlength="19" minlength="19" id="cartao-numero"
                                                     placeholder="1111.1111.1111.1111" required>
                                             </div>
-                                            <div class="div-input d-flex flex-row w-40">
+                                            <div class="div-input d-flex flex-row w-50">
                                                 <div id="div-data" class="d-flex flex-column gap-2 w-50 pe-1">
                                                     <label for="cartao-data">Data de vencimento</label>
                                                     <input type="text" id="cartao-data" minlength="5" maxlength="5"
