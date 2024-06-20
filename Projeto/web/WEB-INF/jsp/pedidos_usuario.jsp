@@ -28,7 +28,7 @@
                         <div id="historico-body">
                             <div class="pedido-box">
                                 <c:forEach items="${pedidos}" var="pedido">
-                                    <button class="w-100 h-100 d-flex flex-row">
+                                    <button class="w-100 h-100 d-flex flex-row border-0">
                                         <div class="w-100 h-100 d-none btnHover">
                                             <span>Clique para ver mais detalhes</span>
                                         </div>

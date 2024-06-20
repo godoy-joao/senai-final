@@ -74,6 +74,37 @@ public class PedidoDAO {
         return idPedido;
     }
 
+    public List<Produto> selecionarProdutosDoPedido(Pedido ped) {
+        List<Produto> produtos = new ArrayList();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT p.* FROM produtopedido as pp JOIN produto AS p ON pp.produto = p.idProduto JOIN pedido AS ped ON pp.pedido = ped.idPedido WHERE ped.idPedido = ?");
+            stmt.setInt(1, ped.getIdPedido());
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setIdProduto(rs.getInt("idProduto"));
+                p.setNome(rs.getString("nome"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setValor(rs.getFloat("valor"));
+                p.setDesconto(rs.getFloat("desconto"));
+                p.setValorFinal(rs.getFloat("valorFinal"));
+                p.setDataRegistro(rs.getDate("dataRegistro"));
+                produtos.add(p);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produtos;
+    }
+
     public Pedido selecionarPorId(int id) {
         Pedido p = new Pedido();
 
@@ -110,7 +141,7 @@ public class PedidoDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
 
-            stmt = conexao.prepareStatement("SELECT * FROM pedido WHERE ");
+            stmt = conexao.prepareStatement("SELECT * FROM pedido");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
