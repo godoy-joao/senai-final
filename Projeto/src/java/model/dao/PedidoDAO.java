@@ -16,6 +16,7 @@ import java.util.List;
 import model.bean.CarrinhoProduto;
 import model.bean.Pedido;
 import model.bean.Produto;
+import model.bean.ProdutoPedido;
 import model.bean.Usuario;
 
 /**
@@ -72,6 +73,36 @@ public class PedidoDAO {
         }
 
         return idPedido;
+    }
+
+    public List<ProdutoPedido> selecionarProdutoPedido(Pedido ped) {
+        List<ProdutoPedido> listPp = new ArrayList();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM produtopedido WHERE pedido = ?");
+            stmt.setInt(1, ped.getIdPedido());
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ProdutoPedido pp = new ProdutoPedido();
+                pp.setIdProdutoPedido(rs.getInt("idProdutoPedido"));
+                pp.setPedido(rs.getInt("pedido"));
+                pp.setProduto(rs.getInt("produto"));
+                pp.setQuantidade(rs.getInt("quantidade"));
+                listPp.add(pp);
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listPp;
     }
 
     public List<Produto> selecionarProdutosDoPedido(Pedido ped) {

@@ -46,7 +46,7 @@ public class CarrinhoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         Usuario u = new Usuario();
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {

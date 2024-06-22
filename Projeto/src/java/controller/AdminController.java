@@ -33,11 +33,13 @@ import model.dao.UsuarioDAO;
  */
 @MultipartConfig
 public class AdminController extends HttpServlet {
-CategoriaDAO cDao = new CategoriaDAO();
-        ProdutoDAO pDao = new ProdutoDAO();
-        UsuarioDAO uDao = new UsuarioDAO();
-        EstoqueDAO eDao = new EstoqueDAO();
-        ImagemDAO iDao = new ImagemDAO();
+
+    CategoriaDAO cDao = new CategoriaDAO();
+    ProdutoDAO pDao = new ProdutoDAO();
+    UsuarioDAO uDao = new UsuarioDAO();
+    EstoqueDAO eDao = new EstoqueDAO();
+    ImagemDAO iDao = new ImagemDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,8 +51,8 @@ CategoriaDAO cDao = new CategoriaDAO();
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       Cookie[] cookies = request.getCookies();
+        request.setCharacterEncoding("UTF-8");
+        Cookie[] cookies = request.getCookies();
         Usuario u = new Usuario();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -61,7 +63,7 @@ CategoriaDAO cDao = new CategoriaDAO();
         }
         List<Categoria> categorias = cDao.listarTodos();
         request.setAttribute("categorias", categorias);
-        List<Produto> produtos = pDao.listarTodos(); 
+        List<Produto> produtos = pDao.listarTodos();
         request.setAttribute("produtos", produtos);
         List<Estoque> estoques = eDao.listarTodos();
         request.setAttribute("estoques", estoques);
@@ -106,7 +108,7 @@ CategoriaDAO cDao = new CategoriaDAO();
         if (url.equals("/addProduto")) {
             //---------------------------- separadores pra ler isso daqui, até pq ngm é de ferro
             Produto p = new Produto();
-            Estoque e = new Estoque();    
+            Estoque e = new Estoque();
             //----------------------------
             p.setNome(request.getParameter("nome"));
             p.setDescricao(request.getParameter("descricao"));
@@ -139,7 +141,7 @@ CategoriaDAO cDao = new CategoriaDAO();
             response.sendRedirect("./admin");
         } else if (url.equals("/addCategoria")) {
             Categoria c = new Categoria();
-            
+
             c.setNome(request.getParameter("nomeCategoria"));
             Part filePart = request.getPart("imagemCategoria");
             if (filePart != null) {
@@ -161,9 +163,9 @@ CategoriaDAO cDao = new CategoriaDAO();
             p.setDescricao(request.getParameter("novaDescricao"));
             Estoque e = eDao.selecionarEstoquePorIdProduto(p);
             e.setQuantidade(Integer.parseInt(request.getParameter("novaQtd")));
-            pDao.atualizar(p);            
+            pDao.atualizar(p);
         } else if (url.equals("excluirProduto")) {
-            
+
         }
     }
 

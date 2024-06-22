@@ -40,11 +40,10 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
      */
-    
-    /*
+ /*
     Seleciona um usuário usando com base um email ou telefone, e uma senha.
     Se bem sucedido retorna o id do usuário, do contrário retornará -1.
-    */
+     */
     public int logar(Usuario u) {
         int idUsuario = -1;
         try {
@@ -201,9 +200,9 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
-    
+
     public void atualizarFoto(Usuario u) {
-         try {
+        try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
@@ -261,13 +260,14 @@ public class UsuarioDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO usuario (nome, email, senha, telefone, dataNascimento, cpf) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt = conexao.prepareStatement("INSERT INTO usuario (nome, email, senha, telefone, dataNascimento, cpf, fotoPerfil) values (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getEmail());
             stmt.setString(3, u.getSenha());
             stmt.setString(4, u.getTelefone());
             stmt.setDate(5, u.getDataNasc());
             stmt.setString(6, "0");
+            stmt.setBytes(7, u.getFoto());
 
             stmt.executeUpdate();
 
@@ -312,12 +312,12 @@ public class UsuarioDAO {
 
             stmt = conexao.prepareStatement("DELETE FROM carrinho WHERE usuario = ?");
             stmt.setInt(1, u.getIdUsuario());
-            
+
             stmt.executeUpdate();
-            
+
             stmt = conexao.prepareStatement("DELETE FROM usuario WHERE idUsuario = ?");
             stmt.setInt(1, u.getIdUsuario());
-            
+
             stmt.executeUpdate();
 
             stmt.close();

@@ -25,7 +25,6 @@
 
                     <body class="overflow-x-hidden">
                         <%@ include file="/WEB-INF/jspf/header.jspf" %>
-
                             <main class="branco-fundo-2">
                                 <div id="container">
                                     <div id="produto-wrapper">
@@ -179,9 +178,9 @@
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
-                                            <div>
-                                                Não há comentários
-                                            </div>
+                                                <div>
+                                                    Não há comentários
+                                                </div>
                                             </c:otherwise>
                                         </c:choose>
 

@@ -90,8 +90,8 @@
                                                     Selecione um endereço
                                                 </label>
                                                 <select name="select-endereco" id="enderecosDoUsuario">
-                                                    <c:if test="${enderecosDoUsuario.size() > 0}">
-                                                        <c:forEach items="${enderecosDoUsuario}" var="endereco"
+                                                    <c:if test="${enderecos.size() > 0}">
+                                                        <c:forEach items="${enderecos}" var="endereco"
                                                             varStatus="contagem">
                                                             <option value="${endereco.idEndereco}">${contagem.count}.
                                                                 ${endereco.rua}, ${endereco.numero}</option>
@@ -151,17 +151,16 @@
                                             <div>
                                                 <label for="input-cidade">Cidade </label>
                                                 <input type="text" name="endereco-cidade" id="input-cidade"
-                                                    placeholder="Pindamonhangaba">
+                                                    placeholder="Cidade">
                                             </div>
                                             <div>
                                                 <label for="input-bairro">Bairro </label>
                                                 <input type="text" name="endereco-bairro" id="input-bairro"
-                                                    placeholder="Bairro do limoeiro">
+                                                    placeholder="Bairro">
                                             </div>
                                             <div>
                                                 <label for="input-rua">Rua </label>
-                                                <input type="text" name="endereco-rua" id="input-rua"
-                                                    placeholder="Rua sem saída">
+                                                <input type="text" name="endereco-rua" id="input-rua" placeholder="Rua">
                                             </div>
                                             <div>
                                                 <label for="input-numero">Número (Deixe em branco caso sem número)
@@ -225,7 +224,8 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div id="area-cartao" class="d-none flex-column justify-content-center gap-3 pb-5">
+                                        <div id="area-cartao"
+                                            class="d-none flex-column justify-content-center gap-3 pb-5">
                                             <div>
                                                 <span class="fs-3">
                                                     Dados do cartão

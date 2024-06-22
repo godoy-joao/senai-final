@@ -40,6 +40,7 @@ public class PerfilController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String nextPage = "/WEB-INF/jsp/perfil.jsp";
 
         Cookie[] cookies = request.getCookies();
@@ -112,14 +113,14 @@ public class PerfilController extends HttpServlet {
         } else if (url.equals("/updSenha")) {
             user.setSenha(request.getParameter("input-updSenha"));
             uDao.atualizarSenha(user);
-            response.sendRedirect("./perfil");   
+            response.sendRedirect("./perfil");
         } else if (url.equals("/updImg")) {
             Part filePart = request.getPart("input-updImg");
             if (filePart != null) {
                 user.setFoto(iDao.partParaBytes(filePart));
                 uDao.atualizarFoto(user);
             } else {
-                
+
             }
             response.sendRedirect("./perfil");
         } else if (url.equals("/logout")) {

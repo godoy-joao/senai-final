@@ -5,7 +5,8 @@
         <html>
 
         <head>
-            <meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8">
+            <meta http-equiv="Content-Type" name="viewport"
+                content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                 crossorigin="anonymous">
@@ -18,18 +19,21 @@
         </head>
 
         <body class="d-flex justify-content-center align-items-center vh-100 vw-100">
-            <div id="backHome">
-                <div id="backHomeInner">
-                    <a href="./home" class="text-decoration-none">
-                        <p><i class="fa-solid fa-arrow-left"></i> Voltar para a home</p>
-                    </a>
-                </div>
+            <div id="btn-home">
+                <a href="./home" class="text-decoration-none">
+                    <span id="home-icone">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </span>
+                    <span>
+                        Voltar para a home
+                    </span>
+                </a>
             </div>
             <div>
-                <div class="d-flex p-3 formWrapper" id="formLoginWrapper">
+                <div class="d-flex p-3 form-wrapper" id="formLoginWrapper">
                     <div class="formHeader d-flex flex-column align-items-center justify-content-center p-3">
                         <p class="h3">Login</p>
-                        <p class="f6 text-body-secondary">Insira suas informações de login.</p>
+                        <p class="fs-6 text-body-secondary">Insira suas informações de login.</p>
                         <button onclick="goToSignup()">
                             <p>Sem cadastro? Clique aqui.</p>
                         </button>
@@ -73,37 +77,37 @@
                         </div>
                     </form>
                 </div>
-                <div class="d-none formWrapper p-3" id="formSignupWrapper">
+                <div class="d-none form-wrapper p-3" id="formSignupWrapper">
                     <div class="formHeader d-flex flex-column align-items-center justify-content-center p-3">
                         <p class="h3">Cadastro</p>
-                        <p class="f6 text-body-secondary text-wrap w-75 text-center">Preencha com suas informações para
-                            realizar o cadastro.</p>
+                        <p class="fs-6 text-body-secondary w-75 text-center m-0">Preencha com suas informações para </p>
+                        <p class="fs-6 text-body-secondary text-wrap w-75 text-center">realizar o cadastro. </p>
                         <button onclick="goToLogin()">
                             <p>Já tem conta? Clique aqui.</p>
                         </button>
                     </div>
-                    <form class="border-start ps-3" action="signup" method="post" id="formSignup">
-                        <div class="mb-3">
+                    <form class="border-start gap-1 ps-3" action="signup" method="post" id="formSignup">
+                        <div class="mb-1">
                             <label for="nome" class="form-label">Nome e sobrenome</label>
                             <input type="text" class="form-control" name="nome" id="nome">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="dataNascimento" class="form-label">Data de nascimento</label>
                             <input type="date" class="form-control" name="dataNascimento" id="dataNascimento">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" name="email" id="email">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="telefone" class="form-label">Número de celular</label>
                             <input type="tel" class="form-control" name="telefone" id="telefone">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="senha" class="form-label">Senha</label>
                             <input type="password" class="form-control" name="senha" id="senha">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-1">
                             <label for="confirmaSenha" class="form-label">Confirme a senha</label>
                             <input type="password" class="form-control" name="confirmaSenha" id="confirmaSenha">
                             <label id="passHelper" class="form-text text-danger" for="confirmaSenha"></label>

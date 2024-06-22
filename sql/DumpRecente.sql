@@ -345,10 +345,10 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL UNIQUE,
   `senha` varchar(100) NOT NULL,
-  `cpf` char(14) DEFAULT '0',
-  `telefone` varchar(15) NOT NULL,
+  `cpf` char(14) DEFAULT '0' ,
+  `telefone` varchar(15) NOT NULL UNIQUE,
   `dataNascimento` date NOT NULL,
   `tipo` int(11) DEFAULT 2,
   `fotoPerfil` longblob DEFAULT NULL,
@@ -374,7 +374,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`nab3rt`@`%`*/ /*!50003 TRIGGER criarCarrinho
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER criarCarrinho
 AFTER INSERT ON usuario
 FOR EACH ROW
 BEGIN

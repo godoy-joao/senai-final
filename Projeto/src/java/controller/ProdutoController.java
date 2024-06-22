@@ -40,6 +40,7 @@ public class ProdutoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         ProdutoDAO pDao = new ProdutoDAO();
         ImagemDAO iDao = new ImagemDAO();
         CategoriaDAO cDao = new CategoriaDAO();
@@ -97,6 +98,16 @@ public class ProdutoController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String url = request.getServletPath();
+        
+        if (url.equals("/postarComentario")) {
+            
+        } else if (url.equals("/deletarComentario")) {
+            
+        } 
+        
+        else {
+            processRequest(request, response);
+        }
     }
 
     /**

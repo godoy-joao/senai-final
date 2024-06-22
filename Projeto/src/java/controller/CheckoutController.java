@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.bean.CarrinhoProduto;
 import model.bean.Endereco;
 import model.bean.Imagem;
@@ -52,9 +53,10 @@ public class CheckoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         Cookie[] cookies = request.getCookies();
         Usuario u = new Usuario();
+        HttpSession session = request.getSession();
         boolean permite = false;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -84,10 +86,14 @@ public class CheckoutController extends HttpServlet {
                 Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
                 produtos.get(i).setImagemBase64(Base64.getEncoder().encodeToString(img.getImagem()));
             }
+            List<Endereco> enderecos = eDao.selecionarPorUsuario(u);
+            request.setAttribute("enderecos", enderecos);
             request.setAttribute("produtos", produtos);
             request.setAttribute("cartProd", cartProd);
             request.setAttribute("usuario", u);
             request.setAttribute("totalPedido", total);
+            Cookie c = new Cookie("totalPedido", Float.toString(total));
+            response.addCookie(c);
             String nextPage = "/WEB-INF/jsp/checkout.jsp";
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
             dispatcher.forward(request, response);
@@ -120,13 +126,21 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String url = request.getServletPath();
+        HttpSession session = request.getSession();
         Cookie[] cookies = request.getCookies();
         Usuario u = new Usuario();
+        Float valorTotal = 0f;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
                     u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+                }
+                if (cookie.getName().equals("totalPedido")) {
+                    valorTotal = Float.parseFloat(cookie.getValue());
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
                 }
             }
         }
@@ -152,7 +166,7 @@ public class CheckoutController extends HttpServlet {
                 p.setEnderecoEntrega(eDao.criar(e));
             }
             p.setDataHoraAtual();
-            p.setValorTotal(Float.parseFloat(request.getAttribute("totalPedido").toString()));
+            p.setValorTotal(valorTotal);
             p.setFormaPagamento(request.getParameter("radio-pagamento"));
             p.setUsuario(u.getIdUsuario());
 
@@ -161,9 +175,7 @@ public class CheckoutController extends HttpServlet {
             List<CarrinhoProduto> produtos = cDao.selecionarQuantidades(cDao.selecionarCarrinho(u));
             pedDao.adicionarProdutos(produtos, p);
             cDao.esvaziarCarrinho(u);
-            String nextPage = "/WEB-INF/jsp/agradecimento.jsp";
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-            dispatcher.forward(request, response);
+            response.sendRedirect("./pedidoFinalizado");
         } else {
             response.sendRedirect("./checkout");
         }

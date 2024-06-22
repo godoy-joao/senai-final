@@ -10,17 +10,20 @@ package model.bean;
  * @author Joao Guilherme
  */
 public class ProdutoPedido {
+
     private int idProdutoPedido;
     private int pedido;
     private int produto;
+    private int quantidade;
 
     public ProdutoPedido() {
     }
 
-    public ProdutoPedido(int idProdutoPedido, int pedido, int produto) {
+    public ProdutoPedido(int idProdutoPedido, int pedido, int produto, int quantidade) {
         this.idProdutoPedido = idProdutoPedido;
         this.pedido = pedido;
         this.produto = produto;
+        this.quantidade = quantidade;
     }
 
     public int getIdProdutoPedido() {
@@ -46,6 +49,13 @@ public class ProdutoPedido {
     public void setProduto(int produto) {
         this.produto = produto;
     }
-    
-    
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
 }
