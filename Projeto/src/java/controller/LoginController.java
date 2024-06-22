@@ -5,14 +5,10 @@
  */
 package controller;
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
 import java.sql.Date;
-import java.util.Base64;
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -21,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.bean.Usuario;
 import model.dao.UsuarioDAO;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 /**
  *
@@ -39,6 +37,7 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String nextPage = "/WEB-INF/jsp/login.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
         dispatcher.forward(request, response);
@@ -56,6 +55,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
     }
 
@@ -112,11 +112,18 @@ public class LoginController extends HttpServlet {
             u.setEmail(request.getParameter("email"));
             u.setTelefone(request.getParameter("telefone"));
             u.setSenha(request.getParameter("senha"));
-           
-            BufferedImage buffer = ImageIO.read(new File("placeholder.png"));
-            ByteArrayOutputStream bOut = new ByteArrayOutputStream();
-            ImageIO.write(buffer, "png", bOut);
-            byte[] data = bOut.toByteArray();
+
+            Resource res = new ClassPathResource("placeholder.png");
+            byte[] data = null;
+            try (InputStream stream = res.getInputStream();
+                    ByteArrayOutputStream bOut = new ByteArrayOutputStream()) {
+                byte[] img = new byte[4096];
+                int byteRead = -1;
+                while ((byteRead = stream.read(img)) != -1) {
+                    bOut.write(img, 0, byteRead);
+                }
+                data = bOut.toByteArray();
+            }
             u.setFoto(data);
             try {
                 uDAO.criar(u);

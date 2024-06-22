@@ -43,7 +43,7 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         String busca = request.getParameter("s");
         List<Produto> produtos = null;
         if (busca == null || busca.equals("")) {
@@ -78,6 +78,7 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String[] cat = request.getParameterValues("c");
         List<Produto> produtos = null;
         List<String> categorias = new ArrayList();

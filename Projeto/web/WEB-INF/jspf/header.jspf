@@ -62,7 +62,7 @@
                 <div id="canvas-desktop">
                     <div class="canvas-item">
                         <div class="item-icone">
-                            <i class="fa-solid fa-clipboard"></i>
+                            <i class="fa-regular fa-clipboard"></i>
                         </div>
                         <div class="item-link">
                             <a href="./pedidos">
@@ -94,7 +94,7 @@
                     </div>
                     <div class="canvas-item">
                         <div class="item-icone">
-                            <i class="fa-solid fa-clipboard"></i>
+                            <i class="fa-regular fa-clipboard"></i>
                         </div>
                         <div class="item-link">
                             <a href="./pedidos">

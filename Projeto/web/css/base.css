@@ -306,29 +306,7 @@ header {
 
 
 
-@media screen and (max-width:720px) {
-    #canvas-mob {
-        display: flex;
-    }
 
-    #div-logo a, #div-icones, #canvas-desktop {
-        display: none;
-    }
-
-    #div-logo button {
-        display: flex;
-    }
-
-    #div-header {
-        grid-template-columns: 2fr 7fr;
-    }
-
-    #div-search form {
-        grid-template-columns: 8fr 2fr;
-        height: 50%;
-    }
-
-}
 
 /* fim do header */
 
@@ -349,7 +327,7 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     padding: 0px 30px;
-    max-height: 100%;
+    height: 100%;
 }
 
 .lateral {
@@ -403,6 +381,35 @@ footer {
     object-fit: contain;
     max-width: 100%;
     max-height: 40px;
+}
+
+@media screen and (max-width:720px) {
+    #canvas-mob {
+        display: flex;
+    }
+
+    #div-logo a,
+    #div-icones,
+    #canvas-desktop {
+        display: none;
+    }
+
+    #div-logo button {
+        display: flex;
+    }
+
+    #div-header {
+        grid-template-columns: 2fr 7fr;
+    }
+
+    #div-search form {
+        grid-template-columns: 8fr 2fr;
+        height: 50%;
+    }
+
+    footer {
+        height: 15vh;
+    }
 }
 
 

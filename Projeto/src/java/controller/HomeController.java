@@ -49,49 +49,57 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nextPage = "/WEB-INF/jsp/index.jsp";
-        List<Categoria> categorias = cDao.listarTodos();
-        List<Produto> produtos = pDao.listarTodos();
-        List<Produto> descontos = pDao.listarTodosComDesconto();
-        if (descontos.size() > 0) {
-            for (int i = 0; i < descontos.size(); i++) {
-                Imagem img = iDao.selecionarPrimeiraImagem(descontos.get(i));
-                String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
-                descontos.get(i).setImagemBase64(imagemBase64);
-            }
-            request.setAttribute("descontos", descontos);
-        }
-        if (produtos.size() > 0) {
-            for (int i = 0; i < produtos.size(); i++) {
-                Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
-                String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
-                produtos.get(i).setImagemBase64(imagemBase64);
-            }
-            request.setAttribute("produtos", produtos);
-        }
-        Cookie[] cookies = request.getCookies();
-        int idUsuario = 0;
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("login")) {
-                    idUsuario = Integer.parseInt(cookie.getValue());
+        request.setCharacterEncoding("UTF-8");
+        String url = request.getServletPath();
+        if (url.equals("/pedidoFinalizado")) {
+            String nextPage = "/WEB-INF/jsp/agradecimento.jsp";
+            RequestDispatcher rd = getServletContext().getRequestDispatcher(nextPage);
+            rd.forward(request, response);
+        } else {
+            String nextPage = "/WEB-INF/jsp/index.jsp";
+            List<Categoria> categorias = cDao.listarTodos();
+            List<Produto> produtos = pDao.listarTodos();
+            List<Produto> descontos = pDao.listarTodosComDesconto();
+            if (descontos.size() > 0) {
+                for (int i = 0; i < descontos.size(); i++) {
+                    Imagem img = iDao.selecionarPrimeiraImagem(descontos.get(i));
+                    String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
+                    descontos.get(i).setImagemBase64(imagemBase64);
                 }
-                System.out.println(cookie.getName() +"<< Cookie" + " VALOR >>"+cookie.getValue());
-                if (cookie.getName().equals("produtoAdicionado") && cookie.getValue().equals("1")) {
-                    request.setAttribute("prodAdd", "1");
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
-                    
-                }
+                request.setAttribute("descontos", descontos);
             }
-        }
-        if (idUsuario > 0) {
-            request.setAttribute("user", uDao.selecionarUsuarioPorId(idUsuario));
-        }
+            if (produtos.size() > 0) {
+                for (int i = 0; i < produtos.size(); i++) {
+                    Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
+                    String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
+                    produtos.get(i).setImagemBase64(imagemBase64);
+                }
+                request.setAttribute("produtos", produtos);
+            }
+            Cookie[] cookies = request.getCookies();
+            int idUsuario = 0;
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("login")) {
+                        idUsuario = Integer.parseInt(cookie.getValue());
+                    }
+                    System.out.println(cookie.getName() + "<< Cookie" + " VALOR >>" + cookie.getValue());
+                    if (cookie.getName().equals("produtoAdicionado") && cookie.getValue().equals("1")) {
+                        request.setAttribute("prodAdd", "1");
+                        cookie.setMaxAge(0);
+                        response.addCookie(cookie);
 
-        request.setAttribute("categorias", categorias);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-        dispatcher.forward(request, response);
+                    }
+                }
+            }
+            if (idUsuario > 0) {
+                request.setAttribute("user", uDao.selecionarUsuarioPorId(idUsuario));
+            }
+
+            request.setAttribute("categorias", categorias);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -106,6 +114,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String url = request.getServletPath();
         if (url.equals("/search")) {
             String busca = request.getParameter("busca");

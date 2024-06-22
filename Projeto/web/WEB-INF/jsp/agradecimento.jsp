@@ -18,10 +18,11 @@
 
         <body class="vh-100 vw-100">
             <div class="w-100 h-100 d-flex flex-column gap-4">
-                <div class="text-success " style="font-size: 70px;">
+                <div class="text-success d-flex justify-content-center align-items-center w-100"
+                    style="font-size: 70px;">
                     <i class="fa-solid fa-check"></i>
                 </div>
-                <div class="d-flex justify-content-center align-items-center flex-column">
+                <div class="d-flex justify-content-center align-items-center flex-column w-100">
                     <span class="text-center">
                         Obrigado!
                     </span>
@@ -29,10 +30,10 @@
                         Sua compra foi bem sucedida, obrigado por comprar conosco!
                     </span>
                 </div>
-                <div>
-                    <button class="btn btn-info">
+                <div class="d-flex justify-content-center align-items-center w-100">
+                    <a href="./home" class="btn btn-info ">
                         Voltar às compras
-                    </button>
+                    </a>
                 </div>
             </div>
         </body>

@@ -26,7 +26,7 @@ public class AvaliacaoDAO {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
 
-            stmt = conexao.prepareStatement("INSERT INTO avaliacao (usuario, produto, nota, conteudo) VALUEs (?, ?, ?, ?)");
+            stmt = conexao.prepareStatement("INSERT INTO avaliacao (usuario, produto, nota, conteudo) VALUES (?, ?, ?, ?)");
             stmt.setInt(1, ava.getUsuario());
             stmt.setInt(2, ava.getProduto());
             stmt.setInt(3, ava.getNota());
