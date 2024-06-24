@@ -18,6 +18,7 @@ import model.bean.Pedido;
 import model.bean.Produto;
 import model.bean.ProdutoPedido;
 import model.bean.Usuario;
+import model.bean.Endereco;
 
 /**
  *
@@ -73,6 +74,39 @@ public class PedidoDAO {
         }
 
         return idPedido;
+    }
+
+    public Endereco selecionarEndereco(Pedido p) {
+        Endereco e = new Endereco();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conexao.prepareStatement("SELECT * FROM endereco WHERE idEndereco = ?");
+            stmt.setInt(1, p.getEnderecoEntrega());
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                e.setIdEndereco(rs.getInt("idEndereco"));
+                e.setUsuario(rs.getInt("usuario"));
+                e.setEstado(rs.getString("estado"));
+                e.setCidade(rs.getString("cidade"));
+                e.setCep(rs.getString("cep"));
+                e.setBairro(rs.getString("bairro"));
+                e.setRua(rs.getString("rua"));
+                e.setNumero(rs.getString("numero"));
+                e.setComplemento(rs.getString("complemento"));
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return e;
     }
 
     public List<ProdutoPedido> selecionarProdutoPedido(Pedido ped) {

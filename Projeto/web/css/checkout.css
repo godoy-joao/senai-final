@@ -284,12 +284,14 @@ select {
 #pagamento-body {
     display: grid;
     grid-template-columns: 3fr 5fr;
+
 }
 
 #formas-de-pagamento {
     border-right: 2px #a1a1a1 solid;
     padding: 10px;
     padding-top: 20px;
+
 }
 
 #area-pix,
@@ -297,8 +299,28 @@ select {
     padding-left: 15px;
     align-items: center;
     padding-top: 20px;
+    height: 440px;
 }
 
+#area-pix div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+#area-pix label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    word-wrap: break-word;
+    width: 80%;
+}
+
+.div-input  label{
+    margin-bottom: 3px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
 .btn-finalizar {
     width: 10rem;
     height: 3rem;

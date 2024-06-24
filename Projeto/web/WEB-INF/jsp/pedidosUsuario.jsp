@@ -62,10 +62,10 @@
                                                                     </div>
                                                                     <div class="detalhes-qtd">
                                                                         <span>
-                                                                            <!--Quantidade: ${produtopedidolist[contagemPedido.index].produtopedido[contagem].quantidade} -->
+                                                                            Quantidade:
                                                                         </span>
                                                                         <span>
-
+                                                                            <!--${produtopedido[contagemPedido.index].produtoPedido[contagem.index].quantidade}-->
                                                                         </span>
                                                                     </div>
                                                                     <div class="detalhes-total">
@@ -98,7 +98,7 @@
                                                                 Quantidade de itens:
                                                             </span>
                                                             <span>
-                                                                ${qtdItens[contagem.index]}
+                                                                ${qtdItens[contagemPedido.index]}
                                                             </span>
                                                         </div>
                                                         <div>
@@ -117,7 +117,7 @@
                                                                     Estado:
                                                                 </span>
                                                                 <span>
-                                                                    ${enderecos[contagem.index].estado}
+                                                                    ${enderecos[contagemPedido.index].estado}
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -125,7 +125,7 @@
                                                                     Cidade
                                                                 </span>
                                                                 <span>
-                                                                    ${enderecos[contagem.index].cidade}
+                                                                    ${enderecos[contagemPedido.index].cidade}
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -133,7 +133,7 @@
                                                                     CEP:
                                                                 </span>
                                                                 <span>
-                                                                    ${enderecos[contagem.index].cep}
+                                                                    ${enderecos[contagemPedido.index].cep}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -143,7 +143,7 @@
                                                                     Bairro:
                                                                 </span>
                                                                 <span>
-                                                                    ${enderecos[contagem.index].bairro}
+                                                                    ${enderecos[contagemPedido.index].bairro}
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -151,7 +151,7 @@
                                                                     Rua:
                                                                 </span>
                                                                 <span>
-                                                                    ${enderecos[contagem.index].rua}
+                                                                    ${enderecos[contagemPedido.index].rua}
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -159,7 +159,7 @@
                                                                     Número:
                                                                 </span>
                                                                 <span>
-                                                                    ${enderecos[contagem.index].numero}
+                                                                    ${enderecos[contagemPedido.index].numero}
                                                                 </span>
                                                             </div>
                                                             <div>
@@ -167,7 +167,7 @@
                                                                     Complemento:
                                                                 </span>
                                                                 <span>
-                                                                    ${enderecos[contagem.index].complemento}
+                                                                    ${enderecos[contagemPedido.index].complemento}
                                                                 </span>
                                                             </div>
                                                         </div>

@@ -16,9 +16,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Endereco;
 import model.bean.Imagem;
 import model.bean.Pedido;
 import model.bean.Produto;
+import model.bean.ProdutoPedido;
 import model.bean.Usuario;
 import model.dao.ImagemDAO;
 import model.dao.PedidoDAO;
@@ -64,15 +66,31 @@ public class HistoricoPedidosController extends HttpServlet {
 
             List<Pedido> pedidos = pedDao.lerPedidos(u);
             List<List<Produto>> itensDoPedido = new ArrayList();
+            List<List<ProdutoPedido>> produtopedido = new ArrayList();
+            List<Integer> qtdItens = new ArrayList();
+            List<Endereco> enderecos = new ArrayList();
             pedidos.forEach((p) -> {
                 List<Produto> produtos = pedDao.selecionarProdutosDoPedido(p);
+                List<ProdutoPedido> produtoPedido = pedDao.selecionarProdutoPedido(p);
+                
+                int quantidade = 0;
                 for (int i = 0; i < produtos.size(); i++) {
                     Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
                     String imagemBase64 = Base64.getEncoder().encodeToString(img.getImagem());
+                    produtos.get(i).setImagemBase64(imagemBase64);
                 }
+                for (int i = 0; i < produtoPedido.size(); i++) {
+                    quantidade += produtoPedido.get(i).getQuantidade();
+                }   
                 itensDoPedido.add(produtos);
+                produtopedido.add(produtoPedido);
+                qtdItens.add(quantidade);
+                enderecos.add(pedDao.selecionarEndereco(p));
             });
+            request.setAttribute("enderecos", enderecos);
+            request.setAttribute("qtdItens", qtdItens);
             request.setAttribute("itensDoPedido", itensDoPedido);
+            request.setAttribute("produtopedido", produtopedido);
             request.setAttribute("pedidos", pedidos);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/pedidosUsuario.jsp");
             rd.forward(request, response);

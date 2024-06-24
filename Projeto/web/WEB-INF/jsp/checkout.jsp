@@ -219,7 +219,7 @@
                                             </div>
 
                                             <div>
-                                                <button class="btn-finalizar">
+                                                <button class="btn-finalizar" type="submit">
                                                     Finalizar pedido
                                                 </button>
                                             </div>
@@ -231,28 +231,28 @@
                                                     Dados do cartão
                                                 </span>
                                             </div>
-                                            <div class="div-input d-flex flex-column w-50 gap-2">
+                                            <div class="div-input d-flex flex-column w-50 ">
                                                 <label for="cartao-titular">Nome do Titular do cartão</label>
-                                                <input type="text" name="cartao-titular" id="cartao-titular"
-                                                    placeholder="Nome E. Exemplo" required>
+                                                <input type="text" name="cartao-titular" value="" id="cartao-titular"
+                                                    placeholder="Nome E. Exemplo">
 
                                             </div>
-                                            <div class="div-input d-flex flex-column w-50 gap-2">
+                                            <div class="div-input d-flex flex-column w-50 ">
                                                 <label for="cartao-numero">Número do cartão</label>
-                                                <input type="text" maxlength="19" minlength="19" id="cartao-numero"
-                                                    placeholder="1111.1111.1111.1111" required>
+                                                <input type="text" maxlength="19" minlength="19" value=""
+                                                    id="cartao-numero" placeholder="1111.1111.1111.1111">
                                             </div>
                                             <div class="div-input d-flex flex-row w-50">
-                                                <div id="div-data" class="d-flex flex-column gap-2 w-50 pe-1">
+                                                <div id="div-data" class="d-flex flex-column w-50 pe-1">
                                                     <label for="cartao-data">Data de vencimento</label>
-                                                    <input type="text" id="cartao-data" minlength="5" maxlength="5"
-                                                        placeholder="MM/AA" required>
+                                                    <input type="text" id="cartao-data" minlength="5" value=""
+                                                        maxlength="5" placeholder="MM/AA">
                                                     <span id="data-aviso"></span>
                                                 </div>
-                                                <div id="div-cvv" class="d-flex flex-column gap-2 w-50 ps-1">
+                                                <div id="div-cvv" class="d-flex flex-column w-50 ps-1">
                                                     <label for="cartao-cvv">Código de segurança</label>
-                                                    <input type="text" id="cartao-cvv" minlength="3" maxlength="3"
-                                                        placeholder="000" required>
+                                                    <input type="text" id="cartao-cvv" minlength="3" value=""
+                                                        maxlength="3" placeholder="000">
                                                 </div>
                                             </div>
                                             <div>
