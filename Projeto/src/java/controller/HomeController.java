@@ -83,7 +83,6 @@ public class HomeController extends HttpServlet {
                     if (cookie.getName().equals("login")) {
                         idUsuario = Integer.parseInt(cookie.getValue());
                     }
-                    System.out.println(cookie.getName() + "<< Cookie" + " VALOR >>" + cookie.getValue());
                     if (cookie.getName().equals("produtoAdicionado") && cookie.getValue().equals("1")) {
                         request.setAttribute("prodAdd", "1");
                         cookie.setMaxAge(0);

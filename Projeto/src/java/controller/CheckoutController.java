@@ -62,8 +62,8 @@ public class CheckoutController extends HttpServlet {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("criarPedido") && cookie.getValue().equals("true")) {
                     permite = true;
-                    //cookie.setMaxAge(0);
-                    //response.addCookie(cookie);
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
                 }
                 if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
                     u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
@@ -75,8 +75,6 @@ public class CheckoutController extends HttpServlet {
         if (!permite || produtos.size() < 1) {
             response.sendRedirect("./carrinho");
         } else {
-            System.out.println(u.getIdUsuario());
-
             List<CarrinhoProduto> cartProd = cDao.selecionarQuantidades(cDao.selecionarCarrinho(u));
             float total = 0;
             for (int i = 0; i < produtos.size(); i++) {
@@ -88,7 +86,7 @@ public class CheckoutController extends HttpServlet {
             }
             List<Endereco> enderecos = eDao.selecionarPorUsuario(u);
             request.setAttribute("enderecos", enderecos);
-            request.setAttribute("produtos", produtos);
+            request.setAttribute("produtos", produtos); 
             request.setAttribute("cartProd", cartProd);
             request.setAttribute("usuario", u);
             request.setAttribute("totalPedido", total);
