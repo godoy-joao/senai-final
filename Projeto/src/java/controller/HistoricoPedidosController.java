@@ -90,8 +90,8 @@ public class HistoricoPedidosController extends HttpServlet {
             request.setAttribute("enderecos", enderecos);
             request.setAttribute("qtdItens", qtdItens);
             request.setAttribute("itensDoPedido", itensDoPedido);
-            request.setAttribute("produtopedido", produtopedido);
-            request.setAttribute("pedidos", pedidos);
+            request.setAttribute("produtoPedido", produtopedido); 
+            request.setAttribute("pedidos", pedidos); 
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/pedidosUsuario.jsp");
             rd.forward(request, response);
         }
