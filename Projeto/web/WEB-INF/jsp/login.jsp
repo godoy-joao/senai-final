@@ -40,7 +40,7 @@
                     </div>
 
 
-                    <form class="border-start ps-3" action="logon" method="post" id="formLogin">
+                    <form class="" action="logon" method="post" id="formLogin">
                         <div class="mb-3">
                             <label class="mb-1" for="form-label">Selecione uma das opções</label>
                             <div id="login-check-group" class="d-flex flex-row gap-2">
@@ -86,7 +86,7 @@
                             <p>Já tem conta? Clique aqui.</p>
                         </button>
                     </div>
-                    <form class="border-start gap-1 ps-3" action="signup" method="post" id="formSignup">
+                    <form class="" action="signup" method="post" id="formSignup">
                         <div class="mb-1">
                             <label for="nome" class="form-label">Nome e sobrenome</label>
                             <input type="text" class="form-control" name="nome" id="nome">

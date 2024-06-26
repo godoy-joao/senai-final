@@ -32,7 +32,7 @@
                                     </span>
                                     <div id="checkbox-group" class="row justify-content-between g-0">
                                         <c:forEach items="${categorias}" var="categoria">
-                                            <div class="w-50 w-lg-100">
+                                            <div class="checkbox-div">
                                                 <input type="checkbox" class="c-checkbox" name="c"
                                                     value="${categoria.idCategoria}"
                                                     id="checkbox-${categoria.nome}"><label
@@ -50,18 +50,22 @@
                                             <span>
                                                 Preço mínimo:
                                             </span>
-                                            <input type="range" class="preco-range" name="range-preco-min" value="0"
-                                                min="0" max="19999" id="preco-min">
-                                            <input type="number" class="range-value" min="0" value="0" max="19999">
-                                            </span>
+                                            <div>
+                                                <input type="range" class="preco-range" name="range-preco-min" value="0"
+                                                    min="0" max="19999" id="preco-min">
+                                                <input type="number" class="range-value" min="0" value="0" max="19999">
+                                            </div>
                                         </div>
                                         <div class="div-range">
                                             <span>
                                                 Preco máximo:
                                             </span>
-                                            <input type="range" class="preco-range" name="range-preco-max" min="1"
-                                                value="20000" max="20000" id="preco-max">
-                                            <input type="number" class="range-value" min="1" value="20000" max="20000">
+                                            <div>
+                                                <input type="range" class="preco-range" name="range-preco-max" min="1"
+                                                    value="12000" max="12000" id="preco-max">
+                                                <input type="number" class="range-value" min="1" value="12000"
+                                                    max="12000">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +136,7 @@
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                                 crossorigin="anonymous"></script>
-                                <script src="./js/search.js"></script>
+                            <script src="./js/search.js"></script>
                 </body>
 
                 </html>

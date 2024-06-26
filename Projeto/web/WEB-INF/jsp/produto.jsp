@@ -124,9 +124,8 @@
                                     <div id="avaliacoes">
                                         <div id="aval">
                                             <form action="enviarAvaliacao" method="post">
-                                                <div id="div-perfil">
-                                                    <img src="data:image/png;base64,${usuario.fotoBase64}" alt=""
-                                                        style="width: 54px; height: 54px; object-fit: fill;">
+                                                <div class="div-perfil">
+                                                    <img src="data:image/png;base64,${usuario.fotoBase64}" alt="">
                                                 </div>
                                                 <div id="wrapper-comentario">
                                                     <div id="wrapper-nome">

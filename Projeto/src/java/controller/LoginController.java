@@ -86,6 +86,7 @@ public class LoginController extends HttpServlet {
                         if (cookie.getName().equals("login")) {
                             cookieExiste = true;
                             cookie.setValue(Integer.toString(uDAO.logar(usuario)));
+                            response.addCookie(cookie);
                         }
                     }
                     if (!cookieExiste) {

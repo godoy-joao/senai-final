@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Base64;
+import java.util.List;
 import model.bean.Usuario;
 
 /**
@@ -44,6 +45,8 @@ public class UsuarioDAO {
     Seleciona um usuário usando com base um email ou telefone, e uma senha.
     Se bem sucedido retorna o id do usuário, do contrário retornará -1.
      */
+ 
+    
     public int logar(Usuario u) {
         int idUsuario = -1;
         try {
