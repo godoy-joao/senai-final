@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ import model.bean.Categoria;
 import model.bean.Produto;
 import model.bean.Imagem;
 import model.bean.Usuario;
+import model.dao.AvaliacaoDAO;
 import model.dao.CategoriaDAO;
 import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
@@ -45,6 +47,7 @@ public class ProdutoController extends HttpServlet {
         ImagemDAO iDao = new ImagemDAO();
         CategoriaDAO cDao = new CategoriaDAO();
         UsuarioDAO uDao = new UsuarioDAO();
+        AvaliacaoDAO avDAO = new AvaliacaoDAO();
         Produto produto = pDao.selecionarPorId(Integer.parseInt(request.getParameter("id")));
         produto.setImagemBase64(Base64.getEncoder().encodeToString(iDao.selecionarPrimeiraImagem(produto).getImagem()));
         List<Imagem> imagens = iDao.selecionarListaDeImagens(produto);
@@ -55,13 +58,21 @@ public class ProdutoController extends HttpServlet {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("login") && !(cookie.getValue().equals(""))) {
                     usuario = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+                    usuario.setFotoBase64(Base64.getEncoder().encodeToString(usuario.getFoto()));
                     request.setAttribute("usuario", usuario);
                 }
             }
         }
+        List<byte[]> fotoBytes = avDAO.pegarFotosComentarios(produto);
+        List<String> fotoBase64 = new ArrayList();
+        for (int i = 0; i < fotoBytes.size(); i++) {
+            String base = Base64.getEncoder().encodeToString(fotoBytes.get(i));
+            fotoBase64.add(base);
+        }
         for (int i = 0; i < imagens.size(); i++) {
             imagens.get(i).setImagemBase64(Base64.getEncoder().encodeToString(imagens.get(i).getImagem()));
         }
+        request.setAttribute("fotoComentarios", fotoBase64);
         request.setAttribute("produtoCategorias", categorias);
         request.setAttribute("produtoImagens", imagens);
         request.setAttribute("produto", produto);

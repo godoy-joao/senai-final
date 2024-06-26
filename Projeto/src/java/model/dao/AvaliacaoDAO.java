@@ -73,6 +73,37 @@ public class AvaliacaoDAO {
         return avaliacoes;
     }
 
+    public List<byte[]> pegarFotosComentarios(Produto p) {
+        List<byte[]> fotos = new ArrayList();
+        List<Avaliacao> avaliacoes = selecionarPorProduto(p);
+
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            for (int i = 0; i < avaliacoes.size(); i++) {
+                int id = avaliacoes.get(i).getUsuario();
+                stmt = conexao.prepareStatement("SELECT fotoPerfil FROM usuario WHERE idUsuario = ?");
+                stmt.setInt(1, id);
+
+                rs = stmt.executeQuery();
+                if (rs.next()) {
+                    byte[] bytes = rs.getBytes("fotoPerfil");
+                    fotos.add(bytes);
+                }
+            }
+
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return fotos;
+    }
+
     public Avaliacao selecionarPorId(int id) {
         Avaliacao aval = new Avaliacao();
         try {

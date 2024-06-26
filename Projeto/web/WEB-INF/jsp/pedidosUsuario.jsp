@@ -79,8 +79,9 @@
                                                                         <div class="detalhes-total">
                                                                             <span>
                                                                                 <c:set var="pp"
-                                                                                value="${produtoPedido[contagemPedido.index]}" />
-                                                                            ${pp[contagem.index].quantidade * item.valorFinal} 
+                                                                                    value="${produtoPedido[contagemPedido.index]}" />
+                                                                                ${pp[contagem.index].quantidade *
+                                                                                item.valorFinal}
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -97,6 +98,9 @@
                                                         <span>Clique para ver mais detalhes</span>
                                                     </div>
                                                     <div class="div-info">
+                                                        <div class="div-img">
+                                                            <img src="" alt="">
+                                                        </div>
                                                         <div class="info-detalhes">
                                                             <div class="div-id">
                                                                 <span>

@@ -7,14 +7,14 @@
 #side-bar {
     position: fixed;
     height: 100%;
-    width: 23vw;
-    top: 0;
+    width: 26vw;
     border-right: 1px #cee2e6 solid;
     z-index: 999;
     font-weight: 600;
-    padding-top: 100px;
+    top: 0;
     left: 0;
     font-size: 1.4rem;
+    padding-top: 80px;
     overflow-y: scroll;
 }
 
@@ -51,7 +51,12 @@
     text-overflow: ellipsis;
 }
 
+.checkbox-div {
+    width: 100%;
+}
+
 .c-checkbox {
+    min-width: 1.6rem;
     width: 1.6rem;
     height: 1.6rem;
     -webkit-appearance: none;
@@ -70,15 +75,19 @@
 }
 
 #range-wrapper {
-   display: flex;
-   flex-direction: column;
-   gap: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
-#range-wrapper > div {
+.div-range {
+    display: flex;
+    flex-direction: column;
+}
+
+.div-range>div {
     display: grid;
-    grid-template-columns: 3fr 7fr 2fr;
-    align-items: center;
+    grid-template-columns: 5fr 2fr;
 }
 
 .preco-range {
@@ -87,6 +96,7 @@
     appearance: none;
     color: transparent;
     padding: 0px 5px;
+    width: 100%;
 }
 
 .preco-range::-webkit-slider-runnable-track {
@@ -122,7 +132,8 @@
     border: 1px #545b5c solid;
 }
 
-.range-value::-webkit-outer-spin-button, .range-value:-webkit-outer-spin-button {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
     visibility: hidden;
     display: none;
     opacity: 0;
@@ -135,6 +146,7 @@
 #div-submit {
     display: flex;
     justify-content: center;
+    margin-bottom: 1.2rem;
 }
 
 #div-submit button {
@@ -155,7 +167,7 @@
 }
 
 #result-container {
-    padding-left: 25vw;
+    padding-left: 28vw;
     padding-right: 1vw;
     padding-top: 7vh;
     width: 100%;
@@ -165,7 +177,7 @@
     position: relative;
     right: 0%;
     min-height: 93vh;
-    width: 73vw;
+    width: 70vw;
     padding: 5% 5%;
 }
 
@@ -188,20 +200,27 @@
     padding: 2px 1px;
 }
 
+.produto-imagem a {
+    height: 100%;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
 .produto-capa {
     width: 100%;
-    height: 15vh;
+    max-height: 100%;
     object-fit: contain;
 }
 
 .tag-desconto {
     position: absolute;
-    background: #fff;
+    background: #ffffffdf;
     padding: 5px;
     border-radius: 5px;
     color: #ff7d7d;
-    right: 10px;
-    top: 10px;
+    right: 2%;
+    top: 5%;
     text-transform: capitalize;
 }
 
@@ -351,5 +370,36 @@
     .produto-card {
         width: auto;
         max-width: 170px;
+    }
+
+    .checkbox-div {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    #div-submit button {
+        width: 45%;
+    }
+
+    .produto-card {
+        min-width: 150px;
+        height: 45vh;
+    }
+
+    .preco {
+        font-size: 1rem;
+    }
+
+    .card-btn:hover {
+        width: 5rem;
+    }
+
+    .produto-nome {
+        font-size: 0.8rem;
+    }
+
+    .tag-desconto {
+        padding: 1px 3px;
     }
 }
