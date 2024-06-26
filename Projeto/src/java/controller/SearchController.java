@@ -78,15 +78,23 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
         String[] cat = request.getParameterValues("c");
+        int valorMin = 0, valorMax = 20000;
         List<Produto> produtos = null;
+        String valorMinString = request.getParameter("range-preco-min");
+        String valorMaxString = request.getParameter("range-preco-max");
+        if (valorMinString != null && valorMaxString != null) {
+            valorMin = Integer.parseInt(valorMinString);
+            valorMax = Integer.parseInt(valorMaxString);
+        }
         List<String> categorias = new ArrayList();
         if (cat != null) {
             categorias.addAll(Arrays.asList(cat));
         }
         String busca = request.getParameter("s");
-        produtos = pdao.listarPorPesquisaCategoria(busca, categorias);
+        produtos = pdao.listarPorPesquisaCategoria(busca, categorias, valorMin, valorMax);
         if (produtos.size() > 0) {
             for (int i = 0; i < produtos.size(); i++) {
                 Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));

@@ -24,8 +24,8 @@
 
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
                         <main class="bg-primary pt-5">
-                            <div class="px-5">
-                                <div class="px-5">
+                            <div class="px-2 px-lg-5 ">
+                                <div class=" px-3">
                                     <div id="carroselHeader" class="carousel slide mb-5">
                                         <div class="carousel-indicators">
                                             <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="0"
@@ -44,7 +44,7 @@
                                             <div class="carousel-item">
                                                 <div class="d-flex justify-content-center">
                                                     <img src="./assets/banner.png" class="" alt="..."
-                                                        style="object-fit: cover; max-height: 30vh;">
+                                                        >
                                                 </div>
                                             </div>
                                         </div>

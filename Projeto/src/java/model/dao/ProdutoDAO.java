@@ -160,7 +160,7 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    public List<Produto> listarPorPesquisaCategoria(String busca, List<String> categorias) {
+    public List<Produto> listarPorPesquisaCategoria(String busca, List<String> categorias, int valorMin, int valorMax) {
         List<Produto> produtos = new ArrayList();
         try {
             Connection conexao = Conexao.conectar();
@@ -175,7 +175,7 @@ public class ProdutoDAO {
                 busca = "";
             }
             busca = "%" + busca + "%";
-            String sql = "SELECT " + distinct + " p.* FROM produto AS p JOIN produtocategoria AS pc ON p.idProduto = pc.produto JOIN categoria AS c ON pc.categoria = c.idCategoria WHERE p.nome LIKE ?";
+            String sql = "SELECT " + distinct + " p.* FROM produto AS p JOIN produtocategoria AS pc ON p.idProduto = pc.produto JOIN categoria AS c ON pc.categoria = c.idCategoria WHERE p.nome LIKE ? AND valorFinal > ? AND valorFinal < ?";
             if (categorias != null) {
                 for (int i = 0; i < categorias.size(); i++) {
                     if (i == 0) {
@@ -188,9 +188,11 @@ public class ProdutoDAO {
             }
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, busca);
+            stmt.setInt(2, valorMin);
+            stmt.setInt(3, valorMax);
             if (categorias != null) {
                 for (int i = 0; i < categorias.size(); i++) {
-                    stmt.setInt(2 + i, Integer.parseInt(categorias.get(i)));
+                    stmt.setInt(4 + i, Integer.parseInt(categorias.get(i)));
                 }
             }
             rs = stmt.executeQuery();

@@ -4,43 +4,140 @@
     height: 25vh;
 }
 
-#side-bar {  
+#side-bar {
     position: fixed;
     height: 100%;
-    width: 20vw;
+    width: 23vw;
     top: 0;
     border-right: 1px #cee2e6 solid;
     z-index: 999;
-    font-size: 30px;
     font-weight: 600;
-    padding-left: 10px;
     padding-top: 100px;
     left: 0;
+    font-size: 1.4rem;
+    overflow-y: scroll;
 }
 
-.checkbox-div {
-    width: 100%;
-    height: 2rem;
-    padding-left: 20px;
-    align-items: center;
-    margin-bottom: 3px;
-    margin-top: 3px;
+#side-bar form {
+    padding: 0 10px;
 }
 
-.input-check {
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-right: 5px;
-    border: 4px rgb(114, 114, 114) solid;
+#div-categorias span,
+#div-preco>span {
+    font-size: 2rem;
+    padding-left: .6rem;
 }
 
 #checkbox-group {
-    margin-top: 20px;
-    font-size: 22px;
+    margin-top: 1rem;
     font-weight: 500;
+    line-height: 1.1rem;
 }
 
-#aplicar-categorias {
+#checkbox-group>div {
+    display: flex;
+    height: 2rem;
+    margin: 0;
+    padding: 0 5px;
+    align-items: center;
+}
+
+#checkbox-group label {
+    display: flex;
+    align-items: center;
+    padding-left: 0.3rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.c-checkbox {
+    width: 1.6rem;
+    height: 1.6rem;
+    -webkit-appearance: none;
+    border: 2px #545b5c solid;
+    border-radius: 20%;
+}
+
+.c-checkbox:checked {
+    background-color: rgb(54, 57, 61);
+}
+
+#div-preco {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px #cee2e6 solid;
+}
+
+#range-wrapper {
+   display: flex;
+   flex-direction: column;
+   gap: .5rem;
+}
+
+#range-wrapper > div {
+    display: grid;
+    grid-template-columns: 3fr 7fr 2fr;
+    align-items: center;
+}
+
+.preco-range {
+    display: flex;
+    -webkit-appearance: none;
+    appearance: none;
+    color: transparent;
+    padding: 0px 5px;
+}
+
+.preco-range::-webkit-slider-runnable-track {
+    border: 1px black solid;
+    background-color: rgb(240, 240, 240);
+    border-radius: .5rem;
+    height: 1rem;
+}
+
+.preco-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -0.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: #004ce6;
+}
+
+.range-value {
+    height: 2rem;
+    font-size: 1.6rem;
+    text-align: center;
+    border: 1px #cee2e6 solid;
+    color: #545b5c;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.range-value:focus-visible {
+    outline: none;
+    border: 1px #545b5c solid;
+}
+
+.range-value::-webkit-outer-spin-button, .range-value:-webkit-outer-spin-button {
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+
+#div-submit {
+    display: flex;
+    justify-content: center;
+}
+
+#div-submit button {
     margin-top: 30px;
     padding: 5px 7px;
     border: none;
@@ -52,15 +149,15 @@
     color: rgb(39, 41, 43);
 }
 
-#aplicar-categorias:active {
+#div-submit button:active {
     background-color: #004ce6;
     color: white;
 }
+
 #result-container {
     padding-left: 25vw;
-    padding-right: 4vw;
+    padding-right: 1vw;
     padding-top: 7vh;
-    padding-bottom: 10vh;
     width: 100%;
 }
 
@@ -68,7 +165,7 @@
     position: relative;
     right: 0%;
     min-height: 93vh;
-    width: 70vw;
+    width: 73vw;
     padding: 5% 5%;
 }
 
@@ -223,4 +320,36 @@
 .valor {
     opacity: 0.5;
     text-decoration: line-through;
+}
+
+@media screen and (max-width:720px) {
+    #side-bar {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 36vh;
+        padding-top: 12vh;
+        border-bottom: 1px #cee2e6 solid;
+        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.301);
+        overflow-y: scroll;
+        padding-bottom: 3rem;
+    }
+
+    #result-container {
+        padding: 0;
+        width: 100%;
+        margin-top: 26vh;
+        border-top: 2px #cee2e6 solid;
+        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.301);
+    }
+
+    #result-body {
+        width: 100%;
+        position: static;
+    }
+
+    .produto-card {
+        width: auto;
+        max-width: 170px;
+    }
 }

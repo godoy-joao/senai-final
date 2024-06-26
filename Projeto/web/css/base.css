@@ -408,7 +408,37 @@ footer {
     }
 
     footer {
-        height: 15vh;
+        height: 18vh;
+    }
+
+    footer .lateral {
+        width: 48%;
+        padding-bottom: 5%;
+    }
+
+    .lateral > div {
+        height: 40%;
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .lateral .footer-titulo {
+        height: 60%;
+        font-size: 1.3rem;
+        line-height: 1.2rem;
+        word-break: normal;
+    }
+
+    #footer-container {
+        padding: 0 15px;
+    }
+
+    #footer-icones {
+        width: 100%;
     }
 }
 
