@@ -257,7 +257,19 @@
 
 @media all and (max-width:768px) {
   .produto-card {
-    min-width: 30vw;
-    max-height: 30vh;
+
+    
+  }
+  .pre-btn, .nxt-btn {
+    width: 10vw;
+    
+  }
+
+  .pre-btn {
+    left: 0;
+  }
+
+  .nxt-btn {
+    right: 0;
   }
 }

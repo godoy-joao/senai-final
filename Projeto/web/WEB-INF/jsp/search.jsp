@@ -25,23 +25,52 @@
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
 
                         <div id="side-bar" class="branco-fundo">
-                            <div class="w-100" id="lateral-divisor"></div>
-                            <label for="checkbox-group">Selecionar categoria:</label>
-                            <div id="checkbox-group" class="d-flex flex-column">
-                                <form action="search" method="get">
-                                    <c:forEach items="${categorias}" var="categoria">
-                                        <div class="d-flex flex-row checkbox-div">
-                                            <input type="checkbox" name="c" class="input-check"
-                                                value="${categoria.idCategoria}" id="checkbox-${categoria.nome}">
-                                            <label for="checkbox-${categoria.nome}">${categoria.nome}</label>
-                                        </div>
-                                    </c:forEach>
-                                    <div class="w-100 d-flex justify-content-center">
-                                        <button type="submit" id="aplicar-categorias">Aplicar</button>
+                            <form action="search" method="get" onkeydown="return event.key != 'Enter';">
+                                <div id="div-categorias">
+                                    <span>
+                                        Categorias
+                                    </span>
+                                    <div id="checkbox-group" class="row justify-content-between g-0">
+                                        <c:forEach items="${categorias}" var="categoria">
+                                            <div class="w-50 w-lg-100">
+                                                <input type="checkbox" class="c-checkbox" name="c"
+                                                    value="${categoria.idCategoria}"
+                                                    id="checkbox-${categoria.nome}"><label
+                                                    for="checkbox-${categoria.nome}">${categoria.nome}</label>
+                                            </div>
+                                        </c:forEach>
                                     </div>
-                                </form>
-
-                            </div>
+                                </div>
+                                <div id="div-preco">
+                                    <span>
+                                        Preço
+                                    </span>
+                                    <div id="range-wrapper">
+                                        <div class="div-range">
+                                            <span>
+                                                Preço mínimo:
+                                            </span>
+                                            <input type="range" class="preco-range" name="range-preco-min" value="0"
+                                                min="0" max="19999" id="preco-min">
+                                            <input type="number" class="range-value" min="0" value="0" max="19999">
+                                            </span>
+                                        </div>
+                                        <div class="div-range">
+                                            <span>
+                                                Preco máximo:
+                                            </span>
+                                            <input type="range" class="preco-range" name="range-preco-max" min="1"
+                                                value="20000" max="20000" id="preco-max">
+                                            <input type="number" class="range-value" min="1" value="20000" max="20000">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="div-submit">
+                                    <button type="submit">
+                                        Aplicar
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                         <div id="result-container">
                             <div id="result-body" class="branco-fundo">
@@ -60,7 +89,7 @@
                                                         </c:if>
                                                         <img src="data:image/png;base64,${produto.imagemBase64}"
                                                             class="produto-capa" alt="">
-                                                        </a>
+                                                    </a>
                                                 </div>
                                                 <div class="produto-info">
                                                     <div class="div-nome">
@@ -103,6 +132,7 @@
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                                 crossorigin="anonymous"></script>
+                                <script src="./js/search.js"></script>
                 </body>
 
                 </html>
