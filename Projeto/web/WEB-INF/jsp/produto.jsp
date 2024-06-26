@@ -172,7 +172,7 @@
                                             <c:when test="${comentarios.size() > 0}">
                                                 <c:forEach items="${comentarios}" var="comentario" varStatus="contagem">
                                                     <div>
-
+                                                        
                                                     </div>
                                                 </c:forEach>
                                             </c:when>
