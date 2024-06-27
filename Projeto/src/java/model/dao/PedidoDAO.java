@@ -19,6 +19,7 @@ import model.bean.Produto;
 import model.bean.ProdutoPedido;
 import model.bean.Usuario;
 import model.bean.Endereco;
+import model.bean.Imagem;
 
 /**
  *
@@ -44,50 +45,80 @@ public class PedidoDAO {
                    
         }
      */
+    public Imagem selecionarPrimeiraImagem(Pedido p) {
+        Imagem img = new Imagem();
+        try {
+            Connection conexao = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conexao.prepareStatement("SELECT img.* FROM produtopedido AS pp JOIN produto AS prod ON pp.produto = prod.idProduto "
+                    + "JOIN imagem AS img ON img.produto = prod.idProduto JOIN pedido AS ped ON pp.pedido = ped.idPedido WHERE idPedido = ? LIMIT 1");
+            stmt.setInt(1, p.getIdPedido());
+            
+            rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                img.setIdImagem(rs.getInt("idImagem"));
+                img.setFormato(rs.getString("formato"));
+                img.setImagem(rs.getBytes("imagem"));
+                img.setProduto(rs.getInt("produto"));
+            }
+            
+            rs.close();
+            stmt.close();
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return img;
+    }
+    
     public int criar(Pedido p) {
         int idPedido = 0;
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
-
+            
             stmt = conexao.prepareStatement("INSERT INTO pedido (usuario, enderecoEntrega, dataPedido, valorTotal, formaPagamento) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, p.getUsuario());
             stmt.setInt(2, p.getEnderecoEntrega());
             stmt.setTimestamp(3, p.getDataPedido());
             stmt.setFloat(4, p.getValorTotal());
             stmt.setString(5, p.getFormaPagamento());
-
+            
             stmt.executeUpdate();
-
+            
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     idPedido = rs.getInt(1);
                 }
             }
-
+            
             stmt.close();
             conexao.close();
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
-
+            
         }
-
+        
         return idPedido;
     }
-
+    
     public Endereco selecionarEndereco(Pedido p) {
         Endereco e = new Endereco();
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-
+            
             stmt = conexao.prepareStatement("SELECT * FROM endereco WHERE idEndereco = ?");
             stmt.setInt(1, p.getEnderecoEntrega());
-
+            
             rs = stmt.executeQuery();
-
+            
             if (rs.next()) {
                 e.setIdEndereco(rs.getInt("idEndereco"));
                 e.setUsuario(rs.getInt("usuario"));
@@ -99,7 +130,7 @@ public class PedidoDAO {
                 e.setNumero(rs.getString("numero"));
                 e.setComplemento(rs.getString("complemento"));
             }
-
+            
             rs.close();
             stmt.close();
             conexao.close();
@@ -108,19 +139,19 @@ public class PedidoDAO {
         }
         return e;
     }
-
+    
     public List<ProdutoPedido> selecionarProdutoPedido(Pedido ped) {
         List<ProdutoPedido> listPp = new ArrayList();
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-
+            
             stmt = conexao.prepareStatement("SELECT * FROM produtopedido WHERE pedido = ?");
             stmt.setInt(1, ped.getIdPedido());
-
+            
             rs = stmt.executeQuery();
-
+            
             while (rs.next()) {
                 ProdutoPedido pp = new ProdutoPedido();
                 pp.setIdProdutoPedido(rs.getInt("idProdutoPedido"));
@@ -129,7 +160,7 @@ public class PedidoDAO {
                 pp.setQuantidade(rs.getInt("quantidade"));
                 listPp.add(pp);
             }
-
+            
             rs.close();
             stmt.close();
             conexao.close();
@@ -138,19 +169,19 @@ public class PedidoDAO {
         }
         return listPp;
     }
-
+    
     public List<Produto> selecionarProdutosDoPedido(Pedido ped) {
         List<Produto> produtos = new ArrayList();
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-
+            
             stmt = conexao.prepareStatement("SELECT p.* FROM produtopedido as pp JOIN produto AS p ON pp.produto = p.idProduto JOIN pedido AS ped ON pp.pedido = ped.idPedido WHERE ped.idPedido = ?");
             stmt.setInt(1, ped.getIdPedido());
-
+            
             rs = stmt.executeQuery();
-
+            
             while (rs.next()) {
                 Produto p = new Produto();
                 p.setIdProduto(rs.getInt("idProduto"));
@@ -162,27 +193,27 @@ public class PedidoDAO {
                 p.setDataRegistro(rs.getDate("dataRegistro"));
                 produtos.add(p);
             }
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        
         return produtos;
     }
-
+    
     public Pedido selecionarPorId(int id) {
         Pedido p = new Pedido();
-
+        
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-
+            
             stmt = conexao.prepareStatement("SELECT * FROM pedido WHERE idPedido = ?");
             stmt.setInt(1, id);
-
+            
             rs = stmt.executeQuery();
-
+            
             while (rs.next()) {
                 p.setIdPedido(rs.getInt("idPedido"));
                 p.setUsuario(rs.getInt("usuario"));
@@ -197,17 +228,17 @@ public class PedidoDAO {
         }
         return p;
     }
-
+    
     public List<Pedido> lerPedidos() {
         List<Pedido> pedidos = new ArrayList();
-
+        
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-
+            
             stmt = conexao.prepareStatement("SELECT * FROM pedido");
-
+            
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Pedido p = new Pedido();
@@ -216,31 +247,32 @@ public class PedidoDAO {
                 p.setEnderecoEntrega(rs.getInt("enderecoEntrega"));
                 p.setValorTotal(rs.getFloat("valorTotal"));
                 p.setDataPedido(rs.getTimestamp("dataPedido"));
+                p.setStatus(rs.getInt("status"));
                 pedidos.add(p);
             }
-
+            
             rs.close();
             stmt.close();
             conexao.close();
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
-
+            
         }
         return pedidos;
     }
-
+    
     public List<Pedido> lerPedidos(Usuario u) {
         List<Pedido> pedidos = new ArrayList();
-
+        
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
-
+            
             stmt = conexao.prepareStatement("SELECT * FROM pedido WHERE usuario = ?");
             stmt.setInt(1, u.getIdUsuario());
-
+            
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Pedido p = new Pedido();
@@ -249,16 +281,17 @@ public class PedidoDAO {
                 p.setEnderecoEntrega(rs.getInt("enderecoEntrega"));
                 p.setValorTotal(rs.getFloat("valorTotal"));
                 p.setDataPedido(rs.getTimestamp("dataPedido"));
+                p.setStatus(rs.getInt("status"));
                 pedidos.add(p);
             }
-
+            
             rs.close();
             stmt.close();
             conexao.close();
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
-
+            
         }
         return pedidos;
     }
@@ -277,21 +310,21 @@ public class PedidoDAO {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
-
+            
             stmt = conexao.prepareStatement("UPDATE pedido SET status = ? WHERE idPedido = ?");
             stmt.setInt(1, status);
             stmt.setInt(2, p.getIdPedido());
-
+            
             stmt.executeUpdate();
-
+            
             stmt.close();
             conexao.close();
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     public void adicionarProdutos(List<CarrinhoProduto> produtos, Pedido p) {
         if (produtos == null) {
             return;
@@ -299,21 +332,21 @@ public class PedidoDAO {
         try {
             Connection conexao = Conexao.conectar();
             PreparedStatement stmt = null;
-
+            
             for (int i = 0; i < produtos.size(); i++) {
                 stmt = conexao.prepareStatement("INSERT INTO produtopedido (produto, pedido, quantidade) VALUES (?, ?, ?)");
                 stmt.setInt(1, produtos.get(i).getProduto());
                 stmt.setInt(2, p.getIdPedido());
                 stmt.setInt(3, produtos.get(i).getQuantidade());
-
+                
                 stmt.executeUpdate();
             }
             stmt.close();
             conexao.close();
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
 }

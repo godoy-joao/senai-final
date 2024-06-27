@@ -69,10 +69,12 @@ public class HistoricoPedidosController extends HttpServlet {
             List<List<ProdutoPedido>> produtopedido = new ArrayList();
             List<Integer> qtdItens = new ArrayList();
             List<Endereco> enderecos = new ArrayList();
+            List<String> statusPedido = new ArrayList();
+            
             pedidos.forEach((p) -> {
                 List<Produto> produtos = pedDao.selecionarProdutosDoPedido(p);
                 List<ProdutoPedido> produtoPedido = pedDao.selecionarProdutoPedido(p);
-                
+
                 int quantidade = 0;
                 for (int i = 0; i < produtos.size(); i++) {
                     Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
@@ -81,17 +83,44 @@ public class HistoricoPedidosController extends HttpServlet {
                 }
                 for (int i = 0; i < produtoPedido.size(); i++) {
                     quantidade += produtoPedido.get(i).getQuantidade();
-                }   
+                }
+                String status = "";
+                System.out.println(p.getStatus());
+                switch (p.getStatus()) {
+                    case 1:
+                        status = "Aguardando pagamento";
+                        break;
+                    case 2:
+                        status = "Pagamento confirmado";
+                        break;
+                    case 3:
+                        status = "Em trânsito";
+                        break;
+                    case 4:
+                        status = "Entregue, aguardando confirmação do usuário";
+                        break;
+                    case 5:
+                        status = "Concluído";
+                        break;
+                    case 6:
+                        status = "Cancelado";
+                        break;
+
+                }
+                statusPedido.add(status);
                 itensDoPedido.add(produtos);
                 produtopedido.add(produtoPedido);
                 qtdItens.add(quantidade);
                 enderecos.add(pedDao.selecionarEndereco(p));
             });
+            request.setAttribute("statusPedido", statusPedido);
+            System.out.println(statusPedido.size());
+            System.out.println(statusPedido.get(0)+"aa");
             request.setAttribute("enderecos", enderecos);
             request.setAttribute("qtdItens", qtdItens);
             request.setAttribute("itensDoPedido", itensDoPedido);
-            request.setAttribute("produtoPedido", produtopedido); 
-            request.setAttribute("pedidos", pedidos); 
+            request.setAttribute("produtoPedido", produtopedido);
+            request.setAttribute("pedidos", pedidos);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/pedidosUsuario.jsp");
             rd.forward(request, response);
         }

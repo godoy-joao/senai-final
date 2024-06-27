@@ -3,17 +3,36 @@ $('#input-cep').mask("00000-000");
 const inputCep = document.getElementById("input-cep");
 const valorFrete = document.getElementById("valor-frete");
 const valorFreteDetalhes = document.getElementById("valores-frete");
-
-inputCep.addEventListener("change", function () {
+const cepAviso = document.getElementById("cep-aviso");
+const valorProdutos = document.getElementById("valores-produtos");
+const valorTotal = document.getElementById("total");
+var valorString = "";
+var total = 0;
+function atualizarFrete() {
+    var frete;
+    valorString = valorProdutos.innerHTML.replace(".", "").replace(",", ".").replace("R$", "").replace("&nbsp;", "");
+    valorString = valorString.trim();
+    var total = parseFloat(valorString);
     if (inputCep.value.length < 9) {
-        valorFrete.innerText = "R$ 0,00";
-        valorFreteDetalhes.innerText = "R$ 0,00";
+        frete = 0;
+        valorFrete.innerText = "R$ " + frete + ",00";
+        valorFreteDetalhes.innerText = "R$ " + frete + ",00";
+        cepAviso.innerHTML = "Cep inválido!"
     } else {
-        valorFrete.innerText = "R$ 30,00";
-        valorFreteDetalhes.innerText = "R$ 30,00";
+        frete = 30;
+        valorFrete.innerText = "R$ " + frete + ",00";
+        valorFreteDetalhes.innerText = "R$ " + frete + ",00";
+        cepAviso.innerHTML = '';
+        total = total + frete;
     }
+    let BRL = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    });
+    valorTotal.innerHTML = BRL.format(total);
+}
 
-})
+inputCep.addEventListener("change", () => atualizarFrete())
 
 //Pagamento
 $('#cartao-numero').mask("0000.0000.0000.0000");
@@ -59,7 +78,4 @@ cartaoData.addEventListener("focusout", function () {
         avisoData.style.color = "black";
         avisoData.innerHTML = "";
     }
-});
-
-'use strict'
-
+})

@@ -17,7 +17,7 @@
         </head>
 
         <body class="vh-100 vw-100">
-            <div class="w-100 h-100 d-flex flex-column gap-4">
+            <div class="w-100 h-100 d-flex flex-column justify-content-center gap-4">
                 <div class="text-success d-flex justify-content-center align-items-center w-100"
                     style="font-size: 70px;">
                     <i class="fa-solid fa-check"></i>

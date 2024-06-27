@@ -15,6 +15,7 @@
                 <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="./css/checkout.css">
                 <link rel="stylesheet" href="./css/base.css">
+
             </head>
 
             <body>
@@ -56,22 +57,22 @@
                             </div>
                             <div id="detalhes-footer">
                                 <div id="valores" class="d-flex flex-column w-100">
-                                    <div class="d-flex flex-row gap-3 w-80 justify-content-between">
+                                    <div>
                                         Produtos:
-                                        <span id="valores-produtos" class="text-start w-50">
+                                        <span id="valores-produtos" class="text-start">
                                             <fmt:formatNumber type="currency" value="${totalPedido}" />
                                         </span>
                                     </div>
-                                    <div class="d-flex flex-row gap-3 w-80 justify-content-between">
+                                    <div>
                                         Frete:
-                                        <span id="valores-frete" class="text-start w-50">
+                                        <span id="valores-frete" class="text-start">
                                             R$ 0,00
                                         </span>
                                     </div>
                                 </div>
                                 <div id="total-pedido">
                                     Total do pedido:
-                                    <span>
+                                    <span id="total">
                                         <fmt:formatNumber type="currency" value="${totalPedido}" />
                                     </span>
                                 </div>
@@ -86,14 +87,26 @@
                                     <div id="endereco-body">
                                         <div id="endereco-esquerda">
                                             <div id="select-enderecos">
+                                                <input type="text" name="idEndereco" id="idEndereco">
                                                 <label for="enderecosDoUsuario">
                                                     Selecione um endereço
                                                 </label>
-                                                <select name="select-endereco" id="enderecosDoUsuario">
+                                                <select name="select-endereco" id="enderecosDoUsuario"
+                                                    onchange="atualizarCampos()">
                                                     <c:if test="${enderecos.size() > 0}">
                                                         <c:forEach items="${enderecos}" var="endereco"
                                                             varStatus="contagem">
-                                                            <option value="${endereco.idEndereco}">${contagem.count}.
+                                                            <option value="${contagem.index}"
+                                                                id="option-${contagem.count}"
+                                                                data-id="${endereco.idEndereco}"
+                                                                data-estado="${endereco.estado}"
+                                                                data-cep="${endereco.cep}"
+                                                                data-cidade="${endereco.cidade}"
+                                                                data-bairro="${endereco.bairro}"
+                                                                data-rua="${endereco.rua}"
+                                                                data-numero="${endereco.numero}"
+                                                                data-complemento="${endereco.complemento}">
+                                                                ${contagem.count}.
                                                                 ${endereco.rua}, ${endereco.numero}</option>
                                                         </c:forEach>
                                                     </c:if>
@@ -136,7 +149,10 @@
                                             <div id="div-cep">
                                                 <label for="input-cep">CEP ou Código Postal</label>
                                                 <input type="text" id="input-cep" minlength="9" name="endereco-cep"
-                                                    placeholder="00000-000">
+                                                    placeholder="00000-000" onmouseleave="pesquisarCep">
+                                                <span id="cep-aviso" style="color: red; font-size: 0.7rem;">
+
+                                                </span>
                                             </div>
                                             <div id="info-frete">
                                                 <span>
@@ -211,7 +227,7 @@
                                                 <span>Mastercard Débito</span>
                                             </div>
                                         </div>
-                                        <div id="area-pix" class="d-flex flex-column justify-content-between pb-5">
+                                        <div id="area-pix" class="d-flex flex-column justify-content-between">
                                             <div>
                                                 <label for="qrcode-pix">Escaneie o QRCode para realizar o pagamento e
                                                     concluir seu pedido.</label>
@@ -225,24 +241,24 @@
                                             </div>
                                         </div>
                                         <div id="area-cartao"
-                                            class="d-none flex-column justify-content-center gap-3 pb-5">
+                                            class="d-none flex-column justify-content-center gap-3">
                                             <div>
                                                 <span class="fs-3">
                                                     Dados do cartão
                                                 </span>
                                             </div>
-                                            <div class="div-input d-flex flex-column w-50 ">
+                                            <div class="div-input d-flex flex-column w-lg-50 w-80 ">
                                                 <label for="cartao-titular">Nome do Titular do cartão</label>
                                                 <input type="text" name="cartao-titular" value="" id="cartao-titular"
                                                     placeholder="Nome E. Exemplo">
 
                                             </div>
-                                            <div class="div-input d-flex flex-column w-50 ">
+                                            <div class="div-input d-flex flex-column w-lg-50 w-80 ">
                                                 <label for="cartao-numero">Número do cartão</label>
                                                 <input type="text" maxlength="19" minlength="19" value=""
                                                     id="cartao-numero" placeholder="1111.1111.1111.1111">
                                             </div>
-                                            <div class="div-input d-flex flex-row w-50">
+                                            <div class="div-input d-flex flex-row w-lg-50 w-80">
                                                 <div id="div-data" class="d-flex flex-column w-50 pe-1">
                                                     <label for="cartao-data">Data de vencimento</label>
                                                     <input type="text" id="cartao-data" minlength="5" value=""
@@ -273,7 +289,88 @@
                         <script
                             src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
                         <script src="./js/checkout.js"></script>
+                        <script>
+                            function atualizarCampos() {
+                                const selectEndereco = document.getElementById('enderecosDoUsuario');
+                                const options = selectEndereco.options;
 
+                                const cidade = document.getElementById('input-cidade');
+                                const bairro = document.getElementById('input-bairro');
+                                const rua = document.getElementById('input-rua');
+                                const numero = document.getElementById('input-numero');
+                                const complemento = document.getElementById('input-complemento');
+                                const cep = document.getElementById('input-cep');
+                                const estado = document.getElementById('select-estado');
+                                const cepAviso = document.getElementById('cep-aviso');
+                                const idEndereco = document.getElementById('idEndereco');
+
+
+                                if (selectEndereco.value == 'novo') {
+                                    cidade.value = '';
+                                    bairro.value = '';
+                                    rua.value = '';
+                                    numero.value = '';
+                                    complemento.value = '';
+                                    cep.value = '';
+                                } else {
+                                    cidade.value = options[selectEndereco.value].getAttribute('data-cidade');
+                                    bairro.value = options[selectEndereco.value].getAttribute('data-bairro');
+                                    rua.value = options[selectEndereco.value].getAttribute('data-rua');
+                                    numero.value = options[selectEndereco.value].getAttribute('data-numero');
+                                    complemento.value = options[selectEndereco.value].getAttribute('data-complemento');
+                                    cep.value = options[selectEndereco.value].getAttribute('data-cep');
+                                    estado.value = options[selectEndereco.value].getAttribute('data-estado');
+                                    idEndereco.value = options[selectEndereco.value].getAttribute('data-id');
+                                }
+                                cep.dispatchEvent(new Event('change'));
+                            }
+                        </script>
+                        <script>
+                            const cidade = document.getElementById('input-cidade');
+                            const bairro = document.getElementById('input-bairro');
+                            const rua = document.getElementById('input-rua');
+                            const numero = document.getElementById('input-numero');
+                            const complemento = document.getElementById('input-complemento');
+                            const cep = document.getElementById('input-cep');
+                            const estado = document.getElementById('select-estado');
+
+                            const limparEndereco = () => {
+                                cidade.value = '';
+                                bairro.value = '';
+                                rua.value = '';
+                                numero.value = '';
+                                complemento.value = '';
+                            }
+
+                            const preencherEndereco = (endereco) => {
+                                cidade.value = endereco.localidade;
+                                bairro.value = endereco.bairro;
+                                rua.value = endereco.logradouro;
+                                cep.value = endereco.cep;
+                                estado.value = endereco.uf;
+                            }
+
+                            const pesquisarCep = async () => {
+                                limparEndereco();
+
+                                const cepE = cep.value;
+                                console.log(cepE);
+                                if (cepE.length == 9) {
+                                    const dados = await fetch('https://viacep.com.br/ws/' + cepE + '/json/');
+                                    const endereco = await dados.json();
+                                    if (!endereco.hasOwnProperty('erro')) {
+                                        preencherEndereco(endereco);
+                                        cepAviso.innerHTML = "";
+                                    } else {
+                                        cepAviso.innerHTML = "Cep não encontrado!";
+                                    }
+                                } else {
+                                    cepAviso.innerHTML = "Cep não encontrado!";
+                                }
+                            }
+
+                            cep.addEventListener('mouseleave', pesquisarCep);
+                        </script>
             </body>
 
             </html>
