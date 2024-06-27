@@ -2,6 +2,13 @@ header form {
     margin-bottom: 0 !important;
 }
 
+#idEndereco {
+    position: absolute;
+    top: -100vh;
+    width: 0.1px;
+    height: 0.1px;
+}
+
 body {
     background-color: #e6e7ee;
     overflow: hidden;
@@ -18,7 +25,7 @@ main {
     left: 0;
     height: 76vh;
     z-index: 1100;
-    width: 24vw;
+    width: 30vw;
     font-weight: 500;
     border-right: 1px #a1a1a1 solid;
     background-color: #f5f5f5;
@@ -120,6 +127,16 @@ main {
     box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.253);
 }
 
+#valores > div {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+}
+
+#valores > div > span {
+    padding-left: 0.5rem;
+    width: 100%;
+}
+
 #total-pedido {
     font-size: 1.2rem;
     font-weight: 500;
@@ -133,7 +150,7 @@ main {
 #preenchimento {
     position: absolute;
     right: 0;
-    width: 72vw;
+    width: 68vw;
     height: 78vh;
     border-left: 1px #a1a1a1 solid;
     padding: 10px 15px;
@@ -195,7 +212,7 @@ main {
 
 #endereco-direita,
 #endereco-esquerda {
-    width: 30%;
+    width: 40%;
     padding: 15px 20px;
     gap: 8px;
     display: flex;
@@ -206,12 +223,12 @@ main {
 #endereco-esquerda div {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
 }
 
 input:focus-visible {
     outline: 2px #e68000 solid;
-
+    outline-offset: 1px;
 }
 
 #endereco label {
@@ -241,6 +258,7 @@ select {
     font: inherit;
     background-color: white;
     width: 25px;
+    min-width: 25px;
     height: 25px;
     border: 2px black solid;
     border-radius: 50%;
@@ -270,7 +288,8 @@ select {
     outline-color: #ffb55c;
 }
 
-#endereco input, #area-cartao input {
+#endereco input,
+#area-cartao input {
     border: 2px rgb(80, 80, 80) solid;
     border-radius: 5px;
     text-align: start;
@@ -306,8 +325,9 @@ select {
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+
 }
+
 #area-pix label {
     font-size: 1.2rem;
     font-weight: 500;
@@ -316,11 +336,12 @@ select {
     width: 80%;
 }
 
-.div-input  label{
+.div-input label {
     margin-bottom: 3px;
     font-size: 1.1rem;
     font-weight: 500;
 }
+
 .btn-finalizar {
     width: 10rem;
     height: 3rem;
@@ -330,4 +351,86 @@ select {
     font-size: 1.2rem;
     line-height: 1.2rem;
     font-weight: 500;
+}
+
+@media screen and (min-width: 767px) and (max-width: 1280px) {
+
+#detalhes-footer {
+    height: auto;
+}
+#total-pedido {
+    display: flex;
+    flex-direction: column;
+}
+
+    #endereco-esquerda,
+    #endereco-direita {
+        width: 50%;
+    }
+
+    #area-pix label {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    #detalhes-pedido {
+        top: 12vh;
+        
+    }
+
+    #area-pix,
+    #area-cartao {
+        height: 400px;
+        padding-left: 0;
+    }
+
+    #pagamento-body {
+        grid-template-rows: 3fr 6fr;
+        grid-template-columns: none;
+    }
+
+    #formas-de-pagamento {
+        border-right: none;
+        border-bottom: 2px #a1a1a1 solid;
+    }
+
+    #area-pix label {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    body {
+        overflow-y: scroll;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+    }
+
+    #detalhes-pedido {
+        position: static;
+        width: 100vw;
+    }
+
+    #preenchimento {
+        position: static;
+        width: 100vw;
+        overflow: visible;
+        height: auto;
+    }
+
+    #preenchimento form {
+        overflow-y: scroll;
+    }
+
+    #endereco-direita,
+    #endereco-esquerda {
+        width: 60%;
+    }
+
+
 }

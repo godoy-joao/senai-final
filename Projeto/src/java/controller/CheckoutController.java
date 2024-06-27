@@ -56,14 +56,13 @@ public class CheckoutController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         Cookie[] cookies = request.getCookies();
         Usuario u = new Usuario();
-        HttpSession session = request.getSession();
         boolean permite = false;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("criarPedido") && cookie.getValue().equals("true")) {
                     permite = true;
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
+                    //cookie.setMaxAge(0);
+                    //response.addCookie(cookie); 
                 }
                 if (cookie.getName().equals("login") && !cookie.getValue().equals("")) {
                     u = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
@@ -150,7 +149,7 @@ public class CheckoutController extends HttpServlet {
             Endereco e = new Endereco();
             Pedido p = new Pedido();
             if (!(request.getParameter("select-endereco").equals("novo"))) {
-                e = eDao.selecionarPorId(Integer.parseInt(request.getParameter("select-endereco")));
+                e = eDao.selecionarPorId(Integer.parseInt(request.getParameter("idEndereco")));
                 p.setEnderecoEntrega(e.getIdEndereco());
             } else {
                 e.setCep(request.getParameter("endereco-cep"));

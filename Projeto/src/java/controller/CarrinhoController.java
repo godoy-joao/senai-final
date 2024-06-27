@@ -129,7 +129,11 @@ public class CarrinhoController extends HttpServlet {
         } else if (url.equals("/mudarQuantidade")) {
             CarrinhoProduto cartprod = cDao.selecionarCartProd(Integer.parseInt(request.getParameter("submitQtd")));
             cartprod.setQuantidade(Integer.parseInt(request.getParameter("inputQtd")));
-            cDao.alterarQuantidade(cartprod);
+            if (cartprod.getQuantidade() < 1) {
+                cDao.removerProduto(pDao.selecionarPorId(cartprod.getProduto()), cDao.selecionarCarrinho(u));
+            } else {
+                cDao.alterarQuantidade(cartprod);
+            }
             response.sendRedirect("./carrinho");
         } else {
             processRequest(request, response);

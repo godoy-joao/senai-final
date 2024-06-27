@@ -127,6 +127,14 @@
                                                                         value="${pedido.valorTotal}" />
                                                                 </span>
                                                             </div>
+                                                            <div>
+                                                                <span>
+                                                                    Status:
+                                                                </span>
+                                                                <span>
+                                                                    ${statusPedido[contagemPedido.index]}
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                         <div class="info-endereco">
                                                             <div class="endereco-esquerda">
