@@ -8,6 +8,7 @@ package controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -95,9 +96,10 @@ public class LoginController extends HttpServlet {
                     }
                     response.sendRedirect("./home");
                 } else {
+                    
                     request.setAttribute("errorMessage", "Usuário ou senha inválidos");
-                    response.sendRedirect("./login");
-
+                    request.getRequestDispatcher("./login").forward(request, response);
+                    
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -128,7 +130,8 @@ public class LoginController extends HttpServlet {
             u.setFoto(data);
             try {
                 uDAO.criar(u);
-                response.sendRedirect("./login");
+                request.setAttribute("errorMessage", "Cadastrado com sucesso!");
+                request.getRequestDispatcher("./login").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("errorCadastro", "Algo deu errado. Confira os dados e tente novamente.");

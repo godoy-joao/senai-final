@@ -20,6 +20,7 @@
                     <link rel="stylesheet" href="./css/pedidosUsuario.css">
                     <link rel="stylesheet" href="./css/header.css">
                     <link rel="stylesheet" href="./css/base.css">
+                    <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
                 </head>
 
                 <body>
@@ -99,7 +100,8 @@
                                                     </div>
                                                     <div class="div-info">
                                                         <div class="div-img">
-                                                            <img src="" alt="">
+                                                            <img src="data:image/png;base64,${imagens[contagemPedido.index]}"
+                                                                alt="">
                                                         </div>
                                                         <div class="info-detalhes">
                                                             <div class="div-id">
@@ -133,6 +135,14 @@
                                                                 </span>
                                                                 <span>
                                                                     ${statusPedido[contagemPedido.index]}
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span>
+                                                                    Forma de pagamento:
+                                                                </span>
+                                                                <span>
+                                                                    ${pedido.formaPagamento}
                                                                 </span>
                                                             </div>
                                                         </div>

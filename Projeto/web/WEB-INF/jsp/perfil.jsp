@@ -5,8 +5,7 @@
             <html>
 
             <head>
-                <meta http-equiv="Content-Type" name="viewport"
-                charset="UTF-8"
+                <meta http-equiv="Content-Type" name="viewport" charset="UTF-8"
                     content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
                 <title>Perfil</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,6 +17,7 @@
                 <link rel="stylesheet" href="./css/header.css">
                 <link rel="stylesheet" href="./css/base.css">
                 <link rel="stylesheet" href="./css/perfil.css">
+                <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
             </head>
 
             <body class="overflow-hidden">

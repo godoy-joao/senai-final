@@ -1,5 +1,6 @@
 //Endereço
 $('#input-cep').mask("00000-000");
+$('#input-cpf').mask("000.000.000-00");
 const inputCep = document.getElementById("input-cep");
 const valorFrete = document.getElementById("valor-frete");
 const valorFreteDetalhes = document.getElementById("valores-frete");

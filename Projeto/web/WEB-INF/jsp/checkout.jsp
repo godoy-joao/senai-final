@@ -12,6 +12,7 @@
                     crossorigin="anonymous">
                 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
                     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+                <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
                 <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="./css/checkout.css">
                 <link rel="stylesheet" href="./css/base.css">
@@ -227,54 +228,73 @@
                                                 <span>Mastercard Débito</span>
                                             </div>
                                         </div>
-                                        <div id="area-pix" class="d-flex flex-column justify-content-between">
-                                            <div>
-                                                <label for="qrcode-pix">Escaneie o QRCode para realizar o pagamento e
-                                                    concluir seu pedido.</label>
-                                                <img src="" id="qrcode-pix" alt="">
-                                            </div>
+                                        <div>
+                                            <div id="div-cpf">
+                                                <c:choose>
+                                                    <c:when test="${usuario.cpf == '0'}">
+                                                        <span>
+                                                            Por favor informe seu CPF:
+                                                        </span>
+                                                        <input type="text" id="input-cpf" required>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input type="text" id="input-cpf" value="${usuario.cpf}" disabled>
+                                                        <c:out value="${usuario.cpf}" />
 
-                                            <div>
-                                                <button class="btn-finalizar" type="submit">
-                                                    Finalizar pedido
-                                                </button>
+                                                        
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
-                                        </div>
-                                        <div id="area-cartao"
-                                            class="d-none flex-column justify-content-center gap-3">
-                                            <div>
-                                                <span class="fs-3">
-                                                    Dados do cartão
-                                                </span>
-                                            </div>
-                                            <div class="div-input d-flex flex-column w-lg-50 w-80 ">
-                                                <label for="cartao-titular">Nome do Titular do cartão</label>
-                                                <input type="text" name="cartao-titular" value="" id="cartao-titular"
-                                                    placeholder="Nome E. Exemplo">
-
-                                            </div>
-                                            <div class="div-input d-flex flex-column w-lg-50 w-80 ">
-                                                <label for="cartao-numero">Número do cartão</label>
-                                                <input type="text" maxlength="19" minlength="19" value=""
-                                                    id="cartao-numero" placeholder="1111.1111.1111.1111">
-                                            </div>
-                                            <div class="div-input d-flex flex-row w-lg-50 w-80">
-                                                <div id="div-data" class="d-flex flex-column w-50 pe-1">
-                                                    <label for="cartao-data">Data de vencimento</label>
-                                                    <input type="text" id="cartao-data" minlength="5" value=""
-                                                        maxlength="5" placeholder="MM/AA">
-                                                    <span id="data-aviso"></span>
+                                            <div id="area-pix" class="d-flex flex-column justify-content-between">
+                                                <div>
+                                                    <label for="qrcode-pix">Escaneie o QRCode para realizar o pagamento
+                                                        e
+                                                        concluir seu pedido.</label>
+                                                    <img src="" id="qrcode-pix" alt="">
                                                 </div>
-                                                <div id="div-cvv" class="d-flex flex-column w-50 ps-1">
-                                                    <label for="cartao-cvv">Código de segurança</label>
-                                                    <input type="text" id="cartao-cvv" minlength="3" value=""
-                                                        maxlength="3" placeholder="000">
+
+                                                <div>
+                                                    <button class="btn-finalizar" type="submit">
+                                                        Finalizar pedido
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <button class="btn-finalizar" type="submit">
-                                                    Finalizar pedido
-                                                </button>
+                                            <div id="area-cartao"
+                                                class="d-none flex-column justify-content-center gap-3">
+                                                <div>
+                                                    <span class="fs-3">
+                                                        Dados do cartão
+                                                    </span>
+                                                </div>
+                                                <div class="div-input d-flex flex-column w-lg-50 w-80 ">
+                                                    <label for="cartao-titular">Nome do Titular do cartão</label>
+                                                    <input type="text" name="cartao-titular" value=""
+                                                        id="cartao-titular" placeholder="Nome E. Exemplo">
+
+                                                </div>
+                                                <div class="div-input d-flex flex-column w-lg-50 w-80 ">
+                                                    <label for="cartao-numero">Número do cartão</label>
+                                                    <input type="text" maxlength="19" minlength="19" value=""
+                                                        id="cartao-numero" placeholder="1111.1111.1111.1111">
+                                                </div>
+                                                <div class="div-input d-flex flex-row w-lg-50 w-80">
+                                                    <div id="div-data" class="d-flex flex-column w-50 pe-1">
+                                                        <label for="cartao-data">Data de vencimento</label>
+                                                        <input type="text" id="cartao-data" minlength="5" value=""
+                                                            maxlength="5" placeholder="MM/AA">
+                                                        <span id="data-aviso"></span>
+                                                    </div>
+                                                    <div id="div-cvv" class="d-flex flex-column w-50 ps-1">
+                                                        <label for="cartao-cvv">Código de segurança</label>
+                                                        <input type="text" id="cartao-cvv" minlength="3" value=""
+                                                            maxlength="3" placeholder="000">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button class="btn-finalizar" type="submit">
+                                                        Finalizar pedido
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -369,7 +389,7 @@
                                 }
                             }
 
-                            cep.addEventListener('mouseleave', pesquisarCep);
+                            cep.addEventListener('focusout', pesquisarCep);
                         </script>
             </body>
 

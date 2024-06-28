@@ -136,6 +136,14 @@
         <servlet-name>ProdutoController</servlet-name>
         <url-pattern>/produto</url-pattern>
     </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>ProdutoController</servlet-name>
+        <url-pattern>/postarComentario</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>ProdutoController</servlet-name>
+        <url-pattern>/deletarComentario</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/admin</url-pattern>

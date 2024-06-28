@@ -70,11 +70,13 @@ public class HistoricoPedidosController extends HttpServlet {
             List<Integer> qtdItens = new ArrayList();
             List<Endereco> enderecos = new ArrayList();
             List<String> statusPedido = new ArrayList();
-            
+            List<Imagem> imagens = new ArrayList();
             pedidos.forEach((p) -> {
                 List<Produto> produtos = pedDao.selecionarProdutosDoPedido(p);
                 List<ProdutoPedido> produtoPedido = pedDao.selecionarProdutoPedido(p);
-
+                Imagem imagem = pedDao.selecionarPrimeiraImagem(p);
+                imagem.setImagemBase64(Base64.getEncoder().encodeToString(imagem.getImagem()));
+                imagens.add(imagem);
                 int quantidade = 0;
                 for (int i = 0; i < produtos.size(); i++) {
                     Imagem img = iDao.selecionarPrimeiraImagem(produtos.get(i));
@@ -85,7 +87,6 @@ public class HistoricoPedidosController extends HttpServlet {
                     quantidade += produtoPedido.get(i).getQuantidade();
                 }
                 String status = "";
-                System.out.println(p.getStatus());
                 switch (p.getStatus()) {
                     case 1:
                         status = "Aguardando pagamento";
@@ -113,9 +114,8 @@ public class HistoricoPedidosController extends HttpServlet {
                 qtdItens.add(quantidade);
                 enderecos.add(pedDao.selecionarEndereco(p));
             });
+            request.setAttribute("imagens", imagens);
             request.setAttribute("statusPedido", statusPedido);
-            System.out.println(statusPedido.size());
-            System.out.println(statusPedido.get(0)+"aa");
             request.setAttribute("enderecos", enderecos);
             request.setAttribute("qtdItens", qtdItens);
             request.setAttribute("itensDoPedido", itensDoPedido);

@@ -156,7 +156,8 @@ public class HomeController extends HttpServlet {
                     Cookie cookie = new Cookie("produtoAdicionado", "1");
                     response.addCookie(cookie);
                 }
-                response.sendRedirect("./home");
+                
+                response.sendRedirect(request.getParameter("lastPage"));
             }
         }
     }

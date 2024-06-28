@@ -21,6 +21,7 @@
                             crossorigin="anonymous"></script>
                         <link rel="stylesheet" href="./css/base.css">
                         <link rel="stylesheet" href="./css/produto.css">
+                        <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
                     </head>
 
                     <body class="overflow-x-hidden">
@@ -141,7 +142,6 @@
                                                                 <option value="3">3 Estrelas</option>
                                                                 <option value="4">4 Estrelas</option>
                                                                 <option value="5">5 Estrelas</option>
-
                                                             </select>
                                                         </div>
                                                     </div>
@@ -161,23 +161,37 @@
                                                         </c:choose>
                                                     </div>
                                                 </div>
+                                                <input type="text" value="${produto.idProduto}" name="idProduto"
+                                                    style="width: 0.1px; height: 0.1px; border: none; background-color: transparent;">
                                                 <div id="div-enviar">
                                                     <button type="submit" value="${usuario.idUsuario}" name="enviar">
                                                         Enviar
                                                     </button>
                                                 </div>
                                             </form>
+
                                         </div>
                                         <c:choose>
                                             <c:when test="${comentarios.size() > 0}">
                                                 <c:forEach items="${comentarios}" var="comentario" varStatus="contagem">
                                                     <div>
-                                                        
+                                                        <div>
+
+                                                        </div>
+                                                        <c:if test="${comentario.usuario == usuario.idUsuario}">
+                                                            <form action="deletarComentario" method="post">
+                                                                <button type="submit" name="enviar"
+                                                                    value="${comentario.idAvaliacao}">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </c:if>
                                                     </div>
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
-                                                <div>
+                                                <div
+                                                    style="width: 100%; display: flex; justify-content: center; height: 3rem; text-align: center;">
                                                     Não há comentários
                                                 </div>
                                             </c:otherwise>

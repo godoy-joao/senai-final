@@ -127,12 +127,12 @@ main {
     box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.253);
 }
 
-#valores > div {
+#valores>div {
     display: grid;
     grid-template-columns: 4fr 8fr;
 }
 
-#valores > div > span {
+#valores>div>span {
     padding-left: 0.5rem;
     width: 100%;
 }
@@ -342,6 +342,30 @@ select {
     font-weight: 500;
 }
 
+#div-cpf {
+    width: 100%;
+    height: 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#div-cpf input {
+    border: 2px rgb(80, 80, 80) solid;
+    border-radius: 5px;
+    text-align: start;
+    padding: 3px;
+    padding-left: 5px;
+    font-size: 1.4rem;
+    height: 1.9rem;
+    width: 40%;
+}
+
+
 .btn-finalizar {
     width: 10rem;
     height: 3rem;
@@ -355,13 +379,14 @@ select {
 
 @media screen and (min-width: 767px) and (max-width: 1280px) {
 
-#detalhes-footer {
-    height: auto;
-}
-#total-pedido {
-    display: flex;
-    flex-direction: column;
-}
+    #detalhes-footer {
+        height: auto;
+    }
+
+    #total-pedido {
+        display: flex;
+        flex-direction: column;
+    }
 
     #endereco-esquerda,
     #endereco-direita {
@@ -377,7 +402,7 @@ select {
 
     #detalhes-pedido {
         top: 12vh;
-        
+
     }
 
     #area-pix,
