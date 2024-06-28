@@ -105,12 +105,21 @@
                                                         </span>
                                                     </div>
                                                     <div id="div-comprar">
-                                                        <button id="comprar-btn">
-                                                            <span>
-                                                                <i class="fa-solid fa-shopping-cart"></i>
-                                                            </span>
-                                                            <span class="ms-2">Adicionar ao carrinho</span>
-                                                        </button>
+
+                                                        <form action="enviarParaCarrinho" method="post">
+                                                            <input type="text"
+                                                                style="height: 0.1px; width: 0.1px; position: absolute; background-color: transparent; border: transparent;"
+                                                                name="lastPage"
+                                                                value="./produto?id=${produto.idProduto}">
+                                                            <button id="comprar-btn" type="submit"
+                                                                value="${produto.idProduto}" name="item">
+                                                                <span>
+                                                                    <i class="fa-solid fa-shopping-cart"></i>
+                                                                </span>
+                                                                <span class="ms-2">Adicionar ao carrinho</span>
+                                                            </button>
+                                                        </form>
+
                                                     </div>
                                                 </div>
                                             </div>
