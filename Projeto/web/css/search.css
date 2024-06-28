@@ -377,7 +377,7 @@ input::-webkit-inner-spin-button {
     }
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width:1360px) {
     #div-submit button {
         width: 45%;
     }
@@ -396,7 +396,7 @@ input::-webkit-inner-spin-button {
     }
 
     .produto-nome {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .tag-desconto {

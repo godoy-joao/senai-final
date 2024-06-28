@@ -9,13 +9,14 @@
 
                     <head>
                         <meta http-equiv="Content-Type" name="viewport"
-                        content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
-                    <title>Carrinho</title>
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-                        rel="stylesheet"
-                        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-                        crossorigin="anonymous">
-                    <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
+                            content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
+                        <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
+                        <title>Carrinho</title>
+                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+                            rel="stylesheet"
+                            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+                            crossorigin="anonymous">
+                        <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
                         <link rel="stylesheet" href="./css/carrinho.css">
                         <link rel="stylesheet" href="./css/base.css">
                     </head>

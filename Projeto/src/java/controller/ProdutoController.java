@@ -5,7 +5,9 @@
  */
 package controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Avaliacao;
 import model.bean.Categoria;
 import model.bean.Produto;
 import model.bean.Imagem;
@@ -24,12 +27,20 @@ import model.dao.CategoriaDAO;
 import model.dao.ImagemDAO;
 import model.dao.ProdutoDAO;
 import model.dao.UsuarioDAO;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 /**
  *
  * @author João Guilherme
  */
 public class ProdutoController extends HttpServlet {
+
+    ProdutoDAO pDao = new ProdutoDAO();
+    ImagemDAO iDao = new ImagemDAO();
+    CategoriaDAO cDao = new CategoriaDAO();
+    UsuarioDAO uDao = new UsuarioDAO();
+    AvaliacaoDAO avDAO = new AvaliacaoDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,11 +54,6 @@ public class ProdutoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        ProdutoDAO pDao = new ProdutoDAO();
-        ImagemDAO iDao = new ImagemDAO();
-        CategoriaDAO cDao = new CategoriaDAO();
-        UsuarioDAO uDao = new UsuarioDAO();
-        AvaliacaoDAO avDAO = new AvaliacaoDAO();
         Produto produto = pDao.selecionarPorId(Integer.parseInt(request.getParameter("id")));
         produto.setImagemBase64(Base64.getEncoder().encodeToString(iDao.selecionarPrimeiraImagem(produto).getImagem()));
         List<Imagem> imagens = iDao.selecionarListaDeImagens(produto);
@@ -58,16 +64,36 @@ public class ProdutoController extends HttpServlet {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("login") && !(cookie.getValue().equals(""))) {
                     usuario = uDao.selecionarUsuarioPorId(Integer.parseInt(cookie.getValue()));
+                    if (usuario.getFoto() == null) {
+                        System.out.println("Não foi possível converter imagem, utilizando padrão.");
+                        Resource res = new ClassPathResource("placeholder.png");
+                        byte[] data = null;
+                        try (InputStream stream = res.getInputStream();
+                                ByteArrayOutputStream bOut = new ByteArrayOutputStream()) {
+                            byte[] img = new byte[4096];
+                            int byteRead = -1;
+                            while ((byteRead = stream.read(img)) != -1) {
+                                bOut.write(img, 0, byteRead);
+                            }
+                            data = bOut.toByteArray();
+                        }
+                        usuario.setFoto(data);
+                    }
                     usuario.setFotoBase64(Base64.getEncoder().encodeToString(usuario.getFoto()));
+
                     request.setAttribute("usuario", usuario);
                 }
             }
         }
-        List<byte[]> fotoBytes = avDAO.pegarFotosComentarios(produto);
         List<String> fotoBase64 = new ArrayList();
-        for (int i = 0; i < fotoBytes.size(); i++) {
-            String base = Base64.getEncoder().encodeToString(fotoBytes.get(i));
-            fotoBase64.add(base);
+        try {
+            List<byte[]> fotoBytes = avDAO.pegarFotosComentarios(produto);
+            for (int i = 0; i < fotoBytes.size(); i++) {
+                String base = Base64.getEncoder().encodeToString(fotoBytes.get(i));
+                fotoBase64.add(base);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         for (int i = 0; i < imagens.size(); i++) {
             imagens.get(i).setImagemBase64(Base64.getEncoder().encodeToString(imagens.get(i).getImagem()));
@@ -109,14 +135,20 @@ public class ProdutoController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String url = request.getServletPath();
-        
+
         if (url.equals("/postarComentario")) {
-            
+            Avaliacao ava = new Avaliacao();
+            ava.setConteudo(request.getParameter("comentario"));
+            ava.setNota(Integer.parseInt(request.getParameter("aval-nota")));
+            ava.setProduto(Integer.parseInt(request.getParameter("idProduto")));
+            ava.setUsuario(Integer.parseInt(request.getParameter("enviar")));
+            avDAO.create(ava);
+            response.sendRedirect("produto?id=" + request.getParameter("idProduto"));
         } else if (url.equals("/deletarComentario")) {
-            
-        } 
-        
-        else {
+            Avaliacao ava = new Avaliacao();
+            ava.setIdAvaliacao(Integer.parseInt(request.getParameter("enviar")));
+            avDAO.delete(ava.getIdAvaliacao());
+        } else {
             processRequest(request, response);
         }
     }

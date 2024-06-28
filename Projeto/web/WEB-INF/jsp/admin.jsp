@@ -7,7 +7,7 @@
 
                 <head>
                     <meta http-equiv="Content-Type" name="viewport"
-                content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
+                        content="width=device-width, initial-scale=1.0, text/html, charset=UTF-8">
                     <title>Admin</title>
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
                         rel="stylesheet"
@@ -19,6 +19,7 @@
                         crossorigin="anonymous"></script>
                     <link rel="stylesheet" href="./css/header.css">
                     <link rel="stylesheet" href="./css/base.css">
+                    <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
                 </head>
 
                 <body class="branco-fundo-2">
@@ -167,25 +168,30 @@
                                                 <form action="editarProduto" method="post"
                                                     class="d-none flex-column border" id="confirmarEditar">
                                                     <span class="fs-3">Edição de produto</span>
-                                                        <input type="text" name="novoNome" placeholder="${produtos[contagem.index].nome}">
-                                                        <input type="text" name="novoValor" placeholder="Valor atual: ${produtos[contagem.index].valor}">
-                                                        <input type="text" name="novoDesconto" placeholder="Desconto: ${produtos[contagem.index].desconto}">
-                                                        <input type="text" name="novaQtd" placeholder="Quantidade: ${estoque.quantidade}">
-                                                        <textarea name="novaDescricao">${produtos[contagem.index].descricao}</textarea>
-                                                        <button value="${estoque.produto}" name="editId" type="submit">
-                                                            Confirmar
-                                                        </button>
-                                                        <button type="button">
-                                                            Cancelar
-                                                        </button>
+                                                    <input type="text" name="novoNome"
+                                                        placeholder="${produtos[contagem.index].nome}">
+                                                    <input type="text" name="novoValor"
+                                                        placeholder="Valor atual: ${produtos[contagem.index].valor}">
+                                                    <input type="text" name="novoDesconto"
+                                                        placeholder="Desconto: ${produtos[contagem.index].desconto}">
+                                                    <input type="text" name="novaQtd"
+                                                        placeholder="Quantidade: ${estoque.quantidade}">
+                                                    <textarea
+                                                        name="novaDescricao">${produtos[contagem.index].descricao}</textarea>
+                                                    <button value="${estoque.produto}" name="editId" type="submit">
+                                                        Confirmar
+                                                    </button>
+                                                    <button type="button">
+                                                        Cancelar
+                                                    </button>
                                                 </form>
                                                 <div>
                                                     <button onclick="abrirExcluir('${estoque.idEstoque}')">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>
-                                                <form class="d-none flex-column border" id="confirmarExcluir" method="post"
-                                                    action="excluirProduto">
+                                                <form class="d-none flex-column border" id="confirmarExcluir"
+                                                    method="post" action="excluirProduto">
                                                     <div class="d-flex justify-content-center align-items-center h-70">
                                                         <span>
                                                             Tem certeza que deseja excluir o produto?

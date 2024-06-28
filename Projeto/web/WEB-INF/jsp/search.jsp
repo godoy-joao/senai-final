@@ -18,6 +18,7 @@
                         crossorigin="anonymous"></script>
                     <link rel="stylesheet" href="./css/base.css">
                     <link rel="stylesheet" href="./css/search.css">
+                    <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
                     <title>Search</title>
                 </head>
 
@@ -115,10 +116,11 @@
                                                         </span>
                                                     </div>
                                                     <div id="div-btn">
-                                                        <form action="sendToCart" method="post"
+                                                        <form action="enviarParaCarrinho" method="post"
                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
+                                                            <input type="text" style="height: 0.1px; width: 0.1px; position: absolute; background-color: transparent; border: transparent;"  name="lastPage" value="./search?s=">
                                                             <button type="submit" value="${produto.idProduto}"
-                                                                name="addProduto" class="card-btn verde-fundo fs-6">
+                                                                name="item" class="card-btn verde-fundo fs-6">
                                                                 <span class="msg1">Comprar</span>
                                                                 <span class="msg2"><i
                                                                         class="fa-solid fa-shopping-cart me-1"></i>Adicionar</span>

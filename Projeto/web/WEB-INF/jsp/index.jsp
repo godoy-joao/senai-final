@@ -14,14 +14,13 @@
                         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
                         crossorigin="anonymous">
                     <script src="https://kit.fontawesome.com/aca8650e9f.js" crossorigin="anonymous"></script>
-
+                    <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
                     <link rel="stylesheet" href="./css/index.css">
                     <link rel="stylesheet" href="./css/base.css">
                     <link rel="stylesheet" href="./css/slider.css">
                 </head>
 
                 <body>
-
                     <%@ include file="/WEB-INF/jspf/header.jspf" %>
                         <main class="bg-primary pt-5">
                             <div class="px-2 px-lg-5 ">
@@ -32,19 +31,17 @@
                                                 class="active" aria-current="true" aria-label="Slide 1"></button>
                                             <button type="button" data-bs-target="#carroselHeader" data-bs-slide-to="1"
                                                 class="active" aria-current="true" aria-label="Slide 2"></button>
-
                                         </div>
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
                                                 <div class="d-flex justify-content-center">
-                                                    <img src="./assets/banner.png" class="" alt="..."
+                                                    <img src="./assets/NovosProdutos.png" class="" alt="..."
                                                         style="object-fit: cover; max-height: 30vh;">
                                                 </div>
                                             </div>
                                             <div class="carousel-item">
                                                 <div class="d-flex justify-content-center">
-                                                    <img src="./assets/banner.png" class="" alt="..."
-                                                        >
+                                                    <img src="./assets/NovosProdutos.png" class="" alt="...">
                                                 </div>
                                             </div>
                                         </div>
@@ -106,6 +103,7 @@
                                                                     <div class="div-btn">
                                                                         <form action="enviarParaCarrinho" method="post"
                                                                             class="w-100 h-100 d-flex align-items-center justify-content-center">
+                                                                            <input type="text" style="height: 0.1px; width: 0.1px; position: absolute; background-color: transparent; border: transparent;"  name="lastPage" value="./home">
                                                                             <button type="submit"
                                                                                 value="${produto.idProduto}" name="item"
                                                                                 class="card-btn verde-fundo fs-6">

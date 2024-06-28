@@ -15,6 +15,7 @@
                 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="./css/login.css">
             <link rel="stylesheet" href="./css/base.css">
+            <link rel="shortcut icon" href="./assets/logo-round.png" type="image/x-icon">
             <title>Login</title>
         </head>
 
@@ -132,6 +133,14 @@
                     goToSignup();
                 }
 
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const msg = '${errorMessage}';
+                    if (msg != '') {
+                        alert(msg);
+                    }
+                })
             </script>
         </body>
 
