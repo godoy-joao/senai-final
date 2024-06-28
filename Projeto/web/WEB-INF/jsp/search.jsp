@@ -139,6 +139,14 @@
                                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                                 crossorigin="anonymous"></script>
                             <script src="./js/search.js"></script>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    var msg = '${prodAdd.nome}';
+                                    if (msg != '') {
+                                        alert(msg +' foi adicionado ao carrinho!');
+                                    }
+                                })
+                            </script>
                 </body>
 
                 </html>

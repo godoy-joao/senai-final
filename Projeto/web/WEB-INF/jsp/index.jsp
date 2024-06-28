@@ -193,9 +193,14 @@
                             <script src="./js/slider.js"></script>
                             <script>
                                 document.addEventListener("DOMContentLoaded", function () {
-                                    var valor = '${prodAdd}';
+                                    var valor = '${produtoAdicionado}';
                                     if (valor === "1") {
                                         alert("O produto não foi adicionado. Limite de itens no carrinho: 10");
+                                    }
+
+                                    var msg = '${prodAdd.nome}';
+                                    if (msg != '') {
+                                        alert(msg +' foi adicionado ao carrinho!');
                                     }
                                 })
 
